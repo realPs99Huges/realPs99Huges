@@ -46,6 +46,8 @@ local CONFIG = {
 	-- Empty means no music bed.
 	MusicId            = "",
 	MusicVolume        = 0.35,
+
+	Debug              = true,   -- print a one-line sanity report to Output on start
 }
 
 local DURATION = 30
@@ -1378,12 +1380,21 @@ local running = false
 local conn
 local savedCameraType
 local hidden = {}
+local anchoredRoot = nil
+local charConn
 
 local function hideCharacter(on)
 	if not CONFIG.HideLocalCharacter then return end
 	local char = player.Character
 	if not char then return end
 	if on then
+		-- anchor the root: a character that falls out of the world dies, respawns,
+		-- and the respawn hands the camera back to the default camera module
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			anchoredRoot = { hrp, hrp.Anchored }
+			hrp.Anchored = true
+		end
 		for _, d in ipairs(char:GetDescendants()) do
 			if d:IsA("BasePart") then
 				table.insert(hidden, { d, d.LocalTransparencyModifier })
@@ -1411,6 +1422,10 @@ local function hideCharacter(on)
 			end
 		end
 		hidden = {}
+		if anchoredRoot and anchoredRoot[1] and anchoredRoot[1].Parent then
+			anchoredRoot[1].Anchored = anchoredRoot[2]
+		end
+		anchoredRoot = nil
 		local hum = char:FindFirstChildOfClass("Humanoid")
 		if hum then
 			hum.WalkSpeed = 16
@@ -1420,12 +1435,16 @@ local function hideCharacter(on)
 	end
 end
 
+local RENDER_NAME = "BaconBuildsCutsceneCamera"
+
 local finished = false
 local function finish()
 	if finished then return end
 	finished = true
 	running = false
+	pcall(function() RunService:UnbindFromRenderStep(RENDER_NAME) end)
 	if conn then conn:Disconnect(); conn = nil end
+	if charConn then charConn:Disconnect(); charConn = nil end
 	if music then music:Stop(); music:Destroy(); music = nil end
 
 	local cam = workspace.CurrentCamera
@@ -1457,11 +1476,37 @@ local function run()
 	startMusic()
 	chimneySmoke = makeSmokeStack(CHIMNEY_TOP)
 
+	-- a respawn mid-cutscene hands the camera back and un-hides the avatar
+	charConn = player.CharacterAdded:Connect(function()
+		task.wait(0.25)
+		if running then
+			hidden = {}
+			hideCharacter(true)
+		end
+	end)
+
+	if CONFIG.Debug then
+		local n = 0
+		for _, d in ipairs(ROOT:GetDescendants()) do
+			if d:IsA("BasePart") then n += 1 end
+		end
+		print(("[BaconBuilds] %d parts built at Y=%d | camera start %s")
+			:format(n, CONFIG.BuildHeight, tostring((ORIGIN.Position + CAM[1][2]))))
+	end
+
 	local t = 0
 	local nextEvent = 1
 
-	conn = RunService.RenderStepped:Connect(function(dt)
+	-- Bound ABOVE the default camera module. RunService.RenderStepped fires before
+	-- the PlayerModule's camera step, so a CFrame written there is overwritten the
+	-- same frame and the shot never leaves the player's own view.
+	local function step(dt)
 		if not running then return end
+		cam = workspace.CurrentCamera
+		if not cam then return end
+		if cam.CameraType ~= Enum.CameraType.Scriptable then
+			cam.CameraType = Enum.CameraType.Scriptable
+		end
 		t = math.min(t + dt, DURATION)
 
 		while nextEvent <= #EVENTS and EVENTS[nextEvent][1] <= t do
@@ -1509,7 +1554,9 @@ local function run()
 			running = false
 			task.delay(0.25, finish)
 		end
-	end)
+	end
+
+	RunService:BindToRenderStep(RENDER_NAME, Enum.RenderPriority.Camera.Value + 10, step)
 end
 
 ----------------------------------------------------------------------
