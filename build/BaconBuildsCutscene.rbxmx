@@ -1,0 +1,1534 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+  <Item class="LocalScript" referent="RBX_BaconBuildsCutscene">
+    <Properties>
+      <string name="Name">BaconBuildsCutscene</string>
+      <bool name="Disabled">false</bool>
+      <ProtectedString name="Source"><![CDATA[--[[
+	BACON BUILDS - 30 second cinematic cutscene
+	=================================================================
+	LocalScript. Put it in StarterPlayer > StarterPlayerScripts.
+
+	Everything is built from Parts at runtime, 2000 studs above your
+	map, so it never touches your game geometry. No uploads, no rig
+	assets, no animation IDs. Press Play and it runs.
+
+	Shots
+	  00.0  Bacon drops in on a beam of light
+	  03.6  He walks up and slaps the plot sign - CLAIMED
+	  07.4  Cartoony hammer comes out of his pocket
+	  10.4  Eleven whacks, one classic house
+	  19.6  Happy dance, confetti, the house comes alive
+	  23.8  He runs next door to the neighbour Bacon's mansion
+	  28.2  Title card
+
+	Everything worth tweaking is in CONFIG below.
+=================================================================]]
+
+----------------------------------------------------------------------
+-- SERVICES
+----------------------------------------------------------------------
+local Players      = game:GetService("Players")
+local RunService   = game:GetService("RunService")
+local SoundService = game:GetService("SoundService")
+local Lighting     = game:GetService("Lighting")
+local Debris       = game:GetService("Debris")
+
+local player = Players.LocalPlayer
+
+----------------------------------------------------------------------
+-- CONFIG
+----------------------------------------------------------------------
+local CONFIG = {
+	AutoPlay           = true,   -- roll as soon as the player loads
+	StartDelay         = 1.0,    -- seconds before it rolls
+	BuildHeight        = 2000,   -- studs above your map that the set is built at
+	HideLocalCharacter = true,   -- hide the player's avatar while it plays
+	OverrideLighting   = true,   -- bright cartoon lighting, restored afterwards
+	ShowSkipButton     = true,
+	MasterVolume       = 0.65,
+
+	-- Paste your own uploaded track here, e.g. "rbxassetid://1234567890".
+	-- Empty means no music bed.
+	MusicId            = "",
+	MusicVolume        = 0.35,
+}
+
+local DURATION = 30
+
+----------------------------------------------------------------------
+-- SOUND
+-- These files ship with Studio, so nothing needs uploading.
+-- Swap any value for your own rbxassetid:// if you want.
+----------------------------------------------------------------------
+local SFX = {
+	whoosh = "rbxasset://sounds/swoosh.wav",
+	pop    = "rbxasset://sounds/clickfast.wav",
+	thud   = "rbxasset://sounds/bass.wav",
+	ding   = "rbxasset://sounds/electronicpingshort.wav",
+	snap   = "rbxasset://sounds/snap.wav",
+	whack  = "rbxasset://sounds/metal.ogg",
+	boing  = "rbxasset://sounds/action_jump.mp3",
+	land   = "rbxasset://sounds/action_jump_land.mp3",
+	step   = "rbxasset://sounds/action_footsteps_plastic.mp3",
+	boom   = "rbxasset://sounds/impact_explosion_01.mp3",
+	wow    = "rbxasset://sounds/uuhhh.mp3",
+	click  = "rbxasset://sounds/button.wav",
+}
+
+----------------------------------------------------------------------
+-- PALETTE (classic Roblox noob)
+----------------------------------------------------------------------
+local C = {
+	skin    = Color3.fromRGB(245, 205, 48),
+	shirt   = Color3.fromRGB(13, 105, 172),
+	legs    = Color3.fromRGB(75, 151, 75),
+	hair    = Color3.fromRGB(180, 118, 74),
+	hair2   = Color3.fromRGB(149, 92, 53),
+
+	nbShirt = Color3.fromRGB(196, 40, 28),
+	nbLegs  = Color3.fromRGB(94, 90, 92),
+
+	grass   = Color3.fromRGB(106, 200, 108),
+	leaf    = Color3.fromRGB(62, 158, 90),
+	hill    = Color3.fromRGB(143, 211, 160),
+	stone   = Color3.fromRGB(154, 136, 120),
+	wall    = Color3.fromRGB(241, 222, 182),
+	roof    = Color3.fromRGB(217, 73, 59),
+	roofDk  = Color3.fromRGB(184, 57, 46),
+	wood    = Color3.fromRGB(160, 98, 58),
+	wood2   = Color3.fromRGB(169, 113, 63),
+	glass   = Color3.fromRGB(111, 197, 238),
+	white   = Color3.fromRGB(243, 234, 218),
+	gold    = Color3.fromRGB(255, 197, 61),
+	tomato  = Color3.fromRGB(255, 94, 91),
+	teal    = Color3.fromRGB(43, 166, 160),
+	tealDk  = Color3.fromRGB(30, 138, 133),
+	cream   = Color3.fromRGB(246, 233, 207),
+	hedge   = Color3.fromRGB(59, 143, 82),
+	water   = Color3.fromRGB(78, 195, 240),
+	metal   = Color3.fromRGB(107, 97, 87),
+	path    = Color3.fromRGB(201, 187, 160),
+	trim    = Color3.fromRGB(230, 213, 178),
+	warm    = Color3.fromRGB(255, 214, 120),
+}
+
+----------------------------------------------------------------------
+-- MATH
+----------------------------------------------------------------------
+local function lerp(a, b, t) return a + (b - a) * t end
+local function inv(t, a, b) return math.clamp((t - a) / (b - a), 0, 1) end
+
+local function eIO(t)
+	if t < 0.5 then return 4 * t * t * t end
+	return 1 - ((-2 * t + 2) ^ 3) / 2
+end
+local function eOut(t) return 1 - (1 - t) ^ 3 end
+local function eIn(t)  return t * t * t end
+local function eBack(t)
+	local c = 2.0
+	return 1 + (c + 1) * (t - 1) ^ 3 + c * (t - 1) ^ 2
+end
+local function eElastic(t)
+	if t <= 0 then return 0 end
+	if t >= 1 then return 1 end
+	return 2 ^ (-9 * t) * math.sin((t * 10 - 0.75) * (2 * math.pi / 3)) + 1
+end
+
+local function track(keys, t, ease)
+	ease = ease or eIO
+	if t <= keys[1][1] then return keys[1][2] end
+	for i = 1, #keys - 1 do
+		local a, b = keys[i], keys[i + 1]
+		if t <= b[1] then
+			return lerp(a[2], b[2], ease(inv(t, a[1], b[1])))
+		end
+	end
+	return keys[#keys][2]
+end
+
+----------------------------------------------------------------------
+-- STAGE LAYOUT
+--   +Z faces the camera. Bacon walks along X in a lane in front of
+--   everything, so he never ends up inside a wall.
+----------------------------------------------------------------------
+local ORIGIN   = CFrame.new(0, CONFIG.BuildHeight, 0)
+local GY       = 0        -- ground level, local to ORIGIN
+local LANE     = 14       -- Bacon's walking lane on Z
+local HX       = 24       -- house centre on X
+local NX       = 72       -- mansion centre on X
+local SIGN_X   = 14
+local SIGN_Z   = 14
+
+local function at(x, y, z) return ORIGIN * CFrame.new(x, y, z) end
+
+local ROOT = Instance.new("Folder")
+ROOT.Name = "BaconBuildsCutscene"
+ROOT.Parent = workspace
+
+local SET     = Instance.new("Folder"); SET.Name     = "Set";     SET.Parent     = ROOT
+local HOUSE   = Instance.new("Folder"); HOUSE.Name   = "House";   HOUSE.Parent   = ROOT
+local MANSION = Instance.new("Folder"); MANSION.Name = "Mansion"; MANSION.Parent = ROOT
+local FX      = Instance.new("Folder"); FX.Name      = "FX";      FX.Parent      = ROOT
+
+----------------------------------------------------------------------
+-- PART HELPERS
+----------------------------------------------------------------------
+local function newPart(parent, size, cf, color, material, shape)
+	local p = Instance.new("Part")
+	p.Size = size
+	p.CFrame = cf
+	p.Color = color
+	p.Material = material or Enum.Material.SmoothPlastic
+	p.Anchored = true
+	p.CanCollide = false
+	p.CanQuery = false
+	p.CanTouch = false
+	p.CastShadow = false
+	p.TopSurface = Enum.SurfaceType.Smooth
+	p.BottomSurface = Enum.SurfaceType.Smooth
+	if shape then p.Shape = shape end
+	p.Parent = parent
+	return p
+end
+
+local function wedge(parent, size, cf, color, material)
+	local p = Instance.new("WedgePart")
+	p.Size = size
+	p.CFrame = cf
+	p.Color = color
+	p.Material = material or Enum.Material.SmoothPlastic
+	p.Anchored = true
+	p.CanCollide = false
+	p.CanQuery = false
+	p.CanTouch = false
+	p.CastShadow = false
+	p.Parent = parent
+	return p
+end
+
+----------------------------------------------------------------------
+-- VFX
+----------------------------------------------------------------------
+local TEX_SMOKE   = "rbxasset://textures/particles/smoke_main.dds"
+local TEX_SPARKLE = "rbxasset://textures/particles/sparkles_main.dds"
+
+local function emitterHost(cf)
+	local p = newPart(FX, Vector3.new(0.2, 0.2, 0.2), cf, C.white)
+	p.Transparency = 1
+	local a = Instance.new("Attachment")
+	a.Parent = p
+	return p, a
+end
+
+local function burstDust(cf, amount, power)
+	local part, a = emitterHost(cf)
+	local e = Instance.new("ParticleEmitter")
+	e.Texture = TEX_SMOKE
+	e.Color = ColorSequence.new(Color3.fromRGB(232, 220, 196))
+	e.Transparency = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 0.25),
+		NumberSequenceKeypoint.new(1, 1),
+	})
+	e.Size = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 1.5),
+		NumberSequenceKeypoint.new(1, 6),
+	})
+	e.Lifetime = NumberRange.new(0.45, 0.9)
+	e.Speed = NumberRange.new(power * 0.6, power)
+	e.SpreadAngle = Vector2.new(180, 180)
+	e.Rotation = NumberRange.new(0, 360)
+	e.RotSpeed = NumberRange.new(-90, 90)
+	e.Acceleration = Vector3.new(0, -14, 0)
+	e.Enabled = false
+	e.Parent = a
+	e:Emit(amount)
+	Debris:AddItem(part, 3)
+end
+
+local function burstConfetti(cf, amount, power)
+	local part, a = emitterHost(cf)
+	local e = Instance.new("ParticleEmitter")
+	e.Texture = TEX_SPARKLE
+	e.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, C.gold),
+		ColorSequenceKeypoint.new(0.25, C.tomato),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(91, 216, 138)),
+		ColorSequenceKeypoint.new(0.75, C.water),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 143, 208)),
+	})
+	e.Transparency = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 0),
+		NumberSequenceKeypoint.new(0.78, 0),
+		NumberSequenceKeypoint.new(1, 1),
+	})
+	e.Size = NumberSequence.new(0.9)
+	e.Lifetime = NumberRange.new(1.4, 2.6)
+	e.Speed = NumberRange.new(power * 0.5, power)
+	e.SpreadAngle = Vector2.new(70, 70)
+	e.Rotation = NumberRange.new(0, 360)
+	e.RotSpeed = NumberRange.new(-260, 260)
+	e.Acceleration = Vector3.new(0, -32, 0)
+	e.LightEmission = 0.4
+	e.Enabled = false
+	e.Parent = a
+	e:Emit(amount)
+	Debris:AddItem(part, 5)
+end
+
+local function burstSparkle(cf, amount, spread)
+	local part, a = emitterHost(cf)
+	local e = Instance.new("ParticleEmitter")
+	e.Texture = TEX_SPARKLE
+	e.Color = ColorSequence.new(Color3.fromRGB(255, 244, 194))
+	e.Transparency = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 0),
+		NumberSequenceKeypoint.new(1, 1),
+	})
+	e.Size = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 1.6),
+		NumberSequenceKeypoint.new(1, 0),
+	})
+	e.Lifetime = NumberRange.new(0.5, 1.1)
+	e.Speed = NumberRange.new(spread * 0.4, spread)
+	e.SpreadAngle = Vector2.new(180, 180)
+	e.LightEmission = 1
+	e.Enabled = false
+	e.Parent = a
+	e:Emit(amount)
+	Debris:AddItem(part, 3)
+end
+
+local function makeSmokeStack(cf)
+	local _, a = emitterHost(cf)
+	local e = Instance.new("ParticleEmitter")
+	e.Texture = TEX_SMOKE
+	e.Color = ColorSequence.new(Color3.fromRGB(242, 237, 227))
+	e.Transparency = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 0.35),
+		NumberSequenceKeypoint.new(1, 1),
+	})
+	e.Size = NumberSequence.new({
+		NumberSequenceKeypoint.new(0, 1.2),
+		NumberSequenceKeypoint.new(1, 4.5),
+	})
+	e.Lifetime = NumberRange.new(2.0, 3.0)
+	e.Rate = 7
+	e.Speed = NumberRange.new(3, 5)
+	e.SpreadAngle = Vector2.new(14, 14)
+	e.Acceleration = Vector3.new(2.5, 2, 0)
+	e.Rotation = NumberRange.new(0, 360)
+	e.RotSpeed = NumberRange.new(-30, 30)
+	e.Enabled = false
+	e.Parent = a
+	return e
+end
+
+----------------------------------------------------------------------
+-- SOUND HELPERS
+----------------------------------------------------------------------
+local function play(id, vol, pitch)
+	local s = Instance.new("Sound")
+	s.SoundId = id
+	s.Volume = (vol or 0.6) * CONFIG.MasterVolume
+	s.PlaybackSpeed = pitch or 1
+	s.Parent = SoundService
+	s:Play()
+	Debris:AddItem(s, 8)
+	return s
+end
+
+local music
+local function startMusic()
+	if CONFIG.MusicId == "" then return end
+	music = Instance.new("Sound")
+	music.SoundId = CONFIG.MusicId
+	music.Volume = CONFIG.MusicVolume * CONFIG.MasterVolume
+	music.Looped = true
+	music.Parent = SoundService
+	music:Play()
+end
+
+----------------------------------------------------------------------
+-- GROUND AND SCENERY
+----------------------------------------------------------------------
+newPart(SET, Vector3.new(420, 4, 220), at(40, GY - 2, 0), C.grass, Enum.Material.Grass)
+
+do
+	local rnd = Random.new(7)
+	for i = 1, 30 do
+		local x = -70 + i * 7 + rnd:NextNumber(-2, 2)
+		local z = (i % 2 == 0) and rnd:NextNumber(-80, -34) or rnd:NextNumber(42, 86)
+		local s = rnd:NextNumber(0.8, 1.5)
+		newPart(SET, Vector3.new(1.2 * s, 5 * s, 1.2 * s), at(x, GY + 2.5 * s, z), C.wood)
+		for _ = 1, 3 do
+			newPart(SET, Vector3.new(5 * s, 5 * s, 5 * s),
+				at(x + rnd:NextNumber(-2, 2), GY + 5 * s + rnd:NextNumber(0, 2.2), z + rnd:NextNumber(-2, 2)),
+				C.leaf, Enum.Material.Grass, Enum.PartType.Ball)
+		end
+	end
+	for i = 1, 11 do
+		newPart(SET, Vector3.new(64, 64, 64), at(-90 + i * 24, GY - 28, -130), C.hill, Enum.Material.Grass, Enum.PartType.Ball)
+	end
+end
+
+----------------------------------------------------------------------
+-- PLOT MARKER
+----------------------------------------------------------------------
+local plotMarks = {}
+do
+	local w, d = 26, 20
+	for x = -w / 2, w / 2, 3 do
+		table.insert(plotMarks, newPart(SET, Vector3.new(1.6, 0.2, 0.6), at(HX + x, GY + 0.15, -d / 2), C.white, Enum.Material.Neon))
+		table.insert(plotMarks, newPart(SET, Vector3.new(1.6, 0.2, 0.6), at(HX + x, GY + 0.15,  d / 2), C.white, Enum.Material.Neon))
+	end
+	for z = -d / 2, d / 2, 3 do
+		table.insert(plotMarks, newPart(SET, Vector3.new(0.6, 0.2, 1.6), at(HX - w / 2, GY + 0.15, z), C.white, Enum.Material.Neon))
+		table.insert(plotMarks, newPart(SET, Vector3.new(0.6, 0.2, 1.6), at(HX + w / 2, GY + 0.15, z), C.white, Enum.Material.Neon))
+	end
+end
+
+----------------------------------------------------------------------
+-- SIGN
+----------------------------------------------------------------------
+local signModel = Instance.new("Model"); signModel.Name = "Sign"; signModel.Parent = SET
+newPart(signModel, Vector3.new(0.5, 6, 0.5), at(SIGN_X, GY + 3, SIGN_Z), C.wood, Enum.Material.Wood)
+local signBoard = newPart(signModel, Vector3.new(7, 3.4, 0.4), at(SIGN_X, GY + 6.6, SIGN_Z), C.white, Enum.Material.Wood)
+local signHome = signBoard.CFrame
+
+local signGui = Instance.new("SurfaceGui")
+signGui.Face = Enum.NormalId.Back        -- Back is +Z, which is where the camera lives
+signGui.CanvasSize = Vector2.new(700, 340)
+signGui.LightInfluence = 0
+signGui.Parent = signBoard
+
+local signText = Instance.new("TextLabel")
+signText.Size = UDim2.fromScale(1, 1)
+signText.BackgroundTransparency = 1
+signText.Font = Enum.Font.LuckiestGuy
+signText.TextScaled = true
+signText.TextColor3 = Color3.fromRGB(42, 26, 16)
+signText.Text = "EMPTY PLOT\nCLAIM ME"
+signText.Parent = signGui
+
+----------------------------------------------------------------------
+-- THE HOUSE: eleven groups, each lands on its own beat
+----------------------------------------------------------------------
+local buildGroups = {}
+local shutters = {}
+local houseGlass = {}
+local flagCloth
+
+local function group(name, land, fromOffset, fromRot, builder, idle)
+	local m = Instance.new("Model")
+	m.Name = name
+	m.Parent = HOUSE
+	builder(m)
+	local entry = {
+		name  = name,
+		model = m,
+		land  = land,
+		home  = m:GetPivot(),
+		from  = fromOffset,
+		rot   = fromRot,
+		idle  = idle,
+		shown = false,
+	}
+	for _, d in ipairs(m:GetDescendants()) do
+		if d:IsA("BasePart") then d.Transparency = 1 end
+	end
+	table.insert(buildGroups, entry)
+	return entry
+end
+
+-- 1. foundation
+group("Foundation", 11.0, Vector3.new(0, 60, 0), Vector3.new(0, 0, 0), function(m)
+	newPart(m, Vector3.new(22, 1.6, 16), at(HX, GY + 0.8, 0), C.stone, Enum.Material.Slate)
+end)
+
+-- 2. walls
+group("Walls", 11.9, Vector3.new(-48, 22, 0), Vector3.new(0, 0, -0.7), function(m)
+	local h = 9
+	local midY = GY + 1.6 + h / 2
+	newPart(m, Vector3.new(20, h, 0.8), at(HX, midY,  7), C.wall)
+	newPart(m, Vector3.new(20, h, 0.8), at(HX, midY, -7), C.wall)
+	newPart(m, Vector3.new(0.8, h, 14.8), at(HX - 10, midY, 0), C.wall)
+	newPart(m, Vector3.new(0.8, h, 14.8), at(HX + 10, midY, 0), C.wall)
+	for _, sx in ipairs({ -1, 1 }) do
+		for _, sz in ipairs({ -1, 1 }) do
+			newPart(m, Vector3.new(1.1, h, 1.1), at(HX + sx * 10, midY, sz * 7), C.wood, Enum.Material.Wood)
+		end
+	end
+	newPart(m, Vector3.new(21, 0.9, 15.4), at(HX, GY + 1.6 + h, 0), C.wood, Enum.Material.Wood)
+end)
+
+-- 3. door, hinged on its left edge, breathes open later
+local DOOR_HINGE = at(HX - 2, GY + 4.8, 7.2)
+group("Door", 12.8, Vector3.new(0, -24, 0), Vector3.new(0, 0, 0.9), function(m)
+	newPart(m, Vector3.new(4, 6.4, 0.5), at(HX, GY + 4.8, 7.2), C.wood, Enum.Material.WoodPlanks)
+	newPart(m, Vector3.new(0.6, 0.6, 0.6), at(HX + 1.4, GY + 4.6, 7.6), C.gold, Enum.Material.Metal, Enum.PartType.Ball)
+end, function(t, home)
+	if t < 19.6 then return nil end
+	local sw = math.sin(t * 2.2) * 0.16
+	local hp = DOOR_HINGE.Position
+	return CFrame.new(hp) * CFrame.Angles(0, sw, 0) * CFrame.new(home.Position - hp)
+end)
+
+-- 4 & 5. windows, with shutters that swing open in the dance shot
+local function windowGroup(name, land, sx, fromOffset, fromRot)
+	group(name, land, fromOffset, fromRot, function(m)
+		local wx, wy = HX + sx * 6, GY + 7.4
+		local glass = newPart(m, Vector3.new(4.2, 4.2, 0.4), at(wx, wy, 7.1), C.glass, Enum.Material.Glass)
+		table.insert(houseGlass, glass)
+		newPart(m, Vector3.new(4.8, 0.5, 0.6), at(wx, wy + 2.2, 7.25), C.white)
+		newPart(m, Vector3.new(4.8, 0.5, 0.6), at(wx, wy - 2.2, 7.25), C.white)
+		newPart(m, Vector3.new(0.5, 4.8, 0.6), at(wx - 2.2, wy, 7.25), C.white)
+		newPart(m, Vector3.new(0.5, 4.8, 0.6), at(wx + 2.2, wy, 7.25), C.white)
+		newPart(m, Vector3.new(0.35, 4.2, 0.35), at(wx, wy, 7.35), C.white)
+		newPart(m, Vector3.new(4.2, 0.35, 0.35), at(wx, wy, 7.35), C.white)
+		for _, side in ipairs({ -1, 1 }) do
+			local sh = newPart(m, Vector3.new(1.6, 4.6, 0.45), at(wx + side * 2.9, wy, 7.45), C.tomato, Enum.Material.WoodPlanks)
+			table.insert(shutters, {
+				part = sh,
+				hinge = at(wx + side * 2.1, wy, 7.45),
+				off = CFrame.new(side * 0.8, 0, 0),
+				dir = side,
+			})
+		end
+	end)
+end
+windowGroup("WindowLeft",  13.5, -1, Vector3.new(-36, 16, 0), Vector3.new(0, 0,  1.3))
+windowGroup("WindowRight", 14.1,  1, Vector3.new( 36, 16, 0), Vector3.new(0, 0, -1.3))
+
+-- 6. roof, the big beat
+group("Roof", 15.0, Vector3.new(0, 70, 0), Vector3.new(0.35, 0, 0), function(m)
+	local topY = GY + 11.5
+	for _, sz in ipairs({ -1, 1 }) do
+		wedge(m, Vector3.new(22, 7, 9),
+			at(HX, topY + 3.5, sz * 4.5)
+				* CFrame.Angles(0, sz > 0 and 0 or math.pi, 0)
+				* CFrame.Angles(0, math.pi / 2, 0),
+			C.roof, Enum.Material.Slate)
+	end
+	newPart(m, Vector3.new(23, 0.8, 17), at(HX, topY + 0.3, 0), C.roofDk, Enum.Material.Slate)
+	newPart(m, Vector3.new(23, 0.9, 0.9), at(HX, topY + 7.1, 0), C.roofDk, Enum.Material.Slate)
+end)
+
+-- 7. chimney
+local CHIMNEY_TOP = at(HX + 6.5, GY + 20.4, -2.5)
+group("Chimney", 15.9, Vector3.new(24, 40, 0), Vector3.new(0, 0, 1.6), function(m)
+	newPart(m, Vector3.new(2.6, 6, 2.6), at(HX + 6.5, GY + 16.4, -2.5), C.roofDk, Enum.Material.Brick)
+	newPart(m, Vector3.new(3.4, 0.9, 3.4), at(HX + 6.5, GY + 19.6, -2.5), Color3.fromRGB(142, 64, 54), Enum.Material.Brick)
+end)
+
+-- 8. picket fence
+group("Fence", 16.7, Vector3.new(0, -30, 0), Vector3.new(0, 0, 0), function(m)
+	for _, sx in ipairs({ -1, 1 }) do
+		for i = 0, 4 do
+			local x = HX + sx * (13 + i * 2.4)
+			newPart(m, Vector3.new(0.6, 3.4, 1.4), at(x, GY + 1.7, 8.5), C.white, Enum.Material.WoodPlanks)
+			wedge(m, Vector3.new(1.4, 0.8, 0.6), at(x, GY + 3.8, 8.5) * CFrame.Angles(0, math.pi / 2, 0), C.white, Enum.Material.WoodPlanks)
+		end
+		newPart(m, Vector3.new(11.4, 0.5, 0.35), at(HX + sx * 18, GY + 2.6, 8.5), C.white, Enum.Material.WoodPlanks)
+	end
+end)
+
+-- 9. garden path and flower beds
+group("Garden", 17.4, Vector3.new(0, -26, 0), Vector3.new(0, 0, 0), function(m)
+	for i = 0, 4 do
+		newPart(m, Vector3.new(3.4 - i * 0.2, 0.3, 2), at(HX, GY + 0.2, 9.6 + i * 2.2), C.path, Enum.Material.Slate)
+	end
+	for _, sx in ipairs({ -1, 1 }) do
+		local bx = HX + sx * 7.5
+		newPart(m, Vector3.new(4, 1.6, 4), at(bx, GY + 0.8, 10), C.hedge, Enum.Material.Grass, Enum.PartType.Ball)
+		for j = 1, 4 do
+			local a = j * math.pi / 2
+			newPart(m, Vector3.new(0.9, 0.9, 0.9),
+				at(bx + math.cos(a) * 1.2, GY + 1.9, 10 + math.sin(a) * 1.2),
+				(j % 2 == 0) and C.tomato or C.gold, Enum.Material.Neon, Enum.PartType.Ball)
+		end
+	end
+end)
+
+-- 10. flag on the roof peak
+group("Flag", 18.1, Vector3.new(0, 48, 0), Vector3.new(0, 0, 2.2), function(m)
+	newPart(m, Vector3.new(0.35, 6, 0.35), at(HX, GY + 21.5, 0), C.wood, Enum.Material.Wood)
+	flagCloth = newPart(m, Vector3.new(4.6, 2.6, 0.2), at(HX + 2.4, GY + 23.4, 0), C.gold, Enum.Material.Fabric)
+end)
+local FLAG_HOME = at(HX + 2.4, GY + 23.4, 0)
+
+-- 11. mailbox
+group("Mailbox", 18.8, Vector3.new(-34, 0, 0), Vector3.new(0, 0, -2.4), function(m)
+	newPart(m, Vector3.new(0.5, 4, 0.5), at(HX - 14, GY + 2, 10.5), C.wood, Enum.Material.Wood)
+	newPart(m, Vector3.new(1.6, 1.6, 3.2), at(HX - 14, GY + 4.6, 10.5), C.water)
+	newPart(m, Vector3.new(0.3, 1.6, 0.3), at(HX - 13, GY + 5.6, 10.5), C.tomato)
+end)
+
+----------------------------------------------------------------------
+-- THE NEIGHBOUR'S MANSION (already standing, full of motion)
+----------------------------------------------------------------------
+local vanes, mansionFlags, hedges, mansionLights, fountainJets = {}, {}, {}, {}, {}
+
+do
+	newPart(MANSION, Vector3.new(36, 22, 22), at(NX, GY + 11, 0), C.cream)
+	newPart(MANSION, Vector3.new(37, 0.8, 23), at(NX, GY + 11, 0), Color3.fromRGB(205, 175, 128))
+
+	for _, sz in ipairs({ -1, 1 }) do
+		wedge(MANSION, Vector3.new(38, 9, 12),
+			at(NX, GY + 26.5, sz * 6)
+				* CFrame.Angles(0, sz > 0 and 0 or math.pi, 0)
+				* CFrame.Angles(0, math.pi / 2, 0),
+			C.teal, Enum.Material.Slate)
+	end
+	newPart(MANSION, Vector3.new(40, 1, 25), at(NX, GY + 22.3, 0), C.tealDk, Enum.Material.Slate)
+
+	for _, sx in ipairs({ -1, 1 }) do
+		local tx = NX + sx * 22
+		newPart(MANSION, Vector3.new(10, 32, 10), at(tx, GY + 16, 0), C.cream)
+		for i = 0, 5 do
+			local s = 13 - i * 2.1
+			newPart(MANSION, Vector3.new(s, 1.8, s), at(tx, GY + 33 + i * 1.8, 0), C.teal, Enum.Material.Slate)
+		end
+		newPart(MANSION, Vector3.new(0.3, 4, 0.3), at(tx, GY + 45, 0), C.metal, Enum.Material.Metal)
+		local vane = newPart(MANSION, Vector3.new(3.4, 0.9, 0.2), at(tx, GY + 46.6, 0), C.gold, Enum.Material.Metal)
+		table.insert(vanes, { part = vane, home = vane.CFrame })
+
+		local fl = newPart(MANSION, Vector3.new(3.4, 2, 0.2), at(tx + 1.8, GY + 44.2, 0),
+			sx > 0 and C.tomato or C.gold, Enum.Material.Fabric)
+		table.insert(mansionFlags, { part = fl, home = fl.CFrame })
+
+		table.insert(mansionLights, newPart(MANSION, Vector3.new(3.6, 4.6, 0.4), at(tx, GY + 24, 5.2), C.glass, Enum.Material.Neon))
+	end
+
+	for row = 0, 1 do
+		for col = 0, 3 do
+			local wx, wy = NX - 13 + col * 8.6, GY + 7 + row * 9
+			table.insert(mansionLights, newPart(MANSION, Vector3.new(5, 6, 0.4), at(wx, wy, 11.2), C.glass, Enum.Material.Neon))
+			newPart(MANSION, Vector3.new(5.6, 0.5, 0.6), at(wx, wy + 3.1, 11.35), C.white)
+			newPart(MANSION, Vector3.new(5.6, 0.5, 0.6), at(wx, wy - 3.1, 11.35), C.white)
+			newPart(MANSION, Vector3.new(0.4, 6, 0.4), at(wx, wy, 11.45), C.white)
+		end
+	end
+
+	newPart(MANSION, Vector3.new(18, 0.8, 3), at(NX, GY + 12.4, 12), C.trim)
+	for i = 0, 8 do
+		newPart(MANSION, Vector3.new(0.4, 2, 0.4), at(NX - 8 + i * 2, GY + 13.6, 13.2), C.trim)
+	end
+
+	newPart(MANSION, Vector3.new(7, 10, 0.6), at(NX, GY + 5, 11.2), C.wood, Enum.Material.WoodPlanks)
+	newPart(MANSION, Vector3.new(0.6, 7, 7), at(NX, GY + 10, 11.2), C.wood, Enum.Material.WoodPlanks, Enum.PartType.Cylinder)
+	newPart(MANSION, Vector3.new(0.9, 0.9, 0.9), at(NX + 2.4, GY + 5, 11.7), C.gold, Enum.Material.Metal, Enum.PartType.Ball)
+	for i = 0, 2 do
+		newPart(MANSION, Vector3.new(12 + i * 3, 0.8, 2.2 + i * 1.4), at(NX, GY + 0.4 + (2 - i) * 0.8, 12.6 + i * 1.5), Color3.fromRGB(217, 203, 176))
+	end
+
+	for i = -4, 4 do
+		if i ~= 0 then
+			local h = newPart(MANSION, Vector3.new(5, 3.4, 4), at(NX + i * 7, GY + 1.7, 18), C.hedge, Enum.Material.Grass)
+			table.insert(hedges, { part = h, home = h.CFrame })
+		end
+	end
+
+	-- fountain, parked clear of Bacon's run-up
+	local fx, fz = NX + 2, 27
+	newPart(MANSION, Vector3.new(1.4, 11, 11), at(fx, GY + 0.7, fz), C.path, Enum.Material.Slate, Enum.PartType.Cylinder)
+	newPart(MANSION, Vector3.new(0.8, 9.4, 9.4), at(fx, GY + 1.4, fz), C.water, Enum.Material.Neon, Enum.PartType.Cylinder)
+	newPart(MANSION, Vector3.new(1.6, 5, 1.6), at(fx, GY + 3.4, fz), C.trim)
+	for i = 1, 14 do
+		local p = newPart(MANSION, Vector3.new(0.7, 0.7, 0.7), at(fx, GY + 6, fz), C.water, Enum.Material.Neon, Enum.PartType.Ball)
+		table.insert(fountainJets, { part = p, phase = i / 14, side = (i % 2 == 0) and 1 or -1, cx = fx, cz = fz })
+	end
+
+	for _, sx in ipairs({ -1, 1 }) do
+		local lx = NX + sx * 26
+		newPart(MANSION, Vector3.new(0.6, 9, 0.6), at(lx, GY + 4.5, 17), C.metal, Enum.Material.Metal)
+		table.insert(mansionLights, newPart(MANSION, Vector3.new(2.2, 2.2, 2.2), at(lx, GY + 9.6, 17), Color3.fromRGB(255, 226, 150), Enum.Material.Neon, Enum.PartType.Ball))
+	end
+end
+
+----------------------------------------------------------------------
+-- BACON RIGS (plain parts, so no avatar or animation uploads)
+----------------------------------------------------------------------
+local function buildBacon(name, shirt, legs)
+	local m = Instance.new("Model")
+	m.Name = name
+	m.Parent = ROOT
+
+	local rig = { model = m }
+
+	rig.torso = newPart(m, Vector3.new(2, 2, 1), ORIGIN, shirt)
+	rig.head  = newPart(m, Vector3.new(2, 1, 1), ORIGIN, C.skin)
+
+	local hm = Instance.new("SpecialMesh")
+	hm.MeshType = Enum.MeshType.Head
+	hm.Scale = Vector3.new(1.25, 1.25, 1.25)
+	hm.Parent = rig.head
+
+	rig.face = Instance.new("Decal")
+	rig.face.Texture = "rbxasset://textures/face.png"
+	rig.face.Face = Enum.NormalId.Front
+	rig.face.Parent = rig.head
+
+	rig.armL = newPart(m, Vector3.new(1, 2, 1), ORIGIN, C.skin)
+	rig.armR = newPart(m, Vector3.new(1, 2, 1), ORIGIN, C.skin)
+	rig.legL = newPart(m, Vector3.new(1, 2, 1), ORIGIN, legs)
+	rig.legR = newPart(m, Vector3.new(1, 2, 1), ORIGIN, legs)
+
+	-- the bacon hair: tan slabs over the crown and down the back
+	rig.hair = {}
+	local hairSpec = {
+		{ Vector3.new(2.15, 0.50, 1.25), CFrame.new(0,  0.62,  0.00), C.hair  },
+		{ Vector3.new(2.00, 0.50, 0.70), CFrame.new(0,  0.48, -0.62) * CFrame.Angles(-0.35, 0, 0), C.hair2 },
+		{ Vector3.new(1.80, 0.50, 0.70), CFrame.new(0,  0.12, -0.84) * CFrame.Angles(-0.70, 0, 0), C.hair  },
+		{ Vector3.new(1.55, 0.50, 0.65), CFrame.new(0, -0.26, -0.88) * CFrame.Angles(-1.05, 0, 0), C.hair2 },
+		{ Vector3.new(1.25, 0.45, 0.60), CFrame.new(0, -0.62, -0.78) * CFrame.Angles(-1.35, 0, 0), C.hair  },
+		{ Vector3.new(1.10, 0.40, 0.75), CFrame.new(0,  0.52,  0.62) * CFrame.Angles( 0.45, 0, 0), C.hair  },
+	}
+	for _, spec in ipairs(hairSpec) do
+		table.insert(rig.hair, { part = newPart(m, spec[1], ORIGIN, spec[3]), off = spec[2] })
+	end
+
+	local bb = Instance.new("BillboardGui")
+	bb.Size = UDim2.fromScale(7, 3.2)
+	bb.StudsOffset = Vector3.new(0, 2.8, 0)
+	bb.AlwaysOnTop = true
+	bb.Enabled = false
+	bb.Adornee = rig.head
+	bb.Parent = rig.head
+	local bt = Instance.new("TextLabel")
+	bt.Size = UDim2.fromScale(1, 1)
+	bt.BackgroundTransparency = 1
+	bt.Font = Enum.Font.LuckiestGuy
+	bt.TextScaled = true
+	bt.TextColor3 = C.gold
+	bt.TextStrokeTransparency = 0
+	bt.TextStrokeColor3 = Color3.fromRGB(26, 14, 8)
+	bt.Text = "!"
+	bt.Parent = bb
+	rig.bubble, rig.bubbleText = bb, bt
+
+	local ham = Instance.new("Model"); ham.Name = "Hammer"; ham.Parent = m
+	rig.hamHandle = newPart(ham, Vector3.new(0.35, 3.2, 0.35), ORIGIN, C.wood2, Enum.Material.Wood)
+	rig.hamHead   = newPart(ham, Vector3.new(3.2, 1.7, 1.7), ORIGIN, C.tomato)
+	rig.hamBand   = newPart(ham, Vector3.new(1.1, 1.8, 1.8), ORIGIN, C.white)
+
+	rig.x, rig.y, rig.z = 0, 0, LANE
+	rig.facing = 1
+	rig.bodyRot, rig.headRot, rig.bob = 0, 0, 0
+	rig.armLRot, rig.armRRot = 0.1, -0.1
+	rig.legLRot, rig.legRRot = 0, 0
+	rig.hammerVisible, rig.hammerRot = false, 0
+
+	return rig
+end
+
+local function setRigVisible(rig, on)
+	local tr = on and 0 or 1
+	for _, d in ipairs(rig.model:GetDescendants()) do
+		if d:IsA("BasePart") then d.Transparency = tr end
+	end
+	rig.face.Transparency = on and 0 or 1
+	if not on then rig.bubble.Enabled = false end
+end
+
+local function setHammerVisible(rig, on)
+	local tr = on and 0 or 1
+	rig.hamHandle.Transparency = tr
+	rig.hamHead.Transparency = tr
+	rig.hamBand.Transparency = tr
+	rig.hammerVisible = on
+end
+
+local function applyRig(rig)
+	local root = at(rig.x, GY + 3 + rig.y + rig.bob, rig.z)
+		* CFrame.Angles(0, rig.facing > 0 and -math.pi / 2 or math.pi / 2, 0)
+		* CFrame.Angles(rig.bodyRot, 0, 0)
+
+	rig.torso.CFrame = root
+
+	local headCF = root * CFrame.new(0, 1.5, 0) * CFrame.Angles(rig.headRot, 0, 0)
+	rig.head.CFrame = headCF
+	for _, h in ipairs(rig.hair) do
+		h.part.CFrame = headCF * h.off
+	end
+
+	local function limb(offset, rot)
+		return root * CFrame.new(offset) * CFrame.Angles(rot, 0, 0) * CFrame.new(0, -1, 0)
+	end
+	rig.armL.CFrame = limb(Vector3.new(-1.5,  1, 0), rig.armLRot)
+	rig.armR.CFrame = limb(Vector3.new( 1.5,  1, 0), rig.armRRot)
+	rig.legL.CFrame = limb(Vector3.new(-0.5, -1, 0), rig.legLRot)
+	rig.legR.CFrame = limb(Vector3.new( 0.5, -1, 0), rig.legRRot)
+
+	if rig.hammerVisible then
+		local hand = rig.armR.CFrame * CFrame.new(0, -1, 0)
+		local hcf = hand * CFrame.Angles(rig.hammerRot, 0, 0) * CFrame.new(0, -1.4, 0)
+		rig.hamHandle.CFrame = hcf
+		rig.hamHead.CFrame   = hcf * CFrame.new(0, -1.9, 0)
+		rig.hamBand.CFrame   = hcf * CFrame.new(0, -1.9, 0)
+	end
+end
+
+local bacon     = buildBacon("Bacon", C.shirt, C.legs)
+local neighbour = buildBacon("NeighbourBacon", C.nbShirt, C.nbLegs)
+setRigVisible(bacon, false)
+setHammerVisible(bacon, false)
+setHammerVisible(neighbour, false)
+
+----------------------------------------------------------------------
+-- SPAWN BEAM
+----------------------------------------------------------------------
+local beam = newPart(SET, Vector3.new(70, 8, 8), at(0, GY + 35, LANE), Color3.fromRGB(255, 244, 194), Enum.Material.Neon, Enum.PartType.Cylinder)
+beam.Transparency = 1
+
+----------------------------------------------------------------------
+-- CAMERA
+----------------------------------------------------------------------
+local CAM = {
+	{  0.0, Vector3.new(  2, 10, 48), Vector3.new(  0,  5, 14), 70 },
+	{  1.2, Vector3.new( -6,  7, 32), Vector3.new(  0,  4, 14), 62 },
+	{  3.0, Vector3.new( -2,  6, 30), Vector3.new(  2,  4, 14), 64 },
+	{  3.6, Vector3.new(  2,  6, 32), Vector3.new(  6,  4, 14), 66 },
+	{  5.0, Vector3.new( 10,  6, 26), Vector3.new( 14,  5, 14), 52 },
+	{  7.2, Vector3.new( 13,  6, 28), Vector3.new( 14,  4, 14), 58 },
+	{  7.6, Vector3.new( 16,  1.6, 26), Vector3.new( 16,  5, 14), 48 },
+	{  9.2, Vector3.new( 17,  1.2, 24), Vector3.new( 17,  6, 14), 44 },
+	{ 10.4, Vector3.new( 24, 18, 62), Vector3.new( 24,  8,  4), 74 },
+	{ 14.0, Vector3.new( 36, 20, 60), Vector3.new( 24,  9,  4), 76 },
+	{ 17.6, Vector3.new( 12, 16, 58), Vector3.new( 24,  9,  4), 74 },
+	{ 19.6, Vector3.new( 22, 12, 48), Vector3.new( 24,  6,  6), 68 },
+	{ 22.4, Vector3.new( 28,  9, 40), Vector3.new( 24,  5,  8), 62 },
+	{ 23.8, Vector3.new( 36, 11, 46), Vector3.new( 40,  5, 12), 70 },
+	{ 25.4, Vector3.new( 46, 12, 60), Vector3.new( 72, 12, 12), 72 },
+	{ 26.6, Vector3.new( 48,  6, 48), Vector3.new( 70, 20,  8), 60 },
+	{ 27.6, Vector3.new( 50,  8, 50), Vector3.new( 70, 15,  8), 64 },
+	{ 28.2, Vector3.new( 48, 32, 104), Vector3.new( 48, 10,  4), 82 },
+	{ 30.0, Vector3.new( 48, 34, 110), Vector3.new( 48, 10,  4), 84 },
+}
+
+local function cameraAt(t)
+	for i = 1, #CAM - 1 do
+		local a, b = CAM[i], CAM[i + 1]
+		if t <= b[1] then
+			local k = eIO(inv(t, a[1], b[1]))
+			return a[2]:Lerp(b[2], k), a[3]:Lerp(b[3], k), lerp(a[4], b[4], k)
+		end
+	end
+	local last = CAM[#CAM]
+	return last[2], last[3], last[4]
+end
+
+----------------------------------------------------------------------
+-- GUI
+----------------------------------------------------------------------
+local gui = Instance.new("ScreenGui")
+gui.Name = "BaconBuildsCutsceneGui"
+gui.IgnoreGuiInset = true
+gui.ResetOnSpawn = false
+gui.DisplayOrder = 1000
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local function letterbox(anchorY, posY)
+	local f = Instance.new("Frame")
+	f.BackgroundColor3 = Color3.fromRGB(7, 6, 14)
+	f.BorderSizePixel = 0
+	f.Size = UDim2.new(1, 0, 0.09, 0)
+	f.AnchorPoint = Vector2.new(0, anchorY)
+	f.Position = UDim2.new(0, 0, posY, 0)
+	f.ZIndex = 10
+	f.Parent = gui
+	return f
+end
+letterbox(0, 0)
+letterbox(1, 1)
+
+local fade = Instance.new("Frame")
+fade.BackgroundColor3 = Color3.fromRGB(7, 6, 14)
+fade.BorderSizePixel = 0
+fade.Size = UDim2.fromScale(1, 1)
+fade.ZIndex = 50
+fade.Parent = gui
+
+local caption = Instance.new("TextLabel")
+caption.Size = UDim2.fromScale(0.9, 0.16)
+caption.Position = UDim2.fromScale(0.05, 0.14)
+caption.BackgroundTransparency = 1
+caption.Font = Enum.Font.LuckiestGuy
+caption.TextScaled = true
+caption.TextStrokeTransparency = 0
+caption.TextStrokeColor3 = Color3.fromRGB(26, 14, 8)
+caption.Text = ""
+caption.TextTransparency = 1
+caption.ZIndex = 20
+caption.Parent = gui
+local captionScale = Instance.new("UIScale"); captionScale.Parent = caption
+
+local titleHolder = Instance.new("Frame")
+titleHolder.BackgroundTransparency = 1
+titleHolder.Size = UDim2.fromScale(1, 1)
+titleHolder.ZIndex = 30
+titleHolder.Visible = false
+titleHolder.Parent = gui
+
+local titleText = Instance.new("TextLabel")
+titleText.Size = UDim2.fromScale(0.92, 0.22)
+titleText.Position = UDim2.fromScale(0.04, 0.33)
+titleText.BackgroundTransparency = 1
+titleText.Font = Enum.Font.LuckiestGuy
+titleText.TextScaled = true
+titleText.TextColor3 = C.gold
+titleText.TextStrokeTransparency = 0
+titleText.TextStrokeColor3 = Color3.fromRGB(26, 14, 8)
+titleText.Text = "BACON BUILDS"
+titleText.ZIndex = 31
+titleText.Parent = titleHolder
+local titleScale = Instance.new("UIScale"); titleScale.Parent = titleText
+
+local tagline = Instance.new("TextLabel")
+tagline.Size = UDim2.fromScale(0.8, 0.07)
+tagline.Position = UDim2.fromScale(0.1, 0.56)
+tagline.BackgroundTransparency = 1
+tagline.Font = Enum.Font.LuckiestGuy
+tagline.TextScaled = true
+tagline.TextColor3 = Color3.fromRGB(255, 255, 255)
+tagline.TextStrokeTransparency = 0
+tagline.TextStrokeColor3 = Color3.fromRGB(26, 14, 8)
+tagline.Text = "A PLOT. A HAMMER. A DREAM."
+tagline.TextTransparency = 1
+tagline.ZIndex = 31
+tagline.Parent = titleHolder
+local taglineScale = Instance.new("UIScale"); taglineScale.Parent = tagline
+
+local skipBtn
+if CONFIG.ShowSkipButton then
+	skipBtn = Instance.new("TextButton")
+	skipBtn.Size = UDim2.fromOffset(120, 36)
+	skipBtn.AnchorPoint = Vector2.new(1, 1)
+	skipBtn.Position = UDim2.new(1, -24, 1, -24)
+	skipBtn.BackgroundColor3 = Color3.fromRGB(28, 22, 54)
+	skipBtn.BackgroundTransparency = 0.25
+	skipBtn.BorderSizePixel = 0
+	skipBtn.Font = Enum.Font.GothamBold
+	skipBtn.TextSize = 15
+	skipBtn.TextColor3 = Color3.fromRGB(244, 239, 255)
+	skipBtn.Text = "SKIP"
+	skipBtn.ZIndex = 60
+	skipBtn.Parent = gui
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 8)
+	corner.Parent = skipBtn
+end
+
+local CAPTIONS = {
+	{  1.75,  3.45, "A NEW BACON APPEARS", C.gold },
+	{  5.18,  7.15, "PLOT CLAIMED!",       Color3.fromRGB(91, 216, 138) },
+	{  8.70, 10.30, "TIME TO BUILD",       C.tomato },
+	{ 15.05, 16.20, "ROOF!",               C.gold },
+	{ 19.85, 22.60, "HOME SWEET HOME",     C.gold },
+	{ 26.00, 27.40, "WHOA.",               C.water },
+	{ 27.00, 28.10, "NEIGHBOUR GOALS",     Color3.fromRGB(255, 143, 208) },
+}
+
+----------------------------------------------------------------------
+-- LIGHTING
+----------------------------------------------------------------------
+local savedLighting
+local function pushLighting()
+	if not CONFIG.OverrideLighting then return end
+	savedLighting = {
+		Ambient        = Lighting.Ambient,
+		OutdoorAmbient = Lighting.OutdoorAmbient,
+		Brightness     = Lighting.Brightness,
+		ClockTime      = Lighting.ClockTime,
+		FogEnd         = Lighting.FogEnd,
+	}
+	Lighting.Ambient        = Color3.fromRGB(120, 120, 128)
+	Lighting.OutdoorAmbient = Color3.fromRGB(150, 160, 170)
+	Lighting.Brightness     = 2.4
+	Lighting.ClockTime      = 14.2
+	Lighting.FogEnd         = 1500
+end
+local function popLighting()
+	if not savedLighting then return end
+	for k, v in pairs(savedLighting) do
+		pcall(function() Lighting[k] = v end)
+	end
+	savedLighting = nil
+end
+
+----------------------------------------------------------------------
+-- TIMELINE EVENTS
+----------------------------------------------------------------------
+local shake = 0
+local function addShake(a) shake = math.max(shake, a) end
+
+local chimneySmoke
+local claimed = false
+
+local EVENTS = {
+	{ 0.10, function() play(SFX.whoosh, 0.5) end },
+	{ 0.86, function()
+		setRigVisible(bacon, true)
+		burstSparkle(at(0, GY + 5, LANE), 40, 18)
+		play(SFX.pop, 0.7)
+	end },
+	{ 1.30, function()
+		burstDust(at(0, GY + 0.5, LANE), 34, 26)
+		addShake(1.1)
+		play(SFX.land, 0.8)
+		play(SFX.thud, 0.5, 1.3)
+	end },
+	{ 1.80, function() play(SFX.boing, 0.5, 1.4) end },
+	{ 2.40, function() play(SFX.pop, 0.4, 1.3) end },
+	{ 3.70, function() play(SFX.step, 0.4) end },
+	{ 4.05, function() play(SFX.step, 0.4, 1.1) end },
+	{ 4.40, function() play(SFX.step, 0.4, 0.95) end },
+
+	{ 5.10, function()
+		claimed = true
+		signText.Text = "BACON'S PLOT"
+		signBoard.Color = C.gold
+		for _, p in ipairs(plotMarks) do p.Color = C.gold end
+		addShake(1.6)
+		play(SFX.whack, 0.7, 1.4)
+		play(SFX.ding, 0.8)
+		burstConfetti(at(SIGN_X, GY + 8, SIGN_Z), 70, 42)
+		burstDust(at(SIGN_X, GY + 0.5, SIGN_Z), 18, 18)
+	end },
+	{ 5.90, function() burstSparkle(at(SIGN_X, GY + 7, SIGN_Z), 20, 12) end },
+
+	{ 7.70, function() play(SFX.click, 0.4, 0.8) end },
+	{ 8.58, function()
+		setHammerVisible(bacon, true)
+		play(SFX.boing, 0.85, 0.75)
+		burstSparkle(at(17, GY + 8, LANE), 30, 16)
+		addShake(0.7)
+	end },
+	{ 9.40, function() play(SFX.whoosh, 0.45, 1.2) end },
+	{ 10.00, function() play(SFX.ding, 0.55, 1.2) end },
+
+	{ 19.05, function()
+		burstSparkle(at(HX, GY + 10, 6), 44, 20)
+		play(SFX.ding, 0.8, 1.1)
+		if chimneySmoke then chimneySmoke.Enabled = true end
+	end },
+	{ 19.72, function()
+		setHammerVisible(bacon, false)
+		burstConfetti(at(HX, GY + 20, 6), 120, 55)
+		addShake(1.0)
+		play(SFX.boom, 0.4, 1.6)
+	end },
+	{ 21.20, function() burstConfetti(at(HX - 9, GY + 16, 8), 55, 44); play(SFX.boing, 0.4, 1.5) end },
+	{ 22.30, function() burstConfetti(at(HX + 9, GY + 16, 8), 55, 44); play(SFX.boing, 0.4, 1.7) end },
+
+	{ 23.90, function() play(SFX.whoosh, 0.5, 0.9) end },
+	{ 24.35, function() play(SFX.step, 0.4, 1.2) end },
+	{ 24.80, function() play(SFX.step, 0.4, 1.1) end },
+	{ 25.25, function() play(SFX.step, 0.4, 1.25) end },
+
+	{ 25.95, function()
+		play(SFX.wow, 0.7)
+		bacon.bubble.Enabled = true
+		bacon.bubbleText.Text = "?!"
+	end },
+	{ 26.40, function() burstSparkle(at(NX, GY + 28, 12), 50, 26) end },
+	{ 26.90, function()
+		bacon.bubbleText.Text = "WOW"
+		burstSparkle(at(NX, GY + 16, 14), 40, 22)
+		play(SFX.ding, 0.7, 0.9)
+	end },
+
+	{ 28.20, function()
+		bacon.bubble.Enabled = false
+		titleHolder.Visible = true
+		addShake(1.4)
+		play(SFX.boom, 0.55, 1.1)
+		play(SFX.ding, 0.9, 1.0)
+		burstConfetti(at(HX, GY + 26, 12), 120, 60)
+		burstConfetti(at(NX, GY + 32, 12), 120, 60)
+		burstConfetti(at(48, GY + 34, 16), 120, 60)
+	end },
+	{ 29.10, function() burstConfetti(at(34, GY + 28, 14), 80, 52); play(SFX.ding, 0.5, 1.3) end },
+	{ 29.50, function() burstConfetti(at(62, GY + 28, 14), 80, 52) end },
+}
+
+for _, g in ipairs(buildGroups) do
+	local isBig = (g.name == "Roof")
+	table.insert(EVENTS, { g.land, function()
+		addShake(isBig and 2.4 or 1.3)
+		local p = g.home.Position
+		burstDust(CFrame.new(p.X, ORIGIN.Position.Y + GY + 1, p.Z), isBig and 50 or 26, isBig and 34 or 24)
+		burstSparkle(CFrame.new(p), isBig and 30 or 14, 14)
+		play(SFX.whack, isBig and 0.85 or 0.6, isBig and 0.7 or (0.95 + math.random() * 0.3))
+		play(SFX.snap, 0.5, 1.1)
+		if isBig then
+			play(SFX.boom, 0.45, 1.2)
+			burstConfetti(CFrame.new(p) * CFrame.new(0, 6, 0), 50, 44)
+		end
+	end })
+end
+
+table.sort(EVENTS, function(a, b) return a[1] < b[1] end)
+
+----------------------------------------------------------------------
+-- POSING
+----------------------------------------------------------------------
+local function walkCycle(rig, t, speed, amp)
+	local p = t * speed
+	rig.legRRot =  math.sin(p) * amp
+	rig.legLRot = -math.sin(p) * amp
+	rig.armRRot = -math.sin(p) * amp * 0.8
+	rig.armLRot =  math.sin(p) * amp * 0.8
+	rig.bob = -math.abs(math.sin(p)) * 0.35
+	rig.bodyRot = 0.05
+end
+
+local function swingAngle(t, land)
+	if t < land - 0.24 or t > land + 0.34 then return nil end
+	if t <= land then
+		return lerp(-2.6, 0.85, eIn(inv(t, land - 0.24, land)))
+	end
+	return lerp(0.85, -2.2, eOut(inv(t, land, land + 0.34)))
+end
+
+local BUILD_WALK = {
+	{ 10.4, 18 }, { 11.0, 20 }, { 11.9, 15 }, { 12.8, 19 }, { 13.5, 14 },
+	{ 14.1, 31 }, { 15.0, 25 }, { 15.9, 32 }, { 16.7, 12 }, { 17.4, 19 },
+	{ 18.1, 24 }, { 18.8, 13 }, { 19.3, 24 },
+}
+
+local function poseBacon(t)
+	local b = bacon
+	b.x, b.y, b.z = 0, 0, LANE
+	b.bob, b.bodyRot, b.headRot = 0, 0, 0
+	b.facing = 1
+	b.armLRot, b.armRRot = 0.1, -0.1
+	b.legLRot, b.legRRot = 0, 0
+	b.hammerRot = 0
+
+	if t < 0.86 then
+		b.y = 14
+	elseif t < 1.28 then
+		b.y = lerp(14, 0, eIn(inv(t, 0.86, 1.28)))
+		b.armRRot, b.armLRot = -1.6, 1.6
+		b.legRRot, b.legLRot = 0.5, -0.5
+	elseif t < 1.75 then
+		local k = inv(t, 1.28, 1.75)
+		b.y = -0.45 * math.exp(-k * 7) * math.cos(k * 22)
+		b.armRRot = -1.3 + k
+		b.armLRot =  1.3 - k
+	elseif t < 3.5 then
+		local k = inv(t, 1.75, 3.5)
+		b.headRot = math.sin(k * 7) * 0.22
+		local hop = (k > 0.45) and math.max(0, math.sin((k - 0.45) * 9)) * 2.2 or 0
+		b.y = hop
+		b.armRRot = -0.5 - math.sin(t * 7) * 0.5
+		b.armLRot =  0.5 + math.sin(t * 7) * 0.5
+		b.legRRot =  hop * 0.12
+		b.legLRot = -hop * 0.12
+	elseif t < 4.86 then
+		b.x = track({ { 3.5, 0 }, { 4.86, 11.4 } }, t)
+		walkCycle(b, t, 11, 0.52)
+	elseif t < 5.10 then
+		b.x = 11.4
+		local k = inv(t, 4.86, 5.10)
+		b.armRRot = lerp(-0.2, -2.5, eOut(k))
+		b.bodyRot = -k * 0.12
+	elseif t < 5.34 then
+		b.x = 11.4
+		local k = inv(t, 5.10, 5.34)
+		b.armRRot = lerp(-2.5, 1.35, eOut(k))
+		b.bodyRot = k * 0.16
+	elseif t < 7.20 then
+		b.x = 11.4
+		local k = inv(t, 5.34, 7.20)
+		local j = math.max(0, math.sin(k * math.pi * 2.4)) * 2.8
+		b.y = j
+		b.armRRot, b.armLRot = -2.3, 2.3
+		b.legRRot, b.legLRot = j * 0.12, -j * 0.12
+		b.bodyRot = math.sin(k * 14) * 0.05
+	elseif t < 7.62 then
+		b.x = track({ { 7.20, 11.4 }, { 7.62, 16 } }, t)
+		walkCycle(b, t, 10, 0.4)
+	elseif t < 8.56 then
+		b.x = 16
+		local k = inv(t, 7.62, 8.56)
+		b.armRRot = lerp(-0.1, 0.55, eIO(math.min(1, k * 2)))
+		b.bodyRot = 0.08 + math.sin(t * 16) * 0.035
+		b.headRot = 0.16
+	elseif t < 10.40 then
+		b.x = 16
+		local k = inv(t, 8.56, 8.95)
+		b.armRRot = lerp(0.55, -2.45, eBack(k))
+		b.hammerRot = lerp(1.6, 0, eBack(k)) + math.sin(t * 2) * 0.06
+		b.armLRot = lerp(0.1, 0.85, k)
+		b.bodyRot = -0.07
+		b.headRot = -0.10
+		b.y = math.abs(math.sin((t - 8.9) * 2)) * 0.4
+	elseif t < 19.50 then
+		b.x = track(BUILD_WALK, t)
+		local sw
+		for _, g in ipairs(buildGroups) do
+			sw = swingAngle(t, g.land)
+			if sw then break end
+		end
+		b.armRRot = sw or (-2.1 + math.sin(t * 3) * 0.12)
+		b.hammerRot = sw and 0 or math.sin(t * 3) * 0.1
+		b.armLRot = 0.35
+		b.legRRot =  math.sin(t * 9) * 0.16
+		b.legLRot = -math.sin(t * 9) * 0.16
+		b.bob = -math.abs(math.sin(t * 9)) * 0.22
+		b.bodyRot = (sw and sw > 0) and 0.14 or -0.04
+	elseif t < 19.72 then
+		b.x = 24
+		b.armRRot = -1.2
+	elseif t < 23.70 then
+		local p = t - 19.72
+		b.x = 24 + math.sin(p * 2.6) * 3.4
+		local j = math.max(0, math.sin(p * 5.4)) * 3.0
+		b.y = j
+		b.armRRot = -2.2 + math.sin(p * 10.8) * 0.9
+		b.armLRot =  2.2 + math.sin(p * 10.8 + 1) * 0.9
+		b.legRRot =  math.sin(p * 10.8) * 0.6
+		b.legLRot = -math.sin(p * 10.8) * 0.6
+		b.bodyRot = math.sin(p * 5.4) * 0.17
+		b.headRot = math.sin(p * 10.8) * 0.2
+		b.facing = (math.sin(p * 2.6) > 0) and 1 or -1
+		if p > 3.4 then b.facing = 1 end
+	elseif t < 25.85 then
+		b.x = track({ { 23.70, 24 }, { 25.85, 60 } }, t)
+		b.z = track({ { 23.70, LANE }, { 25.85, 30 } }, t)
+		walkCycle(b, t, 17, 0.74)
+		b.bodyRot = 0.14
+	else
+		b.x, b.z = 60, 30
+		local k = inv(t, 25.85, 26.60)
+		b.headRot = lerp(0, -0.42, eOut(k))
+		local a = eOut(inv(t, 26.10, 26.70))
+		b.armRRot = lerp(-0.1, -1.5, a)
+		b.armLRot = lerp( 0.1,  1.5, a)
+		b.y = math.abs(math.sin((t - 26.6) * 4)) * 0.6
+		if t > 28.20 then
+			local q = inv(t, 28.20, 28.70)
+			b.headRot = lerp(-0.42, 0, q)
+			b.armRRot = -2.3 + math.sin(t * 9) * 0.35
+			b.armLRot = 1.6
+			b.y = math.abs(math.sin(t * 5)) * 1.1
+		end
+	end
+end
+
+local function poseNeighbour(t)
+	local n = neighbour
+	n.x, n.z, n.facing = 80, 24, -1
+	n.bob = -math.abs(math.sin(t * 2.2)) * 0.25
+	n.armLRot = 0.12
+	n.armRRot = (t > 25.4) and (-2.5 + math.sin(t * 9) * 0.45) or -0.1
+	if t > 28.2 then
+		n.armLRot = -2.3 + math.sin(t * 9 + 2) * 0.3
+		n.bob = -math.abs(math.sin(t * 5 + 1)) * 1.1
+	end
+end
+
+----------------------------------------------------------------------
+-- PER-FRAME WORLD UPDATES
+----------------------------------------------------------------------
+local function updateBeam(t)
+	if t >= 1.4 then
+		beam.Transparency = 1
+		return
+	end
+	local k = inv(t, 0.1, 0.5)
+	local out = inv(t, 0.9, 1.4)
+	local r = lerp(2, 8, k) * (1 - out * 0.4)
+	beam.Transparency = math.min(1, lerp(1, 0.35, k) + out * 0.65)
+	beam.Size = Vector3.new(70, r, r)
+	beam.CFrame = at(0, GY + 35, LANE) * CFrame.Angles(0, 0, math.pi / 2) * CFrame.Angles(0, t * 3, 0)
+end
+
+local function updateSign(t)
+	if claimed then
+		local k = inv(t, 5.10, 5.90)
+		local spin = lerp(math.pi * 4, 0, eOut(k))
+		local lean = math.sin((t - 5.10) * 9) * math.exp(-(t - 5.10) * 3) * 0.18
+		signBoard.CFrame = signHome * CFrame.Angles(0, spin, lean)
+	end
+	local pulse = 0.2 + math.abs(math.sin(t * 3)) * 0.35
+	local faded = inv(t, 11.2, 12.4)
+	for _, p in ipairs(plotMarks) do
+		p.Transparency = math.max(pulse, faded)
+	end
+end
+
+local function updateBuild(t)
+	for _, g in ipairs(buildGroups) do
+		local start = g.land - 0.45
+		if t < start then
+			if g.shown then
+				for _, d in ipairs(g.model:GetDescendants()) do
+					if d:IsA("BasePart") then d.Transparency = 1 end
+				end
+				g.shown = false
+			end
+		else
+			if not g.shown then
+				for _, d in ipairs(g.model:GetDescendants()) do
+					if d:IsA("BasePart") then
+						d.Transparency = (d.Material == Enum.Material.Glass) and 0.3 or 0
+					end
+				end
+				g.shown = true
+			end
+
+			local pivot
+			local idleCF = g.idle and g.idle(t, g.home) or nil
+			if idleCF then
+				pivot = idleCF
+			else
+				local k = eBack(inv(t, start, g.land))
+				local off = g.from * (1 - k)
+				local rot = g.rot * (1 - k)
+				pivot = CFrame.new(g.home.Position + off) * CFrame.Angles(rot.X, rot.Y, rot.Z)
+			end
+
+			local u = t - g.land
+			if u >= 0 and u < 0.35 then
+				pcall(function() g.model:ScaleTo(1 + 0.16 * math.sin(u / 0.35 * math.pi)) end)
+			elseif u >= 0.35 and u < 0.52 then
+				pcall(function() g.model:ScaleTo(1) end)
+			end
+
+			g.model:PivotTo(pivot)
+		end
+	end
+end
+
+local function updateHouseLife(t)
+	if t > 19.3 then
+		local a = lerp(0, -1.15, eBack(inv(t, 19.3, 19.9)))
+		for _, s in ipairs(shutters) do
+			s.part.CFrame = s.hinge * CFrame.Angles(0, a * s.dir, 0) * s.off
+		end
+	end
+	if flagCloth and flagCloth.Transparency < 1 then
+		local w = math.sin(t * 6) * 0.3
+		flagCloth.CFrame = FLAG_HOME * CFrame.Angles(w, 0, w * 0.25)
+	end
+	if t > 19.0 then
+		local glow = 0.3 + math.sin(t * 2) * 0.12
+		for _, g in ipairs(houseGlass) do
+			g.Material = Enum.Material.Neon
+			g.Color = C.glass:Lerp(C.warm, 0.55 + glow * 0.3)
+			g.Transparency = 0.1
+		end
+	end
+end
+
+local function updateMansionLife(t)
+	for _, v in ipairs(vanes) do
+		v.part.CFrame = v.home * CFrame.Angles(0, t * 1.6, 0)
+	end
+	for i, f in ipairs(mansionFlags) do
+		local w = math.sin(t * 6 + i) * 0.34
+		f.part.CFrame = f.home * CFrame.Angles(w, 0, w * 0.3)
+	end
+	for i, h in ipairs(hedges) do
+		h.part.CFrame = h.home * CFrame.Angles(0, 0, math.sin(t * 1.6 + i) * 0.05)
+	end
+	local glow = 0.3 + math.sin(t * 2.2) * 0.12
+	for _, w in ipairs(mansionLights) do
+		w.Color = C.warm:Lerp(Color3.fromRGB(255, 248, 214), glow)
+	end
+	for _, j in ipairs(fountainJets) do
+		local ph = (t * 1.7 + j.phase) % 1
+		local x = j.cx + j.side * ph * 5.2
+		local y = GY + 6 + math.sin(ph * math.pi) * 4.6 - ph * ph * 1.4
+		j.part.CFrame = at(x, y, j.cz)
+		j.part.Transparency = ph * 0.7
+	end
+end
+
+local function updateCaptions(t)
+	for _, c in ipairs(CAPTIONS) do
+		if t >= c[1] and t <= c[2] then
+			local ins  = inv(t, c[1], c[1] + 0.34)
+			local outs = inv(t, c[2] - 0.26, c[2])
+			caption.Text = c[3]
+			caption.TextColor3 = c[4]
+			caption.TextTransparency = outs
+			caption.TextStrokeTransparency = outs
+			captionScale.Scale = math.max(0.01, eBack(ins) * (1 - outs * 0.5))
+			caption.Rotation = math.sin(t * 7) * 1.4 - 1.5
+			return
+		end
+	end
+	caption.TextTransparency = 1
+	caption.TextStrokeTransparency = 1
+end
+
+local function updateTitle(t)
+	if t < 28.2 then return end
+	titleScale.Scale = math.max(0.01, eElastic(inv(t, 28.2, 29.0)))
+	titleText.Rotation = math.sin(t * 4) * 0.8
+	local k2 = inv(t, 28.7, 29.3)
+	tagline.TextTransparency = 1 - k2
+	tagline.TextStrokeTransparency = 1 - k2
+	taglineScale.Scale = math.max(0.01, eBack(k2))
+end
+
+----------------------------------------------------------------------
+-- RUNTIME
+----------------------------------------------------------------------
+local running = false
+local conn
+local savedCameraType
+local hidden = {}
+
+local function hideCharacter(on)
+	if not CONFIG.HideLocalCharacter then return end
+	local char = player.Character
+	if not char then return end
+	if on then
+		for _, d in ipairs(char:GetDescendants()) do
+			if d:IsA("BasePart") then
+				table.insert(hidden, { d, d.LocalTransparencyModifier })
+				d.LocalTransparencyModifier = 1
+			elseif d:IsA("Decal") then
+				table.insert(hidden, { d, d.Transparency })
+				d.Transparency = 1
+			end
+		end
+		local hum = char:FindFirstChildOfClass("Humanoid")
+		if hum then
+			hum.WalkSpeed = 0
+			hum.JumpPower = 0
+			hum.JumpHeight = 0
+		end
+	else
+		for _, rec in ipairs(hidden) do
+			local inst, val = rec[1], rec[2]
+			if inst and inst.Parent then
+				if inst:IsA("BasePart") then
+					inst.LocalTransparencyModifier = val
+				else
+					inst.Transparency = val
+				end
+			end
+		end
+		hidden = {}
+		local hum = char:FindFirstChildOfClass("Humanoid")
+		if hum then
+			hum.WalkSpeed = 16
+			hum.JumpPower = 50
+			hum.JumpHeight = 7.2
+		end
+	end
+end
+
+local finished = false
+local function finish()
+	if finished then return end
+	finished = true
+	running = false
+	if conn then conn:Disconnect(); conn = nil end
+	if music then music:Stop(); music:Destroy(); music = nil end
+
+	local cam = workspace.CurrentCamera
+	if cam then
+		cam.CameraType = savedCameraType or Enum.CameraType.Custom
+		cam.FieldOfView = 70
+	end
+	hideCharacter(false)
+	popLighting()
+
+	if gui then gui:Destroy() end
+	if ROOT then ROOT:Destroy() end
+end
+
+if skipBtn then
+	skipBtn.MouseButton1Click:Connect(finish)
+end
+
+local function run()
+	if running or finished then return end
+	running = true
+
+	local cam = workspace.CurrentCamera
+	savedCameraType = cam.CameraType
+	cam.CameraType = Enum.CameraType.Scriptable
+
+	pushLighting()
+	hideCharacter(true)
+	startMusic()
+	chimneySmoke = makeSmokeStack(CHIMNEY_TOP)
+
+	local t = 0
+	local nextEvent = 1
+
+	conn = RunService.RenderStepped:Connect(function(dt)
+		if not running then return end
+		t = math.min(t + dt, DURATION)
+
+		while nextEvent <= #EVENTS and EVENTS[nextEvent][1] <= t do
+			local ok, err = pcall(EVENTS[nextEvent][2])
+			if not ok then warn("[BaconBuilds] event error: " .. tostring(err)) end
+			nextEvent += 1
+		end
+
+		updateBeam(t)
+		updateSign(t)
+		updateBuild(t)
+		updateHouseLife(t)
+		updateMansionLife(t)
+
+		poseBacon(t)
+		poseNeighbour(t)
+		applyRig(bacon)
+		applyRig(neighbour)
+
+		local pos, look, fov = cameraAt(t)
+		local cf = CFrame.lookAt(ORIGIN.Position + pos, ORIGIN.Position + look)
+		if shake > 0.01 then
+			cf = cf
+				* CFrame.new((math.random() - 0.5) * shake, (math.random() - 0.5) * shake, 0)
+				* CFrame.Angles(0, 0, (math.random() - 0.5) * shake * 0.02)
+			shake *= math.max(0, 1 - dt * 6)
+		else
+			shake = 0
+		end
+		cam.CFrame = cf
+		cam.FieldOfView = fov
+
+		if t < 0.45 then
+			fade.BackgroundTransparency = 1 - inv(t, 0, 0.45)
+		elseif t > 29.72 then
+			fade.BackgroundTransparency = 1 - inv(t, 29.72, 30)
+		else
+			fade.BackgroundTransparency = 1
+		end
+
+		updateCaptions(t)
+		updateTitle(t)
+
+		if t >= DURATION then
+			running = false
+			task.delay(0.25, finish)
+		end
+	end)
+end
+
+----------------------------------------------------------------------
+-- START
+----------------------------------------------------------------------
+if CONFIG.AutoPlay then
+	task.delay(CONFIG.StartDelay, run)
+end
+
+-- Trigger it from anywhere with:  workspace:SetAttribute("PlayBaconCutscene", true)
+workspace:GetAttributeChangedSignal("PlayBaconCutscene"):Connect(function()
+	if workspace:GetAttribute("PlayBaconCutscene") then run() end
+end)
+]]></ProtectedString>
+    </Properties>
+  </Item>
+</roblox>
