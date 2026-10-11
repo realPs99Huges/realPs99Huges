@@ -164,6 +164,18 @@ def build_music():
     return mix
 
 
+def shing(d=0.16, seed=0, vel=1.0):
+    t = tt(d + 0.5)
+    sweep = svf(noise(d + 0.5, seed), 3000 + 7000 * np.clip(t / d, 0, 1), 4.0, 'bp')
+    env = np.clip(t / d, 0, 1) ** 1.5 * np.exp(-np.clip(t - d, 0, None) / 0.05)
+    ring = sum(np.sin(2 * np.pi * f * t + k) * np.exp(-t / 0.35) for k, f in enumerate((3150, 4720, 6080, 7930)))
+    ring *= np.clip((t - d * 0.6) / 0.01, 0, 1) * 0.06
+    return (sweep * env * 0.7 + ring) * vel
+
+
+BLADES = [6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 20.0, 28.0]
+
+
 def clip_audio(name, src_t, d):
     f = [x for x in os.listdir(U) if x.endswith(f'IMG_{name}.mov')][0]
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', str(src_t), '-t', str(d), '-i', os.path.join(U, f),
@@ -189,7 +201,6 @@ def sfx():
     S.add(2.05, tsch(30, 2, 0.07, 0.9), 1.1)
     for k in range(9):
         S.add(2.02 + k * 0.035, pop(1100 + k * 40, 0.12), 1.0)
-    S.add(2.35, marker(0.5, 0.6, 81), 0.5, pan=-0.2)
     S.add(2.5, riser(1.45, 0.7), 1.0)
     rum = lp(noise(0.5, 99), 200) * np.linspace(0, 1, int(0.5 * SR)) ** 2
     S.add(3.48, rum, 0.6)
@@ -199,44 +210,20 @@ def sfx():
     for k in range(8):
         S.add(4.02 + k * 0.03, whoosh(0.35, 1500, 400, 0.15, seed=40 + k), 0.18, pan=-0.8 + k * 0.23)
     # ---------------- reasons
-    REAS = [(1, 4.0, 'strike'), (2, 6.0, 'arrow'), (3, 8.0, 'under'), (4, 10.0, 'circle'), (5, 12.0, 'arrow2'),
-            (6, 14.0, 'sun')]
-    for k, T0, ann in REAS:
-        if k > 1:
-            S.add(T0 - 0.09, whoosh(0.28, 400, 6000, 0.7, seed=60 + k), 0.75, pan=0.5)
-            S.add(T0, crunch(200 + k, 0.09, 1200, 0.8), 0.85, pan=0.6)   # HUD bite
-            S.add(T0 - 0.16 + 0.0, whoosh(0.2, 3000, 500, 0.3, seed=70 + k), 0.4, pan=-0.6)
+    # reason titles: soft pops as the headline letters land; low swell when footage goes full-screen
+    for k, T0 in ((1, 4.0), (2, 6.0), (3, 8.0), (4, 10.0), (5, 12.0), (6, 14.0)):
         for j in range(6):
-            S.add(T0 + 0.05 + j * 0.035, pop(900 + j * 60, 0.1), 1.0)
-        S.add(T0 + 0.32, marker(0.38, 0.6, 82 + k), 0.45, pan=-0.3)
+            S.add(T0 + 0.07 + j * 0.035, pop(900 + j * 60, 0.1), 1.0)
         if k in (4, 6):
             S.add(T0 + 0.1, whoosh(0.4, 150, 1500, 0.6, seed=80 + k, q=0.9), 0.6)
-        if ann == 'strike':
-            S.add(T0 + 0.85, marker(0.25, 0.9, 90), 0.55)
-            S.add(T0 + 0.85, crunch(91, 0.05, 600, 0.3), 0.3)
-        elif ann in ('arrow', 'arrow2'):
-            S.add(T0 + 0.75, marker(0.3, 0.7, 92 + k), 0.5, pan=0.3)
-        elif ann == 'under':
-            S.add(T0 + 0.75, marker(0.2, 0.7, 95), 0.5); S.add(T0 + 0.95, marker(0.17, 0.6, 96), 0.45)
-        elif ann == 'circle':
-            S.add(T0 + 0.75, marker(0.4, 0.7, 97), 0.5)
-        elif ann == 'sun':
-            S.add(T0 + 0.7, marker(0.25, 0.6, 98), 0.45)
-            for j in range(8):
-                S.add(T0 + 0.95 + j * 0.03, tick(0.12, 5000, 300 + j), 1.0)
+    S.add(16.36, thud(0.9, 90), 0.75)
     S.add(10.0, sizzle(2.0, 1.0), 0.18)
     # ---------------- rating mosaic
-    for k in range(8):
-        S.add(16.0 + k * 0.04, whoosh(0.35, 3000, 300, 0.75, seed=110 + k), 0.22, pan=-0.8 + k * 0.22)
-    S.add(16.42, thud(0.8, 90), 0.6)
-    S.add(16.45, pop(700, 0.5), 1.0)
     bells = [81, 84, 86, 88, 93]
     for j in range(5):
         ts = 16.9 + j * 0.125
         S.add(ts, bell(mtof(bells[j]), 1.3, 0.8), 0.45, pan=-0.5 + j * 0.25)
         S.add(ts, crunch(300 + j, 0.07, 1100, 0.7, 1.1 + 0.08 * j), 0.75)
-    S.add(17.5, marker(0.4, 0.7, 120), 0.5)
-    S.add(16.5, marker(0.45, 0.6, 121), 0.4)
     # ---------------- last slice
     for j in range(7):
         tj = 20.05 + j * 0.25
@@ -249,15 +236,11 @@ def sfx():
     S.add(22.0, crash(0.9, 2.4), 0.5)
     S.add(22.25, thud(0.9, 90), 0.7)
     S.add(22.55, whoosh(0.4, 150, 1500, 0.6, seed=140, q=0.9), 0.6)
-    S.add(22.7, marker(0.4, 0.7, 141), 0.5)
-    S.add(23.0, marker(0.3, 0.7, 142), 0.45)
     # ---------------- info
-    S.add(24.05, marker(0.45, 0.7, 150), 0.5)
     for j in range(3):
         t0 = 24.35 + j * 0.5
         S.add(t0 - 0.03, whoosh(0.25, 600, 6000, 0.5, seed=151 + j), 0.5, pan=0.4)
         S.add(t0 + 0.06, pop(1200 + 200 * j, 0.3), 1.0)
-        S.add(t0 + 0.35, marker(0.25, 0.5, 155 + j), 0.4)
     # ---------------- end
     S.add(27.95, whoosh(0.4, 4000, 300, 0.4, seed=160), 0.6)
     for k in range(8):
@@ -267,17 +250,19 @@ def sfx():
     S.add(28.9, puff(0.7, seed=171), 0.4)
     for k in range(11):
         S.add(28.95 + k * 0.03, pop(1000 + k * 30, 0.1), 1.0)
-    S.add(29.2, marker(0.6, 0.6, 172), 0.4)
-    S.add(29.4, marker(0.5, 0.6, 173), 0.45)
     for k in range(31):
         S.add(29.9 + k / 45, tick(0.1, 5600, 400 + k), 1.0)
     for k in range(37):
         S.add(30.5 + k / 45, tick(0.1, 5600, 500 + k), 1.0)
     for k in range(19):
         S.add(31.2 + k / 40, tick(0.12, 5000, 600 + k), 1.0)
-    for k in range(8):
-        S.add(20.02 + k / 40, tick(0.12, 5200, 700 + k), 1.0)
+
     S.add(33.15, tsch(180, 3, 0.11, 0.9), 1.1)
+    # ---------------- blade cuts
+    for j, T in enumerate(BLADES):
+        S.add(T - 0.14, shing(0.14, seed=500 + j), 0.9, pan=(-1) ** j * 0.3)
+        S.add(T, crunch(520 + j, 0.07, 1200, 0.8, 1.2), 0.55)
+        S.add(T, whoosh(0.4, 1800, 300, 0.12, seed=540 + j), 0.45, pan=-(-1) ** j * 0.4)
     # ---------------- real ambience from the iPhone clips
     S.add(10.0, clip_audio('1169', 0.0, 2.0), 0.035)
     S.add(14.0, clip_audio('1172', 150 / 60, 2.0), 0.035)

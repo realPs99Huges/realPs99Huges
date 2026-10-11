@@ -104,6 +104,8 @@ def cover(img, out_w=W, out_h=H, zoom=1.0, cx=0.5, cy=0.5, rot=0.0, dx=0.0, dy=0
 
 def vid(name, f, **kw):
     lo = kw.pop('lo', None); hi = kw.pop('hi', None)
+    if name == 'wa' and 'sharpen' not in kw:
+        kw['sharpen'] = 0.4
     out_w = kw.pop('out_w', W); out_h = kw.pop('out_h', H)
     return cover(frame(name, f, lo, hi), out_w, out_h, **kw)
 
