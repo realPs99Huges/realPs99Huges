@@ -42,6 +42,7 @@ export const nav = [
 export const legalNav = [
   { href: '/impressum/', label: 'Impressum' },
   { href: '/datenschutz/', label: 'Datenschutz' },
+  { href: '/agb/', label: 'AGB' },
 ] as const;
 
 /**

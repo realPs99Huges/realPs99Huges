@@ -26,7 +26,7 @@ Voraussetzung: Node.js ≥ 22.12.
 | `/handelsimmobilien/<id>/` | Detailseite je Angebot (nur wenn Angebote gepflegt sind) |
 | `/ueber-uns/` | Über Issa Immobilien: Inhaber und Angaben auf einen Blick |
 | `/kontakt/` | Kontaktdaten und Anfrageformular |
-| `/impressum/`, `/datenschutz/` | Rechtliches (siehe `docs/RECHTLICHES.md`) |
+| `/impressum/`, `/datenschutz/`, `/agb/` | Rechtliches (siehe `docs/RECHTLICHES.md`) |
 | `/kontakt/gesendet/`, `/kontakt/fehler/` | Rückmeldeseiten für Browser ohne JavaScript (noindex) |
 
 ## Projektstruktur

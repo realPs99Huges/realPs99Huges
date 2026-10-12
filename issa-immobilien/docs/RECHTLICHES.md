@@ -1,6 +1,6 @@
 # Rechtliche Inhalte – Stand und offene Punkte
 
-> Diese Website enthält keine Rechtsberatung. Impressum und Datenschutzerklärung sind vor dem
+> Diese Website enthält keine Rechtsberatung. Impressum, Datenschutzerklärung und AGB sind vor dem
 > Livegang vom Betreiber bzw. einer fachkundigen Stelle abschließend zu prüfen.
 
 ## Impressum (`src/pages/impressum.astro`)
@@ -53,6 +53,30 @@ Schriften, keine Cookies, kein Tracking, keine eingebetteten Dienste.
   (separate Information nach Art. 13/14 DSGVO außerhalb der Website)
 
 Nach Freigabe den Hinweis-Kasten am Seitenanfang entfernen.
+
+## AGB (`src/pages/agb.astro`)
+
+§§ 1–9 wortgetreu aus der gelieferten Datei `AGB_Issa_Immobilien_neu.docx` übernommen
+(einzige Korrektur: ein überzähliges Leerzeichen in „MwSt .“). Das Logo aus der Datei entfällt,
+es steht bereits im Seitenkopf.
+
+**Nicht übernommen:** der angehängte „Hinweis auf die ENEV 2014“. Er gehört nicht zu den AGB,
+beschreibt ein einzelnes Inserat („… existierte noch kein Energieausweis …“) und verweist auf die
+EnEV, die seit dem 01.11.2020 durch das Gebäudeenergiegesetz (GEG) ersetzt ist. Solche Hinweise
+gehören – aktualisiert – in das jeweilige Exposé.
+
+**Bitte vor dem Livegang fachkundig prüfen lassen**, u. a.:
+
+- § 2 Nr. 5 „zahlbar vom Mieter oder Pächter“: Bei der Vermittlung von **Wohnraum** gilt das
+  Bestellerprinzip (§ 2 Abs. 1a WoVermittG); für Gewerbeflächen nicht betroffen.
+- § 2 Nr. 1: Beim Verkauf von Wohnungen und Einfamilienhäusern an Verbraucher gelten die
+  §§ 656a–656d BGB (Teilung der Provision, Textform).
+- § 1 „Wandlung“: Begriff stammt aus dem Kaufrecht vor 2002 (heute Rücktritt).
+- § 2 „in Nordrhein-Westfalen üblichen Sätzen“ bei deutschlandweiter Tätigkeit.
+- § 8 Gerichtsstandsvereinbarungen sind nur unter Kaufleuten bzw. in den Grenzen des § 38 ZPO
+  wirksam („im Rahmen des Zulässigen“).
+- Ob die AGB wirksam einbezogen werden (z. B. Verweis im Exposé/Maklervertrag), entscheidet sich
+  nicht durch die Veröffentlichung auf der Website allein.
 
 ## Kontaktformular
 
