@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import ServiceList from '../components/ServiceList.astro';
+import ServiceAreas from '../components/ServiceAreas.astro';
+import Process from '../components/Process.astro';
 import PhotoStrip from '../components/PhotoStrip.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { services, examples } from '../data/site';
@@ -31,13 +32,13 @@ const schema = {
 >
   <PageHero
     eyebrow="Leistungen"
-    title="Was wir machen."
-    lead="Vermarktung und Vermittlung von Einzelhandels- und Gewerbeimmobilien in ganz Deutschland – für Eigentümer, Vermieter und Unternehmen, die einen Standort suchen."
+    title="Leistungen."
+    lead="Vermarktung und Vermittlung von Einzelhandelsimmobilien und Handelsstandorten in ganz Deutschland – für Eigentümer, Vermieter und Unternehmen, die einen Standort suchen."
   />
 
   <section class="section">
     <div class="container">
-      <ServiceList />
+      <ServiceAreas detailed />
 
       <div class="examples" data-reveal>
         <p class="examples__label">Immobilien, zum Beispiel</p>
@@ -51,6 +52,7 @@ const schema = {
 
   <PhotoStrip names={['hero', 'einzelhandel', 'deutschland']} />
 
+  <Process />
   <ContactBand />
 </Base>
 

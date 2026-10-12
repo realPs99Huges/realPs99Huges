@@ -1,0 +1,96 @@
+---
+import { company } from '../../data/site';
+---
+
+<section class="germany section" aria-labelledby="deutschland-title">
+  <div class="container grid">
+    <div class="germany__head">
+      <p class="germany__big" aria-hidden="true">Deutschland&shy;weit.</p>
+      <h2 id="deutschland-title" class="h2 germany__title" data-reveal>
+        Deutschlandweit tätig. Auf Handelsimmobilien fokussiert.
+      </h2>
+    </div>
+    <div class="germany__body">
+      <p class="lead" data-reveal>
+        Die Anforderungen an Handelsstandorte unterscheiden sich je nach Nutzung, Fläche, Lage und Zielgruppe. Issa
+        Immobilien richtet den Blick auf die relevanten Standortfaktoren und die passende Vermarktung gewerblicher
+        Einzelhandelsimmobilien.
+      </p>
+      <dl class="germany__facts" data-reveal>
+        <div><dt>Tätigkeitsgebiet</dt><dd>Ganz Deutschland</dd></div>
+        <div><dt>Schwerpunkt</dt><dd>Einzelhandelsimmobilien und Handelsstandorte</dd></div>
+        <div><dt>Sitz</dt><dd>{company.city}</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .germany {
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .germany__big {
+    font-size: clamp(3rem, 1rem + 5.4vw, 6.5rem);
+    font-weight: 760;
+    font-stretch: 75%;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--anthracite);
+  }
+
+  .germany__title {
+    margin-top: 1.5rem;
+    max-width: 20ch;
+    font-size: var(--fs-h3);
+    color: var(--text-2);
+  }
+
+  .germany__body .lead {
+    max-width: 36rem;
+    color: var(--text);
+  }
+
+  .germany__facts {
+    margin-top: 2rem;
+    border-top: 2px solid var(--green);
+  }
+
+  .germany__facts > div {
+    display: grid;
+    gap: 0.2rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .germany__facts dt {
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .germany__facts dd {
+    font-weight: 620;
+  }
+
+  @media (min-width: 40em) {
+    .germany__facts > div {
+      grid-template-columns: 10rem 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 60em) {
+    .germany__head {
+      grid-column: 1 / span 7;
+    }
+
+    .germany__body {
+      grid-column: 8 / span 5;
+      align-self: end;
+    }
+  }
+</style>

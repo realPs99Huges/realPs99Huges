@@ -11,7 +11,12 @@ const { showFormLink = true } = Astro.props;
 
 <section class="contact section" aria-labelledby="kontakt-band-title">
   <div class="container">
-    <h2 id="kontakt-band-title" class="h2 contact__title" data-reveal>Sprechen Sie uns an.</h2>
+    <h2 id="kontakt-band-title" class="h2 contact__title" data-reveal>
+      Sie planen die Vermarktung einer Einzelhandelsimmobilie?
+    </h2>
+    <p class="lead contact__lead" data-reveal>
+      Sprechen Sie mit Issa Immobilien über Ihr Vorhaben, Ihre Fläche oder Ihren geplanten Handelsstandort.
+    </p>
     <div class="contact__grid">
       <a href={company.phoneHref} class="contact__big" data-reveal>{company.phone}</a>
       <a href={`mailto:${company.email}`} class="contact__big contact__big--mail" data-reveal>{company.email}</a>
@@ -35,7 +40,12 @@ const { showFormLink = true } = Astro.props;
   }
 
   .contact__title {
-    margin-bottom: 2rem;
+    max-width: 22ch;
+  }
+
+  .contact__lead {
+    margin-block: 1rem 2rem;
+    max-width: 36rem;
   }
 
   .contact__grid {

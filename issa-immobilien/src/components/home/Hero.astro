@@ -11,17 +11,22 @@ import { company } from '../../data/site';
 
   <div class="container hero__inner">
     <p class="hero__slogan hero__in" style="--d:100">{company.slogan}</p>
-    <h1 id="hero-title" class="hero__title hero__in" style="--d:200">
-      Einzelhandels- und Gewerbe&shy;immobilien. <span>Deutschlandweit.</span>
+    <p class="hero__kicker hero__in" style="--d:160">Einzelhandelsimmobilien · Deutschlandweit</p>
+    <h1 id="hero-title" class="hero__title hero__in" style="--d:220">
+      Der richtige Standort für erfolgreichen <span>Einzelhandel.</span>
     </h1>
     <p class="hero__lead hero__in" style="--d:340">
-      Issa Immobilien vermarktet und vermittelt Handelsimmobilien und Gewerbeflächen in ganz Deutschland – persönlich
-      betreut von Inhaber {company.owner}.
+      Issa Immobilien begleitet die Vermarktung und Vermittlung von Einzelhandelsimmobilien und gewerblichen
+      Handelsstandorten – von Fachmarktzentren und großflächigen Einzelhandelsflächen bis zu geeigneten Standorten für
+      Filialunternehmen.
     </p>
     <div class="hero__actions hero__in" style="--d:460">
       <a href="/kontakt/" class="btn">Kontakt aufnehmen <Arrow /></a>
-      <a href={company.phoneHref} class="btn btn--outline-light">{company.phone}</a>
+      <a href="/leistungen/" class="btn btn--outline-light">Leistungen entdecken</a>
     </div>
+    <p class="hero__phone hero__in" style="--d:560">
+      Direkt: <a href={company.phoneHref}>{company.phone}</a>
+    </p>
   </div>
 </section>
 
@@ -64,10 +69,37 @@ import { company } from '../../data/site';
     letter-spacing: 0.04em;
   }
 
-  .hero__title {
+  .hero__kicker {
     margin-top: 1.5rem;
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--on-dark-2);
+  }
+
+  .hero__phone {
+    margin-top: 1.5rem;
+    font-size: var(--fs-sm);
+    color: var(--on-dark-muted);
+  }
+
+  .hero__phone a {
+    color: var(--white);
+    font-weight: 620;
+    text-decoration: none;
+  }
+
+  .hero__phone a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--green);
+    text-decoration-thickness: 2px;
+  }
+
+  .hero__title {
+    margin-top: 0.75rem;
     max-width: 14ch;
-    font-size: clamp(2.5rem, 1.4rem + 5vw, 6rem);
+    font-size: clamp(2.375rem, 1.3rem + 4.6vw, 5.5rem);
     font-weight: 720;
     font-stretch: 80%;
     line-height: 0.98;
@@ -76,7 +108,7 @@ import { company } from '../../data/site';
   }
 
   .hero__title span {
-    color: var(--on-dark-muted);
+    color: var(--green);
   }
 
   .hero__lead {

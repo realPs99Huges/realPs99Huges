@@ -1,80 +1,48 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/home/Hero.astro';
-import ServiceList from '../components/ServiceList.astro';
+import ServiceAreas from '../components/ServiceAreas.astro';
 import PhotoStrip from '../components/PhotoStrip.astro';
+import Germany from '../components/home/Germany.astro';
+import Process from '../components/Process.astro';
 import ContactBand from '../components/ContactBand.astro';
 import Arrow from '../components/Arrow.astro';
-import { company, examples } from '../data/site';
+import { examples } from '../data/site';
 ---
 
 <Base
-  title="Issa Immobilien · Der Immobilien-Profi für Einzelhandels- und Gewerbeimmobilien"
-  description="Issa Immobilien – Der Immobilien-Profi: Vermarktung und Vermittlung von Einzelhandels- und Gewerbeimmobilien in ganz Deutschland. Inhaber Sami Issa, Sitz in Lippstadt."
+  title="Issa Immobilien · Der Immobilien-Profi für Einzelhandelsimmobilien und Handelsstandorte"
+  description="Issa Immobilien – Der Immobilien-Profi: Spezialist für Einzelhandelsimmobilien und Handelsstandorte. Fachmärkte, Fachmarktzentren, Shopping-Center, Filialstandorte und mehr – deutschlandweit, Sitz in Lippstadt."
 >
   <Hero />
 
-  <section class="about section" aria-labelledby="wer-title">
-    <div class="container grid">
-      <h2 id="wer-title" class="h2 about__title" data-reveal>Wer wir sind</h2>
-      <div class="about__text" data-reveal>
-        <p class="lead">
-          Issa Immobilien ist auf Einzelhandelsimmobilien und Handelsstandorte spezialisiert. Wir sind in ganz
-          Deutschland tätig, unser Sitz ist {company.city}.
-        </p>
-        <p class="lead">
-          Inhaber {company.owner} betreut jedes Vorhaben selbst – vom ersten Gespräch bis zum Abschluss.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <PhotoStrip names={['hero', 'einzelhandel', 'deutschland']} />
-
-  <section class="what section" aria-labelledby="was-title">
+  <section class="what section" aria-labelledby="leistungen-title">
     <div class="container">
       <div class="what__head">
-        <h2 id="was-title" class="h2" data-reveal>Was wir machen</h2>
+        <h2 id="leistungen-title" class="h2" data-reveal>Leistungen</h2>
         <a href="/leistungen/" class="link-arrow" data-reveal>Alle Leistungen <Arrow class="" /></a>
       </div>
-      <ServiceList />
-
-      <div class="examples" data-reveal>
-        <p class="examples__label">Zum Beispiel</p>
-        <p class="examples__list">
-          {examples.map((e) => <span>{e}</span>)}
-          <span class="examples__more">und vieles mehr.</span>
-        </p>
-      </div>
+      <ServiceAreas />
     </div>
   </section>
 
+  <section class="market" aria-labelledby="markt-title">
+    <div class="container market__inner">
+      <h2 id="markt-title" class="market__label" data-reveal>Handelsimmobilien, zum Beispiel</h2>
+      <p class="market__list" data-reveal>
+        {examples.map((e) => <span>{e}</span>)}
+        <span class="market__more">und vieles mehr.</span>
+      </p>
+    </div>
+    <PhotoStrip names={['hero', 'einzelhandel', 'deutschland']} />
+  </section>
+
+  <Germany />
+  <Process />
   <ContactBand />
 </Base>
 
 <style>
-  .about__text {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .about__text .lead {
-    max-width: 40rem;
-    color: var(--text);
-    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
-    line-height: 1.45;
-  }
-
-  @media (min-width: 60em) {
-    .about__title {
-      grid-column: 1 / span 4;
-    }
-
-    .about__text {
-      grid-column: 5 / span 8;
-    }
-  }
-
   .what__head {
     display: flex;
     flex-wrap: wrap;
@@ -84,13 +52,12 @@ import { company, examples } from '../data/site';
     margin-bottom: 2rem;
   }
 
-  .examples {
-    display: grid;
-    gap: 0.75rem;
-    margin-top: var(--space-5);
+  .market__inner {
+    padding-bottom: var(--space-5);
   }
 
-  .examples__label {
+  .market__label {
+    margin-bottom: 1rem;
     font-size: var(--fs-xs);
     font-weight: 650;
     letter-spacing: 0.14em;
@@ -98,24 +65,25 @@ import { company, examples } from '../data/site';
     color: var(--muted);
   }
 
-  .examples__list {
+  .market__list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem 0;
-    font-size: clamp(1.375rem, 1.05rem + 1.6vw, 2.5rem);
-    font-weight: 700;
-    font-stretch: 82%;
-    line-height: 1.2;
+    font-size: clamp(1.5rem, 1.05rem + 2.2vw, 3rem);
+    font-weight: 720;
+    font-stretch: 80%;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
   }
 
-  .examples__list span:not(:last-child):not(:nth-last-child(2))::after {
+  .market__list span:not(:last-child):not(:nth-last-child(2))::after {
     content: '/';
-    margin-inline: 0.45em;
+    margin-inline: 0.4em;
     color: var(--green);
     font-weight: 400;
   }
 
-  .examples__more {
+  .market__more {
     margin-left: 0.3em;
     color: var(--muted);
   }

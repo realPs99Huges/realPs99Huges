@@ -20,8 +20,8 @@ Voraussetzung: Node.js ≥ 22.12.
 
 | Pfad | Inhalt |
 | --- | --- |
-| `/` | Startseite: Einstieg, Wer wir sind, Bildreihe, Was wir machen, Kontakt |
-| `/leistungen/` | Leistungen und Beispiele (keine abschließende Liste) |
+| `/` | Startseite: Einstieg, Leistungen, Handelsimmobilien-Beispiele, Deutschlandweit, Zusammenarbeit, Kontakt |
+| `/leistungen/` | Vier Leistungsbereiche im Detail, Beispiele, Zusammenarbeit |
 | `/handelsimmobilien/` | Beispiele, Bildreihe, Anfragewege; zeigt Angebote, sobald welche gepflegt sind |
 | `/handelsimmobilien/<id>/` | Detailseite je Angebot (nur wenn Angebote gepflegt sind) |
 | `/ueber-uns/` | Über Issa Immobilien: Inhaber und Angaben auf einen Blick |
@@ -33,7 +33,7 @@ Voraussetzung: Node.js ≥ 22.12.
 
 ```
 src/
-  data/site.ts          Zentrale Unternehmensangaben, Navigation, Leistungen, Beispiele
+  data/site.ts          Zentrale Unternehmensangaben, Navigation, Leistungen, Beispiele, Ablauf
   data/images.ts        Zuordnung der Bilder zu den Bildflächen
   styles/global.css     Design-Tokens, Typografie, Raster, Buttons, Bewegung
   layouts/Base.astro    <head>, SEO/Open Graph, JSON-LD, Header, Footer

@@ -1,0 +1,130 @@
+---
+import { services } from '../data/site';
+
+interface Props {
+  /** Mit Detailpunkten (Leistungsseite) oder kompakt (Startseite) */
+  detailed?: boolean;
+}
+const { detailed = false } = Astro.props;
+---
+
+<ol class:list={['areas', detailed && 'areas--detailed']} role="list">
+  {
+    services.map((s, i) => (
+      <li id={s.id} class="area" data-reveal style={`--reveal-delay:${(i % 2) * 80}`}>
+        {detailed ? (
+          <span class="area__no" aria-hidden="true">{s.no}</span>
+        ) : (
+          <a href={`/leistungen/#${s.id}`} class="area__link" aria-label={`${s.title} – mehr erfahren`} />
+        )}
+        {!detailed && <span class="area__no" aria-hidden="true">{s.no}</span>}
+        <h3 class="area__title">{s.title}</h3>
+        <p class="area__text">{s.text}</p>
+        {detailed && (
+          <ul class="area__items" role="list">
+            {s.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .areas {
+    display: grid;
+    border-top: 2px solid var(--anthracite);
+  }
+
+  .area {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding-block: 2rem 2.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Grüne Linie oben beim Überfahren – ruhig, ohne Bewegung des Inhalts */
+  .area::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 100%;
+    height: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .area:hover::before,
+  .area:focus-within::before {
+    transform: scaleX(1);
+  }
+
+  .area__link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .area__no {
+    font-size: clamp(2.25rem, 1.6rem + 2.5vw, 3.5rem);
+    font-weight: 720;
+    font-stretch: 78%;
+    line-height: 1;
+    color: var(--green);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .area__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    font-stretch: 84%;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    max-width: 18ch;
+  }
+
+  .area__text {
+    max-width: 32rem;
+    color: var(--text-2);
+  }
+
+  .area__items {
+    margin-top: 0.5rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .area__items li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-weight: 560;
+  }
+
+  .area__items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.6rem;
+    height: 2px;
+    background: var(--green);
+  }
+
+  @media (min-width: 48em) {
+    .areas {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--gutter);
+    }
+
+    .area {
+      padding-block: 2.5rem 2.75rem;
+    }
+  }
+</style>
