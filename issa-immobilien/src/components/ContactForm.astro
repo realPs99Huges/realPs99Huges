@@ -233,7 +233,8 @@ import { limits } from '../lib/contact';
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
-    padding: 0.55rem 1rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
     border: 1px solid var(--line-strong);
     font-size: var(--fs-sm);
     transition:
@@ -291,6 +292,7 @@ import { limits } from '../lib/contact';
 
   .cf__status {
     padding: 1rem 1.25rem;
+    border-radius: var(--radius);
     border-left: 2px solid #9b2c1f;
     background: rgb(155 44 31 / 0.06);
     font-size: var(--fs-sm);
@@ -323,6 +325,7 @@ import { limits } from '../lib/contact';
 
   .cf__success {
     padding: clamp(1.75rem, 4vw, 3rem);
+    border-radius: var(--radius-lg);
     border-top: 4px solid var(--green);
     background: var(--surface);
   }

@@ -48,7 +48,8 @@
   --space-5: clamp(3rem, 2rem + 4vw, 5rem);
   --space-6: clamp(4rem, 2.75rem + 6vw, 8.5rem);
   --header-h: 5rem;
-  --radius: 2px;
+  --radius: 8px; /* Buttons, Felder */
+  --radius-lg: 14px; /* Bilder, Flächen */
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -353,6 +354,27 @@ textarea {
   --btn-border: var(--green-strong);
 }
 
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition:
+      background-color 0.3s var(--ease),
+      color 0.3s var(--ease),
+      border-color 0.3s var(--ease),
+      transform 0.4s var(--ease-out),
+      box-shadow 0.4s var(--ease-out);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px -14px rgb(42 42 42 / 0.55);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
 .btn--outline {
   --btn-bg: transparent;
   --btn-fg: var(--text);
@@ -445,6 +467,22 @@ textarea {
     transform: none;
   }
 
+  /* Überschriften gleiten aus einer Maske nach oben. Der Ausgangszustand
+     bleibt messbar (nur unsichtbar), damit die Sichtbarkeitserkennung greift. */
+  .js .h1[data-reveal],
+  .js .h2[data-reveal],
+  .js .h3[data-reveal] {
+    transform: none;
+    transition: none;
+  }
+
+  .js .h1[data-reveal].is-visible,
+  .js .h2[data-reveal].is-visible,
+  .js .h3[data-reveal].is-visible {
+    animation: mask-up 1s var(--ease-out) both;
+    animation-delay: calc(var(--reveal-delay, 0) * 1ms);
+  }
+
   .js [data-reveal='image'] {
     opacity: 1;
     transform: none;
@@ -489,6 +527,19 @@ textarea {
   }
 }
 
+@keyframes mask-up {
+  from {
+    opacity: 1;
+    clip-path: inset(-0.2em -0.2em 100% -0.2em);
+    transform: translate3d(0, 0.35em, 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(-0.2em -0.2em -0.2em -0.2em);
+    transform: none;
+  }
+}
+
 @keyframes vt-out {
   to {
     opacity: 0;
@@ -500,5 +551,35 @@ textarea {
   from {
     opacity: 0;
     transform: translateY(16px);
+  }
+}
+
+/* ================================================================== */
+/* Scroll-gebundene Tiefe (nur wo CSS-Scroll-Timelines verfügbar)     */
+/* ================================================================== */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Bilder gleiten minimal gegen die Scrollrichtung – ruhig, nicht verspielt */
+    .slot img {
+      scale: 1.07;
+      animation: slot-drift linear both;
+    }
+
+    /* Eigene Regel, damit der CSS-Minifier die Timeline nicht in die
+       animation-Kurzschreibweise zieht (dort ist sie ungültig). */
+    .slot picture img {
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+@keyframes slot-drift {
+  from {
+    translate: 0 -3%;
+  }
+  to {
+    translate: 0 3%;
   }
 }

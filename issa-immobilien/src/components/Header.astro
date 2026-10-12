@@ -69,7 +69,19 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     view-transition-name: site-header;
     background: var(--white);
     color: var(--text);
-    transition: box-shadow 0.4s var(--ease);
+    transition:
+      box-shadow 0.4s var(--ease),
+      transform 0.5s var(--ease-out);
+  }
+
+  .site-header.is-hidden {
+    transform: translateY(-100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header.is-hidden {
+      transform: none;
+    }
   }
 
   .site-header.is-scrolled {
@@ -376,10 +388,19 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   if (header) {
     // Kompakter Header nach den ersten Pixeln Scrollweg – passiv und ohne Layout-Arbeit.
     let ticking = false;
+    let lastY = window.scrollY;
     const update = () => {
-      header.classList.toggle('is-scrolled', window.scrollY > 24);
+      const y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 24);
+      // Beim Runterscrollen Platz machen, beim Hochscrollen sofort wieder da
+      const menuOpen = document.documentElement.classList.contains('menu-open');
+      if (!menuOpen && y > 320 && y > lastY + 6) header.classList.add('is-hidden');
+      else if (y < lastY - 6 || y <= 320 || menuOpen) header.classList.remove('is-hidden');
+      lastY = y;
       ticking = false;
     };
+    // Fokus per Tastatur im Header holt ihn immer zurück
+    header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
     update();
     window.addEventListener(
       'scroll',
