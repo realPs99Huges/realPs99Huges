@@ -14,9 +14,11 @@ interface Props {
   position?: string;
   priority?: boolean;
   reveal?: boolean;
+  /** Verzögerung des Einblendens in Millisekunden */
+  delay?: number;
 }
 
-const { name, sizes, ratio = '3 / 2', class: className, position = '50% 50%', priority = false, reveal = true } = Astro.props;
+const { name, sizes, ratio = '3 / 2', class: className, position = '50% 50%', priority = false, reveal = true, delay = 0 } = Astro.props;
 const slot = imageSlots[name];
 const src = slot.src;
 const widths = src ? [360, 480, 600, 800, 1200, 1600, 2400].filter((w) => w <= src.width) : [];
@@ -25,7 +27,7 @@ if (src && !widths.includes(src.width)) widths.push(src.width);
 
 <div
   class:list={['slot', !src && 'slot--empty', className]}
-  style={`--ratio:${ratio}`}
+  style={`--ratio:${ratio};--reveal-delay:${delay}`}
   data-reveal={reveal && src ? 'image' : undefined}
   data-slot={name}
 >

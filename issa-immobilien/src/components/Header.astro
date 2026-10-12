@@ -7,7 +7,7 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
-<header class="site-header" data-header>
+<header class:list={['site-header', path === '/' && 'site-header--home']} data-header>
   <div class="container site-header__inner">
     <a href="/" class="site-header__brand" aria-label="Issa Immobilien – zur Startseite">
       <Logo height={46} priority class="site-header__logo" />
@@ -102,9 +102,24 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     height: 4.25rem;
   }
 
+  .site-header__brand,
+  .site-header__claim {
+    transition:
+      opacity 0.5s var(--ease),
+      transform 0.6s var(--ease-out);
+  }
+
   .site-header__brand {
     flex: none;
     display: block;
+  }
+
+  /* Startseite: kleines Logo erst, wenn das große Logo aus dem Bild ist */
+  :global(.js) .site-header--home:not(.is-past-intro) .site-header__brand,
+  :global(.js) .site-header--home:not(.is-past-intro) .site-header__claim {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
   }
 
   .site-header__brand :global(.site-header__logo) {
@@ -399,6 +414,15 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       lastY = y;
       ticking = false;
     };
+    // Startseite: Header-Logo einblenden, sobald das große Logo verlassen wurde
+    const introLogo = document.querySelector('[data-intro-logo]');
+    if (introLogo && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        header.classList.toggle('is-past-intro', !entry.isIntersecting);
+      }, { rootMargin: '-80px 0px 0px 0px' }).observe(introLogo);
+    } else {
+      header.classList.add('is-past-intro');
+    }
     // Fokus per Tastatur im Header holt ihn immer zurück
     header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
     update();

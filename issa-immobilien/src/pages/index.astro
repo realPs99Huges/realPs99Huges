@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/home/Hero.astro';
+import Intro from '../components/home/Intro.astro';
+import Statement from '../components/home/Statement.astro';
 import ServiceAreas from '../components/ServiceAreas.astro';
 import PhotoStrip from '../components/PhotoStrip.astro';
 import Germany from '../components/home/Germany.astro';
@@ -14,12 +15,13 @@ import { examples } from '../data/site';
   title="Issa Immobilien · Der Immobilien-Profi für Einzelhandelsimmobilien und Handelsstandorte"
   description="Issa Immobilien – Der Immobilien-Profi: Spezialist für Einzelhandelsimmobilien und Handelsstandorte. Fachmärkte, Fachmarktzentren, Shopping-Center, Filialstandorte und mehr – deutschlandweit, Sitz in Lippstadt."
 >
-  <Hero />
+  <Intro />
+  <Statement />
 
   <section class="what section" aria-labelledby="leistungen-title">
     <div class="container">
       <div class="what__head">
-        <h2 id="leistungen-title" class="h2" data-reveal>Leistungen</h2>
+        <h2 id="leistungen-title" class="h2" data-reveal>Unsere <strong>Leistungen</strong></h2>
         <a href="/leistungen/" class="link-arrow" data-reveal>Alle Leistungen <Arrow class="" /></a>
       </div>
       <ServiceAreas />
@@ -28,10 +30,10 @@ import { examples } from '../data/site';
 
   <section class="market" aria-labelledby="markt-title">
     <div class="container market__inner">
-      <h2 id="markt-title" class="market__label" data-reveal>Handelsimmobilien, zum Beispiel</h2>
-      <p class="market__list" data-reveal>
-        {examples.map((e) => <span>{e}</span>)}
-        <span class="market__more">und vieles mehr.</span>
+      <h2 id="markt-title" class="eyebrow market__label" data-reveal>Handelsimmobilien, zum Beispiel</h2>
+      <p class="market__list">
+        {examples.map((e, i) => <span data-reveal style={`--reveal-delay:${i * 70}`}>{e}</span>)}
+        <span class="market__more" data-reveal style={`--reveal-delay:${examples.length * 70}`}>und vieles mehr.</span>
       </p>
     </div>
     <PhotoStrip names={['hero', 'einzelhandel', 'deutschland']} />
@@ -49,7 +51,7 @@ import { examples } from '../data/site';
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
 
   .market__inner {
@@ -57,34 +59,28 @@ import { examples } from '../data/site';
   }
 
   .market__label {
-    margin-bottom: 1rem;
-    font-size: var(--fs-xs);
-    font-weight: 650;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
+    margin-bottom: 1.25rem;
   }
 
   .market__list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem 0;
+    gap: 0.35rem 0;
     font-size: clamp(1.5rem, 1.05rem + 2.2vw, 3rem);
-    font-weight: 720;
-    font-stretch: 80%;
+    font-weight: 400;
     line-height: 1.15;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
   }
 
   .market__list span:not(:last-child):not(:nth-last-child(2))::after {
     content: '/';
     margin-inline: 0.4em;
     color: var(--green);
-    font-weight: 400;
   }
 
   .market__more {
     margin-left: 0.3em;
-    color: var(--muted);
+    font-weight: 700;
+    color: var(--green);
   }
 </style>

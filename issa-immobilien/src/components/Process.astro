@@ -62,17 +62,28 @@ import { process } from '../data/site';
     place-items: center;
     width: 2.25rem;
     height: 2.25rem;
-    background: var(--green);
+    background: linear-gradient(var(--green), var(--green)) left / 100% 100% no-repeat, var(--white);
+    border: 2px solid var(--green);
     color: var(--white);
     font-weight: 700;
+    transition:
+      background-size 0.8s var(--ease-out) calc(var(--reveal-delay, 0) * 1ms + 200ms),
+      color 0.6s var(--ease) calc(var(--reveal-delay, 0) * 1ms + 300ms);
     font-variant-numeric: tabular-nums;
   }
 
   .process__title {
     font-size: var(--fs-h4);
-    font-weight: 680;
-    font-stretch: 88%;
+    font-weight: 600;
     line-height: 1.25;
+  }
+
+  /* Nummernfeld füllt sich beim Erscheinen mit Grün */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .process__step:not(.is-visible) .process__no {
+      background-size: 0% 100%;
+      color: var(--green);
+    }
   }
 
   .process__text {

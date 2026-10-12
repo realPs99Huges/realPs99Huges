@@ -10,7 +10,7 @@ const { names } = Astro.props;
 ---
 
 <div class="strip" style={`--n:${names.length}`}>
-  {names.map((n) => <ImageSlot name={n} ratio="3 / 4" sizes="33vw" class="strip__item" />)}
+  {names.map((n, i) => <ImageSlot name={n} ratio="3 / 4" sizes="33vw" class="strip__item" delay={i * 140} />)}
 </div>
 
 <style>

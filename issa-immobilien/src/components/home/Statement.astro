@@ -1,0 +1,111 @@
+---
+import ImageSlot from '../ImageSlot.astro';
+import Arrow from '../Arrow.astro';
+import { company } from '../../data/site';
+---
+
+<section class="statement on-dark" id="standort" aria-labelledby="standort-title">
+  <div class="container statement__grid">
+    <div class="statement__text">
+      <p class="eyebrow" data-reveal>{company.positioning}</p>
+      <h2 id="standort-title" class="h1 statement__title" data-reveal>
+        Der richtige Standort für erfolgreichen <strong>Einzelhandel.</strong>
+      </h2>
+      <p class="lead statement__lead" data-reveal>
+        Issa Immobilien begleitet die Vermarktung und Vermittlung von Einzelhandelsimmobilien und gewerblichen
+        Handelsstandorten – von Fachmarktzentren und großflächigen Einzelhandelsflächen bis zu geeigneten Standorten für
+        Filialunternehmen.
+      </p>
+      <div class="statement__actions" data-reveal>
+        <a href="/kontakt/" class="btn">Kontakt aufnehmen <Arrow /></a>
+        <a href={company.phoneHref} class="statement__phone">{company.phone}</a>
+      </div>
+    </div>
+    <div class="statement__media">
+      <ImageSlot name="hero" ratio="4 / 5" sizes="(min-width: 60em) 40vw, 100vw" position="40% 50%" />
+      <span class="statement__bar" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .statement {
+    padding-block: var(--space-6);
+    overflow: hidden;
+  }
+
+  .statement__grid {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .statement__title {
+    margin-top: 1.5rem;
+    max-width: 14ch;
+  }
+
+  .statement__title strong {
+    color: var(--green);
+  }
+
+  .statement__lead {
+    margin-top: 1.75rem;
+    max-width: 36rem;
+  }
+
+  .statement__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .statement__phone {
+    font-size: 1.125rem;
+    font-weight: 620;
+    text-decoration: none;
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 0.15rem;
+  }
+
+  .statement__media {
+    position: relative;
+    max-width: 30rem;
+  }
+
+  /* Grüne Kante wie die Linien im Logo – zeichnet sich beim Erscheinen */
+  .statement__bar {
+    position: absolute;
+    left: -1rem;
+    bottom: -1rem;
+    width: 55%;
+    height: 6px;
+    background: var(--green);
+    transform-origin: left;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .statement__bar {
+      transform: scaleX(0);
+      transition: transform 1.2s var(--ease-out) 0.6s;
+    }
+
+    :global(.js) .statement__media:has(.is-visible) .statement__bar {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (min-width: 60em) {
+    .statement__grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: clamp(2rem, 6vw, 6rem);
+    }
+
+    .statement__media {
+      justify-self: end;
+      width: 100%;
+    }
+  }
+</style>

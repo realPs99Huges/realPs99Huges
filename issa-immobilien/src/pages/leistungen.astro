@@ -40,12 +40,12 @@ const schema = {
     <div class="container">
       <ServiceAreas detailed />
 
-      <div class="examples" data-reveal>
-        <p class="examples__label">Immobilien, zum Beispiel</p>
-        <ul class="examples__list" role="list">
-          {examples.map((e) => <li>{e}</li>)}
-          <li class="examples__more">und vieles mehr</li>
-        </ul>
+      <div class="examples">
+        <p class="eyebrow examples__label" data-reveal>Immobilien, zum Beispiel</p>
+        <p class="examples__list">
+          {examples.map((e, i) => <span data-reveal style={`--reveal-delay:${i * 60}`}>{e}</span>)}
+          <span class="examples__more" data-reveal style={`--reveal-delay:${examples.length * 60}`}>und vieles mehr.</span>
+        </p>
       </div>
     </div>
   </section>
@@ -58,34 +58,31 @@ const schema = {
 
 <style>
   .examples {
-    display: grid;
-    gap: 1rem;
     margin-top: var(--space-5);
   }
 
   .examples__label {
-    font-size: var(--fs-xs);
-    font-weight: 650;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
+    margin-bottom: 1rem;
   }
 
   .examples__list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.3rem 0;
+    font-size: clamp(1.375rem, 1rem + 1.8vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
   }
 
-  .examples__list li {
-    padding: 0.55rem 0.9rem;
-    border: 1px solid var(--line-strong);
-    font-weight: 600;
+  .examples__list span:not(:last-child):not(:nth-last-child(2))::after {
+    content: '/';
+    margin-inline: 0.4em;
+    color: var(--green);
   }
 
-  .examples__list .examples__more {
-    border-color: var(--green);
-    background: var(--green);
-    color: var(--white);
+  .examples__more {
+    margin-left: 0.3em;
+    font-weight: 700;
+    color: var(--green);
   }
 </style>

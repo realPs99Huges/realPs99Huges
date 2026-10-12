@@ -20,7 +20,7 @@ Voraussetzung: Node.js ≥ 22.12.
 
 | Pfad | Inhalt |
 | --- | --- |
-| `/` | Startseite: Einstieg, Leistungen, Handelsimmobilien-Beispiele, Deutschlandweit, Zusammenarbeit, Kontakt |
+| `/` | Startseite: animiertes Logo-Intro, Standort-Aussage, Leistungen, Beispiele, Deutschlandweit, Zusammenarbeit, Kontakt als Visitenkarte |
 | `/leistungen/` | Vier Leistungsbereiche im Detail, Beispiele, Zusammenarbeit |
 | `/handelsimmobilien/` | Beispiele, Bildreihe, Anfragewege; zeigt Angebote, sobald welche gepflegt sind |
 | `/handelsimmobilien/<id>/` | Detailseite je Angebot (nur wenn Angebote gepflegt sind) |

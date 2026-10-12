@@ -1,5 +1,6 @@
 ---
 import Arrow from './Arrow.astro';
+import Logo from './Logo.astro';
 import { company } from '../data/site';
 
 interface Props {
@@ -10,26 +11,38 @@ const { showFormLink = true } = Astro.props;
 ---
 
 <section class="contact section" aria-labelledby="kontakt-band-title">
-  <div class="container">
-    <h2 id="kontakt-band-title" class="h2 contact__title" data-reveal>
-      Sie planen die Vermarktung einer Einzelhandelsimmobilie?
-    </h2>
-    <p class="lead contact__lead" data-reveal>
-      Sprechen Sie mit Issa Immobilien über Ihr Vorhaben, Ihre Fläche oder Ihren geplanten Handelsstandort.
-    </p>
-    <div class="contact__grid">
-      <a href={company.phoneHref} class="contact__big" data-reveal>{company.phone}</a>
-      <a href={`mailto:${company.email}`} class="contact__big contact__big--mail" data-reveal>{company.email}</a>
-    </div>
-    <div class="contact__foot" data-reveal>
-      <p>{company.owner} · Inhaber · {company.street}, {company.zip} {company.city}</p>
+  <div class="container contact__grid">
+    <div class="contact__text">
+      <p class="eyebrow" data-reveal>Kontakt</p>
+      <h2 id="kontakt-band-title" class="h2 contact__title" data-reveal>
+        Sie planen die Vermarktung einer <strong>Einzelhandelsimmobilie?</strong>
+      </h2>
+      <p class="lead contact__lead" data-reveal>
+        Sprechen Sie mit Issa Immobilien über Ihr Vorhaben, Ihre Fläche oder Ihren geplanten Handelsstandort.
+      </p>
       {
         showFormLink && (
-          <a href="/kontakt/#anfrage" class="btn">
-            Anfrage senden <Arrow />
-          </a>
+          <div class="contact__actions" data-reveal>
+            <a href="/kontakt/#anfrage" class="btn">
+              Anfrage senden <Arrow />
+            </a>
+          </div>
         )
       }
+    </div>
+
+    <!-- Visitenkarte: Aufbau und Farben wie die Originalkarte -->
+    <div class="card-stage" data-card-stage>
+      <address class="card on-dark" data-card>
+        <Logo variant="negativ" height={60} class="card__logo" />
+        <span class="card__lines">
+          <span>{company.owner}</span>
+          <span>{company.street}</span>
+          <span>{company.zip} {company.city}</span>
+          <span>Telefon: <a href={company.phoneHref}>{company.phone}</a></span>
+          <span>Email: <a href={`mailto:${company.email}`}>{company.email}</a></span>
+        </span>
+      </address>
     </div>
   </div>
 </section>
@@ -37,51 +50,139 @@ const { showFormLink = true } = Astro.props;
 <style>
   .contact {
     border-top: 1px solid var(--line);
-  }
-
-  .contact__title {
-    max-width: 22ch;
-  }
-
-  .contact__lead {
-    margin-block: 1rem 2rem;
-    max-width: 36rem;
+    overflow: hidden;
   }
 
   .contact__grid {
     display: grid;
-    border-top: 2px solid var(--anthracite);
+    gap: var(--space-5);
+    align-items: center;
   }
 
-  .contact__big {
-    display: block;
-    padding-block: 1.25rem;
-    border-bottom: 1px solid var(--line);
-    font-size: clamp(1.75rem, 1.1rem + 3vw, 3.5rem);
-    font-weight: 700;
-    font-stretch: 82%;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+  .contact__title {
+    margin-top: 1.25rem;
+    max-width: 18ch;
+  }
+
+  .contact__lead {
+    margin-top: 1.25rem;
+    max-width: 34rem;
+  }
+
+  .contact__actions {
+    margin-top: 2rem;
+  }
+
+  .card-stage {
+    perspective: 1200px;
+  }
+
+  .card {
+    display: grid;
+    align-content: space-between;
+    gap: 1.75rem;
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 85 / 55;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    font-style: normal;
+    box-shadow: 0 40px 60px -40px rgb(0 0 0 / 0.55);
+    transition: transform 0.6s var(--ease-out);
+    transform-style: preserve-3d;
+  }
+
+  .card :global(.card__logo) {
+    width: auto;
+    height: clamp(3.25rem, 2.3rem + 3vw, 4.75rem);
+  }
+
+  .card__lines {
+    display: grid;
+    gap: 0.15rem;
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--white);
+  }
+
+  .card__lines a {
     text-decoration: none;
     overflow-wrap: anywhere;
-    transition: color 0.25s var(--ease);
   }
 
-  .contact__big--mail {
-    font-size: clamp(1.4rem, 1rem + 2vw, 2.5rem);
+  .card__lines a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--green);
+    text-decoration-thickness: 2px;
   }
 
-  .contact__big:hover {
-    color: var(--green);
+  @media (max-width: 30em) {
+    .card {
+      aspect-ratio: auto;
+    }
   }
 
-  .contact__foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem 2rem;
-    margin-top: 2rem;
-    color: var(--text-2);
+  @media (min-width: 60em) {
+    .contact__grid {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+
+    .card-stage {
+      justify-self: end;
+      width: 100%;
+      max-width: 34rem;
+    }
+  }
+
+  /* Karte schwebt beim Erscheinen herein */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .card {
+      opacity: 0;
+      transform: translateY(40px) rotateX(14deg) rotateZ(-2deg);
+      transition:
+        opacity 0.9s var(--ease-out),
+        transform 1.3s var(--ease-out);
+    }
+
+    :global(.js) .card.is-in {
+      opacity: 1;
+      transform: none;
+    }
   }
 </style>
+
+<script>
+  // Visitenkarte einblenden und – nur mit Maus – leicht der Bewegung folgen lassen.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for (const stage of document.querySelectorAll<HTMLElement>('[data-card-stage]')) {
+    const card = stage.querySelector<HTMLElement>('[data-card]');
+    if (!card) continue;
+    if (!('IntersectionObserver' in window) || reduce) {
+      card.classList.add('is-in');
+      continue;
+    }
+    new IntersectionObserver(
+      (entries, io) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          card.classList.add('is-in');
+          io.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    ).observe(stage);
+
+    if (window.matchMedia('(hover: hover)').matches) {
+      stage.addEventListener('pointermove', (e) => {
+        if (!card.classList.contains('is-in')) return;
+        const r = stage.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+      });
+      stage.addEventListener('pointerleave', () => {
+        card.style.transform = '';
+      });
+    }
+  }
+</script>

@@ -225,8 +225,8 @@ textarea {
 .h2,
 .h3 {
   font-family: var(--font);
-  font-weight: 680;
-  font-stretch: 84%;
+  font-weight: 400;
+  font-stretch: 100%;
   letter-spacing: -0.008em;
   text-wrap: balance;
 }
@@ -254,10 +254,14 @@ textarea {
   letter-spacing: -0.01em;
 }
 
-/* Hervorhebung in Überschriften: Logo-Grün statt Kursivschrift */
+/* Wie im Logo: „ISSA“ fett und grün, „IMMOBILIEN“ leicht */
+.h1 strong,
+.h2 strong,
+.h3 strong,
 .h1 .accent,
 .h2 .accent,
 .h3 .accent {
+  font-weight: 700;
   color: var(--green);
 }
 
@@ -463,20 +467,33 @@ textarea {
     animation-delay: calc(var(--reveal-delay, 0) * 1ms);
   }
 
-  .js [data-reveal='image'] {
-    opacity: 1;
+  /* Wischen von links nach rechts (große Wörter). Ausgangszustand bleibt
+     messbar (nur unsichtbar), damit die Sichtbarkeitserkennung greift. */
+  .js [data-reveal='wipe'] {
     transform: none;
-    clip-path: inset(0 0 12% 0);
-    transition: clip-path 1.2s var(--ease-out);
+    transition: none;
   }
 
-  .js [data-reveal='image'] img {
-    transform: scale(1.05);
-    transition: transform 1.6s var(--ease-out);
+  .js [data-reveal='wipe'].is-visible {
+    animation: wipe-in 1.2s var(--ease-out) both;
+    animation-delay: calc(var(--reveal-delay, 0) * 1ms);
+  }
+
+  /* Bilder öffnen sich von unten (gleiches Prinzip: erst sichtbar, dann maskiert animiert) */
+  .js [data-reveal='image'] {
+    transform: none;
+    transition: none;
   }
 
   .js [data-reveal='image'].is-visible {
-    clip-path: inset(0 0 0 0);
+    animation: image-in 1.2s var(--ease-out) both;
+    animation-delay: calc(var(--reveal-delay, 0) * 1ms);
+  }
+
+  .js [data-reveal='image'] img {
+    transform: scale(1.06);
+    transition: transform 1.8s var(--ease-out);
+    transition-delay: calc(var(--reveal-delay, 0) * 1ms);
   }
 
   .js [data-reveal='image'].is-visible img {
@@ -517,6 +534,37 @@ textarea {
     opacity: 1;
     clip-path: inset(-0.2em -0.2em -0.2em -0.2em);
     transform: none;
+  }
+}
+
+@keyframes wipe-in {
+  from {
+    opacity: 1;
+    clip-path: inset(-0.1em 100% -0.2em 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(-0.1em -0.1em -0.2em 0);
+  }
+}
+
+@keyframes image-in {
+  from {
+    opacity: 1;
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes line-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 

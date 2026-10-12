@@ -1,0 +1,182 @@
+---
+import LogoReveal from '../LogoReveal.astro';
+import Arrow from '../Arrow.astro';
+import { company } from '../../data/site';
+---
+
+<section class="intro" aria-labelledby="intro-title">
+  <div class="container intro__inner">
+    <h1 id="intro-title" class="intro__brand">
+      <span class="intro__logo"><LogoReveal /></span>
+      <span class="intro__slogan">{company.slogan}</span>
+    </h1>
+    <p class="intro__kicker">Einzelhandelsimmobilien · Deutschlandweit</p>
+    <div class="intro__actions">
+      <a href="/kontakt/" class="btn">Kontakt aufnehmen <Arrow /></a>
+      <a href="/leistungen/" class="btn btn--outline">Leistungen entdecken</a>
+    </div>
+  </div>
+  <a href="#standort" class="intro__scroll" aria-label="Weiter zum nächsten Abschnitt">
+    <span aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  .intro {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: max(34rem, min(calc(100svh - var(--header-h)), 56rem));
+    margin-top: var(--header-h);
+    padding-block: 3rem 5rem;
+    background: var(--white);
+    text-align: center;
+  }
+
+  .intro__inner {
+    display: grid;
+    justify-items: center;
+  }
+
+  .intro__brand {
+    display: grid;
+    justify-items: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: inherit;
+  }
+
+  .intro__logo {
+    display: block;
+    width: min(34rem, 82vw);
+  }
+
+  .intro__slogan {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.5rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--slate);
+  }
+
+  /* Grüner Strich wächst aus der Mitte */
+  .intro__slogan::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 3.5rem;
+    height: 3px;
+    margin-left: -1.75rem;
+    background: var(--green);
+  }
+
+  .intro__kicker {
+    margin-top: 2rem;
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .intro__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .intro__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    width: 1.5rem;
+    height: 3rem;
+    margin-left: -0.75rem;
+    display: grid;
+    justify-items: center;
+  }
+
+  .intro__scroll span {
+    position: relative;
+    display: block;
+    width: 2px;
+    height: 100%;
+    overflow: hidden;
+    background: var(--line);
+  }
+
+  .intro__scroll span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 40%;
+    background: var(--green);
+  }
+
+  @media (max-width: 30em) {
+    .intro__actions .btn {
+      flex: 1 1 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .intro__slogan {
+      animation: intro-up 0.9s var(--ease-out) 1.9s both;
+    }
+
+    .intro__slogan::after {
+      animation: intro-line 0.9s var(--ease-out) 2.3s both;
+    }
+
+    .intro__kicker {
+      animation: intro-up 0.9s var(--ease-out) 2.25s both;
+    }
+
+    .intro__actions {
+      animation: intro-up 0.9s var(--ease-out) 2.4s both;
+    }
+
+    .intro__scroll {
+      animation: intro-fade 0.8s var(--ease) 2.8s both;
+    }
+
+    .intro__scroll span::after {
+      animation: intro-scroll 2.4s var(--ease) 3.2s 2; /* nur zweimal, keine Dauerbewegung */
+    }
+  }
+
+  @keyframes intro-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  @keyframes intro-line {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes intro-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes intro-scroll {
+    0% {
+      transform: translateY(-100%);
+    }
+    60%,
+    100% {
+      transform: translateY(260%);
+    }
+  }
+</style>

@@ -11,7 +11,7 @@ der passenden Fläche zuzuweisen. Astro erzeugt beim Build automatisch AVIF/WebP
 
 | Fläche | Einsatz | Aktuelles Bild | Format / empfohlene Größe |
 | --- | --- | --- | --- |
-| `hero` | Einstieg Startseite (schwarz-weiß, rechte Hälfte) und Bildreihe | `shopping-center-galerie.jpg` | Hochformat oder 4:3, mind. 1600 px breit |
+| `hero` | Startseite „Der richtige Standort …“ (Hochformat) und Bildreihe | `shopping-center-galerie.jpg` | 4:5, mind. 1200 × 1500 px |
 | `einzelhandel` | Bildreihe (Startseite, Leistungen, Handelsimmobilien) | `einzelhandel-einkauf.jpg` | 3:2, mind. 1200 px breit |
 | `deutschland` | Bildreihe (Startseite, Leistungen, Handelsimmobilien) | `einkaufsstrasse-innenstadt.jpg` | 3:2, mind. 1200 px breit |
 | `ueberUns` | Über Issa Immobilien (Porträt oder Büro) | – noch nicht geliefert | 4:5, mind. 1200 × 1500 px |
@@ -37,6 +37,14 @@ Platzhalter werden nie als Immobilienangebote oder Referenzen dargestellt.
   (dunkle Hintergründe) und `bildmarke.png` (Favicon). Skript: `npm run prepare:logo`.
 - Liegt das Logo als Vektordatei (SVG/PDF/EPS) vor, sollte diese die PNG-Dateien ersetzen –
   für die schärfste Darstellung auf allen Bildschirmen.
+
+## Logo-Animation auf der Startseite
+
+`src/components/LogoReveal.astro` zeigt das Original-Logo groß und baut es in drei Schritten auf
+(Bildmarke, „ISSA“, „IMMOBILIEN“). Dafür werden drei deckungsgleiche Ausschnitte derselben
+Bilddatei nacheinander sichtbar – das Logo selbst wird nicht verändert. Für die schärfste
+Darstellung in dieser Größe das Logo bitte als SVG oder als PNG mit mind. 1600 px Breite liefern;
+bei geändertem Seitenverhältnis die Ausschnittsgrenzen in der Komponente anpassen.
 
 ## Markenfarben (aus den Originaldateien gemessen)
 
