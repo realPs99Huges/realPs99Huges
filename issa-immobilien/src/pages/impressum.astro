@@ -1,0 +1,58 @@
+---
+import LegalLayout from '../components/LegalLayout.astro';
+import { company } from '../data/site';
+/*
+ * Rechtlicher Stand: Der frühere Verweis auf § 5 TMG wurde durch § 5 DDG,
+ * der Verweis auf § 55 RStV durch § 18 Abs. 2 MStV ersetzt. Der Hinweis auf
+ * die EU-OS-Plattform entfällt (Plattform eingestellt). Offene Punkte zur
+ * abschließenden Prüfung durch den Betreiber: docs/RECHTLICHES.md
+ */
+---
+
+<LegalLayout
+  title="Impressum"
+  description="Impressum von Issa Immobilien, Inhaber Sami Issa, Arendsstr. 21, 59557 Lippstadt."
+  heading="Impressum"
+>
+  <h2>Angaben gemäß § 5 DDG</h2>
+  <address>
+    {company.name}<br />
+    Inhaber: {company.owner}<br />
+    {company.street}<br />
+    {company.zip} {company.city}<br />
+    {company.country}
+  </address>
+
+  <h2>Kontakt</h2>
+  <p>
+    Telefon: <a href={company.phoneHref}>{company.phone}</a><br />
+    E-Mail: <a href={`mailto:${company.email}`}>{company.email}</a>
+  </p>
+
+  <h2>Erlaubnis und Aufsichtsbehörde</h2>
+  <p>{company.license.basis}</p>
+  <p>
+    Zuständige Genehmigungsbehörde:<br />
+    {company.license.authority}<br />
+    {company.license.authorityAddress}
+  </p>
+
+  <h2>Zuständige Kammer</h2>
+  <p>{company.chamber}</p>
+
+  <h2>Steuernummer</h2>
+  <p>{company.taxNumber}</p>
+
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <address>
+    {company.owner}<br />
+    {company.street}<br />
+    {company.zip} {company.city}
+  </address>
+
+  <h2>Abbildungen</h2>
+  <p>
+    Die Abbildungen auf dieser Website sind eigens erstellte Architekturvisualisierungen. Sie zeigen keine realen oder
+    angebotenen Objekte.
+  </p>
+</LegalLayout>

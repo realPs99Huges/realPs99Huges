@@ -1,0 +1,70 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  /** Teil der Überschrift, der kursiv gesetzt wird */
+  emphasis?: string;
+  lead?: string;
+}
+const { eyebrow, title, emphasis, lead } = Astro.props;
+---
+
+<header class="page-hero">
+  <div class="container grid">
+    <p class="eyebrow eyebrow--rule page-hero__eyebrow page-hero__in">{eyebrow}</p>
+    <h1 class="h1 page-hero__title page-hero__in" style="--d:120">
+      {title}{emphasis && <> <em>{emphasis}</em></>}
+    </h1>
+    {lead && <p class="lead page-hero__lead page-hero__in" style="--d:240">{lead}</p>}
+    <slot />
+  </div>
+</header>
+
+<style>
+  .page-hero {
+    padding-top: calc(var(--header-h) + clamp(3rem, 8vw, 7.5rem));
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .page-hero .grid {
+    row-gap: 1.5rem;
+  }
+
+  .page-hero__title {
+    max-width: 16ch;
+  }
+
+  .page-hero__lead {
+    max-width: 36rem;
+  }
+
+  @media (min-width: 60em) {
+    .page-hero__eyebrow {
+      grid-column: 1 / -1;
+    }
+
+    .page-hero__title {
+      grid-column: 1 / span 7;
+    }
+
+    .page-hero__lead {
+      grid-column: 8 / span 5;
+      align-self: end;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .page-hero__in {
+      animation: page-hero-in 1s var(--ease-out) both;
+      animation-delay: calc(var(--d, 0) * 1ms + 80ms);
+    }
+  }
+
+  @keyframes page-hero-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+</style>

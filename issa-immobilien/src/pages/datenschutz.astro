@@ -1,0 +1,60 @@
+---
+import LegalLayout from '../components/LegalLayout.astro';
+import { company } from '../data/site';
+/*
+ * VORBEREITETE SEITE – keine vollständige Datenschutzerklärung.
+ * Enthält ausschließlich Angaben, die sich aus der technischen Umsetzung
+ * dieser Website ergeben. Die vollständige, fachlich geprüfte Fassung muss
+ * vor dem Livegang ergänzt werden. Benötigte Informationen:
+ * docs/RECHTLICHES.md
+ */
+---
+
+<LegalLayout
+  title="Datenschutz"
+  description="Datenschutzhinweise von Issa Immobilien, Lippstadt."
+  heading="Datenschutz"
+>
+  <p class="notice">
+    Die vollständige Datenschutzerklärung wird derzeit fachlich erstellt und geprüft. Bis dahin finden Sie hier die
+    wesentlichen Angaben zur Verarbeitung personenbezogener Daten auf dieser Website. Bei Fragen zum Datenschutz wenden
+    Sie sich bitte jederzeit an uns.
+  </p>
+
+  <h2>Verantwortlicher</h2>
+  <address>
+    {company.name}<br />
+    Inhaber: {company.owner}<br />
+    {company.street}<br />
+    {company.zip} {company.city}<br />
+    Telefon: <a href={company.phoneHref}>{company.phone}</a><br />
+    E-Mail: <a href={`mailto:${company.email}`}>{company.email}</a>
+  </address>
+
+  <h2>Kontaktformular</h2>
+  <p>
+    Wenn Sie uns über das Kontaktformular schreiben, werden Ihre Angaben – Vor- und Nachname, E-Mail-Adresse, optional
+    Ihre Telefonnummer, das gewählte Anliegen und Ihre Nachricht – ausschließlich zur Bearbeitung Ihrer Anfrage
+    verwendet und per E-Mail an {company.email} übermittelt. Eine Speicherung in einer Datenbank dieser Website findet
+    nicht statt.
+  </p>
+  <p>
+    Zum Schutz vor missbräuchlichen Mehrfachanfragen wird die IP-Adresse beim Absenden des Formulars für höchstens
+    15 Minuten im Arbeitsspeicher des Servers vorgehalten und nicht dauerhaft gespeichert.
+  </p>
+
+  <h2>Kontakt per E-Mail oder Telefon</h2>
+  <p>
+    Wenn Sie uns per E-Mail oder Telefon kontaktieren, verwenden wir Ihre Angaben zur Bearbeitung Ihres Anliegens.
+  </p>
+
+  <h2>Schriftarten, Cookies und externe Dienste</h2>
+  <ul>
+    <li>Alle Schriftarten werden direkt von diesem Server geladen. Es besteht keine Verbindung zu Google Fonts.</li>
+    <li>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Dienste.</li>
+    <li>
+      Es sind keine Karten oder Inhalte Dritter eingebettet. Der Link „Route in Google Maps öffnen“ führt erst nach
+      einem Klick zu Google Maps; dort gelten die Datenschutzbestimmungen von Google.
+    </li>
+  </ul>
+</LegalLayout>

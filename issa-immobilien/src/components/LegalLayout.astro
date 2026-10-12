@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from './PageHero.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  emphasis?: string;
+}
+const { title, description, heading, emphasis } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <PageHero eyebrow={title} title={heading} emphasis={emphasis} />
+  <div class="section legal">
+    <div class="container grid">
+      <div class="legal__body">
+        <slot />
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .legal__body {
+    max-width: 44rem;
+    color: var(--ink-soft);
+  }
+
+  .legal__body :global(h2) {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--serif);
+    font-size: var(--fs-h4);
+    font-weight: 420;
+    color: var(--ink);
+  }
+
+  .legal__body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .legal__body :global(h3) {
+    margin-top: 1.75rem;
+    font-size: var(--fs-base);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .legal__body :global(p),
+  .legal__body :global(ul),
+  .legal__body :global(address) {
+    margin-top: 0.9rem;
+  }
+
+  .legal__body :global(address) {
+    font-style: normal;
+  }
+
+  .legal__body :global(ul) {
+    padding-left: 1.2rem;
+  }
+
+  .legal__body :global(li + li) {
+    margin-top: 0.4rem;
+  }
+
+  .legal__body :global(.notice) {
+    padding: 1.25rem 1.5rem;
+    border-left: 2px solid var(--accent);
+    background: var(--paper-deep);
+    color: var(--ink);
+  }
+
+  @media (min-width: 60em) {
+    .legal__body {
+      grid-column: 4 / span 8;
+    }
+  }
+</style>

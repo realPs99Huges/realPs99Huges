@@ -1,0 +1,110 @@
+---
+import Study from '../Study.astro';
+---
+
+<section class="statement section" id="haltung" aria-labelledby="haltung-title">
+  <div class="container grid">
+    <p class="eyebrow statement__label" data-reveal><span class="index">01</span> Haltung</p>
+
+    <h2 id="haltung-title" class="display statement__title" data-reveal>
+      Gute Vermarktung beginnt lange vor dem ersten <em>Besichtigungstermin.</em>
+    </h2>
+
+    <div class="statement__image">
+      <Study name="facade" sizes="(min-width: 60em) 34vw, 100vw" ratio="4 / 5" />
+    </div>
+
+    <div class="statement__body">
+      <p class="lead" data-reveal>
+        Wer eine Immobilie verkaufen oder vermieten möchte, braucht mehr als eine Anzeige. Am Anfang steht ein genauer
+        Blick: auf das Objekt, auf seine Lage und auf die Menschen, für die es das Richtige sein kann.
+      </p>
+
+      <dl class="statement__facets">
+        <div data-reveal style="--reveal-delay:0">
+          <dt>Das Objekt</dt>
+          <dd>Was zeichnet die Immobilie aus, in welchem Zustand ist sie, welche Nutzungen sind möglich?</dd>
+        </div>
+        <div data-reveal style="--reveal-delay:90">
+          <dt>Die Lage</dt>
+          <dd>Mikro- und Makrolage: das direkte Umfeld ebenso wie die Perspektive des Standorts.</dd>
+        </div>
+        <div data-reveal style="--reveal-delay:180">
+          <dt>Die Zielgruppe</dt>
+          <dd>Für wen ist das Objekt interessant – und wie werden genau diese Interessenten angesprochen?</dd>
+        </div>
+      </dl>
+
+      <p class="statement__note" data-reveal>
+        Aus diesen drei Fragen entsteht das Konzept, das Präsentation, Ansprache und Verhandlung trägt.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .statement__title {
+    max-width: 18ch;
+  }
+
+  .statement__facets {
+    margin-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .statement__facets > div {
+    display: grid;
+    gap: 0.35rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .statement__facets dt {
+    font-family: var(--serif);
+    font-size: var(--fs-h4);
+    font-weight: 400;
+  }
+
+  .statement__facets dd {
+    color: var(--ink-soft);
+    max-width: 34rem;
+  }
+
+  .statement__note {
+    margin-top: 1.75rem;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    max-width: 30rem;
+  }
+
+  @media (min-width: 40em) {
+    .statement__facets > div {
+      grid-template-columns: 11rem 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 60em) {
+    .statement__label {
+      grid-column: 1 / span 3;
+      align-self: start;
+      padding-top: 1.1rem;
+    }
+
+    .statement__title {
+      grid-column: 4 / span 9;
+    }
+
+    .statement__image {
+      grid-column: 1 / span 5;
+      grid-row: 2 / span 2;
+      margin-top: var(--space-5);
+    }
+
+    .statement__body {
+      grid-column: 7 / span 6;
+      margin-top: var(--space-5);
+      padding-top: 0.5rem;
+    }
+  }
+</style>

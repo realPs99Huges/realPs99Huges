@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { company } from '../../data/site';
+---
+
+<Base title="Anfrage nicht übermittelt" description="Ihre Anfrage konnte nicht übermittelt werden." noindex>
+  <PageHero
+    eyebrow="Hinweis"
+    title="Ihre Anfrage wurde"
+    emphasis="nicht übermittelt."
+    lead="Bitte prüfen Sie Ihre Angaben und versuchen Sie es erneut – oder kontaktieren Sie uns direkt."
+  />
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <p>
+          Mögliche Gründe: Ein Pflichtfeld war nicht ausgefüllt, die Datenschutzhinweise wurden nicht bestätigt oder der
+          Online-Versand ist vorübergehend nicht verfügbar.
+        </p>
+        <p>
+          Telefon: <a href={company.phoneHref}>{company.phone}</a><br />
+          E-Mail: <a href={`mailto:${company.email}`}>{company.email}</a>
+        </p>
+      </div>
+      <p style="margin-top:2rem"><a href="/kontakt/#anfrage" class="btn">Zurück zum Formular</a></p>
+    </div>
+  </section>
+</Base>

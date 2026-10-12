@@ -1,0 +1,182 @@
+---
+import raw from '../../content/objekte.json';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import Arrow from '../../components/Arrow.astro';
+import { company } from '../../data/site';
+
+export async function getStaticPaths() {
+  if (!raw.length) return [];
+  const objekte = (await getCollection('objekte')).filter((o) => o.data.veroeffentlicht);
+  return objekte.map((objekt) => ({ params: { id: objekt.id }, props: { objekt } }));
+}
+
+interface Props {
+  objekt: CollectionEntry<'objekte'>;
+}
+
+const { objekt } = Astro.props;
+const o = objekt.data;
+const [cover, ...gallery] = o.bilder;
+---
+
+<Base title={o.titel} description={o.kurzbeschreibung}>
+  <article>
+    <header class="od-hero">
+      <div class="container">
+        <a href="/objekte/" class="link-arrow od-back"><Arrow direction="right" class="od-back__arrow" /> Alle Objekte</a>
+        <p class="eyebrow od-meta">{o.vermarktung} · {o.art} · {o.ort}</p>
+        <h1 class="h1 od-title">{o.titel}</h1>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="od-cover">
+        <Picture
+          src={cover.src}
+          alt={cover.alt}
+          formats={['avif', 'webp']}
+          widths={[720, 1280, 1920]}
+          sizes="(min-width: 90em) 1440px, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container grid">
+        <div class="od-text prose">
+          {o.beschreibung.map((p) => <p>{p}</p>)}
+        </div>
+        <aside class="od-facts">
+          {o.preis && <p class="od-price">{o.preis}</p>}
+          {
+            o.kennzahlen.length > 0 && (
+              <dl>
+                {o.kennzahlen.map((k) => (
+                  <div>
+                    <dt>{k.label}</dt>
+                    <dd>{k.wert}</dd>
+                  </div>
+                ))}
+              </dl>
+            )
+          }
+          {o.energie && <p class="od-energy">{o.energie}</p>}
+          <a href={`/kontakt/?anliegen=suche#anfrage`} class="btn">Exposé anfragen <Arrow /></a>
+          <a href={company.phoneHref} class="od-phone">{company.phone}</a>
+        </aside>
+      </div>
+    </section>
+
+    {
+      gallery.length > 0 && (
+        <section class="od-gallery" aria-label="Weitere Bilder">
+          <div class="container od-gallery__grid">
+            {gallery.map((b) => (
+              <Picture src={b.src} alt={b.alt} formats={['avif', 'webp']} widths={[480, 960]} sizes="(min-width: 48em) 50vw, 100vw" />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </article>
+
+  <ContactBand />
+</Base>
+
+<style>
+  .od-hero {
+    padding-top: calc(var(--header-h) + 3rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .od-back {
+    margin-bottom: 2.5rem;
+  }
+
+  .od-back :global(.od-back__arrow) {
+    width: 1rem;
+    transform: rotate(180deg);
+  }
+
+  .od-title {
+    margin-top: 1rem;
+    max-width: 20ch;
+  }
+
+  .od-cover {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--stone);
+  }
+
+  .od-cover :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .od-facts {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+    justify-items: start;
+    padding: 2rem;
+    background: var(--paper-deep);
+  }
+
+  .od-price {
+    font-family: var(--serif);
+    font-size: var(--fs-h3);
+  }
+
+  .od-facts dl {
+    width: 100%;
+  }
+
+  .od-facts dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .od-facts dt {
+    color: var(--muted);
+  }
+
+  .od-energy {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  .od-gallery {
+    padding-bottom: var(--space-6);
+  }
+
+  .od-gallery__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 48em) {
+    .od-gallery__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 60em) {
+    .od-text {
+      grid-column: 1 / span 7;
+    }
+
+    .od-facts {
+      grid-column: 9 / span 4;
+    }
+  }
+</style>

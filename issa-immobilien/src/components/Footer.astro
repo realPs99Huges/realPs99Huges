@@ -1,0 +1,137 @@
+---
+import Wordmark from './Wordmark.astro';
+import { company, nav, legalNav, mapsUrl } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="/" aria-label="Issa Immobilien – zur Startseite"><Wordmark size="large" /></a>
+        <p class="site-footer__claim">Immobilien verdienen eine durchdachte Perspektive.</p>
+      </div>
+
+      <div class="site-footer__cols">
+        <section aria-labelledby="footer-contact">
+          <h2 id="footer-contact" class="site-footer__title">Kontakt</h2>
+          <address>
+            {company.name}<br />
+            Inhaber {company.owner}<br />
+            <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+              {company.street}<br />
+              {company.zip} {company.city}<span class="visually-hidden"> (öffnet Google Maps in neuem Tab)</span>
+            </a>
+          </address>
+          <p>
+            <a href={company.phoneHref}>{company.phone}</a><br />
+            <a href={`mailto:${company.email}`}>{company.email}</a>
+          </p>
+        </section>
+
+        <nav aria-labelledby="footer-nav">
+          <h2 id="footer-nav" class="site-footer__title">Seiten</h2>
+          <ul role="list">
+            {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="footer-legal">
+          <h2 id="footer-legal" class="site-footer__title">Rechtliches</h2>
+          <ul role="list">
+            {legalNav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {year} {company.name} · {company.owner}</p>
+      <p>Abbildungen: Architekturstudien (Visualisierungen) – keine angebotenen Objekte.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-5) 2rem;
+    background: var(--paper-deep);
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+  }
+
+  .site-footer a {
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+
+  .site-footer__top {
+    display: grid;
+    gap: 3rem;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-footer__brand > a {
+    color: var(--ink);
+  }
+
+  .site-footer__brand > a:hover {
+    text-decoration: none;
+  }
+
+  .site-footer__claim {
+    margin-top: 1.25rem;
+    max-width: 22rem;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .site-footer__cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 2.25rem 2rem;
+  }
+
+  .site-footer__title {
+    margin-bottom: 0.9rem;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .site-footer address {
+    font-style: normal;
+    margin-bottom: 0.9rem;
+  }
+
+  .site-footer li + li {
+    margin-top: 0.35rem;
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-top: 1.5rem;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+  }
+
+  @media (min-width: 60em) {
+    .site-footer__top {
+      grid-template-columns: 5fr 7fr;
+      gap: var(--gutter);
+    }
+  }
+</style>

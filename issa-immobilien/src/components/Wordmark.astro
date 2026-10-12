@@ -1,0 +1,56 @@
+---
+/**
+ * Typografisches Wortlogo. Es liegt kein offizielles Logo vor; sobald eines
+ * existiert, kann es hier unverändert eingesetzt werden.
+ */
+interface Props {
+  size?: 'default' | 'large';
+}
+const { size = 'default' } = Astro.props;
+---
+
+<span class:list={['wordmark', `wordmark--${size}`]}>
+  <span class="wordmark__name">Issa</span>
+  <span class="wordmark__rule" aria-hidden="true"></span>
+  <span class="wordmark__kind">Immobilien</span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .wordmark__name {
+    font-family: var(--serif);
+    font-size: 1.45em;
+    font-weight: 420;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    /* optischer Ausgleich für das Laufweiten-Ende */
+    margin-right: -0.2em;
+  }
+
+  .wordmark__rule {
+    width: 1px;
+    height: 1.35em;
+    background: currentColor;
+    opacity: 0.45;
+  }
+
+  .wordmark__kind {
+    font-family: var(--sans);
+    font-size: 0.68em;
+    font-weight: 560;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    margin-right: -0.34em;
+  }
+
+  .wordmark--large {
+    font-size: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+  }
+</style>

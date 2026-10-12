@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { company } from '../../data/site';
+---
+
+<Base title="Anfrage gesendet" description="Ihre Anfrage an Issa Immobilien wurde übermittelt." noindex>
+  <PageHero
+    eyebrow="Vielen Dank"
+    title="Ihre Anfrage ist bei uns"
+    emphasis="eingegangen."
+    lead="Wir melden uns persönlich bei Ihnen."
+  />
+  <section class="section">
+    <div class="container">
+      <p class="prose">
+        Wenn es eilt, erreichen Sie uns telefonisch unter <a href={company.phoneHref}>{company.phone}</a>.
+      </p>
+      <p style="margin-top:2rem"><a href="/" class="btn btn--ghost">Zur Startseite</a></p>
+    </div>
+  </section>
+</Base>

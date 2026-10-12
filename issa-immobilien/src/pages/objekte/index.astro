@@ -1,0 +1,250 @@
+---
+import raw from '../../content/objekte.json';
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Study from '../../components/Study.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import Arrow from '../../components/Arrow.astro';
+
+// Sammlung nur abfragen, wenn Einträge gepflegt sind (vermeidet Build-Warnungen bei leerer Liste).
+const objekte = raw.length ? (await getCollection('objekte')).filter((o) => o.data.veroeffentlicht) : [];
+const hasListings = objekte.length > 0;
+---
+
+<Base
+  title="Objekte"
+  description="Immobilie anbieten oder suchen: Issa Immobilien in Lippstadt vermarktet Wohn- und Gewerbeimmobilien individuell. Schildern Sie uns Ihr Anliegen – wir melden uns persönlich."
+>
+  <PageHero
+    eyebrow="Objekte"
+    title={hasListings ? 'Ausgewählte' : 'Individuell vermarktet,'}
+    emphasis={hasListings ? 'Immobilien.' : 'persönlich vermittelt.'}
+    lead={hasListings
+      ? 'Eine Auswahl der Immobilien, die wir derzeit vermarkten. Für Details, Unterlagen oder einen Besichtigungstermin sprechen Sie uns gern an.'
+      : 'Ob aktuell passende Objekte verfügbar sind, besprechen wir am besten persönlich. Schildern Sie uns, was Sie anbieten oder suchen – wir melden uns bei Ihnen.'}
+  />
+
+  {
+    hasListings && (
+      <section class="section" aria-label="Aktuelle Objekte">
+        <div class="container">
+          <ul class="listings" role="list">
+            {objekte.map((o) => (
+              <li data-reveal>
+                <a href={`/objekte/${o.id}/`} class="listing">
+                  <div class="listing__image">
+                    <Picture
+                      src={o.data.bilder[0].src}
+                      alt={o.data.bilder[0].alt}
+                      formats={['avif', 'webp']}
+                      widths={[480, 720, 960]}
+                      sizes="(min-width: 60em) 45vw, 100vw"
+                    />
+                  </div>
+                  <p class="listing__meta">
+                    {o.data.vermarktung} · {o.data.art} · {o.data.ort}
+                  </p>
+                  <h2 class="h3 listing__title">{o.data.titel}</h2>
+                  <p class="listing__text">{o.data.kurzbeschreibung}</p>
+                  {o.data.preis && <p class="listing__price">{o.data.preis}</p>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="paths section" aria-labelledby="paths-title">
+    <div class="container">
+      <h2 id="paths-title" class="visually-hidden">Ihr Anliegen</h2>
+      <div class="paths__grid">
+        <article class="path" data-reveal>
+          <p class="eyebrow"><span class="index">A</span> Sie bieten an</p>
+          <h3 class="h2 path__title">Sie möchten eine Immobilie verkaufen oder vermieten?</h3>
+          <p class="path__text">
+            Wir verschaffen uns ein Bild von Objekt und Lage und entwickeln ein Vermarktungskonzept – mit Exposé, gezielter
+            Ansprache geeigneter Interessenten und Begleitung bis zur Übergabe.
+          </p>
+          <h4 class="path__list-title">Hilfreich für das erste Gespräch</h4>
+          <ul class="path__list" role="list">
+            <li>Art und Lage der Immobilie</li>
+            <li>Größe, Baujahr und Zustand, soweit bekannt</li>
+            <li>Ihr Ziel: Verkauf oder Vermietung</li>
+            <li>Ihr gewünschter Zeitrahmen</li>
+          </ul>
+          <div class="path__actions">
+            <a href="/kontakt/?anliegen=verkauf#anfrage" class="btn">Verkauf anfragen <Arrow /></a>
+            <a href="/kontakt/?anliegen=vermietung#anfrage" class="btn btn--ghost">Vermietung anfragen</a>
+          </div>
+        </article>
+
+        <article class="path path--dark on-dark" data-reveal style="--reveal-delay:120">
+          <p class="eyebrow"><span class="index">B</span> Sie suchen</p>
+          <h3 class="h2 path__title">Sie suchen eine Immobilie oder Gewerbefläche?</h3>
+          <p class="path__text">
+            Beschreiben Sie uns, wonach Sie suchen. Bei gewerblichen Vorhaben betrachten wir zusätzlich Standortfaktoren,
+            Flächenbedarf und Nutzungsmöglichkeiten.
+          </p>
+          <h4 class="path__list-title">Hilfreich für Ihre Anfrage</h4>
+          <ul class="path__list" role="list">
+            <li>Gewünschte Objektart und Nutzung</li>
+            <li>Bevorzugte Lage</li>
+            <li>Größe bzw. Flächenbedarf</li>
+            <li>Kauf oder Miete und Ihr Zeitrahmen</li>
+          </ul>
+          <div class="path__actions">
+            <a href="/kontakt/?anliegen=suche#anfrage" class="btn btn--light">Suchanfrage stellen <Arrow /></a>
+            <a href="/kontakt/?anliegen=gewerbe#anfrage" class="btn btn--ghost-light">Gewerbefläche anfragen</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="objects-visual" aria-label="Architekturstudie">
+    <div class="container">
+      <Study name="urban" ratio="21 / 9" sizes="(min-width: 90em) 1440px, 100vw" />
+    </div>
+  </section>
+
+  <ContactBand />
+</Base>
+
+<style>
+  .listings {
+    display: grid;
+    gap: var(--space-5) var(--gutter);
+  }
+
+  @media (min-width: 48em) {
+    .listings {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .listing {
+    display: grid;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .listing__image {
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 0.75rem;
+    background: var(--stone);
+  }
+
+  .listing__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-out);
+  }
+
+  .listing:hover .listing__image :global(img) {
+    transform: scale(1.03);
+  }
+
+  .listing__meta {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .listing__text {
+    color: var(--ink-soft);
+  }
+
+  .listing__price {
+    font-weight: 600;
+  }
+
+  .paths__grid {
+    display: grid;
+    gap: var(--gutter);
+  }
+
+  @media (min-width: 60em) {
+    .paths__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+  }
+
+  .path {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.75rem, 4vw, 4rem);
+    background: var(--paper-deep);
+  }
+
+  .path--dark {
+    background: var(--ink);
+    color: var(--on-dark);
+  }
+
+  .path__title {
+    margin-top: 1.25rem;
+    max-width: 14ch;
+    font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem);
+  }
+
+  .path__text {
+    margin-top: 1.25rem;
+    max-width: 30rem;
+    color: var(--ink-soft);
+  }
+
+  .path--dark .path__text {
+    color: var(--on-dark-muted);
+  }
+
+  .path__list-title {
+    margin-top: 2rem;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .path--dark .path__list-title {
+    color: var(--on-dark-muted);
+  }
+
+  .path__list {
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .path--dark .path__list {
+    border-color: var(--line-dark);
+  }
+
+  .path__list li {
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .path--dark .path__list li {
+    border-color: var(--line-dark);
+  }
+
+  .path__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 2.25rem;
+  }
+
+  .objects-visual {
+    padding-bottom: var(--space-6);
+  }
+</style>

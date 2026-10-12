@@ -1,0 +1,117 @@
+---
+import Arrow from './Arrow.astro';
+import { company } from '../data/site';
+
+interface Props {
+  index?: string;
+  /** Formular-Link ausblenden, z. B. auf der Kontaktseite */
+  showFormLink?: boolean;
+}
+const { index, showFormLink = true } = Astro.props;
+---
+
+<section class="band section on-dark" aria-labelledby="kontakt-band-title">
+  <div class="container grid">
+    <div class="band__text">
+      <p class="eyebrow" data-reveal>{index && <span class="index">{index}</span>} Kontakt</p>
+      <h2 id="kontakt-band-title" class="h2 band__title" data-reveal>
+        Sie möchten eine Immobilie verkaufen, vermieten oder ein gewerbliches Vorhaben besprechen?
+      </h2>
+      <p class="band__lead" data-reveal>
+        Lassen Sie uns gemeinsam die passende <em>Vorgehensweise</em> entwickeln.
+      </p>
+    </div>
+
+    <div class="band__actions" data-reveal>
+      <a href={company.phoneHref} class="band__phone">
+        <span class="band__phone-label">Anrufen</span>
+        <span class="band__phone-number">{company.phone}</span>
+      </a>
+      <a href={`mailto:${company.email}`} class="band__mail">{company.email}</a>
+      {
+        showFormLink && (
+          <a href="/kontakt/#anfrage" class="btn btn--light band__btn">
+            Zum Kontaktformular <Arrow />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .band__title {
+    margin-top: 1.25rem;
+    max-width: 20ch;
+  }
+
+  .band__lead {
+    margin-top: 1.5rem;
+    font-family: var(--serif);
+    font-size: var(--fs-h3);
+    font-weight: 340;
+    line-height: 1.25;
+    color: var(--on-dark-muted);
+  }
+
+  .band__lead em {
+    color: var(--on-dark);
+  }
+
+  .band__actions {
+    display: grid;
+    align-content: end;
+    justify-items: start;
+    gap: 1.25rem;
+  }
+
+  .band__phone {
+    display: grid;
+    gap: 0.35rem;
+    width: 100%;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line-dark);
+    text-decoration: none;
+  }
+
+  .band__phone-label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
+
+  .band__phone-number {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+    font-weight: 360;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    transition: color 0.3s var(--ease);
+  }
+
+  .band__phone:hover .band__phone-number {
+    color: var(--on-dark-accent);
+  }
+
+  .band__mail {
+    font-size: 1.0625rem;
+    color: var(--on-dark);
+    text-decoration-color: rgb(237 231 220 / 0.4);
+  }
+
+  .band__btn {
+    margin-top: 0.75rem;
+  }
+
+  @media (min-width: 60em) {
+    .band__text {
+      grid-column: 1 / span 7;
+    }
+
+    .band__actions {
+      grid-column: 9 / span 4;
+    }
+  }
+</style>

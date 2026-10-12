@@ -1,0 +1,159 @@
+---
+import { process } from '../data/site';
+
+interface Props {
+  index?: string;
+  headingId?: string;
+}
+const { index, headingId = 'ablauf-title' } = Astro.props;
+---
+
+<section class="process section on-dark" aria-labelledby={headingId}>
+  <div class="container grid">
+    <header class="process__head">
+      <p class="eyebrow" data-reveal>{index && <span class="index">{index}</span>} Ablauf</p>
+      <h2 id={headingId} class="h2 process__title" data-reveal>
+        Ein klarer Weg – <em>Schritt für Schritt.</em>
+      </h2>
+      <p class="process__note" data-reveal>
+        Allgemeine Darstellung unserer Arbeitsweise. Der konkrete Ablauf richtet sich nach Ihrer Immobilie und Ihrem
+        Anliegen und wird individuell mit Ihnen abgestimmt.
+      </p>
+    </header>
+
+    <div class="process__steps">
+      <span class="process__track" aria-hidden="true"><span class="process__fill"></span></span>
+      <ol role="list">
+      {
+        process.map((step, i) => (
+          <li class="process__step" data-reveal style={`--reveal-delay:${i * 40}`}>
+            <span class="process__no" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3 class="process__step-title">
+                <span class="visually-hidden">Schritt {i + 1}: </span>
+                {step.title}
+              </h3>
+              <p class="process__text">{step.text}</p>
+            </div>
+          </li>
+        ))
+      }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process__title {
+    margin-top: 1.25rem;
+    max-width: 15ch;
+  }
+
+  .process__note {
+    margin-top: 1.5rem;
+    max-width: 24rem;
+    font-size: var(--fs-sm);
+    color: var(--on-dark-muted);
+  }
+
+  .process__steps {
+    position: relative;
+    padding-left: 0;
+  }
+
+  .process__track {
+    position: absolute;
+    left: 1.375rem;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    width: 1px;
+    background: var(--line-dark);
+  }
+
+  .process__fill {
+    position: absolute;
+    inset: 0;
+    background: var(--on-dark-accent);
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+
+  /* Fortschrittslinie folgt dem Scrollen – nur wo CSS-Scroll-Timelines verfügbar sind */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .process__fill {
+        animation: process-fill linear both;
+        animation-timeline: view();
+        animation-range: entry 60% cover 70%;
+      }
+    }
+  }
+
+  @keyframes process-fill {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  .process__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    gap: 1.25rem;
+    padding-block: 1.25rem 1.75rem;
+  }
+
+  .process__no {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--line-dark);
+    border-radius: 50%;
+    background: var(--ink);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--on-dark-accent);
+  }
+
+  .process__step-title {
+    padding-top: 0.45rem;
+    font-family: var(--serif);
+    font-size: var(--fs-h4);
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .process__text {
+    margin-top: 0.5rem;
+    max-width: 32rem;
+    color: var(--on-dark-muted);
+  }
+
+  @media (min-width: 60em) {
+    .process__head {
+      grid-column: 1 / span 5;
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+      align-self: start;
+    }
+
+    .process__steps {
+      grid-column: 7 / span 6;
+    }
+
+    .process__step {
+      grid-template-columns: 2.75rem 1fr;
+      gap: 2rem;
+      padding-block: 1.5rem 2.5rem;
+    }
+  }
+</style>

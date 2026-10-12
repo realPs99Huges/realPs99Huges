@@ -1,0 +1,141 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Arrow from '../../components/Arrow.astro';
+import { company, mapsUrl } from '../../data/site';
+---
+
+<Base
+  title="Kontakt"
+  description="Kontakt zu Issa Immobilien in Lippstadt: Telefon +49 175 811 85 80, E-Mail info@issa-immobilien.de, Arendsstr. 21, 59557 Lippstadt – oder bequem über das Anfrageformular."
+>
+  <PageHero
+    eyebrow="Kontakt"
+    title="Lassen Sie uns über Ihre"
+    emphasis="Immobilie sprechen."
+    lead="Rufen Sie uns an, schreiben Sie eine E-Mail oder nutzen Sie das Formular. Wir melden uns persönlich bei Ihnen."
+  />
+
+  <section class="contact section" aria-label="Kontaktmöglichkeiten">
+    <div class="container grid">
+      <aside class="contact__details" aria-labelledby="direkt-title">
+        <h2 id="direkt-title" class="eyebrow">Direkter Kontakt</h2>
+
+        <a href={company.phoneHref} class="contact__phone">
+          <span class="contact__label">Telefon</span>
+          <span class="contact__value">{company.phone}</span>
+        </a>
+
+        <a href={`mailto:${company.email}`} class="contact__mail">
+          <span class="contact__label">E-Mail</span>
+          <span class="contact__value contact__value--sm">{company.email}</span>
+        </a>
+
+        <div class="contact__address">
+          <span class="contact__label">Adresse</span>
+          <address>
+            {company.name}<br />
+            Inhaber {company.owner}<br />
+            {company.street}<br />
+            {company.zip} {company.city}
+          </address>
+          <a href={mapsUrl} class="link-arrow" target="_blank" rel="noopener noreferrer">
+            Route in Google Maps öffnen <Arrow direction="up-right" class="" />
+            <span class="visually-hidden">(externer Link, öffnet in neuem Tab)</span>
+          </a>
+        </div>
+      </aside>
+
+      <div class="contact__form" id="anfrage">
+        <h2 class="h3 contact__form-title">Ihre Anfrage</h2>
+        <p class="contact__form-intro muted">
+          Je genauer Sie Ihr Anliegen beschreiben, desto gezielter können wir uns auf das Gespräch vorbereiten.
+        </p>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact .grid {
+    row-gap: var(--space-5);
+  }
+
+  .contact__details {
+    display: grid;
+    align-content: start;
+    gap: 0;
+  }
+
+  .contact__details .eyebrow {
+    margin-bottom: 1.25rem;
+  }
+
+  .contact__phone,
+  .contact__mail,
+  .contact__address {
+    display: grid;
+    gap: 0.3rem;
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  .contact__label {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .contact__value {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.25rem);
+    font-weight: 360;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .contact__value--sm {
+    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
+  }
+
+  .contact__phone:hover .contact__value,
+  .contact__mail:hover .contact__value {
+    color: var(--accent);
+  }
+
+  .contact__address address {
+    font-style: normal;
+    font-size: 1.0625rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact__address .link-arrow {
+    justify-self: start;
+  }
+
+  .contact__form-title {
+    margin-bottom: 0.75rem;
+  }
+
+  .contact__form-intro {
+    max-width: 34rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 60em) {
+    .contact__details {
+      grid-column: 1 / span 4;
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+      align-self: start;
+    }
+
+    .contact__form {
+      grid-column: 6 / span 7;
+    }
+  }
+</style>

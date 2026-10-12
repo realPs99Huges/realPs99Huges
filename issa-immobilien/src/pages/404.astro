@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<Base title="Seite nicht gefunden" description="Die angeforderte Seite wurde nicht gefunden." noindex>
+  <PageHero
+    eyebrow="Fehler 404"
+    title="Diese Seite gibt es"
+    emphasis="nicht."
+    lead="Möglicherweise wurde die Adresse falsch eingegeben oder die Seite verschoben."
+  >
+    <p class="nf-actions">
+      <a href="/" class="btn">Zur Startseite</a>
+      <a href="/kontakt/" class="btn btn--ghost">Kontakt</a>
+    </p>
+  </PageHero>
+  <div class="section"></div>
+</Base>
+
+<style>
+  .nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 60em) {
+    .nf-actions {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

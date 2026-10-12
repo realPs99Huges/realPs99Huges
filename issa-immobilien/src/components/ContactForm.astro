@@ -1,0 +1,518 @@
+---
+import Arrow from './Arrow.astro';
+import { inquiryTopics, company } from '../data/site';
+import { limits } from '../lib/contact';
+---
+
+<div class="cf" data-contact>
+  <form class="cf__form" method="post" action="/api/contact/" data-contact-form>
+    <p class="cf__required-note">Pflichtfelder sind mit <span aria-hidden="true">*</span><span class="visually-hidden">Sternchen</span> markiert.</p>
+
+    <div class="cf__row">
+      <div class="cf__field">
+        <label for="cf-firstName">Vorname <span aria-hidden="true">*</span></label>
+        <input id="cf-firstName" name="firstName" type="text" autocomplete="given-name" required maxlength={limits.name} aria-describedby="cf-firstName-error" />
+        <p class="cf__error" id="cf-firstName-error" data-error-for="firstName"></p>
+      </div>
+      <div class="cf__field">
+        <label for="cf-lastName">Nachname <span aria-hidden="true">*</span></label>
+        <input id="cf-lastName" name="lastName" type="text" autocomplete="family-name" required maxlength={limits.name} aria-describedby="cf-lastName-error" />
+        <p class="cf__error" id="cf-lastName-error" data-error-for="lastName"></p>
+      </div>
+    </div>
+
+    <div class="cf__row">
+      <div class="cf__field">
+        <label for="cf-email">E-Mail-Adresse <span aria-hidden="true">*</span></label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength={limits.email} aria-describedby="cf-email-error" />
+        <p class="cf__error" id="cf-email-error" data-error-for="email"></p>
+      </div>
+      <div class="cf__field">
+        <label for="cf-phone">Telefon <span class="cf__optional">optional</span></label>
+        <input id="cf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength={limits.phone} aria-describedby="cf-phone-hint cf-phone-error" />
+        <p class="cf__hint" id="cf-phone-hint">Falls Sie einen Rückruf wünschen.</p>
+        <p class="cf__error" id="cf-phone-error" data-error-for="phone"></p>
+      </div>
+    </div>
+
+    <fieldset class="cf__field cf__topics" aria-describedby="cf-topic-error">
+      <legend>Ihr Anliegen <span aria-hidden="true">*</span></legend>
+      <div class="cf__options">
+        {
+          inquiryTopics.map((t, i) => (
+            <label class="cf__option">
+              <input type="radio" name="topic" value={t.value} required={i === 0} />
+              <span>{t.label}</span>
+            </label>
+          ))
+        }
+      </div>
+      <p class="cf__error" id="cf-topic-error" data-error-for="topic"></p>
+    </fieldset>
+
+    <div class="cf__field">
+      <label for="cf-message">Nachricht <span aria-hidden="true">*</span></label>
+      <textarea id="cf-message" name="message" rows="6" required minlength={limits.messageMin} maxlength={limits.message} aria-describedby="cf-message-hint cf-message-error"></textarea>
+      <p class="cf__hint" id="cf-message-hint">Zum Beispiel: Art und Lage der Immobilie, Ihr Ziel und Ihr gewünschter Zeitrahmen.</p>
+      <p class="cf__error" id="cf-message-error" data-error-for="message"></p>
+    </div>
+
+    <!-- Honeypot gegen automatisierte Einsendungen: für Menschen unsichtbar -->
+    <div class="cf__trap" aria-hidden="true">
+      <label for="cf-company-url">Bitte nicht ausfüllen</label>
+      <input id="cf-company-url" name="company_url" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="started" value="" data-started />
+
+    <div class="cf__field cf__privacy">
+      <label class="cf__check">
+        <input type="checkbox" name="privacy" required aria-describedby="cf-privacy-error" />
+        <span>
+          Ich habe die <a href="/datenschutz/" target="_blank" rel="noopener">Datenschutzhinweise<span class="visually-hidden"> (öffnet in neuem Tab)</span></a>{' '}
+          zur Kenntnis genommen. Meine Angaben werden ausschließlich zur Bearbeitung meiner Anfrage verwendet. <span aria-hidden="true">*</span>
+        </span>
+      </label>
+      <p class="cf__error" id="cf-privacy-error" data-error-for="privacy"></p>
+    </div>
+
+    <div class="cf__status" role="alert" aria-live="assertive" data-status hidden></div>
+
+    <div class="cf__submit">
+      <button type="submit" class="btn" data-submit>
+        <span data-submit-label>Anfrage senden</span>
+        <Arrow />
+      </button>
+      <p class="cf__alt">
+        Lieber direkt? <a href={company.phoneHref}>{company.phone}</a>
+      </p>
+    </div>
+  </form>
+
+  <div class="cf__success" tabindex="-1" data-success hidden>
+    <p class="eyebrow">Vielen Dank</p>
+    <p class="h3">Ihre Anfrage ist bei uns eingegangen.</p>
+    <p class="cf__success-text">
+      Wir melden uns persönlich bei Ihnen. Wenn es eilt, erreichen Sie uns telefonisch unter
+      <a href={company.phoneHref}>{company.phone}</a>.
+    </p>
+  </div>
+</div>
+
+<style>
+  .cf__form {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .cf__required-note {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  .cf__row {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 40em) {
+    .cf__row {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  .cf__field {
+    display: grid;
+    gap: 0.45rem;
+    align-content: start;
+    min-width: 0;
+  }
+
+  .cf__field > label,
+  .cf__topics legend {
+    font-size: var(--fs-sm);
+    font-weight: 550;
+    letter-spacing: 0.02em;
+  }
+
+  .cf__optional {
+    margin-left: 0.35rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .cf input[type='text'],
+  .cf input[type='email'],
+  .cf input[type='tel'],
+  .cf textarea {
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0.8rem 0.95rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 0;
+    background: rgb(255 255 255 / 0.55);
+    font-size: 1rem;
+    line-height: 1.45;
+    transition:
+      border-color 0.25s var(--ease),
+      background-color 0.25s var(--ease),
+      box-shadow 0.25s var(--ease);
+    appearance: none;
+  }
+
+  .cf textarea {
+    min-height: 10rem;
+    resize: vertical;
+  }
+
+  .cf input:hover,
+  .cf textarea:hover {
+    border-color: var(--ink-soft);
+  }
+
+  .cf input:focus-visible,
+  .cf textarea:focus-visible {
+    outline: none;
+    border-color: var(--ink);
+    background: #fff;
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+
+  .cf input[aria-invalid='true'],
+  .cf textarea[aria-invalid='true'] {
+    border-color: #9b2c1f;
+    box-shadow: 0 0 0 1px #9b2c1f;
+  }
+
+  .cf__hint {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+  }
+
+  .cf__error {
+    font-size: var(--fs-sm);
+    color: #9b2c1f;
+  }
+
+  .cf__error:empty {
+    display: none;
+  }
+
+  .cf__topics {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .cf__topics legend {
+    padding: 0;
+    margin-bottom: 0.6rem;
+  }
+
+  .cf__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .cf__option {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .cf__option input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .cf__option span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--line-strong);
+    font-size: var(--fs-sm);
+    transition:
+      background-color 0.25s var(--ease),
+      color 0.25s var(--ease),
+      border-color 0.25s var(--ease);
+  }
+
+  .cf__option:hover span {
+    border-color: var(--ink);
+  }
+
+  .cf__option input:checked + span {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .cf__option input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .cf__topics[aria-invalid='true'] .cf__option span {
+    border-color: #9b2c1f;
+  }
+
+  .cf__check {
+    display: grid;
+    grid-template-columns: 1.25rem 1fr;
+    gap: 0.85rem;
+    align-items: start;
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .cf__check input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0.15rem 0 0;
+    accent-color: var(--ink);
+    cursor: pointer;
+  }
+
+  .cf__trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .cf__status {
+    padding: 1rem 1.25rem;
+    border-left: 2px solid #9b2c1f;
+    background: rgb(155 44 31 / 0.06);
+    font-size: var(--fs-sm);
+  }
+
+  .cf__status a {
+    font-weight: 550;
+  }
+
+  .cf__submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.75rem;
+  }
+
+  .cf__submit .btn[aria-disabled='true'] {
+    opacity: 0.65;
+    cursor: progress;
+  }
+
+  .cf__alt {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  .cf__alt a {
+    color: var(--ink);
+  }
+
+  .cf__success {
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border-top: 2px solid var(--ink);
+    background: var(--paper-deep);
+  }
+
+  .cf__success:focus {
+    outline: none;
+  }
+
+  .cf__success .h3 {
+    margin-top: 1rem;
+  }
+
+  .cf__success-text {
+    margin-top: 1rem;
+    max-width: 32rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 30em) {
+    .cf__submit .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  import { company } from '../data/site';
+
+  type Errors = Record<string, string>;
+
+  const messages: Record<string, string> = {
+    not_configured:
+      'Der Online-Versand ist derzeit nicht eingerichtet. Ihre Nachricht wurde nicht übermittelt. Bitte rufen Sie uns an oder schreiben Sie uns eine E-Mail.',
+    send_failed:
+      'Ihre Nachricht konnte gerade nicht versendet werden. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.',
+    rate_limited:
+      'Es wurden in kurzer Zeit mehrere Anfragen gesendet. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.',
+    too_fast: 'Das Formular wurde sehr schnell abgeschickt. Bitte prüfen Sie Ihre Angaben und senden Sie es erneut.',
+    spam: 'Ihre Anfrage konnte nicht angenommen werden. Bitte kontaktieren Sie uns direkt per Telefon oder E-Mail.',
+    bad_request: 'Ihre Anfrage konnte nicht verarbeitet werden. Bitte versuchen Sie es erneut.',
+    network:
+      'Es besteht offenbar keine Verbindung. Ihre Nachricht wurde nicht übermittelt. Bitte prüfen Sie Ihre Internetverbindung.',
+    invalid: 'Bitte prüfen Sie die markierten Felder.',
+  };
+
+  const clientChecks: Record<string, (form: HTMLFormElement) => string> = {
+    firstName: (f) => (field(f, 'firstName').value.trim() ? '' : 'Bitte geben Sie Ihren Vornamen an.'),
+    lastName: (f) => (field(f, 'lastName').value.trim() ? '' : 'Bitte geben Sie Ihren Nachnamen an.'),
+    email: (f) => {
+      const v = field(f, 'email').value.trim();
+      if (!v) return 'Bitte geben Sie Ihre E-Mail-Adresse an.';
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'Bitte prüfen Sie die E-Mail-Adresse, z. B. name@beispiel.de.';
+    },
+    phone: (f) => {
+      const v = field(f, 'phone').value.trim();
+      return !v || /^[+()\d\s/.-]{6,}$/.test(v)
+        ? ''
+        : 'Bitte geben Sie eine gültige Telefonnummer an oder lassen Sie das Feld leer.';
+    },
+    topic: (f) => (f.querySelector('input[name="topic"]:checked') ? '' : 'Bitte wählen Sie Ihr Anliegen aus.'),
+    message: (f) =>
+      field(f, 'message').value.trim().length >= 10 ? '' : 'Bitte beschreiben Sie Ihr Anliegen in einigen Worten.',
+    privacy: (f) =>
+      (f.querySelector<HTMLInputElement>('input[name="privacy"]')?.checked ?? false)
+        ? ''
+        : 'Bitte bestätigen Sie, dass Sie die Datenschutzhinweise gelesen haben.',
+  };
+
+  function field(form: HTMLFormElement, name: string) {
+    return form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement;
+  }
+
+  function target(form: HTMLFormElement, name: string): HTMLElement | null {
+    if (name === 'topic') return form.querySelector('.cf__topics');
+    if (name === 'privacy') return form.querySelector('input[name="privacy"]');
+    return form.querySelector(`[name="${name}"]`);
+  }
+
+  function showErrors(form: HTMLFormElement, errors: Errors) {
+    for (const name of Object.keys(clientChecks)) {
+      const msg = errors[name] ?? '';
+      const slot = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+      if (slot) slot.textContent = msg;
+      const el = target(form, name);
+      if (el) {
+        if (msg) el.setAttribute('aria-invalid', 'true');
+        else el.removeAttribute('aria-invalid');
+      }
+    }
+  }
+
+  function focusFirstError(form: HTMLFormElement, errors: Errors) {
+    const first = Object.keys(clientChecks).find((n) => errors[n]);
+    if (!first) return;
+    const el = first === 'topic' ? form.querySelector<HTMLElement>('input[name="topic"]') : target(form, first);
+    el?.focus();
+  }
+
+  function validate(form: HTMLFormElement): Errors {
+    const errors: Errors = {};
+    for (const [name, check] of Object.entries(clientChecks)) {
+      const msg = check(form);
+      if (msg) errors[name] = msg;
+    }
+    return errors;
+  }
+
+  function setStatus(box: HTMLElement, code: string | null) {
+    if (!code) {
+      box.hidden = true;
+      box.textContent = '';
+      return;
+    }
+    box.hidden = false;
+    const text = messages[code] ?? messages.bad_request;
+    const contact = code === 'invalid' ? '' : ` Telefon: <a href="${company.phoneHref}">${company.phone}</a> · E-Mail: <a href="mailto:${company.email}">${company.email}</a>`;
+    box.innerHTML = `<p>${text}${contact}</p>`;
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-contact]')) {
+    const form = root.querySelector<HTMLFormElement>('[data-contact-form]')!;
+    const status = root.querySelector<HTMLElement>('[data-status]')!;
+    const success = root.querySelector<HTMLElement>('[data-success]')!;
+    const submit = root.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const submitLabel = root.querySelector<HTMLElement>('[data-submit-label]')!;
+    const started = root.querySelector<HTMLInputElement>('[data-started]')!;
+
+    // JS übernimmt die Validierung mit verständlichen Meldungen.
+    form.noValidate = true;
+    started.value = String(Date.now());
+
+    // Anliegen aus dem Link übernehmen, z. B. /kontakt/?anliegen=suche
+    const preset = new URLSearchParams(location.search).get('anliegen');
+    if (preset) {
+      const radio = form.querySelector<HTMLInputElement>(`input[name="topic"][value="${CSS.escape(preset)}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    let touched = false;
+    form.addEventListener('input', () => {
+      if (touched) showErrors(form, validate(form));
+    });
+    form.addEventListener('change', () => {
+      if (touched) showErrors(form, validate(form));
+    });
+
+    let sending = false;
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      touched = true;
+      setStatus(status, null);
+
+      const errors = validate(form);
+      showErrors(form, errors);
+      if (Object.keys(errors).length) {
+        focusFirstError(form, errors);
+        return;
+      }
+
+      sending = true;
+      submit.setAttribute('aria-disabled', 'true');
+      submitLabel.textContent = 'Wird gesendet …';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { accept: 'application/json' },
+        });
+        const data = (await res.json().catch(() => ({}))) as { ok?: boolean; code?: string; errors?: Errors };
+
+        if (res.ok && data.ok) {
+          form.hidden = true;
+          success.hidden = false;
+          success.focus();
+          return;
+        }
+        if (data.errors) {
+          showErrors(form, data.errors);
+          focusFirstError(form, data.errors);
+        }
+        setStatus(status, data.code ?? 'bad_request');
+      } catch {
+        setStatus(status, 'network');
+      } finally {
+        sending = false;
+        submit.removeAttribute('aria-disabled');
+        submitLabel.textContent = 'Anfrage senden';
+      }
+    });
+  }
+</script>
