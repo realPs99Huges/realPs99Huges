@@ -363,6 +363,8 @@ import { limits } from '../lib/contact';
     too_fast: 'Das Formular wurde sehr schnell abgeschickt. Bitte prüfen Sie Ihre Angaben und senden Sie es erneut.',
     spam: 'Ihre Anfrage konnte nicht angenommen werden. Bitte kontaktieren Sie uns direkt per Telefon oder E-Mail.',
     bad_request: 'Ihre Anfrage konnte nicht verarbeitet werden. Bitte versuchen Sie es erneut.',
+    unavailable:
+      'Der Online-Versand ist in dieser Version der Website nicht verfügbar. Ihre Nachricht wurde nicht übermittelt. Bitte rufen Sie uns an oder schreiben Sie uns eine E-Mail.',
     network:
       'Es besteht offenbar keine Verbindung. Ihre Nachricht wurde nicht übermittelt. Bitte prüfen Sie Ihre Internetverbindung.',
     invalid: 'Bitte prüfen Sie die markierten Felder.',
@@ -493,7 +495,12 @@ import { limits } from '../lib/contact';
           body: new FormData(form),
           headers: { accept: 'application/json' },
         });
-        const data = (await res.json().catch(() => ({}))) as { ok?: boolean; code?: string; errors?: Errors };
+        // Keine JSON-Antwort: Endpunkt fehlt (z. B. reines statisches Hosting) – ehrlich melden.
+        const data = (await res.json().catch(() => ({ code: 'unavailable' }))) as {
+          ok?: boolean;
+          code?: string;
+          errors?: Errors;
+        };
 
         if (res.ok && data.ok) {
           form.hidden = true;
