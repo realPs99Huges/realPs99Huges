@@ -6,44 +6,17 @@ import ContactBand from '../components/ContactBand.astro';
 import { company } from '../data/site';
 import { imageSlots } from '../data/images';
 
-const principles = [
-  {
-    title: 'Fokus auf Handelsimmobilien',
-    text: 'Einzelhandelsimmobilien und Handelsstandorte stehen im Mittelpunkt – nicht die Vermittlung privater Wohnimmobilien.',
-  },
-  {
-    title: 'Standortbetrachtung',
-    text: 'Mikro- und Makrolage, Flächen und Nutzungsmöglichkeiten gehören zur Einordnung jeder Handelsimmobilie.',
-  },
-  {
-    title: 'Strukturierte Vermarktung',
-    text: 'Exposé, gezielte Ansprache geeigneter Interessenten, Besichtigungen und Verhandlungen folgen einem klaren Ablauf.',
-  },
-  {
-    title: 'Persönlicher Ansprechpartner',
-    text: 'Sie sprechen direkt mit dem Inhaber – vom ersten Gespräch bis zum Abschluss.',
-  },
-  {
-    title: 'Diskretion',
-    text: 'Vermarktung und Standortsuche sind oft vertraulich. Informationen werden entsprechend sorgfältig behandelt.',
-  },
-  {
-    title: 'Deutschlandweit tätig',
-    text: 'Der Unternehmenssitz ist Lippstadt, das Tätigkeitsgebiet umfasst ganz Deutschland.',
-  },
-];
 const hasPortrait = Boolean(imageSlots.ueberUns.src);
 ---
 
 <Base
   title="Über Issa Immobilien"
-  description="Issa Immobilien, Inhaber Sami Issa: Spezialist für Einzelhandelsimmobilien und Handelsstandorte mit Sitz in Lippstadt, deutschlandweit tätig."
+  description="Issa Immobilien, Inhaber Sami Issa: Der Immobilien-Profi für Einzelhandels- und Gewerbeimmobilien. Sitz in Lippstadt, tätig in ganz Deutschland."
 >
   <PageHero
     eyebrow="Über Issa Immobilien"
-    title="Spezialist für Einzelhandelsimmobilien und"
-    emphasis="Handelsstandorte."
-    lead="Issa Immobilien begleitet die Vermarktung und Vermittlung gewerblicher Einzelhandelsimmobilien – von Fachmarktzentren und großflächigen Handelsflächen bis zu Standorten für Filialunternehmen. Der Sitz ist Lippstadt, das Tätigkeitsgebiet ganz Deutschland."
+    title="Der Immobilien-Profi für Handel und Gewerbe."
+    lead="Issa Immobilien ist auf Einzelhandelsimmobilien und Handelsstandorte spezialisiert und in ganz Deutschland tätig. Der Sitz ist Lippstadt."
   />
 
   <section class="owner section" aria-labelledby="owner-title">
@@ -56,50 +29,19 @@ const hasPortrait = Boolean(imageSlots.ueberUns.src);
         )
       }
       <div class:list={['owner__text', !hasPortrait && 'owner__text--wide']}>
-        <p class="eyebrow" data-reveal>Inhaber</p>
-        <h2 id="owner-title" class="h2 owner__name" data-reveal>{company.owner}</h2>
-        <p class="owner__role" data-reveal>Inhaber von {company.name}</p>
-        <div class="prose owner__prose" data-reveal>
-          <p>
-            Bei Issa Immobilien haben Sie einen festen Ansprechpartner. Sami Issa betreut Ihr Vorhaben selbst – von der
-            Einordnung der Immobilie und des Standorts über die Vermarktung bis zur Begleitung der Verhandlungen.
-          </p>
-          <p>
-            Handelsstandorte folgen eigenen Anforderungen. Deshalb beginnt die Zusammenarbeit mit einem genauen
-            Verständnis Ihrer Immobilie, Ihrer Fläche oder Ihres Expansionsvorhabens.
-          </p>
-        </div>
+        <h2 id="owner-title" class="h2" data-reveal>{company.owner}</h2>
+        <p class="owner__role" data-reveal>Inhaber</p>
+        <p class="lead owner__lead" data-reveal>
+          Bei Issa Immobilien haben Sie einen Ansprechpartner: Sami Issa betreut jedes Vorhaben selbst – vom ersten
+          Gespräch bis zum Abschluss.
+        </p>
       </div>
-    </div>
-  </section>
-
-  <section class="principles section surface" aria-labelledby="principles-title">
-    <div class="container grid">
-      <div class="principles__head">
-        <p class="eyebrow" data-reveal>Arbeitsweise</p>
-        <h2 id="principles-title" class="h2 principles__title" data-reveal>
-          Wofür <span class="accent">Issa Immobilien</span> steht.
-        </h2>
-      </div>
-      <ul class="principles__list" role="list">
-        {
-          principles.map((p, i) => (
-            <li data-reveal style={`--reveal-delay:${(i % 2) * 90}`}>
-              <h3 class="h4">{p.title}</h3>
-              <p>{p.text}</p>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
   <section class="facts section" aria-labelledby="facts-title">
     <div class="container grid">
-      <div class="facts__head">
-        <p class="eyebrow" data-reveal>Unternehmen</p>
-        <h2 id="facts-title" class="h3 facts__title" data-reveal>Angaben im Überblick</h2>
-      </div>
+      <h2 id="facts-title" class="h3 facts__title" data-reveal>Auf einen Blick</h2>
       <dl class="facts__list" data-reveal>
         <div>
           <dt>Unternehmen</dt>
@@ -107,7 +49,7 @@ const hasPortrait = Boolean(imageSlots.ueberUns.src);
         </div>
         <div>
           <dt>Schwerpunkt</dt>
-          <dd>Einzelhandelsimmobilien und Handelsstandorte</dd>
+          <dd>Einzelhandels- und Gewerbeimmobilien</dd>
         </div>
         <div>
           <dt>Tätigkeitsgebiet</dt>
@@ -122,7 +64,7 @@ const hasPortrait = Boolean(imageSlots.ueberUns.src);
           <dd>{company.license.basis}, erteilt durch den {company.license.authority}</dd>
         </div>
         <div>
-          <dt>Zuständige Kammer</dt>
+          <dt>Kammer</dt>
           <dd>{company.chamber}</dd>
         </div>
       </dl>
@@ -133,82 +75,46 @@ const hasPortrait = Boolean(imageSlots.ueberUns.src);
 </Base>
 
 <style>
-  .owner__name {
-    margin-top: 1.25rem;
-  }
-
   .owner__role {
     margin-top: 0.5rem;
-    font-weight: 560;
-    color: var(--green-strong);
+    font-weight: 650;
+    color: var(--green);
   }
 
-  .owner__prose {
-    margin-top: var(--space-4);
+  .owner__lead {
+    margin-top: 1.5rem;
+    max-width: 40rem;
+    color: var(--text);
   }
 
-  .principles__title {
-    margin-top: 1.25rem;
-    max-width: 12ch;
-  }
-
-  .principles__list {
-    display: grid;
-    gap: 0 var(--gutter);
-    border-top: 3px solid var(--anthracite);
-  }
-
-  .principles__list li {
-    position: relative;
-    display: grid;
-    gap: 0.5rem;
-    padding: 1.6rem 0 1.8rem 1.5rem;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .principles__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 2.05rem;
-    width: 0.5rem;
-    height: 0.5rem;
-    background: var(--green);
-  }
-
-  .principles__list p {
-    color: var(--text-2);
-    max-width: 30rem;
+  .facts {
+    padding-top: 0;
   }
 
   .facts__list > div {
     display: grid;
     gap: 0.25rem;
-    padding-block: 1.1rem;
+    padding-block: 1rem;
     border-bottom: 1px solid var(--line);
   }
 
   .facts__list > div:first-child {
-    border-top: 3px solid var(--green);
+    border-top: 2px solid var(--anthracite);
   }
 
   .facts__list dt {
     font-size: var(--fs-xs);
-    font-weight: 600;
+    font-weight: 650;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
   .facts__list dd {
-    font-weight: 520;
+    font-weight: 560;
   }
 
   @media (min-width: 40em) {
-    .principles__list {
-      grid-template-columns: 1fr 1fr;
-    }
-
     .facts__list > div {
       grid-template-columns: 12rem 1fr;
       gap: 1.5rem;
@@ -229,15 +135,7 @@ const hasPortrait = Boolean(imageSlots.ueberUns.src);
       grid-column: 1 / span 8;
     }
 
-    .principles__head {
-      grid-column: 1 / span 4;
-    }
-
-    .principles__list {
-      grid-column: 5 / span 8;
-    }
-
-    .facts__head {
+    .facts__title {
       grid-column: 1 / span 4;
     }
 

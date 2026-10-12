@@ -1,10 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import Process from '../components/Process.astro';
+import ServiceList from '../components/ServiceList.astro';
+import PhotoStrip from '../components/PhotoStrip.astro';
 import ContactBand from '../components/ContactBand.astro';
-import Arrow from '../components/Arrow.astro';
-import { services } from '../data/site';
+import { services, examples } from '../data/site';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -16,7 +16,7 @@ const schema = {
     item: {
       '@type': 'Service',
       name: s.title,
-      description: s.short,
+      description: s.text,
       areaServed: { '@type': 'Country', name: 'Deutschland' },
       provider: { '@id': 'https://www.issa-immobilien.de/#unternehmen' },
     },
@@ -26,146 +26,42 @@ const schema = {
 
 <Base
   title="Leistungen"
-  description="Leistungen von Issa Immobilien: Vermarktung und Vermittlung von Einzelhandelsimmobilien, Fachmarktzentren und Handelsflächen, Filialstandorte und Expansion sowie gewerbliche Standortvermittlung – deutschlandweit."
+  description="Leistungen von Issa Immobilien: Vermarktung und Vermittlung von Einzelhandels- und Gewerbeimmobilien, Standortanalyse, Exposés, Verhandlungen, Standortsuche und Expansion – deutschlandweit."
   schema={schema}
 >
   <PageHero
     eyebrow="Leistungen"
-    title="Vermarktung und Vermittlung von"
-    emphasis="Handelsimmobilien."
-    lead="Vier Leistungsbereiche, die ineinandergreifen: von der Einordnung einer Einzelhandelsimmobilie über die Präsentation und Ansprache geeigneter Interessenten bis zur Begleitung der Verhandlungen."
-  >
-    <nav class="toc" aria-label="Leistungsbereiche">
-      <ol role="list">
-        {
-          services.map((s) => (
-            <li>
-              <a href={`#${s.id}`}>
-                <span class="num">{s.no}</span> {s.title}
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </nav>
-  </PageHero>
+    title="Was wir machen."
+    lead="Vermarktung und Vermittlung von Einzelhandels- und Gewerbeimmobilien in ganz Deutschland – für Eigentümer, Vermieter und Unternehmen, die einen Standort suchen."
+  />
 
-  {
-    services.map((s) => (
-      <section class="sd section" id={s.id} aria-labelledby={`${s.id}-title`}>
-        <div class="container grid">
-          <div class="sd__head">
-            <p class="sd__no num" aria-hidden="true" data-reveal>
-              {s.no}
-            </p>
-            <h2 id={`${s.id}-title`} class="h2 sd__title" data-reveal>
-              {s.title}
-            </h2>
-          </div>
-          <div class="sd__body">
-            <p class="lead" data-reveal>
-              {s.intro}
-            </p>
-            <h3 class="sd__list-title" data-reveal>
-              Leistungsumfang
-            </h3>
-            <ul class="sd__list" role="list">
-              {s.items.map((item, j) => (
-                <li data-reveal style={`--reveal-delay:${j * 70}`}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-    ))
-  }
+  <section class="section">
+    <div class="container">
+      <ServiceList />
 
-  <section class="note section on-dark" aria-labelledby="note-title">
-    <div class="container grid">
-      <h2 id="note-title" class="h3 note__title" data-reveal>
-        Sie sind unsicher, welcher Bereich zu Ihrem Vorhaben passt?
-      </h2>
-      <div class="note__body" data-reveal>
-        <p class="prose">
-          In einem ersten Gespräch klären wir, um welche Immobilie oder welchen Flächenbedarf es geht und welche Schritte
-          sinnvoll sind.
-        </p>
-        <a href="/kontakt/" class="btn btn--light">Kontakt aufnehmen <Arrow /></a>
+      <div class="examples" data-reveal>
+        <p class="examples__label">Immobilien, zum Beispiel</p>
+        <ul class="examples__list" role="list">
+          {examples.map((e) => <li>{e}</li>)}
+          <li class="examples__more">und vieles mehr</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <Process />
+  <PhotoStrip names={['hero', 'einzelhandel', 'deutschland']} />
+
   <ContactBand />
 </Base>
 
 <style>
-  .toc {
-    margin-top: 0.5rem;
-  }
-
-  .toc ol {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .toc a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    min-height: 2.75rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    background: var(--white);
-    font-size: var(--fs-sm);
-    font-weight: 560;
-    text-decoration: none;
-    transition:
-      background-color 0.3s var(--ease),
-      border-color 0.3s var(--ease),
-      color 0.3s var(--ease);
-  }
-
-  .toc a:hover {
-    background: var(--anthracite);
-    border-color: var(--anthracite);
-    color: var(--white);
-  }
-
-  @media (min-width: 60em) {
-    .toc {
-      grid-column: 1 / -1;
-    }
-  }
-
-  .sd + .sd {
-    border-top: 1px solid var(--line);
-  }
-
-  .sd__head {
+  .examples {
     display: grid;
     gap: 1rem;
-    align-content: start;
+    margin-top: var(--space-5);
   }
 
-  .sd__no {
-    font-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
-    font-weight: 700;
-    font-stretch: 80%;
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-  }
-
-  .sd__title {
-    max-width: 14ch;
-  }
-
-  .sd__list-title {
-    margin-top: var(--space-4);
+  .examples__label {
     font-size: var(--fs-xs);
     font-weight: 650;
     letter-spacing: 0.14em;
@@ -173,66 +69,21 @@ const schema = {
     color: var(--muted);
   }
 
-  .sd__list {
-    margin-top: 1rem;
-    border-top: 3px solid var(--anthracite);
+  .examples__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .sd__list li {
-    position: relative;
-    padding: 1rem 0 1rem 1.75rem;
-    border-bottom: 1px solid var(--line);
-    font-weight: 520;
+  .examples__list li {
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--line-strong);
+    font-weight: 600;
   }
 
-  .sd__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 1.55rem;
-    width: 0.75rem;
-    height: 3px;
+  .examples__list .examples__more {
+    border-color: var(--green);
     background: var(--green);
-  }
-
-  .note__body {
-    display: grid;
-    gap: 1.5rem;
-    justify-items: start;
-  }
-
-  @media (min-width: 60em) {
-    .sd__head {
-      grid-column: 1 / span 5;
-      position: sticky;
-      top: calc(var(--header-h) + 2rem);
-      align-self: start;
-    }
-
-    .sd__body {
-      grid-column: 7 / span 6;
-    }
-
-    .note__title {
-      grid-column: 1 / span 6;
-    }
-
-    .note__body {
-      grid-column: 8 / span 5;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .sd:target .sd__no,
-    .sd:target .sd__title {
-      animation: sd-arrive 1s var(--ease-out) 0.25s both;
-    }
-  }
-
-  @keyframes sd-arrive {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
+    color: var(--white);
   }
 </style>

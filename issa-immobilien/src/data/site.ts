@@ -44,138 +44,61 @@ export const legalNav = [
   { href: '/datenschutz/', label: 'Datenschutz' },
 ] as const;
 
-/** Arten von Handelsimmobilien, auf die sich Issa Immobilien konzentriert. */
-export const assetClasses = [
-  {
-    id: 'lebensmittel',
-    title: 'Lebensmitteleinzelhandel',
-    text: 'Standorte für Lebensmittelmärkte und großflächige Lebensmittelmärkte – mit Blick auf Fläche, Erreichbarkeit, Stellplätze und Einzugsgebiet.',
-  },
-  {
-    id: 'fachmaerkte',
-    title: 'Fachmärkte',
-    text: 'Einzelne Fachmarktflächen und Fachmarktstandorte für unterschiedliche Sortimente und Betreiberkonzepte.',
-  },
-  {
-    id: 'fachmarktzentren',
-    title: 'Fachmarktzentren',
-    text: 'Zusammenhängende Handelsstandorte mit mehreren Nutzern, gemeinsamer Erschließung und sich ergänzendem Angebot.',
-  },
-  {
-    id: 'shopping-center',
-    title: 'Shopping-Center',
-    text: 'Einkaufszentren und Galerien mit mehreren Ebenen, Mieterstruktur und eigener Frequenz.',
-  },
-  {
-    id: 'filialstandorte',
-    title: 'Filialstandorte',
-    text: 'Handelsimmobilien und Flächen für Filialunternehmen und Handelsketten, die neue Standorte suchen.',
-  },
-  {
-    id: 'fitness',
-    title: 'Fitness- und Sportstandorte',
-    text: 'Großzügige Flächen für Fitness- und Sportanbieter, etwa in Handels- oder Gewerbelagen.',
-  },
-  {
-    id: 'gewerbe',
-    title: 'Weitere Gewerbestandorte',
-    text: 'Weitere großflächige gewerbliche Einzelhandelsimmobilien und geeignete Handelsflächen.',
-  },
-] as const;
-
 /**
- * Leistungsbereiche. Die Detailpunkte stammen aus den bestätigten
- * Leistungen (Vermarktung, Standortanalyse, Exposé, Interessenten,
- * Besichtigungen, Verhandlungen, Expansion, Flächenoptimierung,
- * Projektentwicklung), bezogen auf Handelsimmobilien.
+ * Was Issa Immobilien macht – kurz und ohne Zahlen oder Kundennamen.
+ * Grundlage: die bestätigten Leistungen des Auftraggebers.
  */
 export const services = [
   {
-    id: 'einzelhandelsimmobilien',
-    no: '01',
-    title: 'Einzelhandelsimmobilien',
-    short: 'Vermarktung und Vermittlung geeigneter Immobilien für den stationären Einzelhandel.',
-    intro:
-      'Für Einzelhandelsimmobilien zählen andere Kriterien als für Wohn- oder Büroflächen. Die Vermarktung beginnt deshalb mit einer genauen Einordnung von Objekt, Fläche und Lage.',
-    items: [
-      'Einordnung von Objekt, Flächen und Nutzungsmöglichkeiten',
-      'Standortanalyse mit Betrachtung von Mikro- und Makrolage',
-      'Vermarktungskonzept von der Konzeption bis zur Übergabe',
-    ],
+    id: 'vermarktung',
+    title: 'Vermarktung und Vermittlung',
+    text: 'Einzelhandels- und Gewerbeimmobilien – zur Miete oder zum Kauf, von der Konzeption bis zur Übergabe.',
   },
   {
-    id: 'fachmarktzentren',
-    no: '02',
-    title: 'Fachmarktzentren und Handelsflächen',
-    short: 'Professionelle Präsentation und Vermarktung von Fachmarktstandorten und großflächigen Handelsflächen.',
-    intro:
-      'Großflächige Handelsstandorte brauchen eine Präsentation, die Flächen, Lage und Rahmenbedingungen klar und vollständig darstellt.',
-    items: [
-      'Erstellung individueller Exposés für Handelsflächen',
-      'Gezielte Auswahl potenzieller Interessenten',
-      'Ansprache von Interessenten, deren Anforderungen zum Standort passen',
-    ],
+    id: 'standortanalyse',
+    title: 'Standortanalyse',
+    text: 'Mikro- und Makrolage, Flächen und Nutzungsmöglichkeiten richtig einordnen.',
   },
   {
-    id: 'filialstandorte',
-    no: '03',
-    title: 'Filialstandorte und Expansion',
-    short: 'Unterstützung bei der Betrachtung geeigneter Standorte und gewerblicher Flächen für Filialkonzepte.',
-    intro:
-      'Filialunternehmen suchen Standorte, die zu ihrem Konzept passen. Wir betrachten Flächen und Standortfaktoren im Hinblick auf diese Anforderungen.',
-    items: [
-      'Beratung bei gewerblichen Immobilienflächen und Unternehmensexpansion',
-      'Betrachtung von Standortfaktoren und Flächenanforderungen',
-      'Konzepte für Flächenoptimierung und Projektentwicklung',
-    ],
+    id: 'exposes',
+    title: 'Exposés und Interessenten',
+    text: 'Aussagekräftige Exposés und die gezielte Ansprache passender Interessenten.',
   },
   {
-    id: 'standortvermittlung',
-    no: '04',
-    title: 'Gewerbliche Standortvermittlung',
-    short: 'Strukturierte Begleitung bei der Vermarktung und Vermittlung gewerblicher Immobilien und Handelsstandorte.',
-    intro:
-      'Zwischen dem ersten Kontakt und einer Einigung liegen viele Schritte. Wir koordinieren sie und bleiben durchgehend Ihr Ansprechpartner.',
-    items: [
-      'Organisation und Durchführung von Besichtigungen',
-      'Begleitung bei Miet- und Kaufvertragsverhandlungen',
-      'Begleitung des Vermittlungsprozesses bis zur Übergabe',
-    ],
+    id: 'verhandlungen',
+    title: 'Besichtigungen und Verhandlungen',
+    text: 'Organisation von Besichtigungen und Begleitung bei Miet- und Kaufvertragsverhandlungen.',
+  },
+  {
+    id: 'expansion',
+    title: 'Standortsuche und Expansion',
+    text: 'Beratung zu Gewerbeflächen und neuen Standorten für Unternehmen und Filialisten.',
+  },
+  {
+    id: 'projektentwicklung',
+    title: 'Flächenoptimierung und Projektentwicklung',
+    text: 'Konzepte zur Optimierung von Flächen und für Projektentwicklungen.',
   },
 ] as const;
 
-/** Allgemeine Darstellung der Arbeitsweise – keine Erfolgsgarantie. */
-export const process = [
-  {
-    title: 'Anforderungen und Ziele verstehen',
-    text: 'Wir klären, um welche Immobilie oder welchen Flächenbedarf es geht und welches Ziel Sie verfolgen.',
-  },
-  {
-    title: 'Immobilie und Standort einordnen',
-    text: 'Objekt, Flächen, Mikro- und Makrolage sowie die Nutzungsmöglichkeiten werden betrachtet.',
-  },
-  {
-    title: 'Vermarktungsstrategie abstimmen',
-    text: 'Präsentation, Exposé und Vorgehen werden gemeinsam mit Ihnen festgelegt.',
-  },
-  {
-    title: 'Geeignete Interessenten ansprechen',
-    text: 'Wir wählen Interessenten aus, deren Anforderungen zum Standort passen, und sprechen sie gezielt an.',
-  },
-  {
-    title: 'Vermittlungsprozess begleiten',
-    text: 'Besichtigungen, Gespräche sowie Miet- oder Kaufvertragsverhandlungen begleiten wir bis zur Übergabe.',
-  },
+/** Beispiele – ausdrücklich keine abschließende Liste. */
+export const examples = [
+  'Lebensmittelmärkte',
+  'Fachmärkte',
+  'Fachmarktzentren',
+  'Shopping-Center',
+  'Filialstandorte',
+  'Fitness- und Sportstandorte',
+  'Gewerbeflächen',
 ] as const;
 
 /** Auswahl im Kontaktformular (Wert = übermittelter Schlüssel). */
 export const inquiryTopics = [
-  { value: 'vermarktung', label: 'Einzelhandelsimmobilie vermarkten' },
-  { value: 'fachmarkt', label: 'Fachmarkt oder Fachmarktzentrum' },
-  { value: 'shopping-center', label: 'Shopping-Center' },
-  { value: 'expansion', label: 'Filialstandort oder Expansion' },
-  { value: 'gewerbe', label: 'Gewerbliche Fläche' },
-  { value: 'sonstiges', label: 'Sonstiges Anliegen' },
+  { value: 'vermarktung', label: 'Immobilie vermarkten' },
+  { value: 'vermietung', label: 'Fläche vermieten' },
+  { value: 'expansion', label: 'Standort oder Fläche gesucht' },
+  { value: 'beratung', label: 'Beratung' },
+  { value: 'sonstiges', label: 'Sonstiges' },
 ] as const;
 
 export type InquiryTopic = (typeof inquiryTopics)[number]['value'];

@@ -2,30 +2,29 @@
 interface Props {
   eyebrow: string;
   title: string;
-  /** Teil der Überschrift, der kursiv gesetzt wird */
+  /** Optionaler zweiter Teil der Überschrift (etwas heller gesetzt) */
   emphasis?: string;
   lead?: string;
 }
 const { eyebrow, title, emphasis, lead } = Astro.props;
 ---
 
-<header class="page-hero">
+<header class="page-hero on-dark">
   <div class="container grid">
     <p class="eyebrow page-hero__eyebrow page-hero__in">{eyebrow}</p>
-    <h1 class="h1 page-hero__title page-hero__in" style="--d:120">
-      {title}{emphasis && <> <span class="accent">{emphasis}</span></>}
+    <h1 class="page-hero__title page-hero__in" style="--d:120">
+      {title}{emphasis && <> <span>{emphasis}</span></>}
     </h1>
-    {lead && <p class="lead page-hero__lead page-hero__in" style="--d:240">{lead}</p>}
+    {lead && <p class="page-hero__lead page-hero__in" style="--d:240">{lead}</p>}
     <slot />
   </div>
 </header>
 
 <style>
   .page-hero {
-    padding-top: calc(var(--header-h) + clamp(2.5rem, 6vw, 5.5rem));
-    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
+    margin-top: var(--header-h);
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4.5rem);
+    border-bottom: 6px solid var(--green);
   }
 
   .page-hero .grid {
@@ -34,10 +33,23 @@ const { eyebrow, title, emphasis, lead } = Astro.props;
 
   .page-hero__title {
     max-width: 16ch;
+    font-size: clamp(2.25rem, 1.3rem + 4vw, 5rem);
+    font-weight: 720;
+    font-stretch: 80%;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .page-hero__title span {
+    color: var(--on-dark-muted);
   }
 
   .page-hero__lead {
     max-width: 36rem;
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--on-dark-2);
   }
 
   @media (min-width: 60em) {
@@ -57,15 +69,15 @@ const { eyebrow, title, emphasis, lead } = Astro.props;
 
   @media (prefers-reduced-motion: no-preference) {
     .page-hero__in {
-      animation: page-hero-in 1s var(--ease-out) both;
-      animation-delay: calc(var(--d, 0) * 1ms + 80ms);
+      animation: page-hero-in 0.9s var(--ease-out) both;
+      animation-delay: calc(var(--d, 0) * 1ms + 60ms);
     }
   }
 
   @keyframes page-hero-in {
     from {
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(14px);
     }
   }
 </style>

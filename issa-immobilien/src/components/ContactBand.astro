@@ -9,120 +9,69 @@ interface Props {
 const { showFormLink = true } = Astro.props;
 ---
 
-<section class="band section surface" aria-labelledby="kontakt-band-title">
-  <div class="container grid">
-    <div class="band__text">
-      <p class="eyebrow" data-reveal>Kontakt</p>
-      <h2 id="kontakt-band-title" class="h2 band__title" data-reveal>
-        Sie planen die Vermarktung einer <span class="accent">Einzelhandelsimmobilie?</span>
-      </h2>
-      <p class="lead band__lead" data-reveal>
-        Sprechen Sie mit Issa Immobilien über Ihr Vorhaben, Ihre Fläche oder Ihren geplanten Handelsstandort.
-      </p>
+<section class="contact section" aria-labelledby="kontakt-band-title">
+  <div class="container">
+    <h2 id="kontakt-band-title" class="h2 contact__title" data-reveal>Sprechen Sie uns an.</h2>
+    <div class="contact__grid">
+      <a href={company.phoneHref} class="contact__big" data-reveal>{company.phone}</a>
+      <a href={`mailto:${company.email}`} class="contact__big contact__big--mail" data-reveal>{company.email}</a>
+    </div>
+    <div class="contact__foot" data-reveal>
+      <p>{company.owner} · Inhaber · {company.street}, {company.zip} {company.city}</p>
       {
         showFormLink && (
-          <div class="band__actions" data-reveal>
-            <a href="/kontakt/#anfrage" class="btn">
-              Anfrage senden <Arrow />
-            </a>
-          </div>
+          <a href="/kontakt/#anfrage" class="btn">
+            Anfrage senden <Arrow />
+          </a>
         )
       }
     </div>
-
-    <aside class="band__card on-dark" aria-label="Direkter Kontakt" data-reveal>
-      <p class="band__person">
-        <span class="band__name">{company.owner}</span>
-        <span class="band__role">Inhaber, {company.name}</span>
-      </p>
-      <a href={company.phoneHref} class="band__row">
-        <span class="band__label">Telefon</span>
-        <span class="band__value">{company.phone}</span>
-      </a>
-      <a href={`mailto:${company.email}`} class="band__row">
-        <span class="band__label">E-Mail</span>
-        <span class="band__value">{company.email}</span>
-      </a>
-    </aside>
   </div>
 </section>
 
 <style>
-  .band__title {
-    margin-top: 1.25rem;
-    max-width: 17ch;
+  .contact {
+    border-top: 1px solid var(--line);
   }
 
-  .band__lead {
-    margin-top: 1.25rem;
-    max-width: 32rem;
+  .contact__title {
+    margin-bottom: 2rem;
   }
 
-  .band__actions {
-    margin-top: 2rem;
-  }
-
-  .band__card {
-    align-self: end;
-    padding: clamp(1.75rem, 3vw, 2.5rem);
-    border-radius: var(--radius-lg);
-    border-top: 4px solid var(--green);
-  }
-
-  .band__person {
+  .contact__grid {
     display: grid;
-    gap: 0.15rem;
-    padding-bottom: 1.25rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid var(--line-dark);
+    border-top: 2px solid var(--anthracite);
   }
 
-  .band__name {
-    font-size: 1.25rem;
-    font-weight: 650;
-  }
-
-  .band__role {
-    font-size: var(--fs-sm);
-    color: var(--on-dark-muted);
-  }
-
-  .band__row {
-    display: grid;
-    gap: 0.15rem;
-    padding-block: 0.9rem;
+  .contact__big {
+    display: block;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line);
+    font-size: clamp(1.75rem, 1.1rem + 3vw, 3.5rem);
+    font-weight: 700;
+    font-stretch: 82%;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
     text-decoration: none;
-    border-bottom: 1px solid var(--line-dark);
-  }
-
-  .band__label {
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--on-dark-muted);
-  }
-
-  .band__value {
-    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.4rem);
-    font-weight: 620;
     overflow-wrap: anywhere;
     transition: color 0.25s var(--ease);
   }
 
-  .band__row:hover .band__value {
-    text-decoration: underline;
-    text-decoration-color: var(--green);
-    text-decoration-thickness: 2px;
+  .contact__big--mail {
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.5rem);
   }
 
-  @media (min-width: 60em) {
-    .band__text {
-      grid-column: 1 / span 7;
-    }
+  .contact__big:hover {
+    color: var(--green);
+  }
 
-    .band__card {
-      grid-column: 8 / span 5;
-    }
+  .contact__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: 2rem;
+    color: var(--text-2);
   }
 </style>

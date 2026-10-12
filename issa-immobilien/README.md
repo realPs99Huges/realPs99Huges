@@ -20,11 +20,11 @@ Voraussetzung: Node.js ≥ 22.12.
 
 | Pfad | Inhalt |
 | --- | --- |
-| `/` | Startseite: Hero, Leistungen, Handelsimmobilien, Deutschlandweit, Zusammenarbeit, Kontakt |
-| `/leistungen/` | Vier Leistungsbereiche im Detail, Zusammenarbeit |
-| `/handelsimmobilien/` | Schwerpunkte, Standortfaktoren, Anfragewege; zeigt Angebote, sobald welche gepflegt sind |
+| `/` | Startseite: Einstieg, Wer wir sind, Bildreihe, Was wir machen, Kontakt |
+| `/leistungen/` | Leistungen und Beispiele (keine abschließende Liste) |
+| `/handelsimmobilien/` | Beispiele, Bildreihe, Anfragewege; zeigt Angebote, sobald welche gepflegt sind |
 | `/handelsimmobilien/<id>/` | Detailseite je Angebot (nur wenn Angebote gepflegt sind) |
-| `/ueber-uns/` | Über Issa Immobilien: Inhaber, Arbeitsweise, Angaben im Überblick |
+| `/ueber-uns/` | Über Issa Immobilien: Inhaber und Angaben auf einen Blick |
 | `/kontakt/` | Kontaktdaten und Anfrageformular |
 | `/impressum/`, `/datenschutz/` | Rechtliches (siehe `docs/RECHTLICHES.md`) |
 | `/kontakt/gesendet/`, `/kontakt/fehler/` | Rückmeldeseiten für Browser ohne JavaScript (noindex) |
@@ -33,7 +33,7 @@ Voraussetzung: Node.js ≥ 22.12.
 
 ```
 src/
-  data/site.ts          Zentrale Unternehmensangaben, Navigation, Leistungen, Ablauf
+  data/site.ts          Zentrale Unternehmensangaben, Navigation, Leistungen, Beispiele
   data/images.ts        Zuordnung der Bilder zu den Bildflächen
   styles/global.css     Design-Tokens, Typografie, Raster, Buttons, Bewegung
   layouts/Base.astro    <head>, SEO/Open Graph, JSON-LD, Header, Footer

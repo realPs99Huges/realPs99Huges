@@ -11,9 +11,9 @@ der passenden Fläche zuzuweisen. Astro erzeugt beim Build automatisch AVIF/WebP
 
 | Fläche | Einsatz | Aktuelles Bild | Format / empfohlene Größe |
 | --- | --- | --- | --- |
-| `hero` | Startseite, oberer Bereich | `shopping-center-galerie.jpg` | 4:3, mind. 2000 × 1500 px |
-| `einzelhandel` | Startseite „Handelsimmobilien“, Seite Handelsimmobilien | `einzelhandel-einkauf.jpg` | 3:2 bzw. 4:3, mind. 1600 px breit |
-| `deutschland` | Startseite „Deutschlandweit tätig“ | `einkaufsstrasse-innenstadt.jpg` | 4:3, mind. 1600 px breit |
+| `hero` | Einstieg Startseite (schwarz-weiß, rechte Hälfte) und Bildreihe | `shopping-center-galerie.jpg` | Hochformat oder 4:3, mind. 1600 px breit |
+| `einzelhandel` | Bildreihe (Startseite, Leistungen, Handelsimmobilien) | `einzelhandel-einkauf.jpg` | 3:2, mind. 1200 px breit |
+| `deutschland` | Bildreihe (Startseite, Leistungen, Handelsimmobilien) | `einkaufsstrasse-innenstadt.jpg` | 3:2, mind. 1200 px breit |
 | `ueberUns` | Über Issa Immobilien (Porträt oder Büro) | – noch nicht geliefert | 4:5, mind. 1200 × 1500 px |
 
 Flächen ohne Bild (`src: null`) werden ausgeblendet (Über uns) bzw. als neutrale Fläche dargestellt.
