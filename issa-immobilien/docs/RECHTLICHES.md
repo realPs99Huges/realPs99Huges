@@ -66,6 +66,14 @@ Nach Freigabe den Hinweis-Kasten am Seitenanfang entfernen.
 Folgende Formulierungen leiten sich aus den bereitgestellten Informationen ab; bitte kurz
 bestätigen:
 
-- „Sie sprechen direkt mit dem Inhaber“ / „Sami Issa betreut Ihr Anliegen selbst“ (Über uns)
+- „Sie sprechen direkt mit dem Inhaber“ / „Sami Issa betreut Ihr Vorhaben selbst“ (Über uns)
+- Leistungsbeschreibungen für Einzelhandelsimmobilien, Fachmarktzentren, Filialstandorte und
+  gewerbliche Standortvermittlung (`src/data/site.ts`) – es werden keine Kunden, Mieter oder
+  Geschäftsbeziehungen (z. B. zu Handelsketten) genannt
 - Die Markenwerte (persönliche Beratung, Diskretion, Erfahrung usw.) werden ohne Zahlen oder
   Belege dargestellt – es wurden keine Referenzen, Kundenstimmen oder Statistiken erfunden.
+
+## Bilder
+
+Die verwendeten Fotos wurden vom Auftraggeber bereitgestellt. Bitte die Nutzungsrechte prüfen
+und bei Bedarf Bildnachweise im Impressum ergänzen (Details: `docs/BILDER.md`).

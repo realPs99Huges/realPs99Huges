@@ -8,13 +8,13 @@ import { company, mapsUrl } from '../../data/site';
 
 <Base
   title="Kontakt"
-  description="Kontakt zu Issa Immobilien in Lippstadt: Telefon +49 175 811 85 80, E-Mail info@issa-immobilien.de, Arendsstr. 21, 59557 Lippstadt – oder bequem über das Anfrageformular."
+  description="Kontakt zu Issa Immobilien, Spezialist für Einzelhandelsimmobilien und Handelsstandorte: Telefon +49 175 811 85 80, E-Mail info@issa-immobilien.de, Sitz in Lippstadt, deutschlandweit tätig."
 >
   <PageHero
     eyebrow="Kontakt"
-    title="Lassen Sie uns über Ihre"
-    emphasis="Immobilie sprechen."
-    lead="Rufen Sie uns an, schreiben Sie eine E-Mail oder nutzen Sie das Formular. Wir melden uns persönlich bei Ihnen."
+    title="Sprechen Sie mit uns über Ihren"
+    emphasis="Handelsstandort."
+    lead="Ob Vermarktung einer Einzelhandelsimmobilie, Fachmarktfläche oder Expansionsvorhaben: Rufen Sie an, schreiben Sie eine E-Mail oder nutzen Sie das Formular."
   />
 
   <section class="contact section" aria-label="Kontaktmöglichkeiten">
@@ -50,7 +50,7 @@ import { company, mapsUrl } from '../../data/site';
       <div class="contact__form" id="anfrage">
         <h2 class="h3 contact__form-title">Ihre Anfrage</h2>
         <p class="contact__form-intro muted">
-          Je genauer Sie Ihr Anliegen beschreiben, desto gezielter können wir uns auf das Gespräch vorbereiten.
+          Hilfreich sind Angaben zu Art und Lage der Immobilie, zur Fläche und zu Ihrem Zeitrahmen.
         </p>
         <ContactForm />
       </div>
@@ -91,9 +91,10 @@ import { company, mapsUrl } from '../../data/site';
   }
 
   .contact__value {
-    font-family: var(--serif);
-    font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.25rem);
-    font-weight: 360;
+    font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2rem);
+    font-weight: 640;
+    font-stretch: 88%;
+    letter-spacing: -0.01em;
     line-height: 1.2;
     overflow-wrap: anywhere;
   }
@@ -104,7 +105,7 @@ import { company, mapsUrl } from '../../data/site';
 
   .contact__phone:hover .contact__value,
   .contact__mail:hover .contact__value {
-    color: var(--accent);
+    color: var(--green-strong);
   }
 
   .contact__address address {

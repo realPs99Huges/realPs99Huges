@@ -9,6 +9,10 @@ export default defineConfig({
   site: 'https://www.issa-immobilien.de',
   trailingSlash: 'always',
   output: 'static',
+  // Frühere Adresse der Angebotsseite
+  redirects: {
+    '/objekte': '/handelsimmobilien/',
+  },
   adapter: node({ mode: 'standalone' }),
   integrations: [
     sitemap({

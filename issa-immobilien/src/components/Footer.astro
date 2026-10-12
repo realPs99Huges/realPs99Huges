@@ -1,32 +1,33 @@
 ---
-import Wordmark from './Wordmark.astro';
+import Logo from './Logo.astro';
 import { company, nav, legalNav, mapsUrl } from '../data/site';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
+<footer class="site-footer on-dark">
   <div class="container">
     <div class="site-footer__top">
       <div class="site-footer__brand">
-        <a href="/" aria-label="Issa Immobilien – zur Startseite"><Wordmark size="large" /></a>
-        <p class="site-footer__claim">Immobilien verdienen eine durchdachte Perspektive.</p>
+        <a href="/" aria-label="Issa Immobilien – zur Startseite">
+          <Logo variant="negativ" height={58} class="site-footer__logo" />
+        </a>
+        <p class="site-footer__claim">{company.positioning}. {company.area} tätig.</p>
       </div>
 
       <div class="site-footer__cols">
         <section aria-labelledby="footer-contact">
           <h2 id="footer-contact" class="site-footer__title">Kontakt</h2>
           <address>
-            {company.name}<br />
-            Inhaber {company.owner}<br />
+            {company.owner}<br />
             <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
               {company.street}<br />
               {company.zip} {company.city}<span class="visually-hidden"> (öffnet Google Maps in neuem Tab)</span>
             </a>
           </address>
           <p>
-            <a href={company.phoneHref}>{company.phone}</a><br />
-            <a href={`mailto:${company.email}`}>{company.email}</a>
+            Telefon: <a href={company.phoneHref}>{company.phone}</a><br />
+            E-Mail: <a href={`mailto:${company.email}`}>{company.email}</a>
           </p>
         </section>
 
@@ -47,8 +48,8 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="site-footer__bottom">
-      <p>© {year} {company.name} · {company.owner}</p>
-      <p>Abbildungen: Architekturzeichnungen – keine angebotenen Objekte.</p>
+      <p>© {year} {company.name} · Inhaber {company.owner}</p>
+      <p>Sitz in {company.city} · {company.area} tätig</p>
     </div>
   </div>
 </footer>
@@ -56,42 +57,40 @@ const year = new Date().getFullYear();
 <style>
   .site-footer {
     padding-block: var(--space-5) 2rem;
-    background: var(--paper-deep);
     font-size: var(--fs-sm);
-    color: var(--ink-soft);
+    color: var(--on-dark-2);
   }
 
   .site-footer a {
     text-decoration: none;
+    transition: color 0.25s var(--ease);
   }
 
   .site-footer a:hover {
+    color: var(--white);
     text-decoration: underline;
+    text-decoration-color: var(--green);
+    text-decoration-thickness: 2px;
   }
 
   .site-footer__top {
     display: grid;
     gap: 3rem;
     padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-dark);
   }
 
-  .site-footer__brand > a {
-    color: var(--ink);
-  }
-
-  .site-footer__brand > a:hover {
-    text-decoration: none;
+  .site-footer__brand :global(.site-footer__logo) {
+    width: auto;
+    height: 52px;
   }
 
   .site-footer__claim {
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
     max-width: 22rem;
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-style: italic;
-    line-height: 1.35;
-    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--on-dark-2);
   }
 
   .site-footer__cols {
@@ -103,10 +102,10 @@ const year = new Date().getFullYear();
   .site-footer__title {
     margin-bottom: 0.9rem;
     font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: 0.16em;
+    font-weight: 650;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--white);
   }
 
   .site-footer address {
@@ -115,7 +114,7 @@ const year = new Date().getFullYear();
   }
 
   .site-footer li + li {
-    margin-top: 0.35rem;
+    margin-top: 0.4rem;
   }
 
   .site-footer__bottom {
@@ -125,7 +124,7 @@ const year = new Date().getFullYear();
     gap: 0.5rem 2rem;
     padding-top: 1.5rem;
     font-size: var(--fs-xs);
-    color: var(--muted);
+    color: var(--on-dark-muted);
   }
 
   @media (min-width: 60em) {

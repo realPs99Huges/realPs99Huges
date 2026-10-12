@@ -1,9 +1,9 @@
-# Objekte veröffentlichen
+# Angebote (Handelsimmobilien) veröffentlichen
 
 Objekte werden in `src/content/objekte.json` gepflegt. Ist die Liste leer (`[]`), zeigt
-`/objekte/` die Anfragewege „Sie bieten an / Sie suchen“. Sobald Einträge vorhanden sind,
-erscheint zusätzlich eine Übersicht, und für jedes Objekt wird eine Detailseite
-`/objekte/<id>/` erzeugt.
+`/handelsimmobilien/` nur Schwerpunkte und Anfragewege. Sobald Einträge vorhanden sind,
+erscheint zusätzlich „Aktuelle Angebote“, und für jedes Angebot wird eine Detailseite
+`/handelsimmobilien/<id>/` erzeugt.
 
 Nur echte, von den Eigentümern freigegebene Objekte eintragen.
 
@@ -14,22 +14,22 @@ Bilder in einen Ordner neben der JSON-Datei legen, z. B. `src/content/objekte/<i
 ```json
 [
   {
-    "id": "wohnung-lippstadt-zentrum",
+    "id": "fachmarkt-beispielstadt",
     "veroeffentlicht": true,
     "titel": "…",
-    "art": "Eigentumswohnung",
-    "vermarktung": "Kauf",
-    "ort": "Lippstadt",
+    "art": "Fachmarkt",
+    "vermarktung": "Miete",
+    "ort": "…",
     "kurzbeschreibung": "Ein Satz für die Übersicht.",
     "beschreibung": ["Absatz 1", "Absatz 2"],
-    "preis": "Kaufpreis: … €",
+    "preis": "Miete auf Anfrage",
     "kennzahlen": [
-      { "label": "Wohnfläche", "wert": "… m²" },
-      { "label": "Zimmer", "wert": "…" }
+      { "label": "Verkaufsfläche", "wert": "… m²" },
+      { "label": "Stellplätze", "wert": "…" }
     ],
     "energie": "Energieausweis: …",
     "bilder": [
-      { "src": "./objekte/wohnung-lippstadt-zentrum/01.jpg", "alt": "Bildbeschreibung" }
+      { "src": "./objekte/fachmarkt-beispielstadt/01.jpg", "alt": "Bildbeschreibung" }
     ]
   }
 ]

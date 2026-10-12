@@ -1,0 +1,104 @@
+---
+import ImageSlot from '../ImageSlot.astro';
+import Arrow from '../Arrow.astro';
+import { assetClasses } from '../../data/site';
+---
+
+<section class="market section surface" aria-labelledby="markt-title">
+  <div class="container grid">
+    <div class="market__intro">
+      <p class="eyebrow" data-reveal>Handelsimmobilien</p>
+      <h2 id="markt-title" class="h2 market__title" data-reveal>
+        Spezialisiert auf <span class="accent">Einzelhandels&shy;immobilien</span> und Handelsstandorte.
+      </h2>
+      <p class="lead market__lead" data-reveal>
+        Issa Immobilien ist im gewerblichen Immobilienmarkt tätig. Im Mittelpunkt stehen Immobilien und Standorte, an
+        denen Handel stattfindet – vom Lebensmittelmarkt bis zum Shopping-Center.
+      </p>
+      <div class="market__image">
+        <ImageSlot name="einzelhandel" ratio="3 / 2" sizes="(min-width: 60em) 36vw, 100vw" />
+      </div>
+    </div>
+
+    <div class="market__list-wrap">
+      <ul class="market__list" role="list">
+        {
+          assetClasses.slice(0, 6).map((a, i) => (
+            <li data-reveal style={`--reveal-delay:${(i % 2) * 70}`}>
+              <h3 class="h4">{a.title}</h3>
+              <p>{a.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <a href="/handelsimmobilien/" class="link-arrow market__link" data-reveal>Zu den Handelsimmobilien <Arrow class="" /></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .market__title {
+    margin-top: 1.25rem;
+    max-width: 17ch;
+  }
+
+  .market__lead {
+    margin-top: 1.25rem;
+    max-width: 32rem;
+  }
+
+  .market__image {
+    margin-top: var(--space-4);
+    max-width: 34rem;
+  }
+
+  .market__list {
+    display: grid;
+    gap: 0 var(--gutter);
+    border-top: 3px solid var(--anthracite);
+  }
+
+  .market__list li {
+    position: relative;
+    display: grid;
+    gap: 0.4rem;
+    padding: 1.4rem 0 1.5rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .market__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.85rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--green);
+  }
+
+  .market__list p {
+    color: var(--text-2);
+    font-size: 0.9375rem;
+  }
+
+  .market__link {
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 40em) {
+    .market__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 60em) {
+    .market__intro {
+      grid-column: 1 / span 5;
+    }
+
+    .market__list-wrap {
+      grid-column: 7 / span 6;
+      align-self: start;
+    }
+  }
+</style>

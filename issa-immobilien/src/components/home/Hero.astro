@@ -1,105 +1,77 @@
 ---
-import Study from '../Study.astro';
+import ImageSlot from '../ImageSlot.astro';
 import Arrow from '../Arrow.astro';
-import { company } from '../../data/site';
+import { company, assetClasses } from '../../data/site';
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero__media">
-    <Study
-      name="residence"
-      sizes="(min-width: 60em) 54vw, 100vw"
-      position="62% 40%"
-      caption={false}
-      priority
-      reveal={false}
-    />
-    <p class="hero__caption" aria-hidden="true">Abb. 01 — Perspektive Wohnhaus · Zeichnung</p>
-  </div>
-
-  <div class="container hero__inner">
+  <div class="container hero__grid">
     <div class="hero__text">
-      <p class="eyebrow hero__in" style="--d:250">Immobilienvermarktung <span aria-hidden="true">·</span> Lippstadt</p>
-      <h1 id="hero-title" class="hero__title hero__in" style="--d:380">
-        Jede Immobilie hat eine Geschichte. Wir geben ihr die richtige <em>Perspektive.</em>
+      <p class="eyebrow hero__in" style="--d:150">Einzelhandelsimmobilien · Deutschlandweit</p>
+      <h1 id="hero-title" class="h1 hero__title hero__in" style="--d:260">
+        Der richtige Standort für erfolgreichen <span class="accent">Einzelhandel.</span>
       </h1>
-      <p class="lead hero__lead hero__in" style="--d:560">
-        Von der ersten Einschätzung bis zur Übergabe begleiten wir Sie mit persönlicher Beratung, einem klaren
-        Konzept und dem Blick für das, was Ihre Immobilie ausmacht.
+      <p class="lead hero__lead hero__in" style="--d:400">
+        Issa Immobilien begleitet die Vermarktung und Vermittlung von Einzelhandelsimmobilien und gewerblichen
+        Handelsstandorten – von Fachmarktzentren und großflächigen Einzelhandelsflächen bis zu geeigneten Standorten
+        für Filialunternehmen.
       </p>
-      <div class="hero__actions hero__in" style="--d:700">
-        <a href="/kontakt/" class="btn">Gespräch vereinbaren <Arrow /></a>
-        <a href="/leistungen/" class="btn btn--ghost">Unsere Leistungen</a>
+      <div class="hero__actions hero__in" style="--d:520">
+        <a href="/kontakt/" class="btn">Kontakt aufnehmen <Arrow /></a>
+        <a href="/leistungen/" class="btn btn--outline">Leistungen entdecken</a>
       </div>
+      <dl class="hero__facts hero__in" style="--d:640">
+        <div>
+          <dt>Tätigkeitsgebiet</dt>
+          <dd>Ganz Deutschland</dd>
+        </div>
+        <div>
+          <dt>Sitz</dt>
+          <dd>{company.city}</dd>
+        </div>
+        <div>
+          <dt>Direkt</dt>
+          <dd><a href={company.phoneHref}>{company.phone}</a></dd>
+        </div>
+      </dl>
     </div>
 
-    <div class="hero__meta hero__in" style="--d:900">
-      <p>
-        <span class="hero__meta-label">Direkt erreichbar</span>
-        <a href={company.phoneHref}>{company.phone}</a>
-      </p>
-      <p class="hero__coords" aria-hidden="true">51° 40′ N · 8° 21′ O</p>
-      <a href="#haltung" class="hero__scroll">
-        <span class="visually-hidden">Weiter zum nächsten Abschnitt</span>
-        <span class="hero__scroll-line" aria-hidden="true"></span>
-      </a>
+    <div class="hero__media">
+      <span class="hero__block" aria-hidden="true"></span>
+      <ImageSlot name="hero" ratio="4 / 3" sizes="(min-width: 60em) 46vw, 100vw" priority reveal={false} class="hero__image" />
+    </div>
+  </div>
+
+  <div class="hero__market">
+    <div class="container">
+      <p class="visually-hidden">Schwerpunkte:</p>
+      <ul role="list" class="hero__market-list">
+        {assetClasses.slice(0, 6).map((a) => <li>{a.title}</li>)}
+      </ul>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    padding-top: calc(var(--header-h) + clamp(2rem, 6vw, 4.5rem));
   }
 
-  .hero__media {
-    position: relative;
-    height: 56svh;
-    min-height: 22rem;
-    max-height: 40rem;
-  }
-
-  .hero__media :global(.study),
-  .hero__media :global(.study__frame) {
-    height: 100%;
-  }
-
-  .hero__caption {
-    display: none;
-  }
-
-  .hero__inner {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    padding-top: 2.25rem;
-    padding-bottom: 2.5rem;
-  }
-
-  .hero__text {
-    max-width: 40rem;
+  .hero__grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
 
   .hero__title {
-    margin-top: 1.25rem;
-    font-family: var(--serif);
-    font-size: clamp(2.125rem, 1.25rem + 2.75vw, 3.875rem);
-    font-weight: 370;
-    line-height: 1.06;
-    letter-spacing: -0.022em;
-    text-wrap: balance;
-  }
-
-  .hero__title em {
-    font-weight: 340;
+    margin-top: 1.5rem;
+    max-width: 15ch;
   }
 
   .hero__lead {
     margin-top: 1.5rem;
-    max-width: 31rem;
+    max-width: 36rem;
   }
 
   .hero__actions {
@@ -109,41 +81,83 @@ import { company } from '../../data/site';
     margin-top: 2.25rem;
   }
 
-  .hero__meta {
+  .hero__facts {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding-top: 1.25rem;
+    flex-wrap: wrap;
+    gap: 1.25rem 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--line);
-    font-size: var(--fs-sm);
   }
 
-  .hero__meta a {
-    text-decoration: none;
-  }
-
-  .hero__meta a:hover {
-    text-decoration: underline;
-  }
-
-  .hero__meta-label {
-    display: block;
+  .hero__facts dt {
     font-size: var(--fs-xs);
-    letter-spacing: 0.12em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
-  .hero__coords {
-    display: none;
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--muted);
+  .hero__facts dd {
+    margin-top: 0.2rem;
+    font-weight: 600;
   }
 
-  .hero__scroll {
-    display: none;
+  .hero__facts a {
+    text-decoration: none;
+  }
+
+  .hero__facts a:hover {
+    color: var(--green-strong);
+  }
+
+  /* Bildkomposition: Foto, Anthrazit-Fläche, Linien aus dem Logo */
+  .hero__media {
+    position: relative;
+    margin-right: calc(-1 * var(--gutter));
+    padding: 0 0 1.5rem 1.5rem;
+  }
+
+  .hero__block {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 62%;
+    height: 72%;
+    background: var(--anthracite);
+  }
+
+
+  .hero__media :global(.hero__image) {
+    position: relative;
+  }
+
+  .hero__market {
+    background: var(--anthracite);
+    color: var(--on-dark);
+  }
+
+  .hero__market-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    padding-block: 1.25rem;
+    font-size: var(--fs-sm);
+    font-weight: 560;
+    letter-spacing: 0.01em;
+  }
+
+  .hero__market-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hero__market-list li::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--green);
   }
 
   @media (max-width: 30em) {
@@ -152,115 +166,39 @@ import { company } from '../../data/site';
     }
   }
 
-  /* Desktop: asymmetrisches Raster, Bild läuft bis an den rechten Rand */
   @media (min-width: 60em) {
-    .hero {
-      min-height: max(40rem, min(100svh, 60rem));
+    .hero__grid {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      gap: clamp(2rem, 5vw, 5rem);
     }
 
     .hero__media {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 54vw;
-      height: auto;
-      max-height: none;
+      margin-right: 0;
+      padding: 0 0 2rem 2rem;
     }
 
-    .hero__caption {
-      display: block;
-      position: absolute;
-      left: -2.25rem;
-      bottom: 0;
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.06em;
-      color: var(--muted);
-    }
-
-    .hero__inner {
-      flex: 1;
+    .hero__market-list {
       justify-content: space-between;
-      padding-top: calc(var(--header-h) + clamp(2.5rem, 8vh, 6rem));
-      padding-bottom: 2.25rem;
-    }
-
-    .hero__text {
-      width: calc(46vw - var(--gutter) - 4.5rem);
-      max-width: 38rem;
-    }
-
-    .hero__meta {
-      width: calc(46vw - var(--gutter) - 4.5rem);
-      max-width: 38rem;
-    }
-
-    .hero__coords {
-      display: block;
-    }
-
-    .hero__scroll {
-      display: block;
-      position: relative;
-      width: 1px;
-      height: 3.5rem;
-      background: var(--line);
-      overflow: hidden;
-    }
-
-    .hero__scroll::before {
-      content: '';
-      position: absolute;
-      inset: -0.5rem -1rem;
-    }
-
-    .hero__scroll-line {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 1px;
-      height: 40%;
-      background: var(--ink);
     }
   }
 
-  /* Eingangsanimation – ruhig, kurz, ohne Ladebildschirm */
+  /* Eingangsanimation: ruhig und kurz */
   @media (prefers-reduced-motion: no-preference) {
-    .hero__media :global(.study__frame) {
-      animation: hero-reveal 1.6s var(--ease-out) both;
-    }
-
-    .hero__media :global(img) {
-      animation: hero-settle 2.4s var(--ease-out) both;
-    }
-
     .hero__in {
-      animation: hero-text 1.1s var(--ease-out) both;
+      animation: hero-text 0.9s var(--ease-out) both;
       animation-delay: calc(var(--d, 0) * 1ms);
     }
 
-    .hero__scroll-line {
-      animation: hero-scroll 2.6s var(--ease) 2s infinite;
+    .hero__media :global(.hero__image) {
+      animation: hero-image 1.3s var(--ease-out) 0.25s both;
     }
-  }
 
-  @keyframes hero-reveal {
-    from {
-      clip-path: inset(0 0 100% 0);
+    .hero__media :global(.hero__image img) {
+      animation: hero-settle 1.8s var(--ease-out) 0.25s both;
     }
-    to {
-      clip-path: inset(0 0 0 0);
-    }
-  }
 
-  @keyframes hero-settle {
-    from {
-      transform: scale(1.07);
-    }
-    to {
-      transform: none;
+    .hero__block {
+      animation: hero-block 1.1s var(--ease-out) 0.1s both;
     }
   }
 
@@ -271,13 +209,29 @@ import { company } from '../../data/site';
     }
   }
 
-  @keyframes hero-scroll {
-    0% {
-      transform: translateY(-100%);
+  @keyframes hero-image {
+    from {
+      clip-path: inset(0 0 0 100%);
     }
-    60%,
-    100% {
-      transform: translateY(260%);
+    to {
+      clip-path: inset(0 0 0 0);
     }
   }
+
+  @keyframes hero-settle {
+    from {
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes hero-block {
+    from {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+    to {
+      transform-origin: bottom;
+    }
+  }
+
 </style>

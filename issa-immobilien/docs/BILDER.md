@@ -1,37 +1,47 @@
 # Bilder
 
-## Ausgangslage
+Die Website verwendet ausschließlich Bilder, die vom Auftraggeber bereitgestellt wurden.
+Es werden keine Bilder generiert oder aus fremden Quellen eingebunden.
 
-Die bestehende Website war aus der Entwicklungsumgebung nicht erreichbar, ebenso Bilddatenbanken
-wie Unsplash oder Pexels. Es lagen keine Unternehmensfotos, kein Logo und kein Porträt vor.
+## Bildflächen
 
-Statt beliebiger Stockfotos wurden deshalb **eigene Architekturzeichnungen** gerendert
-(`scripts/render-images.mjs`, Three.js in Chromium). Sie zeigen keine realen Gebäude und
-werden auf der Website überall als „Zeichnung“ gekennzeichnet (Bildunterschriften,
-Footer, Impressum). Rechte Dritter bestehen daran nicht.
+Alle Bilder werden zentral in `src/data/images.ts` den Bildflächen zugeordnet. Zum Austausch
+genügt es, eine Datei in `src/assets/images/` abzulegen, sie in `images.ts` zu importieren und
+der passenden Fläche zuzuweisen. Astro erzeugt beim Build automatisch AVIF/WebP in passenden Größen.
 
-| Datei | Motiv | Einsatz |
+| Fläche | Einsatz | Aktuelles Bild | Format / empfohlene Größe |
+| --- | --- | --- | --- |
+| `hero` | Startseite, oberer Bereich | `shopping-center-galerie.jpg` | 4:3, mind. 2000 × 1500 px |
+| `einzelhandel` | Startseite „Handelsimmobilien“, Seite Handelsimmobilien | `einzelhandel-einkauf.jpg` | 3:2 bzw. 4:3, mind. 1600 px breit |
+| `deutschland` | Startseite „Deutschlandweit tätig“ | `einkaufsstrasse-innenstadt.jpg` | 4:3, mind. 1600 px breit |
+| `ueberUns` | Über Issa Immobilien (Porträt oder Büro) | – noch nicht geliefert | 4:5, mind. 1200 × 1500 px |
+
+Flächen ohne Bild (`src: null`) werden ausgeblendet (Über uns) bzw. als neutrale Fläche dargestellt.
+Platzhalter werden nie als Immobilienangebote oder Referenzen dargestellt.
+
+## Hinweise zu den gelieferten Fotos
+
+- Die drei Fotos liegen nur in **600 × 400 px** vor. Auf großen und hochauflösenden Bildschirmen
+  wirken sie dadurch weich. Bitte möglichst in höherer Auflösung nachliefern (siehe Tabelle).
+- Bitte sicherstellen, dass für alle Fotos die **Nutzungsrechte** vorliegen (z. B. Lizenz der
+  Bildagentur) und ggf. Bildnachweise im Impressum ergänzen.
+- Auf `einkaufsstrasse-innenstadt.jpg` sind Markenschilder von Geschäften erkennbar. Das Foto
+  zeigt eine allgemeine Einkaufsstraße und stellt keine Geschäftsbeziehung dar; bei Bedenken
+  durch ein neutrales Motiv ersetzen.
+
+## Logo
+
+- Originale: `src/assets/brand/original-logo-hell.jpg` und `original-visitenkarte-dunkel.jpg`
+- Daraus freigestellt (Form und Farben unverändert, nur Hintergrund transparent):
+  `logo-issa-immobilien.png` (helle Hintergründe), `logo-issa-immobilien-negativ.png`
+  (dunkle Hintergründe) und `bildmarke.png` (Favicon). Skript: `npm run prepare:logo`.
+- Liegt das Logo als Vektordatei (SVG/PDF/EPS) vor, sollte diese die PNG-Dateien ersetzen –
+  für die schärfste Darstellung auf allen Bildschirmen.
+
+## Markenfarben (aus den Originaldateien gemessen)
+
+| Token | Wert | Herkunft |
 | --- | --- | --- |
-| `residence.jpg` | Wohnhaus, auskragender Baukörper | Hero, Leistungen, OG-Bild |
-| `facade.jpg` | Fassadendetail, Lamellen | Startseite „Haltung“ |
-| `interior.jpg` | Innenraum, Lichteinfall | Startseite „Leistungen“, Über uns |
-| `urban.jpg` | Gewerbebau, Rasterfassade | Leistungen „Gewerbe“, Objekte |
-| `horizon.jpg` | Wohnhaus mit Mauer, Abendlicht | Startseite „Objekte“, Leistungen „Analyse“ |
-
-## Durch echte Fotografie ersetzen
-
-1. Foto (mindestens 2000 px auf der langen Seite, JPG) unter gleichem Namen in
-   `src/assets/studies/` ablegen – oder eine neue Datei ergänzen.
-2. In `src/data/studies.ts` `caption` und `alt` anpassen. Handelt es sich um eine echte
-   Aufnahme, in `src/components/Study.astro` den Zusatz „· Zeichnung“ entfernen bzw.
-   steuerbar machen und den Hinweis im Footer (`src/components/Footer.astro`) sowie im
-   Impressum anpassen.
-3. `npm run build` – Astro erzeugt automatisch AVIF/WebP in passenden Größen.
-
-Wichtig: Fotos realer Objekte nur mit Zustimmung der Eigentümer und nur, wenn das Objekt
-tatsächlich vermarktet wird bzw. wurde. Bildrechte (Fotograf) im Impressum nennen.
-
-## Porträt
-
-Sobald ein authentisches Porträt von Sami Issa vorliegt, eignet sich die Über-uns-Seite
-(`src/pages/ueber-uns.astro`, Abschnitt „Inhaber“) – dort ersetzt es die Innenraumstudie.
+| `--green` | `#038604` | Grün in Logo und Visitenkarte |
+| `--slate` | `#4E5258` | Grau „IMMOBILIEN“ im Logo |
+| `--anthracite` | `#2A2A2A` | Hintergrund der Visitenkarte |

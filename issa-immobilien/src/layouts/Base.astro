@@ -22,6 +22,7 @@ const ogUrl = new URL(ogImage, Astro.site);
 const business = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
+  description: `${company.positioning}, ${company.area.toLowerCase()} tätig.`,
   '@id': `${company.url}/#unternehmen`,
   name: company.name,
   founder: { '@type': 'Person', name: company.owner },
@@ -36,6 +37,8 @@ const business = {
     addressLocality: company.city,
     addressCountry: 'DE',
   },
+  areaServed: { '@type': 'Country', name: 'Deutschland' },
+  knowsAbout: ['Einzelhandelsimmobilien', 'Handelsstandorte', 'Fachmarktzentren', 'Shopping-Center', 'Filialstandorte'],
 };
 ---
 
@@ -58,12 +61,12 @@ const business = {
     <meta property="og:image" content={ogUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Issa Immobilien – Immobilienvermarktung in Lippstadt" />
+    <meta property="og:image:alt" content="Issa Immobilien – Spezialist für Einzelhandelsimmobilien und Handelsstandorte" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <meta name="theme-color" content="#f3efe8" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 

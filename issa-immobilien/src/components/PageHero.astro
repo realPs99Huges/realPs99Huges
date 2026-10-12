@@ -11,9 +11,9 @@ const { eyebrow, title, emphasis, lead } = Astro.props;
 
 <header class="page-hero">
   <div class="container grid">
-    <p class="eyebrow eyebrow--rule page-hero__eyebrow page-hero__in">{eyebrow}</p>
+    <p class="eyebrow page-hero__eyebrow page-hero__in">{eyebrow}</p>
     <h1 class="h1 page-hero__title page-hero__in" style="--d:120">
-      {title}{emphasis && <> <em>{emphasis}</em></>}
+      {title}{emphasis && <> <span class="accent">{emphasis}</span></>}
     </h1>
     {lead && <p class="lead page-hero__lead page-hero__in" style="--d:240">{lead}</p>}
     <slot />
@@ -22,8 +22,9 @@ const { eyebrow, title, emphasis, lead } = Astro.props;
 
 <style>
   .page-hero {
-    padding-top: calc(var(--header-h) + clamp(3rem, 8vw, 7.5rem));
+    padding-top: calc(var(--header-h) + clamp(2.5rem, 6vw, 5.5rem));
     padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    background: var(--surface);
     border-bottom: 1px solid var(--line);
   }
 

@@ -1,54 +1,54 @@
-@import '@fontsource-variable/newsreader/opsz.css';
-@import '@fontsource-variable/newsreader/opsz-italic.css';
-@import '@fontsource-variable/instrument-sans/wght.css';
+@import '@fontsource-variable/instrument-sans/wdth.css';
 
 /* ================================================================== */
-/* Tokens                                                              */
+/* Tokens – abgeleitet aus Original-Logo und Visitenkarte             */
 /* ================================================================== */
 
 :root {
-  /* Farben */
-  --paper: #f3efe8;
-  --paper-deep: #ebe5da;
-  --stone: #d8cfc0;
-  --taupe: #a39683;
-  --ink: #22211f;
-  --ink-soft: #46433e;
-  --muted: #645e55;
-  --accent: #75633f; /* Bronze mit Olivstich, sparsam eingesetzt */
-  --line: rgb(34 33 31 / 0.16);
-  --line-strong: rgb(34 33 31 / 0.55); /* ≥ 3:1 für Formularrahmen */
+  /* Markenfarben (aus den Originaldateien gemessen) */
+  --green: #038604; /* Logo-Grün */
+  --green-strong: #026a03; /* Hover / Text auf hellen Flächen */
+  --green-tint: #e9f3e9;
+  --anthracite: #2a2a2a; /* Visitenkarte */
+  --anthracite-2: #353535;
+  --slate: #4e5258; /* Logo-Grau „IMMOBILIEN“ */
 
-  --on-dark: #ede7dc;
-  --on-dark-muted: #ada392;
-  --on-dark-accent: #c4ae84;
-  --line-dark: rgb(237 231 220 / 0.16);
+  /* Neutrale Flächen und Texte */
+  --white: #ffffff;
+  --surface: #f4f5f4;
+  --surface-2: #eaeceb;
+  --text: #2a2a2a;
+  --text-2: #4e5258;
+  --muted: #696d73;
+  --line: #e0e2e1;
+  --line-strong: #8a8e93; /* ≥ 3:1 auf Weiß, für Formularrahmen */
 
-  /* Schriften */
-  --serif: 'Newsreader Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-  --sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Auf Anthrazit */
+  --on-dark: #ffffff;
+  --on-dark-2: #c8cacc;
+  --on-dark-muted: #a3a6aa;
+  --line-dark: rgb(255 255 255 / 0.14);
 
-  /* Typografische Skala (fluid) */
+  /* Schrift: eine klare Grotesk in zwei Breiten */
+  --font: 'Instrument Sans Variable', 'Helvetica Neue', Arial, system-ui, sans-serif;
+
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
-  --fs-base: clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);
-  --fs-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
-  --fs-h4: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
-  --fs-h3: clamp(1.5rem, 1.3rem + 0.9vw, 2.125rem);
-  --fs-h2: clamp(2rem, 1.55rem + 2vw, 3.375rem);
-  --fs-h1: clamp(2.375rem, 1.7rem + 3vw, 4.5rem);
-  --fs-display: clamp(2.25rem, 1.4rem + 3.6vw, 5rem);
+  --fs-base: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --fs-h4: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --fs-h3: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
+  --fs-h2: clamp(1.875rem, 1.45rem + 1.9vw, 3.125rem);
+  --fs-h1: clamp(2.25rem, 1.55rem + 3.1vw, 4.25rem);
 
   /* Raster & Abstände */
-  --gutter: clamp(1.25rem, 0.6rem + 3vw, 4rem);
-  --max: 90rem;
-  --space-1: 0.5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
+  --gutter: clamp(1.25rem, 0.6rem + 3vw, 3.5rem);
+  --max: 82rem;
   --space-4: 2.5rem;
-  --space-5: clamp(3rem, 2rem + 4vw, 5.5rem);
-  --space-6: clamp(4.5rem, 3rem + 7vw, 10rem);
-  --header-h: 4.75rem;
+  --space-5: clamp(3rem, 2rem + 4vw, 5rem);
+  --space-6: clamp(4rem, 2.75rem + 6vw, 8.5rem);
+  --header-h: 5rem;
+  --radius: 2px;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -80,9 +80,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--sans);
+  background: var(--white);
+  color: var(--text);
+  font-family: var(--font);
   font-size: var(--fs-base);
   line-height: 1.6;
   font-kerning: normal;
@@ -137,18 +137,17 @@ textarea {
 }
 
 ::selection {
-  background: var(--stone);
-  color: var(--ink);
+  background: var(--green);
+  color: var(--white);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--green);
   outline-offset: 3px;
-  border-radius: 1px;
 }
 
 .on-dark :focus-visible {
-  outline-color: var(--on-dark-accent);
+  outline-color: var(--white);
 }
 
 .visually-hidden {
@@ -169,8 +168,8 @@ textarea {
   left: 0.75rem;
   z-index: 100;
   padding: 0.75rem 1.1rem;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--anthracite);
+  color: var(--white);
   font-size: var(--fs-sm);
   text-decoration: none;
   transform: translateY(-200%);
@@ -191,7 +190,6 @@ textarea {
   padding-inline: var(--gutter);
 }
 
-/* 12-spaltiges Raster ab Tablet, darunter einspaltig */
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -209,82 +207,73 @@ textarea {
   padding-block: var(--space-6);
 }
 
-.on-dark {
-  background: var(--ink);
-  color: var(--on-dark);
+.surface {
+  background: var(--surface);
 }
 
-.surface-deep {
-  background: var(--paper-deep);
+.on-dark {
+  background: var(--anthracite);
+  color: var(--on-dark);
 }
 
 /* ================================================================== */
 /* Typografie                                                          */
 /* ================================================================== */
 
-.display,
 .h1,
 .h2,
 .h3 {
-  font-family: var(--serif);
-  font-weight: 380;
-  letter-spacing: -0.015em;
-  font-optical-sizing: auto;
+  font-family: var(--font);
+  font-weight: 640;
+  font-stretch: 88%;
+  letter-spacing: -0.008em;
   text-wrap: balance;
-}
-
-.display {
-  font-size: var(--fs-display);
-  line-height: 1.04;
-  letter-spacing: -0.022em;
 }
 
 .h1 {
   font-size: var(--fs-h1);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.04;
+  letter-spacing: -0.012em;
 }
 
 .h2 {
   font-size: var(--fs-h2);
-  line-height: 1.1;
+  line-height: 1.06;
 }
 
 .h3 {
   font-size: var(--fs-h3);
-  line-height: 1.18;
+  line-height: 1.15;
 }
 
 .h4 {
-  font-family: var(--sans);
   font-size: var(--fs-h4);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
 
-.display em,
-.h1 em,
-.h2 em,
-.h3 em {
-  font-style: italic;
-  font-weight: 340;
+/* Hervorhebung in Überschriften: Logo-Grün statt Kursivschrift */
+.h1 .accent,
+.h2 .accent,
+.h3 .accent {
+  color: var(--green);
 }
 
 .lead {
   font-size: var(--fs-lead);
   line-height: 1.55;
-  color: var(--ink-soft);
+  color: var(--text-2);
   text-wrap: pretty;
 }
 
 .on-dark .lead {
-  color: var(--on-dark);
+  color: var(--on-dark-2);
 }
 
 .prose {
   max-width: 38rem;
-  color: var(--ink-soft);
+  color: var(--text-2);
   text-wrap: pretty;
 }
 
@@ -293,61 +282,41 @@ textarea {
 }
 
 .on-dark .prose {
-  color: var(--on-dark-muted);
+  color: var(--on-dark-2);
 }
 
 .muted {
   color: var(--muted);
 }
 
-/* Kleine Versal-Zeile über Überschriften */
+/* Versal-Zeile mit grünem Balken – greift die Linien des Logos auf */
 .eyebrow {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  font-family: var(--sans);
+  gap: 0.75rem;
   font-size: var(--fs-xs);
-  font-weight: 550;
-  letter-spacing: 0.16em;
+  font-weight: 650;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-2);
+}
+
+.eyebrow::before {
+  content: '';
+  flex: none;
+  width: 1.75rem;
+  height: 3px;
+  background: var(--green);
 }
 
 .on-dark .eyebrow {
-  color: var(--on-dark-muted);
+  color: var(--on-dark-2);
 }
 
-.eyebrow .index {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 0.9rem;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--accent);
-}
-
-.on-dark .eyebrow .index {
-  color: var(--on-dark-accent);
-}
-
-.eyebrow--rule::after {
-  content: '';
-  flex: 0 0 3rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.5;
-}
-
-.rule {
-  height: 1px;
-  border: 0;
-  margin: 0;
-  background: var(--line);
-}
-
-.on-dark .rule {
-  background: var(--line-dark);
+.num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  color: var(--green);
 }
 
 /* ================================================================== */
@@ -355,10 +324,9 @@ textarea {
 /* ================================================================== */
 
 .btn {
-  --btn-bg: var(--ink);
-  --btn-fg: var(--paper);
-  --btn-border: var(--ink);
-  position: relative;
+  --btn-bg: var(--green);
+  --btn-fg: var(--white);
+  --btn-border: var(--green);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -366,57 +334,59 @@ textarea {
   min-height: 3.25rem;
   padding: 0.85rem 1.5rem;
   border: 1px solid var(--btn-border);
+  border-radius: var(--radius);
   background: var(--btn-bg);
   color: var(--btn-fg);
   font-size: var(--fs-sm);
-  font-weight: 550;
-  letter-spacing: 0.04em;
+  font-weight: 620;
+  letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color 0.35s var(--ease),
-    color 0.35s var(--ease),
-    border-color 0.35s var(--ease);
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
 }
 
 .btn:hover {
-  --btn-bg: var(--ink-soft);
-  --btn-border: var(--ink-soft);
+  --btn-bg: var(--green-strong);
+  --btn-border: var(--green-strong);
 }
 
-.btn--ghost {
+.btn--outline {
   --btn-bg: transparent;
-  --btn-fg: var(--ink);
+  --btn-fg: var(--text);
   --btn-border: var(--line-strong);
 }
 
-.btn--ghost:hover {
-  --btn-bg: var(--ink);
-  --btn-fg: var(--paper);
-  --btn-border: var(--ink);
+.btn--outline:hover {
+  --btn-bg: var(--anthracite);
+  --btn-fg: var(--white);
+  --btn-border: var(--anthracite);
 }
 
 .btn--light {
-  --btn-bg: var(--on-dark);
-  --btn-fg: var(--ink);
-  --btn-border: var(--on-dark);
+  --btn-bg: var(--white);
+  --btn-fg: var(--anthracite);
+  --btn-border: var(--white);
 }
 
 .btn--light:hover {
-  --btn-bg: #fff;
-  --btn-border: #fff;
+  --btn-bg: var(--green);
+  --btn-fg: var(--white);
+  --btn-border: var(--green);
 }
 
-.btn--ghost-light {
+.btn--outline-light {
   --btn-bg: transparent;
-  --btn-fg: var(--on-dark);
-  --btn-border: rgb(237 231 220 / 0.4);
+  --btn-fg: var(--white);
+  --btn-border: rgb(255 255 255 / 0.45);
 }
 
-.btn--ghost-light:hover {
-  --btn-bg: var(--on-dark);
-  --btn-fg: var(--ink);
-  --btn-border: var(--on-dark);
+.btn--outline-light:hover {
+  --btn-bg: var(--white);
+  --btn-fg: var(--anthracite);
+  --btn-border: var(--white);
 }
 
 .btn .arrow {
@@ -435,24 +405,20 @@ textarea {
   gap: 0.6rem;
   padding-block: 0.35rem;
   font-size: var(--fs-sm);
-  font-weight: 550;
-  letter-spacing: 0.04em;
+  font-weight: 620;
+  color: var(--green-strong);
   text-decoration: none;
-  border-bottom: 1px solid var(--line-strong);
-  transition: border-color 0.3s var(--ease), gap 0.4s var(--ease-out);
+  border-bottom: 1px solid currentColor;
+  transition: gap 0.4s var(--ease-out), color 0.3s var(--ease);
 }
 
 .link-arrow:hover {
-  border-color: currentColor;
   gap: 0.85rem;
+  color: var(--text);
 }
 
 .on-dark .link-arrow {
-  border-color: rgb(237 231 220 / 0.35);
-}
-
-.on-dark .link-arrow:hover {
-  border-color: currentColor;
+  color: var(--white);
 }
 
 .link-arrow svg {
@@ -463,18 +429,14 @@ textarea {
 /* Bewegung                                                            */
 /* ================================================================== */
 
-/*
- * Inhalte sind ohne JavaScript immer sichtbar. Erst wenn das Skript läuft
- * (html.js) und Bewegung erlaubt ist, werden Elemente zum Einblenden
- * vorbereitet.
- */
+/* Inhalte sind ohne JavaScript immer sichtbar; Einblenden nur mit JS. */
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
     opacity: 0;
-    transform: translate3d(0, 18px, 0);
+    transform: translate3d(0, 16px, 0);
     transition:
-      opacity 1s var(--ease-out),
-      transform 1.2s var(--ease-out);
+      opacity 0.9s var(--ease-out),
+      transform 1s var(--ease-out);
     transition-delay: calc(var(--reveal-delay, 0) * 1ms);
   }
 
@@ -486,13 +448,13 @@ textarea {
   .js [data-reveal='image'] {
     opacity: 1;
     transform: none;
-    clip-path: inset(8% 0 0 0);
-    transition: clip-path 1.4s var(--ease-out);
+    clip-path: inset(0 0 12% 0);
+    transition: clip-path 1.2s var(--ease-out);
   }
 
   .js [data-reveal='image'] img {
-    transform: scale(1.06);
-    transition: transform 1.8s var(--ease-out);
+    transform: scale(1.05);
+    transition: transform 1.6s var(--ease-out);
   }
 
   .js [data-reveal='image'].is-visible {
@@ -505,14 +467,9 @@ textarea {
 }
 
 /* ================================================================== */
-/* Seitenübergänge                                                     */
+/* Seitenübergänge (native View Transitions, ohne JavaScript)          */
 /* ================================================================== */
 
-/*
- * Weicher Wechsel zwischen den Seiten über native View Transitions
- * (ohne JavaScript). Browser ohne Unterstützung wechseln wie gewohnt.
- * Der Header bleibt dabei stehen, nur der Inhalt blendet über.
- */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
@@ -523,11 +480,11 @@ textarea {
   }
 
   ::view-transition-new(root) {
-    animation: vt-in 0.7s var(--ease-out) 0.22s both;
+    animation: vt-in 0.65s var(--ease-out) 0.2s both;
   }
 
   ::view-transition-group(site-header) {
-    animation-duration: 0.45s;
+    animation-duration: 0.4s;
     animation-timing-function: var(--ease);
   }
 }
@@ -535,13 +492,13 @@ textarea {
 @keyframes vt-out {
   to {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(-10px);
   }
 }
 
 @keyframes vt-in {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(16px);
   }
 }

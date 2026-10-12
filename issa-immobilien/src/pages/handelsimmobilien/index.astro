@@ -1,0 +1,363 @@
+---
+import raw from '../../content/objekte.json';
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ImageSlot from '../../components/ImageSlot.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import Arrow from '../../components/Arrow.astro';
+import { assetClasses } from '../../data/site';
+
+// Sammlung nur abfragen, wenn Einträge gepflegt sind (vermeidet Build-Warnungen bei leerer Liste).
+const objekte = raw.length ? (await getCollection('objekte')).filter((o) => o.data.veroeffentlicht) : [];
+
+const factors = [
+  { title: 'Lage', text: 'Mikro- und Makrolage, Sichtbarkeit und das Umfeld des Standorts.' },
+  { title: 'Fläche', text: 'Größe, Zuschnitt und Nutzbarkeit der Verkaufs- und Nebenflächen.' },
+  { title: 'Erreichbarkeit', text: 'Verkehrsanbindung, Zufahrt, Anlieferung und Stellplätze.' },
+  { title: 'Nutzung', text: 'Welche Handelskonzepte und Nutzer zu Fläche und Standort passen.' },
+];
+---
+
+<Base
+  title="Handelsimmobilien"
+  description="Handelsimmobilien mit Issa Immobilien: Lebensmitteleinzelhandel, Fachmärkte, Fachmarktzentren, Shopping-Center, Filialstandorte sowie Fitness- und Sportstandorte – deutschlandweit."
+>
+  <PageHero
+    eyebrow="Handelsimmobilien"
+    title="Immobilien und Standorte für den"
+    emphasis="Einzelhandel."
+    lead="Issa Immobilien konzentriert sich auf gewerbliche Einzelhandelsimmobilien und großflächige Handelsstandorte in ganz Deutschland. Ob aktuell passende Objekte verfügbar sind, besprechen wir gern direkt mit Ihnen."
+  />
+
+  {
+    objekte.length > 0 && (
+      <section class="section" aria-labelledby="angebote-title">
+        <div class="container">
+          <h2 id="angebote-title" class="h2 listings__title">Aktuelle Angebote</h2>
+          <ul class="listings" role="list">
+            {objekte.map((o) => (
+              <li data-reveal>
+                <a href={`/handelsimmobilien/${o.id}/`} class="listing">
+                  <div class="listing__image">
+                    <Picture
+                      src={o.data.bilder[0].src}
+                      alt={o.data.bilder[0].alt}
+                      formats={['avif', 'webp']}
+                      widths={[480, 720, 960]}
+                      sizes="(min-width: 60em) 45vw, 100vw"
+                    />
+                  </div>
+                  <p class="listing__meta">
+                    {o.data.vermarktung} · {o.data.art} · {o.data.ort}
+                  </p>
+                  <h3 class="h3">{o.data.titel}</h3>
+                  <p class="listing__text">{o.data.kurzbeschreibung}</p>
+                  {o.data.preis && <p class="listing__price">{o.data.preis}</p>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="types section" aria-labelledby="types-title">
+    <div class="container">
+      <header class="types__head">
+        <p class="eyebrow" data-reveal>Schwerpunkte</p>
+        <h2 id="types-title" class="h2 types__title" data-reveal>
+          Von Lebensmittelmärkten bis zu <span class="accent">Shopping-Centern.</span>
+        </h2>
+      </header>
+      <ul class="types__grid" role="list">
+        {
+          assetClasses.slice(0, 6).map((a, i) => (
+            <li id={a.id} data-reveal style={`--reveal-delay:${(i % 3) * 70}`}>
+              <h3 class="h4">{a.title}</h3>
+              <p>{a.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="types__more" data-reveal>
+        <strong>{assetClasses[6].title}:</strong> {assetClasses[6].text}
+      </p>
+    </div>
+  </section>
+
+  <section class="factors section surface" aria-labelledby="factors-title">
+    <div class="container grid">
+      <div class="factors__image">
+        <ImageSlot name="einzelhandel" ratio="4 / 3" sizes="(min-width: 60em) 40vw, 100vw" />
+      </div>
+      <div class="factors__text">
+        <p class="eyebrow" data-reveal>Standortfaktoren</p>
+        <h2 id="factors-title" class="h2 factors__title" data-reveal>
+          Was einen Handelsstandort <span class="accent">ausmacht.</span>
+        </h2>
+        <p class="lead factors__lead" data-reveal>
+          Die Anforderungen unterscheiden sich je nach Nutzung, Fläche, Lage und Zielgruppe. Diese Faktoren betrachten
+          wir bei der Einordnung einer Handelsimmobilie.
+        </p>
+        <dl class="factors__list">
+          {
+            factors.map((f, i) => (
+              <div data-reveal style={`--reveal-delay:${i * 60}`}>
+                <dt>{f.title}</dt>
+                <dd>{f.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="paths section" aria-labelledby="paths-title">
+    <div class="container">
+      <h2 id="paths-title" class="visually-hidden">Ihr Anliegen</h2>
+      <div class="paths__grid">
+        <article class="path" data-reveal>
+          <p class="eyebrow">Eigentümer</p>
+          <h3 class="h3 path__title">Sie möchten eine Handelsimmobilie vermarkten?</h3>
+          <p class="path__text">
+            Wir ordnen Objekt, Flächen und Lage ein, erstellen ein aussagekräftiges Exposé und sprechen gezielt
+            Interessenten an, deren Anforderungen zum Standort passen.
+          </p>
+          <div class="path__actions">
+            <a href="/kontakt/?anliegen=vermarktung#anfrage" class="btn">Vermarktung anfragen <Arrow /></a>
+          </div>
+        </article>
+
+        <article class="path path--dark on-dark" data-reveal style="--reveal-delay:120">
+          <p class="eyebrow">Filialunternehmen</p>
+          <h3 class="h3 path__title">Sie suchen Flächen für Ihre Expansion?</h3>
+          <p class="path__text">
+            Beschreiben Sie uns Ihr Konzept und Ihre Flächenanforderungen. Wir betrachten geeignete Standorte und
+            gewerbliche Flächen im Hinblick auf Ihre Kriterien.
+          </p>
+          <div class="path__actions">
+            <a href="/kontakt/?anliegen=expansion#anfrage" class="btn btn--light">Standortanfrage stellen <Arrow /></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <ContactBand />
+</Base>
+
+<style>
+  .listings__title {
+    margin-bottom: var(--space-4);
+  }
+
+  .listings {
+    display: grid;
+    gap: var(--space-5) var(--gutter);
+  }
+
+  @media (min-width: 48em) {
+    .listings {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .listing {
+    display: grid;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .listing__image {
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 0.5rem;
+    background: var(--surface-2);
+  }
+
+  .listing__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s var(--ease-out);
+  }
+
+  .listing:hover .listing__image :global(img) {
+    transform: scale(1.03);
+  }
+
+  .listing__meta {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-strong);
+  }
+
+  .listing__text {
+    color: var(--text-2);
+  }
+
+  .listing__price {
+    font-weight: 650;
+  }
+
+  .types__head {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: var(--space-5);
+  }
+
+  .types__title {
+    max-width: 18ch;
+  }
+
+  .types__grid {
+    display: grid;
+    gap: 0 var(--gutter);
+    border-top: 3px solid var(--anthracite);
+  }
+
+  .types__grid li {
+    position: relative;
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding: 1.75rem 0 2rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .types__grid li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2.15rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--green);
+  }
+
+  .types__more {
+    margin-top: 1.5rem;
+    max-width: 44rem;
+    color: var(--text-2);
+  }
+
+  .types__more strong {
+    color: var(--text);
+  }
+
+  .types__grid p {
+    color: var(--text-2);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 40em) {
+    .types__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .types__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .factors__title {
+    margin-top: 1.25rem;
+    max-width: 16ch;
+  }
+
+  .factors__lead {
+    margin-top: 1.25rem;
+    max-width: 32rem;
+  }
+
+  .factors__list {
+    margin-top: var(--space-4);
+    border-top: 3px solid var(--green);
+  }
+
+  .factors__list > div {
+    display: grid;
+    gap: 0.2rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .factors__list dt {
+    font-weight: 650;
+  }
+
+  .factors__list dd {
+    color: var(--text-2);
+  }
+
+  @media (min-width: 40em) {
+    .factors__list > div {
+      grid-template-columns: 9rem 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 60em) {
+    .factors__image {
+      grid-column: 1 / span 5;
+      align-self: center;
+    }
+
+    .factors__text {
+      grid-column: 7 / span 6;
+    }
+  }
+
+  .paths__grid {
+    display: grid;
+    gap: var(--gutter);
+  }
+
+  @media (min-width: 60em) {
+    .paths__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+  }
+
+  .path {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.75rem, 4vw, 3.5rem);
+    background: var(--surface);
+    border-top: 4px solid var(--green);
+  }
+
+  .path--dark {
+    background: var(--anthracite);
+    color: var(--on-dark);
+  }
+
+  .path__title {
+    margin-top: 1.25rem;
+    max-width: 18ch;
+  }
+
+  .path__text {
+    margin-top: 1rem;
+    max-width: 30rem;
+    color: var(--text-2);
+  }
+
+  .path--dark .path__text {
+    color: var(--on-dark-2);
+  }
+
+  .path__actions {
+    margin-top: auto;
+    padding-top: 2rem;
+  }
+</style>

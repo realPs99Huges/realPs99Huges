@@ -53,7 +53,7 @@ import { limits } from '../lib/contact';
     <div class="cf__field">
       <label for="cf-message">Nachricht <span aria-hidden="true">*</span></label>
       <textarea id="cf-message" name="message" rows="6" required minlength={limits.messageMin} maxlength={limits.message} aria-describedby="cf-message-hint cf-message-error"></textarea>
-      <p class="cf__hint" id="cf-message-hint">Zum Beispiel: Art und Lage der Immobilie, Ihr Ziel und Ihr gewünschter Zeitrahmen.</p>
+      <p class="cf__hint" id="cf-message-hint">Zum Beispiel: Objektart, Standort, Fläche, Nutzung und gewünschter Zeitrahmen.</p>
       <p class="cf__error" id="cf-message-error" data-error-for="message"></p>
     </div>
 
@@ -149,8 +149,8 @@ import { limits } from '../lib/contact';
     min-height: 3.25rem;
     padding: 0.8rem 0.95rem;
     border: 1px solid var(--line-strong);
-    border-radius: 0;
-    background: rgb(255 255 255 / 0.55);
+    border-radius: var(--radius);
+    background: var(--white);
     font-size: 1rem;
     line-height: 1.45;
     transition:
@@ -167,15 +167,15 @@ import { limits } from '../lib/contact';
 
   .cf input:hover,
   .cf textarea:hover {
-    border-color: var(--ink-soft);
+    border-color: var(--text-2);
   }
 
   .cf input:focus-visible,
   .cf textarea:focus-visible {
     outline: none;
-    border-color: var(--ink);
-    background: #fff;
-    box-shadow: 0 0 0 1px var(--ink);
+    border-color: var(--green);
+    background: var(--white);
+    box-shadow: 0 0 0 1px var(--green);
   }
 
   .cf input[aria-invalid='true'],
@@ -243,17 +243,17 @@ import { limits } from '../lib/contact';
   }
 
   .cf__option:hover span {
-    border-color: var(--ink);
+    border-color: var(--anthracite);
   }
 
   .cf__option input:checked + span {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--paper);
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
   }
 
   .cf__option input:focus-visible + span {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--green);
     outline-offset: 2px;
   }
 
@@ -269,7 +269,7 @@ import { limits } from '../lib/contact';
     font-size: var(--fs-sm);
     font-weight: 400;
     letter-spacing: 0;
-    color: var(--ink-soft);
+    color: var(--text-2);
     cursor: pointer;
   }
 
@@ -277,7 +277,7 @@ import { limits } from '../lib/contact';
     width: 1.25rem;
     height: 1.25rem;
     margin: 0.15rem 0 0;
-    accent-color: var(--ink);
+    accent-color: var(--green);
     cursor: pointer;
   }
 
@@ -318,13 +318,13 @@ import { limits } from '../lib/contact';
   }
 
   .cf__alt a {
-    color: var(--ink);
+    color: var(--anthracite);
   }
 
   .cf__success {
     padding: clamp(1.75rem, 4vw, 3rem);
-    border-top: 2px solid var(--ink);
-    background: var(--paper-deep);
+    border-top: 4px solid var(--green);
+    background: var(--surface);
   }
 
   .cf__success:focus {
@@ -338,7 +338,7 @@ import { limits } from '../lib/contact';
   .cf__success-text {
     margin-top: 1rem;
     max-width: 32rem;
-    color: var(--ink-soft);
+    color: var(--text-2);
   }
 
   @media (max-width: 30em) {

@@ -1,6 +1,7 @@
 # Issa Immobilien – Website
 
-Website für Issa Immobilien, Inhaber Sami Issa, Lippstadt.
+Website für Issa Immobilien, Inhaber Sami Issa – Spezialist für Einzelhandelsimmobilien und
+Handelsstandorte, deutschlandweit tätig, Sitz in Lippstadt.
 Gebaut mit [Astro](https://astro.build) 7: alle Seiten werden statisch vorgerendert, nur der
 Formularendpunkt `/api/contact` läuft serverseitig (Node.js).
 
@@ -19,11 +20,11 @@ Voraussetzung: Node.js ≥ 22.12.
 
 | Pfad | Inhalt |
 | --- | --- |
-| `/` | Startseite: Hero, Haltung, Leistungen, Ablauf, persönliche Betreuung, Objekte, Kontakt |
-| `/leistungen/` | Vier Leistungsbereiche im Detail, Ablauf |
-| `/objekte/` | Anfragewege (anbieten/suchen); zeigt automatisch Objekte, sobald welche gepflegt sind |
-| `/objekte/<id>/` | Detailseite je Objekt (nur wenn Objekte gepflegt sind) |
-| `/ueber-uns/` | Inhaber, Haltung, Rahmenangaben |
+| `/` | Startseite: Hero, Leistungen, Handelsimmobilien, Deutschlandweit, Zusammenarbeit, Kontakt |
+| `/leistungen/` | Vier Leistungsbereiche im Detail, Zusammenarbeit |
+| `/handelsimmobilien/` | Schwerpunkte, Standortfaktoren, Anfragewege; zeigt Angebote, sobald welche gepflegt sind |
+| `/handelsimmobilien/<id>/` | Detailseite je Angebot (nur wenn Angebote gepflegt sind) |
+| `/ueber-uns/` | Über Issa Immobilien: Inhaber, Arbeitsweise, Angaben im Überblick |
 | `/kontakt/` | Kontaktdaten und Anfrageformular |
 | `/impressum/`, `/datenschutz/` | Rechtliches (siehe `docs/RECHTLICHES.md`) |
 | `/kontakt/gesendet/`, `/kontakt/fehler/` | Rückmeldeseiten für Browser ohne JavaScript (noindex) |
@@ -33,18 +34,19 @@ Voraussetzung: Node.js ≥ 22.12.
 ```
 src/
   data/site.ts          Zentrale Unternehmensangaben, Navigation, Leistungen, Ablauf
-  data/studies.ts       Bildtexte der Architekturzeichnungen
+  data/images.ts        Zuordnung der Bilder zu den Bildflächen
   styles/global.css     Design-Tokens, Typografie, Raster, Buttons, Bewegung
   layouts/Base.astro    <head>, SEO/Open Graph, JSON-LD, Header, Footer
-  components/           Header, Footer, Wortmarke, Formular, Sektionen
+  components/           Header, Footer, Logo, Bildfläche, Formular, Sektionen
   components/home/      Abschnitte der Startseite
   pages/                Seiten und api/contact.ts (Formularendpunkt)
   lib/contact.ts        Serverseitige Validierung des Formulars
   content/objekte.json  Objektdaten (leer, siehe docs/OBJEKTE.md)
-  assets/studies/       Gerenderte Architekturzeichnungen
+  assets/brand/         Original-Logo und freigestellte Logo-Versionen
+  assets/images/        Vom Auftraggeber gelieferte Fotos
 scripts/
-  render-images.mjs     Rendert die Architekturzeichnungen (Three.js, Chromium)
-  render-og.mjs         Erzeugt Open-Graph-Bild und Touch-Icon
+  prepare-logo.mjs      Stellt das Original-Logo frei (npm run prepare:logo)
+  render-og.mjs         Erzeugt OG-Bild, Favicon und Touch-Icon aus dem Logo
 docs/                   Betrieb, Recht, Bilder, Objekte
 ```
 
@@ -52,5 +54,5 @@ docs/                   Betrieb, Recht, Bilder, Objekte
 
 - **Betrieb & E-Mail-Versand:** [`docs/BETRIEB.md`](docs/BETRIEB.md)
 - **Offene rechtliche Punkte:** [`docs/RECHTLICHES.md`](docs/RECHTLICHES.md)
-- **Bilder austauschen:** [`docs/BILDER.md`](docs/BILDER.md)
-- **Objekte veröffentlichen:** [`docs/OBJEKTE.md`](docs/OBJEKTE.md)
+- **Bilder, Logo, Farben:** [`docs/BILDER.md`](docs/BILDER.md)
+- **Angebote veröffentlichen:** [`docs/OBJEKTE.md`](docs/OBJEKTE.md)

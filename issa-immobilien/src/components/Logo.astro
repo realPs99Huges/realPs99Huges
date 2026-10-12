@@ -1,0 +1,34 @@
+---
+/**
+ * Original-Logo von Issa Immobilien (unverändert, nur freigestellt –
+ * siehe scripts/prepare-logo.mjs). Varianten: positiv für helle,
+ * negativ für dunkle Hintergründe.
+ */
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo-issa-immobilien.png';
+import logoNegativ from '../assets/brand/logo-issa-immobilien-negativ.png';
+
+interface Props {
+  variant?: 'positiv' | 'negativ';
+  /** Darstellungshöhe in Pixeln */
+  height?: number;
+  class?: string;
+  priority?: boolean;
+}
+
+const { variant = 'positiv', height = 44, class: className, priority = false } = Astro.props;
+const src = variant === 'negativ' ? logoNegativ : logo;
+const width = Math.round((src.width / src.height) * height);
+---
+
+<Image
+  src={src}
+  alt="Issa Immobilien"
+  width={width}
+  height={height}
+  densities={[1, 2]}
+  format="png"
+  class:list={['logo', className]}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding="async"
+/>

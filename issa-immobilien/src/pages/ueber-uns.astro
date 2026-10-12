@@ -1,104 +1,117 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import Study from '../components/Study.astro';
+import ImageSlot from '../components/ImageSlot.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { company } from '../data/site';
+import { imageSlots } from '../data/images';
 
 const principles = [
   {
-    title: 'Persönliche Beratung',
-    text: 'Sie sprechen direkt mit dem Inhaber. Fragen werden dort beantwortet, wo auch die Entscheidungen getroffen werden.',
+    title: 'Fokus auf Handelsimmobilien',
+    text: 'Einzelhandelsimmobilien und Handelsstandorte stehen im Mittelpunkt – nicht die Vermittlung privater Wohnimmobilien.',
   },
   {
-    title: 'Fundierte Standortbetrachtung',
-    text: 'Mikro- und Makrolage gehören zur Einschätzung jeder Immobilie – ebenso wie ihre Nutzungsmöglichkeiten.',
+    title: 'Standortbetrachtung',
+    text: 'Mikro- und Makrolage, Flächen und Nutzungsmöglichkeiten gehören zur Einordnung jeder Handelsimmobilie.',
   },
   {
-    title: 'Professionelle Vermarktung',
-    text: 'Ein durchdachtes Konzept, ein aussagekräftiges Exposé und eine gezielte Ansprache der passenden Interessenten.',
+    title: 'Strukturierte Vermarktung',
+    text: 'Exposé, gezielte Ansprache geeigneter Interessenten, Besichtigungen und Verhandlungen folgen einem klaren Ablauf.',
   },
   {
-    title: 'Strukturierte Begleitung',
-    text: 'Klare Schritte von der Analyse über Besichtigungen bis zu den Vertragsverhandlungen und der Übergabe.',
+    title: 'Persönlicher Ansprechpartner',
+    text: 'Sie sprechen direkt mit dem Inhaber – vom ersten Gespräch bis zum Abschluss.',
   },
   {
     title: 'Diskretion',
-    text: 'Immobilienangelegenheiten sind oft persönlich. Wir gehen mit Ihren Informationen entsprechend sorgfältig um.',
+    text: 'Vermarktung und Standortsuche sind oft vertraulich. Informationen werden entsprechend sorgfältig behandelt.',
   },
   {
-    title: 'Erfahrung & Blick fürs Wesentliche',
-    text: 'Wir konzentrieren uns auf das, was eine Immobilie tatsächlich ausmacht, und darauf, was Ihr Vorhaben voranbringt.',
+    title: 'Deutschlandweit tätig',
+    text: 'Der Unternehmenssitz ist Lippstadt, das Tätigkeitsgebiet umfasst ganz Deutschland.',
   },
 ];
+const hasPortrait = Boolean(imageSlots.ueberUns.src);
 ---
 
 <Base
-  title="Über uns"
-  description="Issa Immobilien mit Sitz in Lippstadt: Inhaber Sami Issa begleitet Eigentümer, Suchende und Unternehmen persönlich bei Vermarktung, Vermietung und gewerblichen Vorhaben."
+  title="Über Issa Immobilien"
+  description="Issa Immobilien, Inhaber Sami Issa: Spezialist für Einzelhandelsimmobilien und Handelsstandorte mit Sitz in Lippstadt, deutschlandweit tätig."
 >
   <PageHero
-    eyebrow="Über uns"
-    title="Persönlich, strukturiert und"
-    emphasis="diskret."
-    lead="Issa Immobilien hat seinen Sitz in Lippstadt. Inhaber Sami Issa begleitet Eigentümer, Suchende und Unternehmen persönlich – von der ersten Einschätzung bis zur Übergabe."
+    eyebrow="Über Issa Immobilien"
+    title="Spezialist für Einzelhandelsimmobilien und"
+    emphasis="Handelsstandorte."
+    lead="Issa Immobilien begleitet die Vermarktung und Vermittlung gewerblicher Einzelhandelsimmobilien – von Fachmarktzentren und großflächigen Handelsflächen bis zu Standorten für Filialunternehmen. Der Sitz ist Lippstadt, das Tätigkeitsgebiet ganz Deutschland."
   />
 
   <section class="owner section" aria-labelledby="owner-title">
     <div class="container grid">
-      <div class="owner__image">
-        <Study name="interior" ratio="4 / 5" sizes="(min-width: 60em) 40vw, 100vw" position="45% 50%" />
-      </div>
-      <div class="owner__text">
-        <p class="eyebrow" data-reveal><span class="index">01</span> Inhaber</p>
+      {
+        hasPortrait && (
+          <div class="owner__image">
+            <ImageSlot name="ueberUns" ratio="4 / 5" sizes="(min-width: 60em) 36vw, 100vw" />
+          </div>
+        )
+      }
+      <div class:list={['owner__text', !hasPortrait && 'owner__text--wide']}>
+        <p class="eyebrow" data-reveal>Inhaber</p>
         <h2 id="owner-title" class="h2 owner__name" data-reveal>{company.owner}</h2>
         <p class="owner__role" data-reveal>Inhaber von {company.name}</p>
         <div class="prose owner__prose" data-reveal>
           <p>
-            Bei Issa Immobilien haben Sie einen festen Ansprechpartner. Sami Issa betreut Ihr Anliegen selbst – vom
-            ersten Gespräch über die Analyse von Immobilie und Standort bis zur Begleitung der Verhandlungen.
+            Bei Issa Immobilien haben Sie einen festen Ansprechpartner. Sami Issa betreut Ihr Vorhaben selbst – von der
+            Einordnung der Immobilie und des Standorts über die Vermarktung bis zur Begleitung der Verhandlungen.
           </p>
           <p>
-            Jede Immobilie bringt eigene Voraussetzungen und Ziele mit sich. Deshalb beginnt die Arbeit mit dem genauen
-            Verständnis Ihres Anliegens und einer Beratung, die sich an Ihrer Immobilie orientiert.
+            Handelsstandorte folgen eigenen Anforderungen. Deshalb beginnt die Zusammenarbeit mit einem genauen
+            Verständnis Ihrer Immobilie, Ihrer Fläche oder Ihres Expansionsvorhabens.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="principles section surface-deep" aria-labelledby="principles-title">
+  <section class="principles section surface" aria-labelledby="principles-title">
     <div class="container grid">
       <div class="principles__head">
-        <p class="eyebrow" data-reveal><span class="index">02</span> Haltung</p>
+        <p class="eyebrow" data-reveal>Arbeitsweise</p>
         <h2 id="principles-title" class="h2 principles__title" data-reveal>
-          Wofür <em>Issa Immobilien</em> steht.
+          Wofür <span class="accent">Issa Immobilien</span> steht.
         </h2>
       </div>
-      <ol class="principles__list" role="list">
+      <ul class="principles__list" role="list">
         {
           principles.map((p, i) => (
             <li data-reveal style={`--reveal-delay:${(i % 2) * 90}`}>
-              <span class="principles__no">{String(i + 1).padStart(2, '0')}</span>
               <h3 class="h4">{p.title}</h3>
               <p>{p.text}</p>
             </li>
           ))
         }
-      </ol>
+      </ul>
     </div>
   </section>
 
   <section class="facts section" aria-labelledby="facts-title">
     <div class="container grid">
       <div class="facts__head">
-        <p class="eyebrow" data-reveal><span class="index">03</span> Rahmen</p>
-        <h2 id="facts-title" class="h3 facts__title" data-reveal>Transparente Grundlagen</h2>
+        <p class="eyebrow" data-reveal>Unternehmen</p>
+        <h2 id="facts-title" class="h3 facts__title" data-reveal>Angaben im Überblick</h2>
       </div>
       <dl class="facts__list" data-reveal>
         <div>
           <dt>Unternehmen</dt>
           <dd>{company.name}, Inhaber {company.owner}</dd>
+        </div>
+        <div>
+          <dt>Schwerpunkt</dt>
+          <dd>Einzelhandelsimmobilien und Handelsstandorte</dd>
+        </div>
+        <div>
+          <dt>Tätigkeitsgebiet</dt>
+          <dd>Deutschlandweit</dd>
         </div>
         <div>
           <dt>Sitz</dt>
@@ -126,12 +139,12 @@ const principles = [
 
   .owner__role {
     margin-top: 0.5rem;
-    color: var(--muted);
+    font-weight: 560;
+    color: var(--green-strong);
   }
 
   .owner__prose {
     margin-top: var(--space-4);
-    color: var(--ink-soft);
   }
 
   .principles__title {
@@ -142,25 +155,30 @@ const principles = [
   .principles__list {
     display: grid;
     gap: 0 var(--gutter);
-    border-top: 1px solid var(--line-strong);
+    border-top: 3px solid var(--anthracite);
   }
 
   .principles__list li {
+    position: relative;
     display: grid;
-    gap: 0.6rem;
-    padding-block: 1.75rem 2rem;
+    gap: 0.5rem;
+    padding: 1.6rem 0 1.8rem 1.5rem;
     border-bottom: 1px solid var(--line);
   }
 
-  .principles__list p {
-    color: var(--ink-soft);
-    max-width: 30rem;
+  .principles__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2.05rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--green);
   }
 
-  .principles__no {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--accent);
+  .principles__list p {
+    color: var(--text-2);
+    max-width: 30rem;
   }
 
   .facts__list > div {
@@ -171,14 +189,19 @@ const principles = [
   }
 
   .facts__list > div:first-child {
-    border-top: 1px solid var(--line-strong);
+    border-top: 3px solid var(--green);
   }
 
   .facts__list dt {
     font-size: var(--fs-xs);
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
+  }
+
+  .facts__list dd {
+    font-weight: 520;
   }
 
   @media (min-width: 40em) {
@@ -200,6 +223,10 @@ const principles = [
     .owner__text {
       grid-column: 7 / span 6;
       align-self: center;
+    }
+
+    .owner__text--wide {
+      grid-column: 1 / span 8;
     }
 
     .principles__head {

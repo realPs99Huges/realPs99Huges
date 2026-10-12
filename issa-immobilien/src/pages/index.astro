@@ -1,23 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/home/Hero.astro';
-import Statement from '../components/home/Statement.astro';
-import ServicesIndex from '../components/home/ServicesIndex.astro';
+import ServicesOverview from '../components/home/ServicesOverview.astro';
+import MarketFocus from '../components/home/MarketFocus.astro';
+import Germany from '../components/home/Germany.astro';
 import Process from '../components/Process.astro';
-import Personal from '../components/home/Personal.astro';
-import ObjectsTeaser from '../components/home/ObjectsTeaser.astro';
 import ContactBand from '../components/ContactBand.astro';
 ---
 
 <Base
-  title="Issa Immobilien · Immobilienvermarktung in Lippstadt"
-  description="Issa Immobilien, Inhaber Sami Issa, Lippstadt: persönliche Beratung und durchdachte Immobilienvermarktung – von Standortanalyse und Exposé über Besichtigungen bis zur Vertragsverhandlung."
+  title="Issa Immobilien · Spezialist für Einzelhandelsimmobilien und Handelsstandorte"
+  description="Issa Immobilien: Vermarktung und Vermittlung von Einzelhandelsimmobilien, Fachmarktzentren, Shopping-Centern und Filialstandorten – deutschlandweit tätig, Sitz in Lippstadt."
 >
   <Hero />
-  <Statement />
-  <ServicesIndex />
-  <Process index="03" />
-  <Personal />
-  <ObjectsTeaser />
-  <ContactBand index="06" />
+  <ServicesOverview />
+  <MarketFocus />
+  <Germany />
+  <Process />
+  <ContactBand />
 </Base>

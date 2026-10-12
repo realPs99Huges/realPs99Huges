@@ -1,0 +1,103 @@
+---
+import ImageSlot from '../ImageSlot.astro';
+import { company } from '../../data/site';
+---
+
+<section class="germany section on-dark" aria-labelledby="deutschland-title">
+  <div class="container grid">
+    <div class="germany__image">
+      <ImageSlot name="deutschland" ratio="4 / 3" sizes="(min-width: 60em) 42vw, 100vw" />
+    </div>
+
+    <div class="germany__text">
+      <p class="eyebrow" data-reveal>Tätigkeitsgebiet</p>
+      <h2 id="deutschland-title" class="h2 germany__title" data-reveal>
+        Deutschlandweit tätig. <span class="accent">Auf Handelsimmobilien fokussiert.</span>
+      </h2>
+      <p class="lead germany__lead" data-reveal>
+        Die Anforderungen an Handelsstandorte unterscheiden sich je nach Nutzung, Fläche, Lage und Zielgruppe. Issa
+        Immobilien richtet den Blick auf die relevanten Standortfaktoren und die passende Vermarktung gewerblicher
+        Einzelhandelsimmobilien.
+      </p>
+
+      <dl class="germany__facts" data-reveal>
+        <div>
+          <dt>Tätigkeitsgebiet</dt>
+          <dd>Ganz Deutschland</dd>
+        </div>
+        <div>
+          <dt>Schwerpunkt</dt>
+          <dd>Einzelhandelsimmobilien und Handelsstandorte</dd>
+        </div>
+        <div>
+          <dt>Unternehmenssitz</dt>
+          <dd>{company.city}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .germany__title {
+    margin-top: 1.25rem;
+    max-width: 16ch;
+  }
+
+  .germany__title .accent {
+    color: var(--on-dark-2);
+  }
+
+  .germany__lead {
+    margin-top: 1.5rem;
+    max-width: 34rem;
+  }
+
+  .germany__facts {
+    display: grid;
+    margin-top: var(--space-4);
+    border-top: 3px solid var(--green);
+  }
+
+  .germany__facts > div {
+    display: grid;
+    gap: 0.2rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .germany__facts dt {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
+
+  .germany__facts dd {
+    font-weight: 600;
+    font-size: 1.0625rem;
+  }
+
+  .germany__image :global(.slot) {
+    filter: grayscale(0.25) contrast(1.05);
+  }
+
+  @media (min-width: 40em) {
+    .germany__facts > div {
+      grid-template-columns: 11rem 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 60em) {
+    .germany__image {
+      grid-column: 1 / span 5;
+      align-self: center;
+    }
+
+    .germany__text {
+      grid-column: 7 / span 6;
+    }
+  }
+</style>
