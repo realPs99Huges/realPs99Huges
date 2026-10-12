@@ -137,7 +137,7 @@ class Builder {
   }
 }
 
-function sun(scene, { color = '#ffe2bf', intensity = 3.2, pos, target = [0, 0, 0], size = 30, mapSize = 4096 }) {
+function sun(scene, { color = '#ffe2bf', intensity = 3.2, pos, target = [0, 0, 0], size = 30, mapSize = 8192 }) {
   const l = new THREE.DirectionalLight(color, intensity);
   l.position.set(...pos);
   l.target.position.set(...target);
@@ -250,25 +250,79 @@ function finish(width, height, { grain = 0.045, vignette = 0.22, warm = 0 } = {}
   return out.toDataURL('image/png');
 }
 
+/* ------------------------------------------------------------------ */
+/* Zeichenstil: Tuschelinien mit zarten Flächentönen                   */
+/* ------------------------------------------------------------------ */
+
+const PAPER = new THREE.Color('#faf8f3');
+const INK = '#2e2c28';
+
+// Toon-Verlauf: Schatten / Seitenfläche / Licht – drei klare Töne wie lavierte Flächen.
+const toonRamp = (() => {
+  const t = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255, 140, 140, 140, 255, 255, 255, 255, 255]), 3, 1);
+  t.minFilter = t.magFilter = THREE.NearestFilter;
+  t.needsUpdate = true;
+  return t;
+})();
+
+function averageColor(material) {
+  const img = material.map?.image;
+  if (!img) return material.color.clone();
+  const c = document.createElement('canvas');
+  c.width = c.height = 1;
+  const ctx = c.getContext('2d');
+  ctx.drawImage(img, 0, 0, 1, 1);
+  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+  return new THREE.Color().setRGB(r / 255, g / 255, b / 255, THREE.SRGBColorSpace);
+}
+
+function toDrawing(scene, { mix = 0.6, lines = true, lineOpacity = 0.85, ambient = 0.7 } = {}) {
+  const meshes = [];
+  scene.traverse((o) => o.isMesh && o.layers.isEnabled(0) && meshes.push(o));
+  for (const m of meshes) {
+    const base = averageColor(m.material).lerp(PAPER, mix);
+    m.material = new THREE.MeshToonMaterial({
+      color: base,
+      gradientMap: toonRamp,
+      polygonOffset: true,
+      polygonOffsetFactor: 1,
+      polygonOffsetUnits: 1,
+    });
+    if (lines && !(m.geometry.type === 'PlaneGeometry')) {
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(m.geometry, 20),
+        new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: lineOpacity }),
+      );
+      m.add(edges);
+    }
+  }
+  // Licht so abstimmen, dass beleuchtete Flächen genau ihren Ton zeigen
+  // und Schatten als ruhige, helle Lavierung erscheinen.
+  scene.traverse((o) => {
+    if (o.isDirectionalLight) {
+      o.intensity = Math.PI * (1 - ambient);
+      o.color.set('#ffffff');
+      o.shadow.radius = 1;
+      o.shadow.normalBias = 0.06;
+      o.shadow.bias = -0.0006;
+    }
+    if (o.isHemisphereLight) o.visible = false;
+  });
+  scene.add(new THREE.AmbientLight('#fff4e6', Math.PI * ambient));
+}
+
 function render(scene, camera, width, height, post = {}) {
   renderer.setPixelRatio(1);
   renderer.setSize(width, height, false);
+  renderer.toneMapping = THREE.NoToneMapping;
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  scene.environment = post.envMap ?? roomEnv;
-  scene.environmentIntensity = post.env ?? 0.35;
-
-  const composer = new EffectComposer(renderer);
-  composer.setSize(width, height);
-  composer.addPass(new RenderPass(scene, camera));
-  const ao = new GTAOPass(scene, camera, width, height);
-  ao.updateGtaoMaterial({ radius: post.aoRadius ?? 0.6, distanceExponent: 1.5, thickness: 1, scale: 1.2, samples: 16 });
-  ao.blendIntensity = post.ao ?? 0.85;
-  composer.addPass(ao);
-  composer.addPass(new OutputPass());
-  composer.render();
-  const dataUrl = finish(width, height, post);
-  composer.dispose();
+  const sky = new THREE.Color(post.sky ?? '#ece7de');
+  scene.background = sky;
+  if (scene.fog) scene.fog.color = sky;
+  toDrawing(scene, post);
+  renderer.render(scene, camera);
+  const dataUrl = finish(width, height, { grain: 0.018, vignette: 0, warm: 0 });
   return { dataUrl, width, height };
 }
 
@@ -405,7 +459,7 @@ const scenes = {
     const cam = new THREE.PerspectiveCamera(46, 1, 0.05, 200);
     cam.position.set(3.0, 1.5, 1.4);
     cam.lookAt(-1.6, 1.1, -6);
-    return render(scene, cam, 2800, 3500, { env: 0.8, envMap: skyEnv('#c9d1d4', '#ece6db', '#b7ab98'), aoRadius: 0.5, ao: 1 });
+    return render(scene, cam, 2800, 3500, { mix: 0.7, ambient: 0.84, sky: '#f1ece4' });
   },
 
   /** Gewerbebau – tiefe Rasterfassade in Untersicht. */
@@ -460,7 +514,7 @@ const scenes = {
     // Hecke
     b.box(-60, 0, -24, 60, 3.2, -20, plaster('#6c6b52', 79, 6));
 
-    sun(scene, { color: '#ffdcb6', pos: [-30, 13, 30], target: [-4, 1, -2], intensity: 4.8, size: 40 });
+    sun(scene, { color: '#ffdcb6', pos: [-30, 13, 30], target: [-4, 1, -2], intensity: 4.8, size: 24, mapSize: 8192 });
 
     const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 600);
     cam.position.set(4, 1.15, 13);

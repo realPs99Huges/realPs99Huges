@@ -71,6 +71,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     position: fixed;
     inset: 0 0 auto;
     z-index: 50;
+    view-transition-name: site-header;
     color: var(--ink);
     transition:
       background-color 0.45s var(--ease),
@@ -246,6 +247,30 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     display: none;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .mobile-menu {
+      clip-path: inset(0 0 100% 0);
+      transition: clip-path 0.65s var(--ease-out);
+    }
+
+    .mobile-menu.is-open {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .mobile-menu__contact {
+      opacity: 0;
+      transform: translateY(10px);
+      transition:
+        opacity 0.6s var(--ease-out) 0.3s,
+        transform 0.7s var(--ease-out) 0.3s;
+    }
+
+    .mobile-menu.is-open .mobile-menu__contact {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .mobile-menu__nav {
     display: flex;
     flex-direction: column;
@@ -324,6 +349,12 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   :global(html.menu-open) .site-header {
     background: var(--paper);
     box-shadow: none;
+    /* backdrop-filter würde das fixierte Menü an den Header binden */
+    backdrop-filter: none;
+  }
+
+  :global(html.menu-open) .site-header__inner {
+    height: var(--header-h);
   }
 </style>
 
@@ -354,17 +385,22 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   }
 
   if (toggle && menu) {
-    const setOpen = (open: boolean) => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let closeTimer = 0;
+    const setOpen = (open: boolean, immediate = false) => {
       toggle.setAttribute('aria-expanded', String(open));
       if (label) label.textContent = open ? 'Schließen' : 'Menü';
       document.documentElement.classList.toggle('menu-open', open);
+      window.clearTimeout(closeTimer);
       if (open) {
         menu.hidden = false;
-        requestAnimationFrame(() => menu.classList.add('is-open'));
-        menu.querySelector<HTMLAnchorElement>('a')?.focus();
+        // Erst nach dem Einblenden des Elements animieren
+        requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add('is-open')));
+        menu.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
       } else {
         menu.classList.remove('is-open');
-        menu.hidden = true;
+        const animated = !immediate && !reduceMotion.matches;
+        closeTimer = window.setTimeout(() => (menu.hidden = true), animated ? 450 : 0);
       }
     };
 
@@ -391,7 +427,8 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     });
 
     menu.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+      // Beim Seitenwechsel sofort schließen – der Seitenübergang übernimmt die Bewegung.
+      if ((e.target as HTMLElement).closest('a')) setOpen(false, true);
     });
 
     window.matchMedia('(min-width: 64em)').addEventListener('change', (e) => {

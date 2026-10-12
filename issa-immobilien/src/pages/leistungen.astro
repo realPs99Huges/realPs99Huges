@@ -167,6 +167,23 @@ const schema = {
     }
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .sd:target .sd__no {
+      animation: sd-arrive 1.1s var(--ease-out) 0.25s both;
+    }
+
+    .sd:target .sd__title {
+      animation: sd-arrive 1.1s var(--ease-out) 0.35s both;
+    }
+  }
+
+  @keyframes sd-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+
   .sd + .sd {
     border-top: 1px solid var(--line);
   }

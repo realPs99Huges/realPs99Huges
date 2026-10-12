@@ -33,7 +33,7 @@ Voraussetzung: Node.js ≥ 22.12.
 ```
 src/
   data/site.ts          Zentrale Unternehmensangaben, Navigation, Leistungen, Ablauf
-  data/studies.ts       Bildtexte der Architekturstudien
+  data/studies.ts       Bildtexte der Architekturzeichnungen
   styles/global.css     Design-Tokens, Typografie, Raster, Buttons, Bewegung
   layouts/Base.astro    <head>, SEO/Open Graph, JSON-LD, Header, Footer
   components/           Header, Footer, Wortmarke, Formular, Sektionen
@@ -41,9 +41,9 @@ src/
   pages/                Seiten und api/contact.ts (Formularendpunkt)
   lib/contact.ts        Serverseitige Validierung des Formulars
   content/objekte.json  Objektdaten (leer, siehe docs/OBJEKTE.md)
-  assets/studies/       Gerenderte Architekturstudien
+  assets/studies/       Gerenderte Architekturzeichnungen
 scripts/
-  render-images.mjs     Rendert die Architekturstudien (Three.js, Chromium)
+  render-images.mjs     Rendert die Architekturzeichnungen (Three.js, Chromium)
   render-og.mjs         Erzeugt Open-Graph-Bild und Touch-Icon
 docs/                   Betrieb, Recht, Bilder, Objekte
 ```

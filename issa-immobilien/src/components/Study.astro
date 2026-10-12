@@ -1,7 +1,7 @@
 ---
 /**
- * Bild einer Architekturstudie mit redaktioneller Bildunterschrift.
- * Die Studien sind Visualisierungen und werden immer als solche
+ * Architekturzeichnung mit redaktioneller Bildunterschrift.
+ * Die Zeichnungen zeigen keine realen Objekte und werden immer als solche
  * gekennzeichnet (siehe docs/BILDER.md).
  */
 import { Picture } from 'astro:assets';
@@ -52,7 +52,7 @@ const study = studies[name];
     caption && (
       <figcaption class="study__caption">
         <span class="study__no">Abb. {study.no}</span>
-        <span>{study.caption} · Visualisierung</span>
+        <span>{study.caption} · Zeichnung</span>
       </figcaption>
     )
   }

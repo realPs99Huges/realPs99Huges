@@ -59,7 +59,7 @@ try {
     await sharp(png)
       .resize(Math.round(width / 2), Math.round(height / 2), { kernel: 'lanczos3' })
       // Zurückhaltende Farbigkeit, passend zur Palette der Website
-      .modulate({ saturation: name === 'horizon' ? 0.72 : 0.86 })
+      .modulate({ saturation: 0.9 })
       .jpeg({ quality: 90, mozjpeg: true, chromaSubsampling: '4:4:4' })
       .toFile(join(outDir, `${name}.jpg`));
     console.log(`✓ ${name} (${width / 2}×${height / 2}) in ${((Date.now() - t) / 1000).toFixed(1)}s`);

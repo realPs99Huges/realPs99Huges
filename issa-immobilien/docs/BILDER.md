@@ -5,9 +5,9 @@
 Die bestehende Website war aus der Entwicklungsumgebung nicht erreichbar, ebenso Bilddatenbanken
 wie Unsplash oder Pexels. Es lagen keine Unternehmensfotos, kein Logo und kein Porträt vor.
 
-Statt beliebiger Stockfotos wurden deshalb **eigene Architekturstudien** gerendert
+Statt beliebiger Stockfotos wurden deshalb **eigene Architekturzeichnungen** gerendert
 (`scripts/render-images.mjs`, Three.js in Chromium). Sie zeigen keine realen Gebäude und
-werden auf der Website überall als „Visualisierung“ gekennzeichnet (Bildunterschriften,
+werden auf der Website überall als „Zeichnung“ gekennzeichnet (Bildunterschriften,
 Footer, Impressum). Rechte Dritter bestehen daran nicht.
 
 | Datei | Motiv | Einsatz |
@@ -23,7 +23,7 @@ Footer, Impressum). Rechte Dritter bestehen daran nicht.
 1. Foto (mindestens 2000 px auf der langen Seite, JPG) unter gleichem Namen in
    `src/assets/studies/` ablegen – oder eine neue Datei ergänzen.
 2. In `src/data/studies.ts` `caption` und `alt` anpassen. Handelt es sich um eine echte
-   Aufnahme, in `src/components/Study.astro` den Zusatz „· Visualisierung“ entfernen bzw.
+   Aufnahme, in `src/components/Study.astro` den Zusatz „· Zeichnung“ entfernen bzw.
    steuerbar machen und den Hinweis im Footer (`src/components/Footer.astro`) sowie im
    Impressum anpassen.
 3. `npm run build` – Astro erzeugt automatisch AVIF/WebP in passenden Größen.
