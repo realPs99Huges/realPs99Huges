@@ -12,6 +12,7 @@ const year = new Date().getFullYear();
         <a href="/" aria-label="Issa Immobilien – zur Startseite">
           <Logo variant="negativ" height={58} class="site-footer__logo" />
         </a>
+        <p class="site-footer__slogan">{company.slogan}</p>
         <p class="site-footer__claim">{company.positioning}. {company.area} tätig.</p>
       </div>
 
@@ -85,8 +86,19 @@ const year = new Date().getFullYear();
     height: 52px;
   }
 
-  .site-footer__claim {
+  .site-footer__slogan {
     margin-top: 1.5rem;
+    padding-left: 0.85rem;
+    border-left: 3px solid var(--green);
+    font-size: 1.375rem;
+    font-weight: 660;
+    font-stretch: 88%;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .site-footer__claim {
+    margin-top: 1rem;
     max-width: 22rem;
     font-size: 1rem;
     line-height: 1.5;

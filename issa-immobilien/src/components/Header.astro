@@ -12,6 +12,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     <a href="/" class="site-header__brand" aria-label="Issa Immobilien – zur Startseite">
       <Logo height={46} priority class="site-header__logo" />
     </a>
+    <p class="site-header__claim">{company.slogan}</p>
 
     <nav class="site-nav" aria-label="Hauptnavigation">
       <ul role="list">
@@ -111,6 +112,24 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
     .is-scrolled .site-header__brand :global(.site-header__logo) {
       height: 40px;
+    }
+  }
+
+  .site-header__claim {
+    display: none;
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--line);
+    font-size: 0.9375rem;
+    font-weight: 650;
+    font-stretch: 90%;
+    white-space: nowrap;
+    color: var(--slate);
+  }
+
+  @media (min-width: 86em) {
+    .site-header__claim {
+      display: block;
+      margin-left: -0.75rem;
     }
   }
 

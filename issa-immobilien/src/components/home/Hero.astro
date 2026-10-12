@@ -7,6 +7,7 @@ import { company, assetClasses } from '../../data/site';
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__text">
+      <p class="hero__slogan hero__in" style="--d:100">{company.slogan}</p>
       <p class="eyebrow hero__in" style="--d:150">Einzelhandelsimmobilien · Deutschlandweit</p>
       <h1 id="hero-title" class="h1 hero__title hero__in" style="--d:260">
         Der richtige Standort für erfolgreichen <span class="accent">Einzelhandel.</span>
@@ -39,6 +40,10 @@ import { company, assetClasses } from '../../data/site';
     <div class="hero__media">
       <span class="hero__block" aria-hidden="true"></span>
       <ImageSlot name="hero" ratio="4 / 3" sizes="(min-width: 60em) 46vw, 100vw" priority reveal={false} class="hero__image" />
+      <p class="hero__seal">
+        <span class="hero__seal-text">{company.slogan}</span>
+        <span class="hero__seal-sub">für Einzelhandelsimmobilien</span>
+      </p>
     </div>
   </div>
 
@@ -62,6 +67,19 @@ import { company, assetClasses } from '../../data/site';
     gap: 3rem;
     align-items: center;
     padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  /* Spruch auf dem Smartphone direkt sichtbar; ab Desktop als Siegel am Bild */
+  .hero__slogan {
+    margin-bottom: 1.25rem;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--green);
+    line-height: 1.15;
+    font-size: 1.25rem;
+    font-weight: 680;
+    font-stretch: 88%;
+    letter-spacing: -0.01em;
+    color: var(--slate);
   }
 
   .hero__title {
@@ -132,6 +150,36 @@ import { company, assetClasses } from '../../data/site';
     position: relative;
   }
 
+  /* Siegel mit dem Markenspruch */
+  .hero__seal {
+    position: absolute;
+    right: var(--gutter);
+    bottom: -0.5rem;
+    z-index: 1;
+    display: none;
+    gap: 0.2rem;
+    padding: 1rem 1.25rem 1.1rem;
+    background: var(--white);
+    border-top: 4px solid var(--green);
+    box-shadow: 0 12px 32px -18px rgb(42 42 42 / 0.45);
+  }
+
+  .hero__seal-text {
+    font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+    font-weight: 680;
+    font-stretch: 88%;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__seal-sub {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-strong);
+  }
+
   .hero__market {
     background: var(--anthracite);
     color: var(--on-dark);
@@ -177,6 +225,18 @@ import { company, assetClasses } from '../../data/site';
       padding: 0 0 2rem 2rem;
     }
 
+    .hero__slogan {
+      display: none;
+    }
+
+    .hero__seal {
+      display: grid;
+      right: auto;
+      left: -1.5rem;
+      bottom: 3.5rem;
+      padding: 1.25rem 1.6rem 1.35rem;
+    }
+
     .hero__market-list {
       justify-content: space-between;
     }
@@ -199,6 +259,10 @@ import { company, assetClasses } from '../../data/site';
 
     .hero__block {
       animation: hero-block 1.1s var(--ease-out) 0.1s both;
+    }
+
+    .hero__seal {
+      animation: hero-text 0.9s var(--ease-out) 0.9s both;
     }
   }
 

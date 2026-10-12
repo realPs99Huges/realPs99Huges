@@ -22,7 +22,8 @@ const ogUrl = new URL(ogImage, Astro.site);
 const business = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
-  description: `${company.positioning}, ${company.area.toLowerCase()} tätig.`,
+  slogan: company.slogan,
+  description: `${company.slogan}: ${company.positioning}, ${company.area.toLowerCase()} tätig.`,
   '@id': `${company.url}/#unternehmen`,
   name: company.name,
   founder: { '@type': 'Person', name: company.owner },

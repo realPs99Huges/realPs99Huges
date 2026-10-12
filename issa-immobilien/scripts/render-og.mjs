@@ -18,8 +18,10 @@ const logo = await b64('src/assets/brand/logo-issa-immobilien-negativ.png');
 const og = `<!doctype html><html><head><style>
 @font-face{font-family:I;src:url(data:font/woff2;base64,${font}) format('woff2');font-weight:400 700;font-stretch:75% 100%}
 *{margin:0;box-sizing:border-box}
-body{width:1200px;height:630px;background:#2a2a2a;color:#fff;font-family:I;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
-img{height:96px;width:auto;display:block}
+body{width:1200px;height:630px;background:#2a2a2a;color:#fff;font-family:I;padding:64px 80px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;position:relative}
+img{height:96px;width:auto;display:block;align-self:flex-start;object-fit:contain}
+body>div.c{}
+.s{font-weight:660;font-stretch:88%;font-size:30px;color:#fff;border-left:5px solid #038604;padding-left:16px;margin-top:-8px}
 h1{font-weight:640;font-stretch:86%;font-size:58px;line-height:1.05;letter-spacing:-.02em;max-width:900px}
 h1 span{color:#038604}
 .m{display:flex;gap:28px;font-size:20px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#c8cacc}
@@ -27,6 +29,7 @@ h1 span{color:#038604}
 .bar{position:absolute;left:0;bottom:0;width:100%;height:10px;background:#038604}
 </style></head><body>
 <img src="data:image/png;base64,${logo}">
+<p class="s">Der Immobilien-Profi</p>
 <h1>Spezialist für Einzelhandelsimmobilien und <span>Handelsstandorte.</span></h1>
 <div class="m"><span><b></b>Deutschlandweit tätig</span><span><b></b>Sitz in Lippstadt</span></div>
 <div class="bar"></div>

@@ -8,6 +8,7 @@
 export const company = {
   name: 'Issa Immobilien',
   owner: 'Sami Issa',
+  slogan: 'Der Immobilien-Profi',
   positioning: 'Spezialist für Einzelhandelsimmobilien und Handelsstandorte',
   area: 'Deutschlandweit',
   street: 'Arendsstr. 21',
