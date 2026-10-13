@@ -1,0 +1,369 @@
+.section {
+  position: relative;
+  z-index: var(--z-content);
+  padding-block: clamp(96px, 14vh, 180px);
+}
+
+.section-head {
+  max-width: 880px;
+}
+
+.section-head .h2 {
+  margin-top: 22px;
+}
+
+.section-head em {
+  color: var(--text-soft);
+}
+
+.section-head__lead {
+  max-width: 36em;
+  margin-top: 26px;
+}
+
+/* ——— Discover ——— */
+
+.discover__atlas {
+  margin-top: clamp(64px, 9vh, 112px);
+}
+
+/* ——— Chapters ——— */
+
+.chapters__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(48px, 7vw, 120px);
+  align-items: start;
+}
+
+.chapters__head {
+  position: sticky;
+  top: calc(var(--header-h) + 48px);
+}
+
+.chapters__cta {
+  margin-top: 36px;
+}
+
+.chapters__list {
+  border-top: 1px solid var(--line);
+}
+
+.chapter {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 52px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 18px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.chapter::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms var(--ease-out);
+}
+
+.chapter:hover::after {
+  transform: scaleX(1);
+}
+
+.chapter__num {
+  padding-top: 8px;
+}
+
+.chapter__glyph {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--text-soft);
+  transition:
+    color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.chapter:hover .chapter__glyph {
+  color: var(--c-gold);
+  border-color: var(--line-gold);
+  box-shadow: 0 0 30px rgb(var(--c-gold-rgb) / 0.2);
+}
+
+.chapter__title {
+  font-family: var(--f-serif);
+  font-size: clamp(1.6rem, 1.3rem + 0.9vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.chapter__text {
+  margin-top: 10px;
+  max-width: 32em;
+  color: var(--text-muted);
+}
+
+.chapter__access {
+  margin-top: 8px;
+}
+
+/* ——— How it works ——— */
+
+.how__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: clamp(56px, 8vh, 96px);
+  padding-top: 40px;
+}
+
+.how__steps::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.how__steps::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-gold), transparent);
+  animation: travel 6s var(--ease-in-out) infinite;
+}
+
+@keyframes travel {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(560%);
+  }
+}
+
+.how__step {
+  position: relative;
+}
+
+.how__node {
+  position: absolute;
+  top: -44px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c-void);
+  border: 1px solid var(--c-gold);
+}
+
+.how__numeral {
+  display: block;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: clamp(3.5rem, 2.6rem + 3vw, 6rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(var(--c-ivory-rgb) / 0.35);
+}
+
+.how__title {
+  margin-top: 22px;
+  font-family: var(--f-serif);
+  font-size: 1.85rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.how__text {
+  margin-top: 12px;
+  color: var(--text-muted);
+  max-width: 26em;
+}
+
+/* ——— Truth panel ——— */
+
+.truth {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  margin-top: clamp(80px, 10vh, 130px);
+  padding: clamp(28px, 4vw, 56px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(160deg, rgb(var(--c-navy-rgb) / 0.75), rgb(var(--c-void-rgb) / 0.4)),
+    radial-gradient(60% 80% at 0% 0%, rgb(var(--c-violet-rgb) / 0.12), transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.truth__intro .h3 {
+  margin-top: 18px;
+}
+
+.truth__intro em {
+  color: var(--text-soft);
+}
+
+.truth__intro p {
+  margin-top: 14px;
+  max-width: 28em;
+}
+
+.truth__icon {
+  color: var(--c-gold);
+}
+
+.truth__col ul {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.truth__col li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 12px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.truth__mark {
+  margin-top: 3px;
+  color: var(--text-faint);
+}
+
+.truth__mark--yes {
+  color: var(--c-gold);
+}
+
+/* ——— Final call ——— */
+
+.final {
+  padding-block: clamp(120px, 18vh, 220px);
+  text-align: center;
+  overflow: clip;
+}
+
+.final__inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+}
+
+.final__mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  opacity: 0.07;
+  pointer-events: none;
+  animation: sphere-spin 120s linear infinite;
+}
+
+.final__mark .astra-mark {
+  width: min(420px, 90vw);
+  height: auto;
+}
+
+.final__mark .astra-mark__orbit {
+  display: none;
+}
+
+.final__title {
+  position: relative;
+  max-width: 14em;
+  font-family: var(--f-serif);
+  font-size: var(--fs-h1);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.final__title em {
+  color: var(--c-gold);
+}
+
+@media (max-width: 1023px) {
+  .chapters__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chapters__head {
+    position: static;
+  }
+
+  .truth {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .truth__intro {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .chapter {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px 18px;
+  }
+
+  .chapter__num {
+    display: none;
+  }
+
+  .chapter__access {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 4px;
+  }
+
+  .how__steps {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+    padding-left: 28px;
+    gap: 44px;
+  }
+
+  .how__steps::before {
+    top: 0;
+    bottom: 0;
+    left: 4px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .how__steps::after {
+    display: none;
+  }
+
+  .how__node {
+    top: 8px;
+    left: -28px;
+  }
+
+  .truth {
+    grid-template-columns: 1fr;
+  }
+}

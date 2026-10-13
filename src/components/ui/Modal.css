@@ -1,0 +1,113 @@
+.modal {
+  width: min(560px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  overflow: visible;
+}
+
+.modal::backdrop {
+  background: rgb(var(--c-void-rgb) / 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal[open] {
+  animation: modal-in 520ms var(--ease-out);
+}
+
+.modal[open]::backdrop {
+  animation: fade-in 420ms var(--ease-out);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+}
+
+.modal__panel {
+  position: relative;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  padding: clamp(28px, 5vw, 48px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgb(var(--c-violet-rgb) / 0.16), transparent 70%),
+    linear-gradient(180deg, rgb(var(--c-navy-rgb) / 0.98), rgb(var(--c-void-rgb) / 0.98));
+  box-shadow:
+    0 40px 120px -30px rgb(0 0 0 / 0.8),
+    0 0 0 1px rgb(var(--c-ivory-rgb) / 0.03) inset;
+}
+
+.modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.modal__close:hover {
+  color: var(--c-ivory);
+  background: rgb(var(--c-ivory-rgb) / 0.06);
+}
+
+.modal__title {
+  margin-top: 16px;
+  font-family: var(--f-serif);
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.modal__text {
+  margin-top: 14px;
+  color: var(--text-soft);
+}
+
+.modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.modal__list {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.modal__list li {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  color: var(--text-soft);
+  font-size: 0.9375rem;
+}
+
+.modal__list svg {
+  margin-top: 3px;
+  color: var(--c-gold);
+}
+
+@media (max-width: 479px) {
+  .modal__actions .btn {
+    width: 100%;
+  }
+}

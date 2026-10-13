@@ -1,0 +1,290 @@
+body.is-generating #root > .header,
+body.is-generating #root > .view,
+body.is-generating #root > .footer {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.genesis {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  justify-items: center;
+  align-items: center;
+  gap: clamp(12px, 3vh, 32px);
+  padding: calc(var(--header-h) + env(safe-area-inset-top)) var(--gutter) calc(24px + env(safe-area-inset-bottom));
+  overflow: hidden;
+  outline: none;
+  animation: fade-in 700ms var(--ease-out) both;
+}
+
+.genesis__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(50% 45% at 50% 42%, rgb(var(--c-violet-rgb) / 0.16), transparent 70%),
+    radial-gradient(120% 100% at 50% 40%, rgb(var(--c-void-rgb) / 0.35), rgb(var(--c-void-rgb) / 0.92) 75%);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.genesis.is-leaving {
+  animation: genesis-out 700ms var(--ease-in-out) forwards;
+}
+
+.genesis.is-leaving .genesis__stage {
+  animation: genesis-stage-out 700ms var(--ease-in-out) forwards;
+}
+
+@keyframes genesis-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes genesis-stage-out {
+  to {
+    transform: scale(1.35);
+    filter: blur(8px);
+  }
+}
+
+.genesis__stage {
+  position: relative;
+  width: min(460px, 78vw, 52vh);
+  aspect-ratio: 1;
+  align-self: end;
+  animation: genesis-stage-in 1.4s var(--ease-out) both;
+}
+
+@keyframes genesis-stage-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82) rotate(-12deg);
+    filter: blur(10px);
+  }
+}
+
+.genesis__ring,
+.genesis__core {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.genesis__ring--ticks {
+  fill: none;
+  stroke: rgb(var(--c-ivory-rgb) / 0.22);
+  stroke-width: 0.8;
+  animation: sphere-spin 40s linear infinite;
+}
+
+.genesis__ring--ticks .is-long {
+  stroke: rgb(var(--c-gold-rgb) / 0.7);
+}
+
+.genesis__ring--glyphs {
+  animation: sphere-spin 60s linear infinite reverse;
+}
+
+.genesis__faint {
+  fill: none;
+  stroke: rgb(var(--c-ivory-rgb) / 0.08);
+}
+
+.genesis__glyph {
+  color: rgb(var(--c-ivory-rgb) / 0.4);
+  transition: color 1s var(--ease-out);
+}
+
+.is-resolved .genesis__glyph.is-own,
+.is-leaving .genesis__glyph.is-own {
+  color: var(--c-gold);
+  filter: drop-shadow(0 0 6px rgb(var(--c-gold-rgb) / 0.9));
+}
+
+.genesis__ring--orbit {
+  animation: sphere-spin 7s linear infinite;
+}
+
+.genesis__dashed {
+  fill: none;
+  stroke: rgb(var(--c-blue-rgb) / 0.3);
+  stroke-dasharray: 2 8;
+}
+
+.genesis__satellite {
+  fill: var(--c-gold);
+  filter: drop-shadow(0 0 6px var(--c-gold));
+}
+
+.genesis__track {
+  fill: none;
+  stroke: rgb(var(--c-ivory-rgb) / 0.08);
+  stroke-width: 1;
+}
+
+.genesis__progress-arc {
+  fill: none;
+  stroke: var(--c-gold);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgb(var(--c-gold-rgb) / 0.7));
+}
+
+.genesis__figure {
+  fill: none;
+  stroke: rgb(var(--c-blue-rgb) / 0.6);
+  stroke-width: 0.9;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: genesis-draw 3.6s var(--ease-in-out) 0.4s forwards;
+}
+
+@keyframes genesis-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.genesis__figure-star {
+  fill: var(--c-ivory);
+  opacity: 0;
+  animation: genesis-star 700ms var(--ease-out) forwards;
+}
+
+@keyframes genesis-star {
+  from {
+    opacity: 0;
+    r: 8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.genesis__center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.genesis__mark,
+.genesis__own {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  transition:
+    opacity 900ms var(--ease-out),
+    transform 900ms var(--ease-out),
+    filter 900ms var(--ease-out);
+}
+
+.genesis__mark .astra-mark {
+  filter: drop-shadow(0 0 20px rgb(var(--c-violet-rgb) / 0.9));
+  animation: mark-breathe 2.4s var(--ease-in-out) infinite;
+}
+
+.genesis__own {
+  opacity: 0;
+  transform: scale(0.6);
+  filter: blur(6px);
+  color: var(--c-ivory);
+}
+
+.is-resolved .genesis__mark,
+.is-leaving .genesis__mark {
+  opacity: 0;
+  transform: scale(1.4);
+  filter: blur(6px);
+}
+
+.is-resolved .genesis__own,
+.is-leaving .genesis__own {
+  opacity: 1;
+  transform: none;
+  filter: drop-shadow(0 0 18px rgb(var(--c-violet-rgb) / 0.9));
+}
+
+.genesis__copy {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: min(520px, 100%);
+  text-align: center;
+  align-self: start;
+}
+
+.genesis__message {
+  min-height: 1.3em;
+  font-family: var(--f-serif);
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  line-height: 1.15;
+  animation: genesis-message 900ms var(--ease-out) both;
+}
+
+@keyframes genesis-message {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+}
+
+.genesis__bar {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  margin-top: 6px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+
+.genesis__bar-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, rgb(var(--c-violet-rgb) / 0.6), var(--c-gold));
+}
+
+.genesis__meta {
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.genesis__sep {
+  color: var(--c-gold);
+}
+
+.genesis__foot {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.genesis__note {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.genesis__skip {
+  font-size: 0.8125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genesis__figure {
+    stroke-dashoffset: 0;
+  }
+
+  .genesis__figure-star {
+    opacity: 1;
+  }
+}
