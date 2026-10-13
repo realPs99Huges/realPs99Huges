@@ -56,7 +56,7 @@ Nach Freigabe den Hinweis-Kasten am Seitenanfang entfernen.
 
 ## AGB (`src/pages/agb.astro`)
 
-§§ 1–9 wortgetreu aus der gelieferten Datei `AGB_Issa_Immobilien_neu.docx` übernommen
+§§ 1–9 wortgetreu aus der gelieferten Datei `AGB_Issa_Immobilien_Provisionen_inkl_MwSt.docx` übernommen
 (einzige Korrektur: ein überzähliges Leerzeichen in „MwSt .“). Das Logo aus der Datei entfällt,
 es steht bereits im Seitenkopf.
 
