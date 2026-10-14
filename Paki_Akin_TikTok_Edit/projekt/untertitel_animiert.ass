@@ -1,0 +1,50 @@
+[Script Info]
+Title: Paki Akin – TikTok Edit
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter SemiBold,62,&H00FFFFFF,&H00FFFFFF,&H9A000000,&HB4000000,0,0,0,0,100,100,0.6,0,1,3.2,1.6,5,150,150,0,1
+Style: Head,Instrument Serif,132,&H00FFFFFF,&H00FFFFFF,&H74000000,&HB4000000,0,1,0,0,100,100,0.5,0,1,4,2,5,120,120,0,1
+Style: HeadSub,Inter Medium,44,&H00FFFFFF,&H00FFFFFF,&H9A000000,&HB4000000,0,0,0,0,100,100,5,0,1,3,1.4,5,120,120,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.00,0:00:00.68,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Klar sagen,
+Dialogue: 1,0:00:00.68,0:00:01.95,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}was die ganzen denken.
+Dialogue: 1,0:00:02.35,0:00:03.50,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Und diese ganzen {\1c&H00FFFFFF&\t(610,750,\1c&H0096CDF2&)}Schafe{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:03.50,0:00:04.12,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}sind dann so:
+Dialogue: 1,0:00:04.12,0:00:04.70,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}„Oh mein Gott,
+Dialogue: 1,0:00:04.70,0:00:05.34,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}hast du gesehen,
+Dialogue: 1,0:00:05.34,0:00:06.28,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}was sie gesagt hat?
+Dialogue: 1,0:00:06.28,0:00:07.00,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Eigentlich denke
+Dialogue: 1,0:00:07.00,0:00:07.77,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}ich das auch.“
+Dialogue: 1,0:00:07.79,0:00:08.91,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Sitcha war genau so.
+Dialogue: 1,0:00:08.91,0:00:10.75,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Sie hat sich das getraut,
+Dialogue: 1,0:00:10.75,0:00:11.87,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}auszusprechen,
+Dialogue: 1,0:00:11.87,0:00:12.91,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}was so viele Menschen
+Dialogue: 1,0:00:12.91,0:00:13.87,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}sich nicht getraut haben.
+Dialogue: 1,0:00:13.87,0:00:14.43,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Und das habe ich
+Dialogue: 1,0:00:14.43,0:00:15.33,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}von ihr gelernt.
+Dialogue: 1,0:00:17.29,0:00:17.95,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Natürlich immer
+Dialogue: 1,0:00:17.95,0:00:18.89,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}mit {\1c&H00FFFFFF&\t(280,420,\1c&H0096CDF2&)}Respekt{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:18.91,0:00:20.01,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Aber kommst du mir
+Dialogue: 1,0:00:20.01,0:00:20.97,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(60,200,\1c&H0096CDF2&)}respektlos{\1c&H00FFFFFF&}?
+Dialogue: 1,0:00:20.97,0:00:21.93,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Glaub mir.
+Dialogue: 1,0:00:22.10,0:00:23.20,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Glaub mir,
+Dialogue: 1,0:00:23.20,0:00:24.77,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}ich mache dich {\1c&H00FFFFFF&\t(620,760,\1c&H0096CDF2&)}mundtot{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:25.03,0:00:25.89,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Das ist auch nicht gut
+Dialogue: 1,0:00:25.89,0:00:27.17,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}für das {\1c&H00FFFFFF&\t(380,520,\1c&H0096CDF2&)}Nervensystem{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:27.17,0:00:27.85,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Überhaupt nicht.
+Dialogue: 1,0:00:27.85,0:00:28.47,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Und ich achte
+Dialogue: 1,0:00:28.47,0:00:29.40,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}auf mein Nervensystem.
+Dialogue: 1,0:00:29.53,0:00:30.55,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}Manche brauchen aber
+Dialogue: 1,0:00:30.55,0:00:31.93,Sub,,0,0,0,,{\an5\q2\move(540,1322,540,1312,0,170)\fad(110,80)\blur0.6}eine {\1c&H00FFFFFF&\t(360,500,\1c&H0096CDF2&)}Schelle{\1c&H00FFFFFF&}.
+Dialogue: 2,0:00:15.33,0:00:17.24,Head,,0,0,0,,{\an5\q2\move(540,1158,540,1150,0,700)\fad(0,160)}{\alpha&HFF&\blur9\t(93,353,0.6,\alpha&H00&\blur0.6)}Kein {\alpha&HFF&\blur9\t(373,633,0.6,\alpha&H00&\blur0.6)}Blatt
+Dialogue: 2,0:00:15.33,0:00:17.24,Head,,0,0,0,,{\an5\q2\move(540,1290,540,1282,0,700)\fad(0,160)}{\alpha&HFF&\blur9\t(773,1033,0.6,\alpha&H00&\blur0.6)}vor {\alpha&HFF&\blur9\t(933,1193,0.6,\alpha&H00&\blur0.6)}den {\alpha&HFF&\blur9\t(1093,1353,0.6,\alpha&H00&\blur0.6)}Mund
+Dialogue: 2,0:00:15.33,0:00:17.24,HeadSub,,0,0,0,,{\an5\q2\move(540,1392,540,1384,0,700)\fad(0,160)}{\alpha&HFF&\blur9\t(1353,1613,0.6,\alpha&H00&\blur0.6)}zu {\alpha&HFF&\blur9\t(1493,1753,0.6,\alpha&H00&\blur0.6)}nehmen.
