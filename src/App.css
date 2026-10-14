@@ -1,0 +1,64 @@
+.view {
+  position: relative;
+  z-index: var(--z-content);
+  outline: none;
+}
+
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+  background: var(--c-void);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.curtain__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70vmax;
+  height: 70vmax;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--c-violet-rgb) / 0.22), transparent);
+}
+
+.curtain--cover {
+  visibility: visible;
+  pointer-events: auto;
+  animation: curtain-in 440ms var(--ease-in-out) forwards;
+}
+
+.curtain--reveal {
+  visibility: visible;
+  opacity: 1;
+  animation: curtain-out 760ms var(--ease-out) forwards;
+}
+
+.curtain--cover .curtain__glow {
+  animation: curtain-glow 440ms var(--ease-out) both;
+}
+
+@keyframes curtain-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes curtain-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes curtain-glow {
+  from {
+    scale: 0.4;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,222 @@
+.sphere {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  transform: translate3d(calc(var(--pnx, 0) * -14px), calc(var(--pny, 0) * -10px), 0);
+  transition: transform 1.6s var(--ease-out);
+}
+
+.sphere__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Depth: rings drift a little further than the core. */
+.sphere__layer--field {
+  transform: translate3d(calc(var(--pnx, 0) * -10px), calc(var(--pny, 0) * -8px), 0);
+  transition: transform 2s var(--ease-out);
+}
+
+.sphere__layer--ring {
+  animation: sphere-spin 260s linear infinite;
+  will-change: transform;
+}
+
+.sphere__layer--inner {
+  animation: sphere-spin 180s linear infinite reverse;
+  will-change: transform;
+}
+
+@keyframes sphere-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sphere__halo {
+  opacity: 0.7;
+  transition: opacity 1.4s var(--ease-out);
+}
+
+.sphere__reticle {
+  fill: none;
+  stroke: rgb(var(--c-ivory-rgb) / 0.07);
+  stroke-width: 0.8;
+}
+
+.sphere__beams line {
+  stroke-width: 0.9;
+}
+
+.sphere__markers path {
+  stroke: rgb(var(--c-gold-rgb) / 0.75);
+  stroke-width: 0.9;
+}
+
+.sphere__markers text {
+  fill: rgb(var(--c-ivory-rgb) / 0.5);
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+}
+
+.sphere__sparkle {
+  fill: var(--c-ivory);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sparkle 6.5s var(--ease-in-out) infinite;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.sphere__ring-line {
+  fill: none;
+  stroke: rgb(var(--c-ivory-rgb) / 0.16);
+  stroke-width: 0.8;
+}
+
+.sphere__ring-line--faint {
+  stroke: rgb(var(--c-ivory-rgb) / 0.08);
+}
+
+.sphere__ring-line--dashed {
+  stroke: rgb(var(--c-blue-rgb) / 0.22);
+  stroke-dasharray: 2 9;
+}
+
+.sphere__ticks {
+  stroke: rgb(var(--c-ivory-rgb) / 0.3);
+  stroke-width: 0.8;
+}
+
+.sphere__ticks--fine {
+  stroke: rgb(var(--c-ivory-rgb) / 0.14);
+  stroke-width: 0.6;
+}
+
+.sphere__ticks--gold {
+  stroke: rgb(var(--c-gold-rgb) / 0.6);
+  stroke-width: 0.9;
+}
+
+.sphere__glyph {
+  color: rgb(var(--c-ivory-rgb) / 0.55);
+}
+
+.sphere__diamond {
+  fill: var(--c-void);
+  stroke: var(--c-gold);
+  stroke-width: 0.9;
+}
+
+.sphere__orbit {
+  fill: none;
+}
+
+.sphere__orbit--back {
+  stroke: rgb(var(--c-gold-rgb) / 0.22);
+  stroke-width: 0.8;
+}
+
+.sphere__orbit--front {
+  stroke-width: 1;
+}
+
+.sphere__orbit--gold {
+  stroke: rgb(var(--c-gold-rgb) / 0.75);
+}
+
+.sphere__orbit--ivory {
+  stroke: rgb(var(--c-ivory-rgb) / 0.4);
+}
+
+.sphere__body-core--gold {
+  fill: #f3e2bd;
+}
+
+.sphere__body-core--ivory {
+  fill: var(--c-ivory);
+}
+
+.sphere__grid {
+  fill: none;
+  stroke: rgb(var(--c-ivory-rgb) / 0.1);
+  stroke-width: 0.7;
+}
+
+.sphere__grid--equator {
+  stroke: rgb(var(--c-violet-rgb) / 0.5);
+  stroke-width: 0.9;
+}
+
+.sphere__meridian {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: meridian 40s var(--ease-in-out) infinite;
+}
+
+@keyframes meridian {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(-1);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.sphere__sky {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 40%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 40%, transparent 72%);
+}
+
+.sphere__sky-strip {
+  width: 200%;
+  height: 100%;
+  max-width: none;
+  animation: sky-drift 90s linear infinite;
+  will-change: transform;
+}
+
+@keyframes sky-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.sphere__constellation {
+  fill: none;
+  stroke: rgb(var(--c-blue-rgb) / 0.5);
+  stroke-width: 0.8;
+}
+
+.sphere__constellation-star {
+  fill: var(--c-ivory);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sphere,
+  .sphere__layer--field {
+    transform: none;
+  }
+}

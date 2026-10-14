@@ -1,0 +1,6 @@
+.reading-view {
+  position: relative;
+  min-height: 100svh;
+  padding-top: calc(var(--header-h) + env(safe-area-inset-top));
+  animation: fade-in 900ms var(--ease-out) both;
+}
