@@ -31,6 +31,7 @@ import {
   type ZodiacSign,
 } from '../astro/zodiac';
 import { compassDirection, distanceKm, findPlace, formatCoordinates, type Place } from '../geo/places';
+import { ELEMENT_STYLE, LIFE_PATH, MODALITY_STYLE, PLANET_WEEKDAY, SIGN_PROFILE } from './content/profile';
 import { SIGN_CONTENT } from './content/signs';
 import {
   ASTERISM_NOUNS,
@@ -309,6 +310,8 @@ function buildFacts(params: {
   flower: string;
   birthPlace: Place | null;
   homePlace: Place | null;
+  ruler: string;
+  rulerDay: string;
 }): Fact[] {
   const { birth, now } = params;
   const bornAt = Date.UTC(birth.year, birth.month - 1, birth.day);
@@ -329,42 +332,44 @@ function buildFacts(params: {
   const facts: Fact[] = [
     {
       value: nf.format(days),
-      label: 'Tage alt',
+      label: 'Tage auf der Erde',
       note: `Dein ${nf.format(nextMilestone)}. Tag: ${formatDate(milestoneDate.getUTCFullYear(), milestoneDate.getUTCMonth() + 1, milestoneDate.getUTCDate())}`,
     },
     {
       value: `≈ ${nf.format(Math.floor(days / SYNODIC_MONTH))}`,
-      label: 'Vollmonde erlebt',
+      label: 'Erlebte Vollmonde',
       note: 'Ein Mondzyklus dauert 29,5 Tage',
     },
     {
       value: `${(years * 0.94).toLocaleString('de-DE', { maximumFractionDigits: 1, minimumFractionDigits: 1 })} Mrd. km`,
-      label: 'mit der Erde um die Sonne gereist',
+      label: 'Deine Reise um die Sonne',
       note: 'Eine Erdumrundung ≈ 940 Mio. km',
     },
     {
-      value: daysToBirthday === 0 ? 'Heute!' : `${nf.format(daysToBirthday)} ${daysToBirthday === 1 ? 'Tag' : 'Tage'}`,
-      label: 'bis zu deinem Geburtstag',
+      value:
+        daysToBirthday === 0 ? 'Heute!' : `in ${nf.format(daysToBirthday)} ${daysToBirthday === 1 ? 'Tag' : 'Tagen'}`,
+      label: 'Nächster Geburtstag',
       note: daysToBirthday === 0 ? 'Alles Gute zum Geburtstag' : `Er fällt auf einen ${nextWeekday}`,
     },
     {
       value: params.weekday.day,
-      label: 'Wochentag deiner Geburt',
+      label: 'Geboren an einem',
       note: `Tag ${PLANET_GENITIVE[params.weekday.planet]} (${params.weekday.origin})`,
     },
-    { value: params.sunLabel, label: 'Sonnenstand bei Geburt', note: 'Berechnet, ca. ±1° ohne Zeitzone' },
+    { value: params.sunLabel, label: 'Sonnenstand bei Geburt', note: 'Berechnet – genau auf etwa ±1°' },
     {
       value: `${params.moonPercent} %`,
       label: 'Mondlicht bei Geburt',
       note: params.moonName,
     },
-    { value: params.animal, label: 'Chinesisches Tierzeichen', note: 'Sonnenjahr ab ca. 4. Februar' },
+    { value: params.animal, label: 'Chinesisches Tierzeichen', note: 'Nach dem Sonnenjahr (Beginn ca. 4. Februar)' },
     {
       value: params.constellation,
       label: 'Sternbild hinter der Sonne',
-      note: 'Astronomisch – durch die Präzession verschoben',
+      note: 'Astronomisch – die Erdachse hat den Himmel verschoben',
     },
     { value: params.birthstone, label: 'Geburtsstein', note: `Geburtsblume: ${params.flower}` },
+    { value: params.ruler, label: 'Dein Herrscherplanet', note: `Traditioneller Glückstag: ${params.rulerDay}` },
   ];
 
   if (params.birthPlace && params.homePlace) {
@@ -372,18 +377,62 @@ function buildFacts(params: {
     if (km >= 30) {
       facts.push({
         value: `${formatKm(km)} km`,
-        label: 'zwischen Geburtsort und Wohnort',
+        label: 'Geburtsort → Wohnort',
         note: `Luftlinie Richtung ${compassDirection(params.birthPlace, params.homePlace)}`,
       });
     }
   } else if (params.birthPlace && Math.abs(params.birthPlace.lat) >= 5 && params.birthPlace.lat > 0) {
     facts.push({
       value: `${Math.round(params.birthPlace.lat)}°`,
-      label: 'Höhe des Polarsterns über deinem Geburtsort',
+      label: 'Polarstern über deinem Geburtsort',
       note: 'Sie entspricht immer der geografischen Breite',
     });
   }
   return facts;
+}
+
+/** Numerology life path: digit sum of the full birth date, keeping master numbers 11, 22 and 33. */
+function lifePathNumber(year: number, month: number, day: number): number {
+  let n = `${day}${month}${year}`.split('').reduce((sum, digit) => sum + Number(digit), 0);
+  while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+    n = String(n)
+      .split('')
+      .reduce((sum, digit) => sum + Number(digit), 0);
+  }
+  return n;
+}
+
+function buildSelfProfile(
+  sign: ZodiacSign,
+  strength: { title: string; body: string },
+  date: { year: number; month: number; day: number },
+): Fact[] {
+  const profile = SIGN_PROFILE[sign.id];
+  const style = ELEMENT_STYLE[sign.element];
+  const lifePath = lifePathNumber(date.year, date.month, date.day);
+  const life = LIFE_PATH[lifePath];
+  return [
+    { label: 'Dein Kern', value: profile.core, note: sign.essence },
+    { label: 'Was dich antreibt', value: profile.drive.value, note: profile.drive.text },
+    { label: 'Deine Stärke', value: strength.title, note: strength.body },
+    { label: 'Deine Herausforderung', value: profile.challenge.value, note: profile.challenge.text },
+    { label: 'In der Liebe', value: profile.love.value, note: profile.love.text },
+    { label: 'Im Beruf', value: profile.work.value, note: profile.work.text },
+    { label: 'Unter Stress', value: profile.stress.value, note: profile.stress.text },
+    { label: 'So tankst du auf', value: style.recharge.value, note: style.recharge.text },
+    { label: 'Wie du kommunizierst', value: style.talk.value, note: style.talk.text },
+    {
+      label: 'Wie du entscheidest',
+      value: MODALITY_STYLE[sign.modality].value,
+      note: MODALITY_STYLE[sign.modality].text,
+    },
+    {
+      label: 'Passt gut zu',
+      value: profile.matches.map((id) => getSign(id).name).join(', '),
+      note: 'Nach astrologischer Tradition: gleiches oder ergänzendes Element.',
+    },
+    { label: 'Deine Lebenszahl', value: `${lifePath} · ${life.value}`, note: `${life.text} (Numerologie)` },
+  ];
 }
 
 export function buildDemoReading(input: ReadingInput, now: Date = new Date()): CosmicReading {
@@ -610,7 +659,10 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
       flower: BIRTH_FLOWERS[date.month - 1],
       birthPlace,
       homePlace,
+      ruler: ruler.name,
+      rulerDay: PLANET_WEEKDAY[sign.traditionalRuler ?? sign.ruler] ?? PLANET_WEEKDAY.sun,
     }),
+    selfProfile: buildSelfProfile(sign, strengths[0], date),
     profile: {
       birthDateLabel: formatDate(date.year, date.month, date.day),
       birthTimeLabel: time ? `${input.birthTime} Uhr` : 'Unbekannt',

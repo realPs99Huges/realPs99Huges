@@ -44,8 +44,12 @@ export function reportText(reading: CosmicReading, includePremium: boolean): str
     '',
     section('Kurz gesagt', [reading.summary]),
     section(
-      'Deine kosmischen Fakten',
-      reading.facts.map((f) => `• ${f.value} – ${f.label}${f.note ? ` (${f.note})` : ''}`),
+      'Das bist du – auf einen Blick',
+      reading.selfProfile.map((f) => `• ${f.label}: ${f.value}${f.note ? ` – ${f.note}` : ''}`),
+    ),
+    section(
+      'Fakten zu deiner Geburt',
+      reading.facts.map((f) => `• ${f.label}: ${f.value}${f.note ? ` – ${f.note}` : ''}`),
     ),
     section('01 – Deine kosmische Identität', [
       `„${reading.identity.lead}“`,

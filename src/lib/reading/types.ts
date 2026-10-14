@@ -29,10 +29,10 @@ export interface Facet {
   note?: string;
 }
 
-/** A verifiable, calculated fact about the birth moment (shown as a tile). */
+/** A tile: category label, short value, one explaining sentence. */
 export interface Fact {
-  value: string;
   label: string;
+  value: string;
   note?: string;
 }
 
@@ -81,6 +81,8 @@ export interface CosmicReading {
   subtitle: string;
   asterism: Asterism;
   summary: string;
+  /** "Das bist du": personality traits, one short answer + one sentence each. */
+  selfProfile: Fact[];
   facts: Fact[];
   profile: {
     birthDateLabel: string;

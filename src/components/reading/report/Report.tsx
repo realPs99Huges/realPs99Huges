@@ -23,6 +23,7 @@ interface ReportProps {
 }
 
 const CHAPTERS = [
+  { id: 'about', label: 'Über dich' },
   { id: 'facts', label: 'Fakten' },
   { id: 'identity', label: 'Identität' },
   { id: 'inner-universe', label: 'Inneres' },
@@ -31,6 +32,44 @@ const CHAPTERS = [
   { id: 'reflection', label: 'Reflexion' },
   { id: 'premium', label: 'Premium' },
 ];
+
+interface TileSectionProps {
+  id: string;
+  kicker: string;
+  title: ReactNode;
+  intro: string;
+  tiles: CosmicReading['facts'];
+  variant: 'about' | 'facts';
+}
+
+/** One consistent tile grid: category, short answer, one explaining sentence. */
+function TileSection({ id, kicker, title, intro, tiles, variant }: TileSectionProps) {
+  return (
+    <section id={id} className={`facts facts--${variant} container`} aria-labelledby={`${id}-title`}>
+      <div className="facts__head" data-reveal>
+        <p className="label label--gold">{kicker}</p>
+        <h2 id={`${id}-title`} className="facts__title">
+          {title}
+        </h2>
+        <p className="facts__intro">{intro}</p>
+      </div>
+      <ul className="facts__grid">
+        {tiles.map((tile, index) => (
+          <li
+            key={tile.label}
+            className="fact"
+            data-reveal
+            style={{ '--reveal-delay': `${(index % 4) * 60}ms` } as CSSProperties}
+          >
+            <span className="fact__label">{tile.label}</span>
+            <span className="fact__value">{tile.value}</span>
+            {tile.note && <span className="fact__note">{tile.note}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
 
 function Section({ id, num, title, children }: { id: string; num: string; title: ReactNode; children: ReactNode }) {
   return (
@@ -180,7 +219,7 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
               }}
             >
               <span className="chapter-nav__num">
-                {chapter.id === 'premium' ? '✦' : chapter.id === 'facts' ? '✧' : `0${index}`}
+                {chapter.id === 'premium' ? '✦' : index < 2 ? '✧' : `0${index - 1}`}
               </span>
               {chapter.label}
             </a>
@@ -188,29 +227,31 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
         </nav>
       </header>
 
-      {/* ——— Facts ——— */}
-      <section id="facts" className="facts container" aria-labelledby="facts-title">
-        <div className="facts__head" data-reveal>
-          <p className="label label--gold">Berechnet aus deinem Geburtsmoment</p>
-          <h2 id="facts-title" className="facts__title">
-            Deine kosmischen <em>Fakten</em>
-          </h2>
-        </div>
-        <ul className="facts__grid">
-          {reading.facts.map((fact, index) => (
-            <li
-              key={fact.label}
-              className="fact"
-              data-reveal
-              style={{ '--reveal-delay': `${(index % 4) * 60}ms` } as CSSProperties}
-            >
-              <span className="fact__value">{fact.value}</span>
-              <span className="fact__label">{fact.label}</span>
-              {fact.note && <span className="fact__note">{fact.note}</span>}
-            </li>
-          ))}
-        </ul>
-      </section>
+      <TileSection
+        id="about"
+        kicker="Dein Persönlichkeitsprofil"
+        title={
+          <>
+            Das bist <em>du</em> – auf einen Blick
+          </>
+        }
+        intro="Zwölf Antworten über dich – kurz, klar und aus deinem Geburtsmoment abgeleitet. Sieh sie als Spiegel, nicht als Urteil."
+        tiles={reading.selfProfile}
+        variant="about"
+      />
+
+      <TileSection
+        id="facts"
+        kicker="Berechnet aus deinem Geburtsmoment"
+        title={
+          <>
+            Fakten zu deiner <em>Geburt</em>
+          </>
+        }
+        intro="Echte Zahlen und Daten – astronomisch berechnet, nicht gedeutet."
+        tiles={reading.facts}
+        variant="facts"
+      />
 
       <Section
         id="identity"
