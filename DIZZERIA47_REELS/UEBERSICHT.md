@@ -101,3 +101,21 @@ HDR-Material (iPhone HLG) wurde farbtreu nach SDR/Rec.709 getonemappt. 60-fps-Cl
 ## Technik
 Motion Design mit Remotion (React/CSS/SVG), Vorbereitung und Endkontrolle mit FFmpeg.
 Schriften: Cormorant Garamond, Manrope, Bodoni Moda, Anton, Instrument Serif, Syne und Space Grotesk, alle mit Open Font License.
+
+---
+
+## Reel 6 – BOOM (`Reel_06_BOOM.mp4`)
+30,0 s · 150 BPM Dark Trap (selbst komponiert) · Dela Gothic One (3D-Extrusion) + Fraunces Black Italic + Space Mono (HUD)
+
+| Zeit | Quelle (neues Material) | Text / Effekt |
+|---|---|---|
+| 0–3,2 s | IMG_1465 · Laden bei Nacht | Leuchtschild „DIZZERIA 47“ flackert an (Neon-Brummen, Glow), Schreibmaschine „LIPPSTADT / EICHENDORFFSTR. 25“, Rush-Zoom ins Weiß |
+| 3,2–6,4 s | – (Opener) | „DIZZERIA“ knallt Buchstabe für Buchstabe rein, riesige 3D-„47“ mit RGB-Split, dann zerfällt alles in Streifen |
+| 6,4–8,8 s | IMG_1487 · Lichterkette + Logo-Schild | „Willkommen.“ |
+| 8,8–13,6 s | IMG_1490 · leerer Karton | 3D-„PIZZA“ schwebt, zittert immer stärker (Kick-Roll) → **zerbricht exakt, als die echte Pizza im Karton landet** (Zeitlupe, Flash, Shake) → HUD-Label „01 PIZZA“ |
+| 13,6–16,8 s | IMG_1484 | Riesiges vertikales „Mozzarella“ + Scan-Labels 02 MOZZARELLA · 03 RUCOLA · 04 TOMATEN · 05 BALSAMICO |
+| 16,8–20 s | IMG_1483 | Grünes 3D-„PESTO“ + Label 06 PESTO |
+| 20–23,2 s | IMG_1468 · Ofen + Pizzaiolo | „HEISS.“ mit Hitzeflimmern und Glut-Glow |
+| 23,2–25,6 s | 12 Blitzschnitte (neues + altes Material) | KNUSPRIG · KÄSE · SAUCE · HEISS · LIPPSTADT · 47 |
+| 25,6–27,2 s | IMG_1484 · Karton geht zu | „Guten Appetit.“ → Deckel zu, Tape-Stop, Stille |
+| 27,2–30 s | IMG_1465 (Schild, abgedunkelt) | Endcard: DIZZERIA 47 (3D), Adresse, Telefon, 5,0 ★ Google, einmal klein „Pizza mit Dinkelmehl“ |
