@@ -34,7 +34,7 @@ function looksLikeReading(value: unknown): value is CosmicReading {
 }
 
 export function createHttpReadingProvider(endpoint: string): ReadingProvider {
-  const engine = { kind: 'remote-model', label: 'AI-assisted reading' } as const;
+  const engine = { kind: 'remote-model', label: 'KI-gestützte Deutung' } as const;
   return {
     engine,
     async generate(input, options) {
@@ -48,11 +48,11 @@ export function createHttpReadingProvider(endpoint: string): ReadingProvider {
         });
       } catch (error) {
         if (error instanceof DOMException && error.name === 'AbortError') throw error;
-        throw new ReadingServiceError('The reading service could not be reached.');
+        throw new ReadingServiceError('Der Deutungsdienst ist nicht erreichbar.');
       }
-      if (!response.ok) throw new ReadingServiceError(`The reading service responded with ${response.status}.`);
+      if (!response.ok) throw new ReadingServiceError(`Der Deutungsdienst antwortete mit Status ${response.status}.`);
       const data: unknown = await response.json().catch(() => null);
-      if (!looksLikeReading(data)) throw new ReadingServiceError('The reading service returned an unexpected format.');
+      if (!looksLikeReading(data)) throw new ReadingServiceError('Der Deutungsdienst lieferte ein unerwartetes Format.');
       // The label always reflects the engine that actually produced the reading.
       return { ...data, engine };
     },

@@ -6,29 +6,42 @@ import { Icon } from '../../ui/Icon';
 import { Sigil } from './Sigil';
 import { TimelineArc, TimelineList } from './Timeline';
 
+const PLANET_GLYPH: Record<string, GlyphId> = {
+  Sonne: 'sun',
+  Mond: 'moon',
+  Mars: 'mars',
+  Merkur: 'mercury',
+  Jupiter: 'jupiter',
+  Venus: 'venus',
+  Saturn: 'saturn',
+};
+
 const LOCKED_ITEMS = [
   {
-    title: 'Extended Cosmic Profile',
-    text: 'Your decan, opposite-sign axis, ruling planet, the house of your Sun and your birth Moon.',
+    title: 'Erweitertes kosmisches Profil',
+    text: 'Deine Dekade, die Achse zum Gegenzeichen, dein Herrscherplanet, das Haus deiner Sonne und dein Geburtsmond.',
   },
   {
-    title: 'Detailed Symbolic Origin Reading',
-    text: 'The real sky above your birthplace, the cultural story of your constellation and symbolic geography.',
+    title: 'Ausführliche Herkunftsdeutung',
+    text: 'Der echte Himmel über deinem Geburtsort, die Kulturgeschichte deines Sternbilds und symbolische Geografie.',
   },
-  { title: 'Extended Visual Timeline', text: 'Every great astrological cycle of a life, placed on your personal arc.' },
-  { title: 'Extended Personal Reflection', text: 'A seven-night practice, beginning on the weekday you were born.' },
   {
-    title: 'Complete Cosmic Report',
-    text: 'Your cosmic signature, symbols, personal asterism and mantra — in one report.',
+    title: 'Erweiterter Zeitstrahl',
+    text: 'Alle großen astrologischen Zyklen eines Lebens auf deinem persönlichen Bogen.',
+  },
+  { title: 'Erweiterte Reflexion', text: 'Eine Praxis für sieben Abende, beginnend am Wochentag deiner Geburt.' },
+  {
+    title: 'Vollständiger kosmischer Bericht',
+    text: 'Deine kosmische Signatur, Symbole, dein persönliches Sternbild und Mantra – in einem Bericht.',
   },
 ];
 
 const INCLUDED = [
-  'Extended Cosmic Profile',
-  'Detailed Symbolic Origin Reading',
-  'Extended Personal Reflection',
-  'Complete Cosmic Report',
-  'Extended visual timeline',
+  'Erweitertes kosmisches Profil',
+  'Ausführliche Herkunftsdeutung',
+  'Erweiterte Reflexion',
+  'Vollständiger kosmischer Bericht',
+  'Erweiterter visueller Zeitstrahl',
 ];
 
 function InsightCard({ item, index }: { item: Insight; index: number }) {
@@ -71,15 +84,15 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
   return (
     <section id="premium" className="premium" aria-labelledby="premium-title">
       <header className="premium__head container" data-reveal>
-        <p className="label label--gold">Premium · Extended reading</p>
+        <p className="label label--gold">Premium · Erweiterte Deutung</p>
         <h2 id="premium-title" ref={headingRef} tabIndex={-1} className="premium__title">
           {premium === 'unlocked' ? (
             <>
-              Your deeper reading, <em>revealed.</em>
+              Deine tiefere Deutung, <em>enthüllt.</em>
             </>
           ) : (
             <>
-              Your deeper reading <em>awaits.</em>
+              Deine tiefere Deutung <em>wartet.</em>
             </>
           )}
         </h2>
@@ -87,7 +100,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
 
       {premium !== 'unlocked' ? (
         <div className="container premium__locked">
-          <ul className="locked-list" aria-label="Included in the extended reading">
+          <ul className="locked-list" aria-label="In der erweiterten Deutung enthalten">
             {LOCKED_ITEMS.map((item, index) => (
               <li
                 key={item.title}
@@ -113,7 +126,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
             {premium === 'preparing' ? (
               <div className="paywall__preparing" role="status">
                 <span className="paywall__spinner" aria-hidden="true" />
-                <p className="paywall__heading">Preparing your extended reading…</p>
+                <p className="paywall__heading">Deine erweiterte Deutung wird vorbereitet …</p>
                 <SkeletonLines count={4} />
               </div>
             ) : (
@@ -124,10 +137,10 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
                 </div>
                 <p className="chip chip--gold paywall__demo">
                   <span className="chip__dot" aria-hidden="true" />
-                  Demo · no real payment
+                  Demo · keine echte Zahlung
                 </p>
-                <p className="paywall__heading">Go beyond the surface.</p>
-                <p className="paywall__text">Explore the extended interpretation of your personal cosmic profile.</p>
+                <p className="paywall__heading">Geh tiefer als die Oberfläche.</p>
+                <p className="paywall__text">Entdecke die erweiterte Deutung deines persönlichen kosmischen Profils.</p>
                 <ul className="paywall__list">
                   {INCLUDED.map((item) => (
                     <li key={item}>
@@ -137,13 +150,13 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
                   ))}
                 </ul>
                 <div className="paywall__price">
-                  <span className="paywall__amount">€9.99</span>
-                  <span className="paywall__per">— Full Reading</span>
+                  <span className="paywall__amount">9,99 €</span>
+                  <span className="paywall__per">– Vollständige Deutung</span>
                 </div>
-                <p className="paywall__fine">Example price for this prototype. Nothing is charged.</p>
+                <p className="paywall__fine">Beispielpreis für diesen Prototyp. Es wird nichts berechnet.</p>
                 <button type="button" className="btn btn--gold paywall__cta" onClick={onRequestUnlock}>
                   <Icon name="unlock" className="btn__icon" />
-                  Unlock Full Reading
+                  Vollständige Deutung freischalten
                 </button>
               </>
             )}
@@ -154,7 +167,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
           <div className="container">
             <p className="premium__banner" role="status">
               <Icon name="sparkle" size={16} />
-              Premium preview unlocked in demo mode — no payment was processed.
+              Premium-Vorschau im Demo-Modus freigeschaltet – es wurde keine Zahlung verarbeitet.
             </p>
           </div>
 
@@ -162,7 +175,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
             <div className="report-section__head">
               <span className="report-section__num">P1</span>
               <h3 className="report-section__title">
-                Extended Cosmic <em>Profile</em>
+                Erweitertes <em>Profil</em>
               </h3>
             </div>
             <div className="report-section__body">
@@ -179,7 +192,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
             <div className="report-section__head">
               <span className="report-section__num">P2</span>
               <h3 className="report-section__title">
-                Detailed Symbolic <em>Origin Reading</em>
+                Ausführliche <em>Herkunftsdeutung</em>
               </h3>
             </div>
             <div className="report-section__body">
@@ -193,7 +206,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
                 {p.originReading.journey && <InsightCard item={p.originReading.journey} index={1} />}
               </div>
               <div className="family-prompts" data-reveal>
-                <p className="label label--gold">If you want to know where your family comes from</p>
+                <p className="label label--gold">Wenn du wissen willst, woher deine Familie kommt</p>
                 <ul>
                   {p.originReading.familyPrompts.map((prompt) => (
                     <li key={prompt}>{prompt}</li>
@@ -207,7 +220,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
             <div className="report-section__head">
               <span className="report-section__num">P3</span>
               <h3 className="report-section__title">
-                Extended Cosmic <em>Timeline</em>
+                Erweiterter <em>Zeitstrahl</em>
               </h3>
             </div>
             <div className="report-section__body">
@@ -221,7 +234,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
             <div className="report-section__head">
               <span className="report-section__num">P4</span>
               <h3 className="report-section__title">
-                Extended Personal <em>Reflection</em>
+                Erweiterte <em>Reflexion</em>
               </h3>
             </div>
             <div className="report-section__body">
@@ -234,9 +247,9 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
                     data-reveal
                     style={{ '--reveal-delay': `${index * 60}ms` } as CSSProperties}
                   >
-                    <span className="night__index label">Night {index + 1}</span>
+                    <span className="night__index label">Abend {index + 1}</span>
                     <span className="night__day">
-                      <Glyph id={night.planet.toLowerCase() as GlyphId} size={18} strokeWidth={1.3} />
+                      <Glyph id={PLANET_GLYPH[night.planet] ?? 'star'} size={18} strokeWidth={1.3} />
                       {night.day}
                       <span className="muted"> · {night.planet}</span>
                     </span>
@@ -251,7 +264,7 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
             <div className="report-section__head">
               <span className="report-section__num">P5</span>
               <h3 className="report-section__title">
-                Complete Cosmic <em>Report</em>
+                Vollständiger <em>Bericht</em>
               </h3>
             </div>
             <div className="report-section__body">
@@ -279,12 +292,12 @@ export function PremiumSection({ reading, premium, onRequestUnlock, onDownload }
                 ))}
               </dl>
               <blockquote className="mantra" data-reveal>
-                <p className="label label--gold">Your mantra</p>
-                <p className="mantra__text">“{p.signature.mantra}”</p>
+                <p className="label label--gold">Dein Mantra</p>
+                <p className="mantra__text">„{p.signature.mantra}“</p>
               </blockquote>
               <button type="button" className="btn btn--ghost" onClick={onDownload}>
                 <Icon name="download" className="btn__icon" />
-                Download complete report · Demo
+                Kompletten Bericht laden · Demo
               </button>
             </div>
           </div>

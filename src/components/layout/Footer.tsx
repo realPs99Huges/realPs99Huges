@@ -16,12 +16,12 @@ export function Footer({ onNavigate, onOpenNotice }: FooterProps) {
           <div className="footer__brand">
             <AstraLogo onClick={() => onNavigate('top')} />
             <p className="footer__tagline">
-              A personal journey through the cosmos — symbolic readings shaped by the moment you were born.
+              Eine persönliche Reise durch den Kosmos – symbolische Deutungen aus dem Moment deiner Geburt.
             </p>
           </div>
 
-          <nav className="footer__col" aria-label="Footer">
-            <p className="label">Explore</p>
+          <nav className="footer__col" aria-label="Fußzeile">
+            <p className="label">Navigation</p>
             <ul>
               {NAV_ITEMS.map((item) => (
                 <li key={item.target}>
@@ -41,16 +41,16 @@ export function Footer({ onNavigate, onOpenNotice }: FooterProps) {
           </nav>
 
           <div className="footer__col">
-            <p className="label">Notices</p>
+            <p className="label">Hinweise</p>
             <ul>
               <li>
                 <button type="button" className="footer__link" onClick={() => onOpenNotice('privacy')}>
-                  Privacy
+                  Datenschutz
                 </button>
               </li>
               <li>
                 <button type="button" className="footer__link" onClick={() => onOpenNotice('demo')}>
-                  Demo &amp; disclaimer
+                  Demo &amp; Haftung
                 </button>
               </li>
             </ul>
@@ -59,20 +59,20 @@ export function Footer({ onNavigate, onOpenNotice }: FooterProps) {
 
         <div className="footer__notice">
           <p>
-            <strong>Demo prototype.</strong> Readings are symbolic interpretations created by a local, rule-based demo
-            engine — not by an AI model, not a DNA or ancestry analysis, and not a prediction. No payments are
-            processed.
+            <strong>Demo-Prototyp.</strong> Deutungen sind symbolische Interpretationen einer lokalen, regelbasierten
+            Demo-Engine – kein KI-Modell, keine DNA- oder Abstammungsanalyse und keine Vorhersage. Es werden keine
+            Zahlungen verarbeitet.
           </p>
           <p>
-            <strong>Privacy.</strong> Everything you enter stays in this browser tab. Nothing is stored, sent or
-            tracked; reloading the page clears it.
+            <strong>Datenschutz.</strong> Alles, was du eingibst, bleibt in diesem Browser-Tab. Nichts wird gespeichert,
+            gesendet oder getrackt; beim Neuladen ist alles gelöscht.
           </p>
         </div>
 
         <div className="footer__bottom">
-          <p className="label">© {new Date().getFullYear()} ASTRA · Prototype</p>
+          <p className="label">© {new Date().getFullYear()} ASTRA · Prototyp</p>
           <button type="button" className="footer__top-link" onClick={() => onNavigate('top')}>
-            <span className="label">Back to the stars</span>
+            <span className="label">Nach oben</span>
             <Icon name="arrowUp" size={16} />
           </button>
         </div>

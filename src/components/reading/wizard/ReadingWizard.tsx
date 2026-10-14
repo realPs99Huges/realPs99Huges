@@ -17,33 +17,33 @@ import './Wizard.css';
 const STEPS = [
   {
     numeral: 'I',
-    name: 'Your Birth',
+    name: 'Deine Geburt',
     title: (
       <>
-        Your <em>Birth</em>
+        Deine <em>Geburt</em>
       </>
     ),
-    intro: 'The moment your story began. Date, hour and place are all your reading needs.',
+    intro: 'Datum, Uhrzeit und Ort – mehr braucht deine Deutung nicht.',
   },
   {
     numeral: 'II',
-    name: 'Your Cosmic Identity',
+    name: 'Dein Zeichen',
     title: (
       <>
-        Your Cosmic <em>Identity</em>
+        Dein <em>Zeichen</em>
       </>
     ),
-    intro: 'We suggested your sign from your birth date. Confirm it, and add anything you’d like the reading to hold.',
+    intro: 'Dein Sternzeichen ist berechnet. Ergänze bei Lust deinen Wohnort und eine Frage – beides ist optional.',
   },
   {
     numeral: 'III',
-    name: 'Reveal',
+    name: 'Deutung',
     title: (
       <>
-        Ready to <em>Reveal</em>
+        Alles <em>bereit</em>
       </>
     ),
-    intro: 'Here is the sky you described. Edit anything, or let it become your reading.',
+    intro: 'Prüfe kurz deine Angaben – dann erstellen wir deine Deutung.',
   },
 ];
 
@@ -85,6 +85,10 @@ export function ReadingWizard({ session, onOpenNotice }: ReadingWizardProps) {
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
+      // On desktop, put the cursor straight into the first field.
+      if (step === 0 && window.matchMedia('(pointer: fine)').matches) {
+        document.getElementById('field-birthDate')?.focus({ preventScroll: true });
+      }
       return;
     }
     headingRef.current?.focus({ preventScroll: true });
@@ -145,13 +149,13 @@ export function ReadingWizard({ session, onOpenNotice }: ReadingWizardProps) {
       <div ref={topRef} className="wizard__anchor" />
       <aside className="wizard__aside">
         <div className="wizard__aside-head">
-          <p className="label label--gold">Your reading</p>
+          <p className="label label--gold">Deine Deutung</p>
           <span className="chip">
             <span className="chip__dot" aria-hidden="true" />
             Demo
           </span>
         </div>
-        <ol className="wizard__rail" aria-label="Steps">
+        <ol className="wizard__rail" aria-label="Schritte">
           {STEPS.map((s, index) => {
             const state = index < step ? 'done' : index === step ? 'current' : 'upcoming';
             return (
@@ -178,18 +182,18 @@ export function ReadingWizard({ session, onOpenNotice }: ReadingWizardProps) {
         <div className="wizard__progress">
           <div className="wizard__progress-meta">
             <span className="label">
-              Step {current.numeral} <span className="muted">of III</span>
+              Schritt {current.numeral} <span className="muted">von III</span>
             </span>
             <span className="label">{current.name}</span>
           </div>
           <div
             className="wizard__progress-track"
             role="progressbar"
-            aria-label="Reading progress"
+            aria-label="Fortschritt"
             aria-valuemin={1}
             aria-valuemax={3}
             aria-valuenow={step + 1}
-            aria-valuetext={`Step ${step + 1} of 3: ${current.name}`}
+            aria-valuetext={`Schritt ${step + 1} von 3: ${current.name}`}
           >
             <span className="wizard__progress-fill" style={{ transform: `scaleX(${(step + 1) / 3})` }} />
           </div>
@@ -219,8 +223,8 @@ export function ReadingWizard({ session, onOpenNotice }: ReadingWizardProps) {
             <div className="wizard__alert" role="alert">
               <Icon name="info" size={18} />
               <div>
-                <strong>The reading could not be prepared.</strong> {error} Your entries are still here — please try
-                again.
+                <strong>Die Deutung konnte nicht erstellt werden.</strong> {error} Deine Angaben sind noch da – bitte
+                versuche es erneut.
               </div>
             </div>
           )}
@@ -229,13 +233,13 @@ export function ReadingWizard({ session, onOpenNotice }: ReadingWizardProps) {
             {step > 0 ? (
               <button type="button" className="btn btn--text wizard__back" onClick={() => goTo(step - 1)}>
                 <Icon name="arrowLeft" className="btn__icon" />
-                Back
+                Zurück
               </button>
             ) : (
               <span />
             )}
             <button type="submit" className={`btn ${step === 2 ? 'btn--primary wizard__generate' : 'btn--primary'}`}>
-              {step === 2 ? 'Generate My Reading' : 'Continue'}
+              {step === 2 ? 'Deutung erstellen' : 'Weiter'}
               <Icon name={step === 2 ? 'sparkle' : 'arrowRight'} className="btn__icon btn__icon--arrow" />
             </button>
           </div>
@@ -243,9 +247,9 @@ export function ReadingWizard({ session, onOpenNotice }: ReadingWizardProps) {
 
         <p className="wizard__privacy">
           <Icon name="shield" size={14} />
-          <span>Processed only in your browser. Nothing is stored or sent.</span>
+          <span>Wird nur in deinem Browser verarbeitet. Nichts wird gespeichert oder gesendet.</span>
           <button type="button" className="wizard__privacy-link" onClick={() => onOpenNotice('privacy')}>
-            Privacy
+            Datenschutz
           </button>
         </p>
       </div>

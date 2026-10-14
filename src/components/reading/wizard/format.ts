@@ -1,22 +1,22 @@
 import { parseDate } from '../../../lib/astro/sky';
 
 const MONTHS = [
-  'January',
-  'February',
-  'March',
+  'Januar',
+  'Februar',
+  'März',
   'April',
-  'May',
-  'June',
-  'July',
+  'Mai',
+  'Juni',
+  'Juli',
   'August',
   'September',
-  'October',
+  'Oktober',
   'November',
-  'December',
+  'Dezember',
 ];
 
 export function formatLongDate(iso: string): string {
   const date = parseDate(iso);
   if (!date) return iso;
-  return `${date.day} ${MONTHS[date.month - 1]} ${date.year}`;
+  return `${date.day}. ${MONTHS[date.month - 1]} ${date.year}`;
 }

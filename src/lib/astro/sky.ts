@@ -115,14 +115,14 @@ export interface MoonPhase {
 }
 
 const PHASE_NAMES: Record<MoonPhaseId, string> = {
-  new: 'New Moon',
-  'waxing-crescent': 'Waxing Crescent',
-  'first-quarter': 'First Quarter',
-  'waxing-gibbous': 'Waxing Gibbous',
-  full: 'Full Moon',
-  'waning-gibbous': 'Waning Gibbous',
-  'last-quarter': 'Last Quarter',
-  'waning-crescent': 'Waning Crescent',
+  new: 'Neumond',
+  'waxing-crescent': 'Zunehmende Sichel',
+  'first-quarter': 'Erstes Viertel',
+  'waxing-gibbous': 'Zunehmender Mond',
+  full: 'Vollmond',
+  'waning-gibbous': 'Abnehmender Mond',
+  'last-quarter': 'Letztes Viertel',
+  'waning-crescent': 'Abnehmende Sichel',
 };
 
 export function moonPhase(m: BirthMoment): MoonPhase {
@@ -178,13 +178,13 @@ export function approximateSunHouse(hour: number, minute = 0): number {
 }
 
 export const WEEKDAYS = [
-  { day: 'Sunday', planet: 'Sun', origin: 'dies Solis' },
-  { day: 'Monday', planet: 'Moon', origin: 'dies Lunae' },
-  { day: 'Tuesday', planet: 'Mars', origin: 'dies Martis' },
-  { day: 'Wednesday', planet: 'Mercury', origin: 'dies Mercurii' },
-  { day: 'Thursday', planet: 'Jupiter', origin: 'dies Iovis' },
-  { day: 'Friday', planet: 'Venus', origin: 'dies Veneris' },
-  { day: 'Saturday', planet: 'Saturn', origin: 'dies Saturni' },
+  { day: 'Sonntag', planet: 'Sonne', glyph: 'sun', origin: 'dies Solis' },
+  { day: 'Montag', planet: 'Mond', glyph: 'moon', origin: 'dies Lunae' },
+  { day: 'Dienstag', planet: 'Mars', glyph: 'mars', origin: 'dies Martis' },
+  { day: 'Mittwoch', planet: 'Merkur', glyph: 'mercury', origin: 'dies Mercurii' },
+  { day: 'Donnerstag', planet: 'Jupiter', glyph: 'jupiter', origin: 'dies Iovis' },
+  { day: 'Freitag', planet: 'Venus', glyph: 'venus', origin: 'dies Veneris' },
+  { day: 'Samstag', planet: 'Saturn', glyph: 'saturn', origin: 'dies Saturni' },
 ] as const;
 
 export function weekdayOf(year: number, month: number, day: number) {

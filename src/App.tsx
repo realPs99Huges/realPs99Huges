@@ -117,7 +117,7 @@ function AstraApp() {
   return (
     <>
       <a className="skip-link" href="#main">
-        Skip to content
+        Zum Inhalt springen
       </a>
       <CosmicBackground />
       <Header view={view} onNavigate={navigate} onBegin={beginReading} onOpenDemoNotice={() => setNotice('demo')} />

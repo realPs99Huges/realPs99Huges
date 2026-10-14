@@ -39,7 +39,7 @@ export function AstraLogo({ onClick, href = '#top' }: AstraLogoProps) {
         event.preventDefault();
         onClick();
       }}
-      aria-label="ASTRA — back to the start"
+      aria-label="ASTRA – zum Anfang"
     >
       <AstraMark />
       <span className="astra-logo__word" aria-hidden="true">

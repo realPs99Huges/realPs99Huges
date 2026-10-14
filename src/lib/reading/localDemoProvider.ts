@@ -19,7 +19,6 @@ import {
   weekdayOf,
   WEEKDAYS,
   type BirthMoment,
-  type MoonPhase,
 } from '../astro/sky';
 import {
   ELEMENTS,
@@ -37,6 +36,7 @@ import {
   ASTERISM_NOUNS,
   BIRTH_FLOWERS,
   BIRTHSTONES,
+  CHINESE_ANIMALS,
   DAY_PART_CONTENT,
   ELEMENT_CONTENT,
   HOUSES,
@@ -51,6 +51,7 @@ import { createRng, hashString, type Rng } from './random';
 import type {
   Asterism,
   CosmicReading,
+  Fact,
   Insight,
   MapPoint,
   ReadingEngine,
@@ -61,99 +62,102 @@ import type {
 
 export const DEMO_ENGINE: ReadingEngine = {
   kind: 'demo-rules',
-  label: 'Demo reading · generated locally by a rule-based engine',
+  label: 'Demo-Deutung · lokal erstellt von einer regelbasierten Engine',
 };
 
 const MONTH_NAMES = [
-  'January',
-  'February',
-  'March',
+  'Januar',
+  'Februar',
+  'März',
   'April',
-  'May',
-  'June',
-  'July',
+  'Mai',
+  'Juni',
+  'Juli',
   'August',
   'September',
-  'October',
+  'Oktober',
   'November',
-  'December',
+  'Dezember',
 ];
 
 const ORDINALS = [
-  'first',
-  'second',
-  'third',
-  'fourth',
-  'fifth',
-  'sixth',
-  'seventh',
-  'eighth',
-  'ninth',
-  'tenth',
-  'eleventh',
-  'twelfth',
+  'ersten',
+  'zweiten',
+  'dritten',
+  'vierten',
+  'fünften',
+  'sechsten',
+  'siebten',
+  'achten',
+  'neunten',
+  'zehnten',
+  'elften',
+  'zwölften',
 ];
 const ROMAN = ['I', 'II', 'III'];
+const SYNODIC_MONTH = 29.530588853;
+const DAY_MS = 86400000;
 
-const CONSTELLATION_NAMES: Record<string, string> = {
-  scorpio: 'Scorpius',
-  capricorn: 'Capricornus',
-};
-
-const MOON_QUESTIONS: Record<MoonPhase['id'], string> = {
-  new: 'What intention would you like to plant — quietly, without announcing it?',
-  'waxing-crescent': 'Which fragile beginning in your life deserves protection right now?',
-  'first-quarter': 'Which decision have you been circling that is ready to be made?',
-  'waxing-gibbous': 'What are you refining that is, in truth, already good enough to share?',
-  full: 'What has recently become clear that you could not see before?',
-  'waning-gibbous': 'What have you learned that someone else might need to hear?',
-  'last-quarter': 'What are you ready to set down so your hands are free again?',
-  'waning-crescent': 'Where in your life are you being asked to rest before you begin again?',
+const MOON_QUESTIONS: Record<string, string> = {
+  new: 'Welche Absicht möchtest du still säen, ohne sie anzukündigen?',
+  'waxing-crescent': 'Welcher zarte Anfang in deinem Leben verdient gerade Schutz?',
+  'first-quarter': 'Um welche Entscheidung kreist du, die jetzt reif ist?',
+  'waxing-gibbous': 'Woran feilst du, das in Wahrheit schon gut genug zum Teilen ist?',
+  full: 'Was ist dir zuletzt klar geworden, das du vorher nicht sehen konntest?',
+  'waning-gibbous': 'Was hast du gelernt, das jemand anderes gerade hören müsste?',
+  'last-quarter': 'Was bist du bereit abzulegen, damit deine Hände wieder frei sind?',
+  'waning-crescent': 'Wo in deinem Leben darfst du ruhen, bevor du neu beginnst?',
 };
 
 const DIRECTION_MEANING: Record<string, string> = {
-  north: 'the north, which many traditions link with endurance, ancestry and quiet wisdom',
-  south: 'the south, which many traditions link with warmth, growth and expression',
-  east: 'the east, which many traditions link with sunrise, beginnings and new light',
-  west: 'the west, which many traditions link with sunset, reflection and completion',
+  Norden: 'den Norden, den viele Traditionen mit Ausdauer und stiller Weisheit verbinden',
+  Süden: 'den Süden, den viele Traditionen mit Wärme, Wachstum und Ausdruck verbinden',
+  Osten: 'den Osten, den viele Traditionen mit Sonnenaufgang und Neubeginn verbinden',
+  Westen: 'den Westen, den viele Traditionen mit Sonnenuntergang, Rückschau und Vollendung verbinden',
+};
+
+/** "Nordosten" → "Osten", "Südwesten" → "Westen"; the four cardinal points pass through. */
+function mainDirection(direction: string): string {
+  if (direction.endsWith('osten')) return 'Osten';
+  if (direction.endsWith('westen')) return 'Westen';
+  return direction;
+}
+
+const PLANET_GENITIVE: Record<string, string> = {
+  Sonne: 'der Sonne',
+  Mond: 'des Mondes',
+  Mars: 'des Mars',
+  Merkur: 'des Merkur',
+  Jupiter: 'des Jupiter',
+  Venus: 'der Venus',
+  Saturn: 'des Saturn',
 };
 
 const RECHARGE_BY_MODALITY = {
-  cardinal: 'Begin each day with one small act that is entirely your own.',
-  fixed: 'Protect one unchanging ritual, even in your busiest weeks.',
-  mutable: 'Allow variety — a new route, a new sound, a new conversation.',
+  cardinal: 'Beginne jeden Tag mit einer kleinen Handlung, die ganz dir gehört.',
+  fixed: 'Schütze ein festes Ritual – auch in vollen Wochen.',
+  mutable: 'Erlaube Abwechslung: einen neuen Weg, einen neuen Klang, ein neues Gespräch.',
 };
 
 const INTENTION_NIGHT_PLANET: Record<string, string> = {
   connection: 'Venus',
   vocation: 'Mars',
-  creativity: 'Sun',
+  creativity: 'Sonne',
   roots: 'Saturn',
   change: 'Jupiter',
-  calm: 'Moon',
-  self: 'Mercury',
+  calm: 'Mond',
+  self: 'Merkur',
 };
 
-function article(word: string): string {
-  return /^[aeiou]/i.test(word) ? 'an' : 'a';
-}
-
-function moonPhrase(moon: MoonPhase): string {
-  const name = moon.name.toLowerCase();
-  return name.endsWith('moon') ? name : `${name} moon`;
-}
-
-function lowerFirst(text: string): string {
-  return text.charAt(0).toLowerCase() + text.slice(1);
-}
+const nf = new Intl.NumberFormat('de-DE');
 
 function formatDate(year: number, month: number, day: number): string {
-  return `${day} ${MONTH_NAMES[month - 1]} ${year}`;
+  return `${day}. ${MONTH_NAMES[month - 1]} ${year}`;
 }
 
 function formatKm(km: number): string {
   const rounded = km < 100 ? Math.round(km / 5) * 5 : Math.round(km / 10) * 10;
-  return rounded.toLocaleString('en-US');
+  return nf.format(rounded);
 }
 
 function cleanText(value: string): string {
@@ -196,13 +200,19 @@ function sunConstellation(month: number, day: number): string {
   return current;
 }
 
+/** Chinese zodiac animal by solar year, which turns at Lichun (around 4 February). */
+function chineseAnimal(year: number, month: number, day: number): string {
+  const solarYear = month < 2 || (month === 2 && day < 4) ? year - 1 : year;
+  return CHINESE_ANIMALS[(((solarYear - 4) % 12) + 12) % 12];
+}
+
 function season(longitude: number, lat: number): { season: string; hemisphere: string } {
-  const northern = ['spring', 'summer', 'autumn', 'winter'];
-  const southern = ['autumn', 'winter', 'spring', 'summer'];
+  const northern = ['Frühling', 'Sommer', 'Herbst', 'Winter'];
+  const southern = ['Herbst', 'Winter', 'Frühling', 'Sommer'];
   const quarter = Math.floor(longitude / 90) % 4;
   return lat >= 0
-    ? { season: northern[quarter], hemisphere: 'northern' }
-    : { season: southern[quarter], hemisphere: 'southern' };
+    ? { season: northern[quarter], hemisphere: 'Nordhalbkugel' }
+    : { season: southern[quarter], hemisphere: 'Südhalbkugel' };
 }
 
 function buildAsterism(rng: Rng, dayPartLatin: string, dayPartMeaning: string): Asterism {
@@ -230,12 +240,7 @@ function buildAsterism(rng: Rng, dayPartLatin: string, dayPartMeaning: string): 
   if (order.length > 4) lines.push([order[0], order[Math.floor(order.length / 2)]]);
 
   const [noun, nounMeaning] = rng.pick(ASTERISM_NOUNS);
-  return {
-    name: `${noun} ${dayPartLatin}`,
-    translation: `The ${nounMeaning} ${dayPartMeaning}`,
-    stars,
-    lines,
-  };
+  return { name: `${noun} ${dayPartLatin}`, translation: `${nounMeaning} ${dayPartMeaning}`, stars, lines };
 }
 
 function toMapPoint(place: Place | null, label: string, role: MapPoint['role']): MapPoint | null {
@@ -274,8 +279,8 @@ function buildTimeline(
     age,
     year: now.getFullYear(),
     glyph: 'moon',
-    title: 'Your Present Sky',
-    cycle: `Now · age ${Math.floor(age)}`,
+    title: 'Dein Himmel heute',
+    cycle: `Jetzt · ${Math.floor(age)} Jahre`,
     theme: presentTheme,
     question: presentQuestion,
     status: 'now',
@@ -291,9 +296,99 @@ function buildTimeline(
   return { free, full };
 }
 
+function buildFacts(params: {
+  birth: BirthMoment;
+  now: Date;
+  sunLabel: string;
+  moonName: string;
+  moonPercent: number;
+  weekday: (typeof WEEKDAYS)[number];
+  animal: string;
+  constellation: string;
+  birthstone: string;
+  flower: string;
+  birthPlace: Place | null;
+  homePlace: Place | null;
+}): Fact[] {
+  const { birth, now } = params;
+  const bornAt = Date.UTC(birth.year, birth.month - 1, birth.day);
+  const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const days = Math.max(0, Math.round((today - bornAt) / DAY_MS));
+  const years = days / 365.2422;
+
+  // Next round "day birthday" (multiples of 1,000 days).
+  const nextMilestone = (Math.floor(days / 1000) + 1) * 1000;
+  const milestoneDate = new Date(bornAt + nextMilestone * DAY_MS);
+
+  // Next calendar birthday.
+  let next = new Date(Date.UTC(now.getFullYear(), birth.month - 1, birth.day));
+  if (next.getTime() < today) next = new Date(Date.UTC(now.getFullYear() + 1, birth.month - 1, birth.day));
+  const daysToBirthday = Math.round((next.getTime() - today) / DAY_MS);
+  const nextWeekday = WEEKDAYS[next.getUTCDay()].day;
+
+  const facts: Fact[] = [
+    {
+      value: nf.format(days),
+      label: 'Tage alt',
+      note: `Dein ${nf.format(nextMilestone)}. Tag: ${formatDate(milestoneDate.getUTCFullYear(), milestoneDate.getUTCMonth() + 1, milestoneDate.getUTCDate())}`,
+    },
+    {
+      value: `≈ ${nf.format(Math.floor(days / SYNODIC_MONTH))}`,
+      label: 'Vollmonde erlebt',
+      note: 'Ein Mondzyklus dauert 29,5 Tage',
+    },
+    {
+      value: `${(years * 0.94).toLocaleString('de-DE', { maximumFractionDigits: 1, minimumFractionDigits: 1 })} Mrd. km`,
+      label: 'mit der Erde um die Sonne gereist',
+      note: 'Eine Erdumrundung ≈ 940 Mio. km',
+    },
+    {
+      value: daysToBirthday === 0 ? 'Heute!' : `${nf.format(daysToBirthday)} ${daysToBirthday === 1 ? 'Tag' : 'Tage'}`,
+      label: 'bis zu deinem Geburtstag',
+      note: daysToBirthday === 0 ? 'Alles Gute zum Geburtstag' : `Er fällt auf einen ${nextWeekday}`,
+    },
+    {
+      value: params.weekday.day,
+      label: 'Wochentag deiner Geburt',
+      note: `Tag ${PLANET_GENITIVE[params.weekday.planet]} (${params.weekday.origin})`,
+    },
+    { value: params.sunLabel, label: 'Sonnenstand bei Geburt', note: 'Berechnet, ca. ±1° ohne Zeitzone' },
+    {
+      value: `${params.moonPercent} %`,
+      label: 'Mondlicht bei Geburt',
+      note: params.moonName,
+    },
+    { value: params.animal, label: 'Chinesisches Tierzeichen', note: 'Sonnenjahr ab ca. 4. Februar' },
+    {
+      value: params.constellation,
+      label: 'Sternbild hinter der Sonne',
+      note: 'Astronomisch – durch die Präzession verschoben',
+    },
+    { value: params.birthstone, label: 'Geburtsstein', note: `Geburtsblume: ${params.flower}` },
+  ];
+
+  if (params.birthPlace && params.homePlace) {
+    const km = distanceKm(params.birthPlace, params.homePlace);
+    if (km >= 30) {
+      facts.push({
+        value: `${formatKm(km)} km`,
+        label: 'zwischen Geburtsort und Wohnort',
+        note: `Luftlinie Richtung ${compassDirection(params.birthPlace, params.homePlace)}`,
+      });
+    }
+  } else if (params.birthPlace && Math.abs(params.birthPlace.lat) >= 5 && params.birthPlace.lat > 0) {
+    facts.push({
+      value: `${Math.round(params.birthPlace.lat)}°`,
+      label: 'Höhe des Polarsterns über deinem Geburtsort',
+      note: 'Sie entspricht immer der geografischen Breite',
+    });
+  }
+  return facts;
+}
+
 export function buildDemoReading(input: ReadingInput, now: Date = new Date()): CosmicReading {
   const date = parseDate(input.birthDate);
-  if (!date) throw new Error('Invalid birth date');
+  if (!date) throw new Error('Ungültiges Geburtsdatum');
   const time = input.birthTimeUnknown ? null : parseTime(input.birthTime);
   const birth: BirthMoment = { ...date, hour: time?.hour ?? 12, minute: time?.minute ?? 0 };
 
@@ -308,6 +403,7 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
   const sun = sunPosition(birth);
   const moon = moonPhase(birth);
   const moonContent = MOON_CONTENT[moon.id];
+  const moonPercent = Math.round(moon.illumination * 100);
   const part = DAY_PART_CONTENT[dayPart(time?.hour ?? null, time?.minute ?? 0)];
   const weekday = weekdayOf(date.year, date.month, date.day);
 
@@ -321,76 +417,60 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
   );
   const rng = createRng(seed);
 
-  // — Title —
+  // — Title: "Die Entdeckerseele der Mitternacht" —
   const noun = rng.pick(content.nouns);
-  const stem = noun.slice(0, 4).toLowerCase();
-  const adjectives = (rng.next() < 0.68 ? part.adjectives : moonContent.adjectives).filter(
-    (candidate) => !candidate.toLowerCase().startsWith(stem),
-  );
-  const adjective = rng.pick(adjectives.length ? adjectives : part.adjectives);
-  const title = `The ${adjective} ${noun}`;
-  const subtitle = `${article(sign.name).replace(/^a/, 'A')} ${sign.name} Sun born ${part.phrase}, beneath a ${moonPhrase(moon)}.`;
+  const genitive = rng.next() < 0.68 ? rng.pick(part.genitives) : moonContent.genitive;
+  const title = `Die ${noun} ${genitive}`;
+  const subtitle = `${sign.name}-Sonne, geboren ${part.phrase} ${moonContent.at}.`;
 
-  // — Inner universe selections (shared by free + premium) —
   const strengths = rng.shuffle(content.strengths);
   const tensions = rng.shuffle(content.tensions);
   const growth = rng.pick(content.growth);
 
-  // — Summary —
-  const summaryTemplates = [
-    () =>
-      `${title} — ${article(sign.name)} ${sign.name} Sun born ${part.phrase} in ${birthplaceLabel}, beneath a ${moonPhrase(moon)}. ${sign.essence} Your reading suggests a ${elementContent.adjective} nature that ${modalityContent.phrase}, with a growth theme of ${lowerFirst(growth.title)}.`,
-    () =>
-      `Born ${part.phrase} in ${birthplaceLabel}, beneath a ${moonPhrase(moon)}, you carry the symbolism of ${lowerFirst(sign.image)} — ${lowerFirst(sign.archetype)} of the zodiac. Your profile points to a ${elementContent.adjective} spirit that ${modalityContent.phrase}; its invitation for now is ${lowerFirst(growth.title)}.`,
-  ];
-  const summary = rng.pick(summaryTemplates)();
+  const summary = rng.pick([
+    `${sign.essence} Als ${sign.name}-Sonne, geboren ${part.phrase} in ${birthplaceLabel}, zeigt dein Profil eine ${elementContent.adjective} Natur, die ${modalityContent.phrase}. Dein Wachstumsthema: ${growth.title}.`,
+    `Geboren ${part.phrase} in ${birthplaceLabel}, ${moonContent.at}: Deine ${sign.name}-Sonne steht für ${sign.keywords[0]}, ${sign.keywords[1]} und ${sign.keywords[2]}. Dein Profil zeigt eine ${elementContent.adjective} Natur, die ${modalityContent.phrase} – dein Wachstumsthema: ${growth.title}.`,
+  ]);
 
   // — Places —
   const birthPlace = findPlace(birthplaceLabel);
   const homePlace = residenceLabel ? findPlace(residenceLabel) : null;
-  const birthPoint = toMapPoint(birthPlace, birthplaceLabel, 'birth');
-  const homePoint = toMapPoint(homePlace, residenceLabel, 'home');
   const distance = birthPlace && homePlace ? distanceKm(birthPlace, homePlace) : null;
 
   // — 01 Identity —
-  const rulerLine = traditional
-    ? `Your ruling planet is ${ruler.name}, associated with ${ruler.theme}; in older traditions, ${traditional.name} — ${traditional.theme} — rules your sign.`
-    : `Your ruling planet is ${ruler.name}, associated with ${ruler.theme}.`;
   let identityNote: string | undefined;
   if (sun.sign.id !== sign.id) {
-    identityNote = `The calculated Sun position for your birth moment is ${formatDegree(sun.degree)} ${sun.sign.name}. You chose ${sign.name}, and this reading follows your choice.`;
+    identityNote = `Berechnet liegt deine Sonne bei ${formatDegree(sun.degree)} ${sun.sign.name}. Du hast ${sign.name} gewählt – die Deutung folgt deiner Wahl.`;
   } else if (sun.cuspWith) {
-    identityNote = `Your Sun sat at ${formatDegree(sun.degree)} ${sun.sign.name}, close to the border with ${sun.cuspWith.name}. Without a time zone the exact switch can shift by a few hours — you may recognise yourself in both.`;
+    identityNote = `Deine Sonne stand bei ${formatDegree(sun.degree)} ${sun.sign.name}, ganz nah an der Grenze zu ${sun.cuspWith.name}. Ohne Zeitzone kann sich der Wechsel um Stunden verschieben – vielleicht erkennst du dich in beiden.`;
   }
 
   // — 03 Origins —
   const statementParts: string[] = [];
   if (birthPlace?.precision === 'city') {
-    statementParts.push(`You were born in ${birthplaceLabel} — ${formatCoordinates(birthPlace)}.`);
+    statementParts.push(`Du wurdest in ${birthplaceLabel} geboren – ${formatCoordinates(birthPlace)}.`);
   } else if (birthPlace) {
-    statementParts.push(
-      `You named ${birthplaceLabel} as your birthplace. ASTRA’s offline atlas marks it at the country’s approximate centre.`,
-    );
+    statementParts.push(`Du hast ${birthplaceLabel} angegeben. Die Karte zeigt den ungefähren Mittelpunkt des Landes.`);
   } else {
     statementParts.push(
-      `You were born in ${birthplaceLabel}. This place is not in ASTRA’s small offline atlas, so it appears by name only — no location service was contacted.`,
+      `Du wurdest in ${birthplaceLabel} geboren. Der Ort ist nicht in ASTRAs kleinem Offline-Atlas und erscheint daher nur mit Namen – es wurde kein Ortungsdienst abgefragt.`,
     );
   }
   if (residenceLabel) {
     if (distance !== null && distance < 30)
-      statementParts.push(`You still live close to where you were born, in ${residenceLabel}.`);
+      statementParts.push(`Du lebst heute nah an deinem Geburtsort, in ${residenceLabel}.`);
     else if (distance !== null && birthPlace && homePlace)
       statementParts.push(
-        `Today you live in ${residenceLabel}, roughly ${formatKm(distance)} km ${compassDirection(birthPlace, homePlace)} of your birthplace.`,
+        `Heute lebst du in ${residenceLabel}, rund ${formatKm(distance)} km Richtung ${compassDirection(birthPlace, homePlace)}.`,
       );
-    else statementParts.push(`Today you live in ${residenceLabel}.`);
+    else statementParts.push(`Heute lebst du in ${residenceLabel}.`);
   }
 
   // — 04 Timeline —
   const today = momentFromDate(now);
   const todaySun = sunPosition(today);
   const todayMoon = moonPhase(today);
-  const presentTheme = `Today the Sun moves through ${todaySun.sign.name} beneath a ${moonPhrase(todayMoon)}. For you, this chapter may be coloured by ${lowerFirst(growth.title)}.`;
+  const presentTheme = `Heute läuft die Sonne durch das Zeichen ${todaySun.sign.name}, der Mond steht ${MOON_CONTENT[todayMoon.id].at}. Für dich könnte dieses Kapitel von „${growth.title}“ geprägt sein.`;
   const presentQuestion = theme ? theme.question : MOON_QUESTIONS[todayMoon.id];
   const timeline = buildTimeline(birth, now, presentTheme, presentQuestion);
 
@@ -398,73 +478,57 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
   const questions = [
     rng.pick(content.questions),
     theme ? theme.question : MOON_QUESTIONS[moon.id],
-    `If “${lowerFirst(growth.title)}” were your theme for the coming season, what would you do differently this week?`,
+    `Wenn „${growth.title}“ dein Thema für die nächste Zeit wäre – was würdest du diese Woche anders machen?`,
   ];
   const quoted = intention.length > 160 ? `${intention.slice(0, 157).trimEnd()}…` : intention;
-  let reflectionIntro = 'Three questions to carry with you. There are no right answers — only honest ones.';
-  if (intention && theme) {
-    reflectionIntro = `Your own question was the starting point. These prompts are shaped around ${theme.focus} and your ${sign.name} symbolism.`;
-  } else if (intention) {
-    reflectionIntro =
-      'Your own question was the starting point. Let these prompts sit beside it — there are no right answers, only honest ones.';
-  }
+  let reflectionIntro = 'Drei Fragen zum Mitnehmen. Es gibt keine richtigen Antworten – nur ehrliche.';
+  if (intention && theme)
+    reflectionIntro = `Deine eigene Frage war der Ausgangspunkt. Die Impulse drehen sich um ${theme.focus}.`;
+  else if (intention)
+    reflectionIntro = 'Deine eigene Frage war der Ausgangspunkt. Lass diese Impulse neben ihr stehen.';
 
   // — Premium: extended profile —
   const decanSign = triplicity(sun.sign)[sun.decan - 1];
   const decanRange = `${(sun.decan - 1) * 10}°–${sun.decan * 10}°`;
   const house = time ? approximateSunHouse(time.hour, time.minute) : null;
-  const extraStrengths = strengths.slice(3);
-  const extraTensions = tensions.slice(2);
   const extendedSections: Insight[] = [
     {
-      title: `Decan ${ROMAN[sun.decan - 1]} · ${decanSign.name}`,
-      body: `Your Sun sits at about ${formatDegree(sun.degree)} ${sun.sign.name}, in the ${ORDINALS[sun.decan - 1]} decan (${decanRange}). In the triplicity system, this ten-degree band is coloured by ${decanSign.name}: ${lowerFirst(decanSign.essence)}`,
+      title: `Dekade ${ROMAN[sun.decan - 1]} · ${decanSign.name}`,
+      body: `Deine Sonne steht bei etwa ${formatDegree(sun.degree)} ${sun.sign.name}, in der ${ORDINALS[sun.decan - 1]} Dekade (${decanRange}). Dieses Zehn-Grad-Feld wird traditionell vom Zeichen ${decanSign.name} gefärbt: ${decanSign.essence}`,
     },
+    { title: `Die Achse ${sign.name} – ${oppositeSign(sign).name}`, body: content.axis },
     {
-      title: `The ${sign.name}–${oppositeSign(sign).name} axis`,
-      body: content.axis,
-    },
-    {
-      title: `${ruler.name}, your ruling planet`,
-      body: `${ruler.name} colours ${sign.name} with ${ruler.theme}. Notice where in your life these themes feel most alive — and where they ask for more room.${traditional ? ` Older traditions add ${traditional.name}, lending ${traditional.theme}.` : ''}`,
+      title: `${ruler.name}, dein Herrscherplanet`,
+      body: `${ruler.name} färbt ${sign.name} mit ${ruler.theme}.${traditional ? ` Ältere Traditionen nennen zusätzlich ${traditional.name}.` : ''} Achte darauf, wo diese Themen in deinem Leben am lebendigsten sind.`,
     },
     house
       ? {
-          title: `Sun in the ${ORDINALS[house - 1]} house`,
-          body: `With a birth time of ${input.birthTime}, your Sun most likely stood in or near the ${ORDINALS[house - 1]} house — the ${HOUSES[house - 1].name}, associated with ${HOUSES[house - 1].theme}.`,
-          tag: 'Approximation · assumes sunrise near 06:00, no time zone',
+          title: `Sonne im ${house}. Haus`,
+          body: `Bei einer Geburtszeit von ${input.birthTime} Uhr stand deine Sonne vermutlich im oder nahe dem ${house}. Haus – dem ${HOUSES[house - 1].name}: ${HOUSES[house - 1].theme}.`,
+          tag: 'Näherung · Sonnenaufgang ~06:00, ohne Zeitzone',
         }
       : {
-          title: 'The open house',
-          body: 'Without a birth time, the house of your Sun stays open. If you ever find your exact time — on a birth certificate or in family records — this layer of the reading can be filled in.',
+          title: 'Das offene Haus',
+          body: 'Ohne Geburtszeit bleibt das Haus deiner Sonne offen. Steht sie auf deiner Geburtsurkunde, lässt sich diese Ebene ergänzen.',
         },
     {
-      title: `Your birth Moon · ${moon.name}`,
-      body: `${moonContent.text} At your birth the Moon was about ${Math.round(moon.illumination * 100)}% illuminated, ${moon.age.toFixed(1)} days into its cycle.`,
-      tag: 'Approximate',
+      title: `Dein Geburtsmond · ${moon.name}`,
+      body: `${moonContent.text} Er war zu etwa ${moonPercent} % beleuchtet, ${moon.age.toFixed(1).replace('.', ',')} Tage nach Neumond.`,
+      tag: 'Berechnet',
     },
     {
-      title: 'More of your light',
-      body: extraStrengths.map((s) => `${s.title} — ${lowerFirst(s.body)}`).join(' '),
-    },
-    {
-      title: 'Further edges to explore',
-      body: extraTensions.map((t) => `${t.title}: ${t.body}`).join(' '),
-    },
-    {
-      title: 'Your recharge ritual',
-      body: `${element.name} signs often restore themselves through ${elementContent.recharge}. ${RECHARGE_BY_MODALITY[sign.modality]}`,
+      title: 'Dein Aufladeritual',
+      body: `${element.name}-Zeichen tanken oft auf durch ${elementContent.recharge}. ${RECHARGE_BY_MODALITY[sign.modality]}`,
     },
   ];
 
   // — Premium: origin reading —
   const constellationBehindSun = sunConstellation(date.month, date.day);
-  const signConstellation = CONSTELLATION_NAMES[sign.id] ?? sign.name;
   const sky: Insight[] = [
     {
-      title: 'The constellation behind your Sun',
-      body: `On ${date.day} ${MONTH_NAMES[date.month - 1]}, the Sun stood — astronomically — in front of the constellation ${constellationBehindSun}. Because Earth’s axis slowly wobbles (precession), the stars have drifted by almost a whole sign since the zodiac was defined${constellationBehindSun === signConstellation ? ', yet in your case sign and constellation still coincide.' : ', so your astrological sign and the visible constellation differ.'}`,
-      tag: 'Astronomy',
+      title: 'Das Sternbild hinter deiner Sonne',
+      body: `Am ${date.day}. ${MONTH_NAMES[date.month - 1]} stand die Sonne astronomisch vor dem Sternbild ${constellationBehindSun}. Weil die Erdachse langsam taumelt (Präzession), hat sich der Himmel seit der Festlegung des Tierkreises um fast ein Zeichen verschoben${constellationBehindSun === sign.name ? ' – bei dir stimmen Zeichen und Sternbild trotzdem überein.' : '.'}`,
+      tag: 'Astronomie',
     },
   ];
   if (birthPlace) {
@@ -472,46 +536,47 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
     const absLat = Math.abs(birthPlace.lat);
     const poleLine =
       absLat < 5
-        ? 'Close to the equator, both celestial poles rest near the horizon, and almost the entire sky passes overhead over a year.'
+        ? 'Nahe dem Äquator liegen beide Himmelspole am Horizont – fast der ganze Himmel zieht im Lauf eines Jahres vorbei.'
         : birthPlace.lat > 0
-          ? `From there, Polaris — the Pole Star — stands about ${Math.round(absLat)}° above the northern horizon, because the height of the celestial pole always equals your latitude.`
-          : `From there, the south celestial pole stands about ${Math.round(absLat)}° above the southern horizon; there is no bright pole star, but the Southern Cross points the way.`;
+          ? `Von dort steht der Polarstern etwa ${Math.round(absLat)}° über dem Nordhorizont – die Höhe des Himmelspols entspricht immer der geografischen Breite.`
+          : `Von dort steht der südliche Himmelspol etwa ${Math.round(absLat)}° über dem Horizont; einen hellen Polarstern gibt es nicht, aber das Kreuz des Südens weist den Weg.`;
     sky.push({
-      title: 'The sky above your birthplace',
-      body: `You were born in the ${birthSeason} of the ${hemisphere} hemisphere${birthPlace.precision === 'country' ? ' (based on an approximate national centre)' : ''}. ${poleLine}`,
-      tag: 'Astronomy',
+      title: 'Der Himmel über deinem Geburtsort',
+      body: `Du wurdest im ${birthSeason} der ${hemisphere} geboren. ${poleLine}`,
+      tag: 'Astronomie',
     });
   }
   sky.push({
-    title: `Your guiding star · ${content.star}`,
-    body: `The brightest star of ${signConstellation} is ${content.star}. On a clear night, finding it is a small, real way to connect with the symbol you were born under.`,
-    tag: 'Astronomy',
+    title: `Dein Leitstern · ${content.star}`,
+    body: `Der hellste Stern im Sternbild ${sign.name} (${sign.image}) ist ${content.star}. Ihn in einer klaren Nacht zu finden, ist eine kleine, echte Verbindung zu deinem Zeichen.`,
+    tag: 'Astronomie',
   });
 
+  const direction = birthPlace && homePlace ? compassDirection(birthPlace, homePlace) : null;
   const journey: Insight | null =
     birthPlace && homePlace && distance !== null
       ? distance < 30
         ? {
-            title: 'One sky, one place',
-            body: `You live close to where you were born. Symbolically, a life rooted under one sky is often read as continuity — a long conversation with a single landscape.`,
-            tag: 'Creative interpretation',
+            title: 'Ein Himmel, ein Ort',
+            body: 'Du lebst nah an deinem Geburtsort. Symbolisch wird ein Leben unter demselben Himmel oft als Kontinuität gelesen – ein langes Gespräch mit einer Landschaft.',
+            tag: 'Kreative Deutung',
           }
         : {
-            title: 'The line between two places',
-            body: `About ${formatKm(distance)} km separate ${birthplaceLabel} and ${residenceLabel}, a line pointing ${compassDirection(birthPlace, homePlace)}. Read poetically, your path leans toward ${DIRECTION_MEANING[compassDirection(birthPlace, homePlace).split('-').pop() ?? 'north']}.`,
-            tag: 'Creative interpretation',
+            title: 'Die Linie zwischen zwei Orten',
+            body: `Rund ${formatKm(distance)} km liegen zwischen ${birthplaceLabel} und ${residenceLabel}, Richtung ${direction}. Poetisch gelesen neigt sich dein Weg in ${DIRECTION_MEANING[mainDirection(direction ?? 'Norden')]}.`,
+            tag: 'Kreative Deutung',
           }
       : null;
 
-  // — Premium: extended reflection (seven nights, starting on your birth weekday) —
+  // — Premium: seven nights, starting on the birth weekday —
   const planetPrompts: Record<string, string> = {
-    Sun: `The first keyword of ${sign.name} is ${sign.keywords[0].toLowerCase()}. Where did it show up in your week — and who noticed?`,
-    Moon: `Born beneath a ${moonPhrase(moon)}: what is waxing in your life right now, and what is waning?`,
-    Mars: `Mars asks about courage. ${tensions[0].body}`,
-    Mercury: 'Write down a conversation you keep having in your head. What would you actually say?',
-    Jupiter: 'What is one way your world could grow larger this month — a place, a book, a person?',
-    Venus: 'List five beautiful things that cost nothing. Which of them did you nearly overlook?',
-    Saturn: 'Saturn asks about structure: which commitment would you keep even if no one ever checked?',
+    Sonne: `Das erste Stichwort deines Zeichens ist ${sign.keywords[0]}. Wo hat es sich diese Woche gezeigt – und wer hat es bemerkt?`,
+    Mond: `Du wurdest ${moonContent.at} geboren: Was wächst gerade in deinem Leben, was nimmt ab?`,
+    Mars: `Mars fragt nach Mut. ${tensions[0].body}`,
+    Merkur: 'Schreib ein Gespräch auf, das du immer wieder im Kopf führst. Was würdest du wirklich sagen?',
+    Jupiter: 'Wie könnte deine Welt diesen Monat größer werden – durch einen Ort, ein Buch, einen Menschen?',
+    Venus: 'Liste fünf schöne Dinge auf, die nichts kosten. Welches davon hättest du fast übersehen?',
+    Saturn: 'Saturn fragt nach Struktur: Welche Verpflichtung würdest du halten, auch wenn niemand nachsieht?',
   };
   if (theme) planetPrompts[INTENTION_NIGHT_PLANET[theme.id]] = theme.night;
   const startIndex = WEEKDAYS.findIndex((w) => w.day === weekday.day);
@@ -520,13 +585,8 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
     return { day: w.day, planet: w.planet, prompt: planetPrompts[w.planet] };
   });
 
-  // — Premium: signature —
   const asterism = buildAsterism(rng, part.latin, part.latinMeaning);
-  const signatureParagraphs = [
-    `${title} is a portrait in symbols: ${article(element.name)} ${element.name.toLowerCase()} sign of the ${modality.name.toLowerCase()} rhythm, ruled by ${ruler.name}, born ${part.phrase} beneath a ${moonPhrase(moon)} on a ${weekday.day}.`,
-    `Its light is ${lowerFirst(strengths[0].title)} and ${lowerFirst(strengths[1].title)}; its edge is ${lowerFirst(tensions[0].title)}. Its invitation — for now — is ${lowerFirst(growth.title)}.`,
-    'None of this is fixed. Like the sky itself, a profile is a moving picture: something to return to, question and rewrite.',
-  ];
+  const animal = chineseAnimal(date.year, date.month, date.day);
 
   return {
     id: seed.toString(36),
@@ -537,109 +597,119 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
     subtitle,
     asterism,
     summary,
+    facts: buildFacts({
+      birth,
+      now,
+      sunLabel: `${formatDegree(sun.degree)} ${sun.sign.name}`,
+      moonName: moon.name,
+      moonPercent,
+      weekday,
+      animal,
+      constellation: constellationBehindSun,
+      birthstone: BIRTHSTONES[date.month - 1],
+      flower: BIRTH_FLOWERS[date.month - 1],
+      birthPlace,
+      homePlace,
+    }),
     profile: {
       birthDateLabel: formatDate(date.year, date.month, date.day),
-      birthTimeLabel: time ? input.birthTime : 'Unknown',
+      birthTimeLabel: time ? `${input.birthTime} Uhr` : 'Unbekannt',
       birthplace: birthplaceLabel,
       residence: residenceLabel,
       facets: [
-        { label: 'Sun', value: `${formatDegree(sun.degree)} ${sun.sign.name}`, note: 'approx.' },
+        { label: 'Sonne', value: `${formatDegree(sun.degree)} ${sun.sign.name}`, note: 'ca.' },
         { label: 'Element', value: element.name },
-        { label: 'Moon at birth', value: moon.name, note: `${Math.round(moon.illumination * 100)}% lit` },
-        { label: 'Born on', value: weekday.day },
-        { label: 'Hour', value: part.label },
+        { label: 'Mond bei Geburt', value: moon.name, note: `${moonPercent} % beleuchtet` },
+        { label: 'Wochentag', value: weekday.day },
       ],
     },
     identity: {
       lead: sign.essence,
-      paragraphs: [
-        rng.pick(content.identity),
-        `${rng.pick(elementContent.temperament)} ${modalityContent.text} ${rulerLine}`,
-        `${part.text} ${moonContent.text}`,
-      ],
+      paragraphs: [rng.pick(content.identity), `${elementContent.temperament} ${part.text}`],
       facets: [
-        { label: 'Sign', value: `${sign.name} · ${sign.image}` },
-        { label: 'Season', value: formatSignRange(sign) },
-        { label: 'Element', value: `${element.name} — ${element.quality}` },
-        { label: 'Modality', value: `${modality.name} — ${modality.quality}` },
-        { label: 'Polarity', value: element.polarity },
-        { label: 'Ruler', value: traditional ? `${ruler.name} (trad. ${traditional.name})` : ruler.name },
-        { label: 'Keywords', value: sign.keywords.join(' · ') },
+        { label: 'Zeitraum', value: formatSignRange(sign) },
+        { label: 'Element', value: `${element.name} · ${element.quality}` },
+        { label: 'Qualität', value: `${modality.name} · ${modality.quality}` },
+        { label: 'Herrscher', value: traditional ? `${ruler.name} (trad. ${traditional.name})` : ruler.name },
+        { label: 'Stichworte', value: sign.keywords.join(' · ') },
+        { label: 'Leitstern', value: content.star },
       ],
       note: identityNote,
     },
     innerUniverse: {
-      intro: `Your ${element.name.toLowerCase()} element and ${modality.name.toLowerCase()} rhythm colour the themes below. Read them as reflection prompts, not as a diagnosis — keep what resonates and leave the rest.`,
+      intro: 'Impulse zum Nachdenken, keine Diagnose – nimm mit, was passt.',
       strengths: strengths.slice(0, 3),
       tensions: tensions.slice(0, 2),
       growth,
     },
     origins: {
-      birth: birthPoint,
-      home: homePoint,
+      birth: toMapPoint(birthPlace, birthplaceLabel, 'birth'),
+      home: toMapPoint(homePlace, residenceLabel, 'home'),
       statement: statementParts.join(' '),
       boundary:
-        'Your birth date, birth time and sign cannot reveal genetic ancestry, ethnicity or cultural origin. Real geographical and cultural roots live in family history, records and personal stories — information ASTRA neither has nor asks for.',
+        'Geburtsdatum, Uhrzeit und Sternzeichen können keine genetische Abstammung, Ethnie oder kulturelle Herkunft zeigen. Echte Wurzeln findest du in Familiengeschichte, Dokumenten und Erzählungen – Informationen, die ASTRA weder hat noch abfragt.',
       symbolic: {
-        title: 'A symbolic landscape',
-        tag: 'Creative interpretation',
-        body: `In elemental symbolism, ${element.name.toLowerCase()} signs are often associated with ${elementContent.landscapes}, and with cultural motifs such as ${elementContent.motifs}. Read these as poetic places your sign’s imagery belongs to — not as places your family came from.`,
+        title: 'Eine symbolische Landschaft',
+        tag: 'Kreative Deutung',
+        body: `In der Elementsymbolik werden ${element.name}-Zeichen mit ${elementContent.landscapes} verbunden – und mit Motiven wie ${elementContent.motifs}. Lies das als poetische Orte deines Zeichens, nicht als Herkunft deiner Familie.`,
       },
     },
     timeline: {
       intro:
-        'Astrology describes long cycles that return at similar ages for everyone. Here they appear as symbolic chapters with questions — not as predictions of what will happen.',
+        'Die Astrologie beschreibt lange Zyklen, die für alle Menschen in ähnlichem Alter wiederkehren. Hier erscheinen sie als Kapitel mit Fragen – nicht als Vorhersagen.',
       nodes: timeline.free,
     },
-    reflection: {
-      intro: reflectionIntro,
-      intention: quoted,
-      questions,
-    },
+    reflection: { intro: reflectionIntro, intention: quoted, questions },
     premium: {
       extendedProfile: {
-        intro: 'The extended profile moves beyond your Sun sign into the finer layers of your birth moment.',
+        intro:
+          'Das erweiterte Profil geht über dein Sonnenzeichen hinaus in die feineren Ebenen deines Geburtsmoments.',
         sections: extendedSections,
       },
       originReading: {
-        intro: 'A deeper look at the real sky above your story — and, clearly marked, at its symbolic geography.',
+        intro:
+          'Ein tieferer Blick auf den echten Himmel über deiner Geschichte – und, klar gekennzeichnet, auf ihre symbolische Geografie.',
         sky,
         lore: {
-          title: `The cultural story of ${signConstellation}`,
-          tag: 'Sky lore',
-          body: `${content.lore} These stories belong to the symbol you were born under — not to your personal ancestry.`,
+          title: `Die Kulturgeschichte von ${sign.name}`,
+          tag: 'Himmelsgeschichte',
+          body: `${content.lore} Diese Geschichten gehören zum Symbol, unter dem du geboren wurdest – nicht zu deiner persönlichen Abstammung.`,
         },
         landscapes: {
-          title: 'Symbolic landscapes',
-          tag: 'Creative interpretation',
-          body: `If your sign were a landscape, it might be ${elementContent.landscapes}. In Western ceremonial traditions each element is also given a direction — ${element.name.toLowerCase()} belongs to the ${elementContent.direction}. Treat this as poetry for the imagination, not as geography of descent.`,
+          title: 'Symbolische Landschaften',
+          tag: 'Kreative Deutung',
+          body: `Wäre dein Zeichen eine Landschaft, wären es vielleicht ${elementContent.landscapes}. In westlichen Traditionen erhält jedes Element auch eine Himmelsrichtung – ${element.name} gehört zum ${elementContent.direction}. Lies das als Poesie, nicht als Herkunft.`,
         },
         journey,
         familyPrompts: [
-          `Who in your family remembers ${birthplaceLabel} around the time you were born?`,
-          'Are there letters, photos or documents that show where your grandparents were born?',
-          'Which recipes, words or traditions were passed down to you — and where did they come from?',
-          'If you want factual answers about ancestry, archives, genealogical records and conversations with relatives are the right tools — astrology is not.',
+          `Wer in deiner Familie erinnert sich an ${birthplaceLabel} zur Zeit deiner Geburt?`,
+          'Gibt es Briefe, Fotos oder Dokumente, die zeigen, wo deine Großeltern geboren wurden?',
+          'Welche Rezepte, Wörter oder Traditionen wurden an dich weitergegeben – und woher kommen sie?',
+          'Für echte Antworten zur Abstammung sind Archive, Stammbäume und Gespräche mit Verwandten die richtigen Werkzeuge – nicht die Astrologie.',
         ],
       },
       extendedReflection: {
-        intro: `A seven-night practice, beginning on a ${weekday.day} — the weekday you were born. Each night is named for the planet that gave the day its name.`,
+        intro: `Eine Praxis für sieben Abende, beginnend an einem ${weekday.day} – dem Wochentag deiner Geburt. Jeder Abend ist nach dem Himmelskörper benannt, der dem Tag seinen lateinischen Namen gab.`,
         nights,
       },
       fullTimeline: {
         intro:
-          'Your complete symbolic arc: every major astrological cycle, placed at the age and year it returns for you. Each is a question to sit with, never a forecast.',
+          'Dein vollständiger Lebensbogen: alle großen astrologischen Zyklen, platziert in dem Alter und Jahr, in dem sie für dich wiederkehren – jeder eine Frage, keine Vorhersage.',
         nodes: timeline.full,
       },
       signature: {
-        paragraphs: signatureParagraphs,
+        paragraphs: [
+          `${title} ist ein Porträt in Symbolen: ein ${element.name}-Zeichen, ${modality.name.toLowerCase()} in seiner Qualität, regiert von ${ruler.name}, geboren ${part.phrase} ${moonContent.at} an einem ${weekday.day}.`,
+          `Dein Licht: ${strengths[0].title} und ${strengths[1].title}. Deine Kante: ${tensions[0].title}. Deine Einladung für jetzt: ${growth.title}.`,
+          'Nichts davon ist festgeschrieben. Wie der Himmel selbst ist ein Profil ein bewegtes Bild – zum Wiederkommen, Hinterfragen und Neuschreiben.',
+        ],
         symbols: [
-          { label: 'Guiding star', value: content.star },
-          { label: 'Birthstone', value: BIRTHSTONES[date.month - 1] },
-          { label: 'Birth flower', value: BIRTH_FLOWERS[date.month - 1] },
-          { label: 'Planetary day', value: `${weekday.day} · ${weekday.planet}`, note: weekday.origin },
-          { label: 'Symbolic colour', value: content.color },
-          { label: 'Personal asterism', value: asterism.name, note: asterism.translation },
+          { label: 'Leitstern', value: content.star },
+          { label: 'Geburtsstein', value: BIRTHSTONES[date.month - 1] },
+          { label: 'Geburtsblume', value: BIRTH_FLOWERS[date.month - 1] },
+          { label: 'Planetentag', value: `${weekday.day} · ${weekday.planet}`, note: weekday.origin },
+          { label: 'Symbolfarbe', value: content.color },
+          { label: 'Persönliches Sternbild', value: asterism.name, note: asterism.translation },
         ],
         mantra: content.mantra,
       },
@@ -650,7 +720,7 @@ export function buildDemoReading(input: ReadingInput, now: Date = new Date()): C
 export const localDemoProvider: ReadingProvider = {
   engine: DEMO_ENGINE,
   async generate(input, options) {
-    if (options?.signal?.aborted) throw new DOMException('Reading cancelled', 'AbortError');
+    if (options?.signal?.aborted) throw new DOMException('Deutung abgebrochen', 'AbortError');
     return buildDemoReading(input, options?.now ?? new Date());
   },
 };

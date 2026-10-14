@@ -13,6 +13,11 @@ export const LIMITS = {
 
 const HAS_LETTER = /\p{L}/u;
 
+const capital = (text: string) => {
+  const plain = text.replace(/^(deinen|deine|dein) /, '');
+  return `Der ${plain.charAt(0).toUpperCase()}${plain.slice(1)}`;
+};
+
 export function todayIso(now = new Date()): string {
   const y = now.getFullYear();
   const m = String(now.getMonth() + 1).padStart(2, '0');
@@ -22,10 +27,10 @@ export function todayIso(now = new Date()): string {
 
 function validatePlace(value: string, required: boolean, label: string): string | undefined {
   const trimmed = value.trim();
-  if (!trimmed) return required ? `Please enter your ${label}.` : undefined;
-  if (trimmed.length < 2) return `That ${label} looks a little short.`;
-  if (trimmed.length > LIMITS.placeMax) return `Please keep the ${label} under ${LIMITS.placeMax} characters.`;
-  if (!HAS_LETTER.test(trimmed)) return `Please enter a ${label} using letters.`;
+  if (!trimmed) return required ? `Bitte gib ${label} ein.` : undefined;
+  if (trimmed.length < 2) return `${capital(label)} ist etwas kurz.`;
+  if (trimmed.length > LIMITS.placeMax) return `Bitte höchstens ${LIMITS.placeMax} Zeichen.`;
+  if (!HAS_LETTER.test(trimmed)) return `Bitte gib ${label} in Buchstaben ein.`;
   return undefined;
 }
 
@@ -33,20 +38,20 @@ export function validateBirthStep(input: ReadingInput, now = new Date()): Valida
   const errors: ValidationErrors = {};
 
   if (!input.birthDate) {
-    errors.birthDate = 'Please enter your date of birth.';
+    errors.birthDate = 'Bitte gib dein Geburtsdatum ein.';
   } else {
     const parsed = parseDate(input.birthDate);
-    if (!parsed) errors.birthDate = 'Please enter a valid date.';
-    else if (parsed.year < LIMITS.minYear) errors.birthDate = `Please choose a date from ${LIMITS.minYear} onwards.`;
-    else if (input.birthDate > todayIso(now)) errors.birthDate = 'Your birth date cannot be in the future.';
+    if (!parsed) errors.birthDate = 'Bitte gib ein gültiges Datum ein (TT.MM.JJJJ).';
+    else if (parsed.year < LIMITS.minYear) errors.birthDate = `Bitte wähle ein Datum ab ${LIMITS.minYear}.`;
+    else if (input.birthDate > todayIso(now)) errors.birthDate = 'Dein Geburtsdatum kann nicht in der Zukunft liegen.';
   }
 
   if (!input.birthTimeUnknown) {
-    if (!input.birthTime) errors.birthTime = 'Enter a time, or tick “I don’t know my birth time”.';
-    else if (!parseTime(input.birthTime)) errors.birthTime = 'Please enter a valid time (HH:MM).';
+    if (!input.birthTime) errors.birthTime = 'Gib eine Uhrzeit ein oder wähle „Uhrzeit unbekannt“.';
+    else if (!parseTime(input.birthTime)) errors.birthTime = 'Bitte gib eine gültige Uhrzeit ein (HH:MM).';
   }
 
-  const place = validatePlace(input.birthplace, true, 'birthplace');
+  const place = validatePlace(input.birthplace, true, 'deinen Geburtsort');
   if (place) errors.birthplace = place;
 
   return errors;
@@ -54,11 +59,11 @@ export function validateBirthStep(input: ReadingInput, now = new Date()): Valida
 
 export function validateIdentityStep(input: ReadingInput): ValidationErrors {
   const errors: ValidationErrors = {};
-  if (!ZODIAC.some((sign) => sign.id === input.sign)) errors.sign = 'Please choose a sign.';
-  const residence = validatePlace(input.residence, false, 'current city');
+  if (!ZODIAC.some((sign) => sign.id === input.sign)) errors.sign = 'Bitte wähle ein Sternzeichen.';
+  const residence = validatePlace(input.residence, false, 'deinen Wohnort');
   if (residence) errors.residence = residence;
   if (input.intention.length > LIMITS.intentionMax) {
-    errors.intention = `Please keep this under ${LIMITS.intentionMax} characters.`;
+    errors.intention = `Bitte höchstens ${LIMITS.intentionMax} Zeichen.`;
   }
   return errors;
 }

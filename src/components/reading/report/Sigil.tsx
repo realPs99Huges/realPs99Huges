@@ -17,7 +17,7 @@ export function Sigil({ sign, asterism, className = '' }: SigilProps) {
       className={`sigil ${className}`}
       viewBox="0 0 400 400"
       role="img"
-      aria-label={`Personal asterism ${asterism.name}`}
+      aria-label={`Persönliches Sternbild ${asterism.name}`}
     >
       <defs>
         <radialGradient id="sigil-core">

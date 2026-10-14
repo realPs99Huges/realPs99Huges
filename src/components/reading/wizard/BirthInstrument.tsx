@@ -38,7 +38,7 @@ export function BirthInstrument({ input, suggestion }: BirthInstrumentProps) {
   const handAngle = time ? ((time.hour + time.minute / 60 - 12) / 24) * 360 : null;
 
   return (
-    <figure className="instrument" aria-label="Live birth chart preview">
+    <figure className="instrument" aria-label="Live-Vorschau deines Geburtshimmels">
       <svg className="instrument__dial" viewBox="0 0 400 400" aria-hidden="true">
         <defs>
           <radialGradient id="instrument-core">
@@ -130,22 +130,22 @@ export function BirthInstrument({ input, suggestion }: BirthInstrumentProps) {
       <figcaption className="instrument__readout">
         <dl>
           <div>
-            <dt className="label">Date</dt>
+            <dt className="label">Datum</dt>
             <dd>{input.birthDate && hasDate ? formatLongDate(input.birthDate) : '—'}</dd>
           </div>
           <div>
-            <dt className="label">Hour</dt>
-            <dd>{input.birthTimeUnknown ? 'Unknown' : time ? input.birthTime : '—'}</dd>
+            <dt className="label">Uhrzeit</dt>
+            <dd>{input.birthTimeUnknown ? 'Unbekannt' : time ? input.birthTime : '—'}</dd>
           </div>
           <div>
-            <dt className="label">Place</dt>
+            <dt className="label">Ort</dt>
             <dd>
               {input.birthplace.trim() ? input.birthplace.trim() : '—'}
               {place && <span className="instrument__coords">{formatCoordinates(place)}</span>}
             </dd>
           </div>
           <div>
-            <dt className="label">Sun</dt>
+            <dt className="label">Sonne</dt>
             <dd>{suggestion ? `${formatDegree(suggestion.degree)} ${suggestion.sign.name}` : '—'}</dd>
           </div>
         </dl>

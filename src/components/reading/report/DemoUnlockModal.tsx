@@ -13,24 +13,24 @@ export function DemoUnlockModal({ open, onPreview, onClose }: DemoUnlockModalPro
       <div className="demo-modal__emblem" aria-hidden="true">
         <Icon name="sparkle" size={22} />
       </div>
-      <p className="label label--gold">Prototype</p>
+      <p className="label label--gold">Prototyp</p>
       <h2 id="demo-title" className="modal__title">
-        Demo Experience
+        Demo-Erlebnis
       </h2>
       <p id="demo-text" className="modal__text">
-        This is a prototype. No payment will be processed.
+        Dies ist ein Prototyp. Es wird keine Zahlung verarbeitet.
       </p>
       <p className="demo-modal__fine">
-        “Preview Premium” unlocks the extended reading for this session only. No card or bank details are requested, and
-        nothing is charged or stored.
+        „Premium ansehen“ schaltet die erweiterte Deutung nur für diese Sitzung frei. Es werden keine Karten- oder
+        Bankdaten abgefragt, nichts wird berechnet oder gespeichert.
       </p>
       <div className="modal__actions">
         <button type="button" className="btn btn--gold" onClick={onPreview} autoFocus>
-          Preview Premium
+          Premium ansehen
           <Icon name="arrowRight" className="btn__icon btn__icon--arrow" />
         </button>
         <button type="button" className="btn btn--ghost" onClick={onClose}>
-          Go Back
+          Zurück
         </button>
       </div>
     </Modal>

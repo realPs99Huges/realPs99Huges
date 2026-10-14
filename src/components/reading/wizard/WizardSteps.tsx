@@ -3,9 +3,10 @@ import type { SunPosition } from '../../../lib/astro/sky';
 import { ELEMENTS, formatSignRange, getSign, ZODIAC } from '../../../lib/astro/zodiac';
 import { findPlace, formatCoordinates } from '../../../lib/geo/places';
 import type { ReadingInput } from '../../../lib/reading/types';
-import { LIMITS, todayIso, type ReadingField, type ValidationErrors } from '../../../lib/reading/validation';
+import { LIMITS, type ReadingField, type ValidationErrors } from '../../../lib/reading/validation';
 import { Glyph } from '../../cosmos/Glyph';
 import { Icon } from '../../ui/Icon';
+import { DateField, TimeField } from './DateTimeFields';
 import { Checkbox, describedBy, FieldShell, TextArea, TextInput } from './fields';
 import { formatLongDate } from './format';
 
@@ -17,55 +18,56 @@ interface StepProps {
   setField: SetField;
 }
 
+const focus = (id: string) => requestAnimationFrame(() => document.getElementById(id)?.focus());
+
 function PlaceHint({ value }: { value: string }) {
   const place = useMemo(() => findPlace(value), [value]);
-  if (value.trim().length < 2) return <>City and country, e.g. “Lisbon, Portugal”. Typed freely — no lookup service.</>;
-  if (!place) return <>Not in ASTRA’s small offline atlas — that’s fine, it will appear by name.</>;
+  if (value.trim().length < 2) return <>Stadt und Land, z. B. „Hamburg, Deutschland“.</>;
+  if (!place) return <>Nicht im Offline-Atlas – kein Problem, der Ort erscheint dann mit Namen.</>;
   return (
     <span className="field__found">
       <Icon name="pin" size={13} />
-      {place.precision === 'city' ? 'Found in offline atlas' : 'Country centre'} · {formatCoordinates(place)}
+      {place.precision === 'city' ? 'Gefunden' : 'Landesmitte'} · {formatCoordinates(place)}
     </span>
   );
 }
 
 export function StepBirth({ input, errors, setField }: StepProps) {
-  const timeHint = input.birthTimeUnknown
-    ? 'No problem — the reading will leave the symbolism of the hour open.'
-    : 'As exact as you know it. Local time at the place of birth.';
   return (
     <div className="fields">
       <div className="fields__row">
         <FieldShell
           id="field-birthDate"
-          label="Date of Birth"
+          label="Geburtsdatum"
           error={errors.birthDate}
-          hint="Pick it from the calendar or type it in."
+          hint="Eintippen (z. B. 14101994) oder Kalender öffnen."
         >
-          <TextInput
+          <DateField
             id="field-birthDate"
-            type="date"
-            min="1900-01-01"
-            max={todayIso()}
             value={input.birthDate}
-            onChange={(event) => setField('birthDate', event.target.value)}
+            onChange={(value) => setField('birthDate', value)}
+            onComplete={() => !input.birthTimeUnknown && focus('field-birthTime')}
             invalid={!!errors.birthDate}
-            aria-describedby={describedBy('field-birthDate', errors.birthDate, true)}
-            required
-            autoComplete="bday"
+            describedBy={describedBy('field-birthDate', errors.birthDate, true)}
           />
         </FieldShell>
 
-        <FieldShell id="field-birthTime" label="Time of Birth" error={errors.birthTime} hint={timeHint}>
-          <TextInput
+        <FieldShell
+          id="field-birthTime"
+          label="Uhrzeit"
+          error={errors.birthTime}
+          hint={
+            input.birthTimeUnknown ? 'Kein Problem – die Deutung passt sich an.' : 'So genau du sie weißt, z. B. 0642.'
+          }
+        >
+          <TimeField
             id="field-birthTime"
-            type="time"
             value={input.birthTime}
-            onChange={(event) => setField('birthTime', event.target.value)}
+            onChange={(value) => setField('birthTime', value)}
+            onComplete={() => focus('field-birthplace')}
             disabled={input.birthTimeUnknown}
             invalid={!!errors.birthTime}
-            aria-describedby={describedBy('field-birthTime', errors.birthTime, true)}
-            required={!input.birthTimeUnknown}
+            describedBy={describedBy('field-birthTime', errors.birthTime, true)}
           />
         </FieldShell>
       </div>
@@ -75,12 +77,12 @@ export function StepBirth({ input, errors, setField }: StepProps) {
         checked={input.birthTimeUnknown}
         onChange={(checked) => setField('birthTimeUnknown', checked)}
       >
-        I don’t know my exact birth time
+        Uhrzeit unbekannt
       </Checkbox>
 
       <FieldShell
         id="field-birthplace"
-        label="Birthplace"
+        label="Geburtsort"
         error={errors.birthplace}
         hint={<PlaceHint value={input.birthplace} />}
       >
@@ -88,7 +90,7 @@ export function StepBirth({ input, errors, setField }: StepProps) {
           id="field-birthplace"
           type="text"
           list="astra-places"
-          placeholder="City, country"
+          placeholder="Stadt, Land"
           value={input.birthplace}
           maxLength={LIMITS.placeMax}
           onChange={(event) => setField('birthplace', event.target.value)}
@@ -120,22 +122,22 @@ export function StepIdentity({ input, errors, setField, suggestion, onAcceptSugg
           <Glyph id={sign.id} size={52} strokeWidth={1} key={sign.id} />
         </div>
         <div className="sign-card__body">
-          <p className="label label--gold">{isSuggested ? 'Suggested from your birth date' : 'Chosen by you'}</p>
+          <p className="label label--gold">{isSuggested ? 'Aus deinem Geburtsdatum berechnet' : 'Von dir gewählt'}</p>
           <p className="sign-card__name">
             {sign.name} <em>{sign.image}</em>
           </p>
           <p className="sign-card__meta">
             {formatSignRange(sign)} · {ELEMENTS[sign.element].name}
-            {suggestion && isSuggested && <> · Sun at {Math.floor(suggestion.degree)}°</>}
+            {suggestion && isSuggested && <> · Sonne bei {Math.floor(suggestion.degree)}°</>}
           </p>
           {suggestion?.cuspWith && isSuggested && (
             <p className="sign-card__note">
-              You were born on the cusp of {suggestion.cuspWith.name}. Choose the sign that resonates most.
+              Du bist an der Grenze zu {suggestion.cuspWith.name} geboren. Wähle das Zeichen, das besser passt.
             </p>
           )}
           {suggestion && !isSuggested && (
             <button type="button" className="btn btn--text sign-card__reset" onClick={onAcceptSuggestion}>
-              Use the suggested sign — {suggestion.sign.name}
+              Berechnetes Zeichen nehmen – {suggestion.sign.name}
             </button>
           )}
         </div>
@@ -146,12 +148,12 @@ export function StepIdentity({ input, errors, setField, suggestion, onAcceptSugg
           aria-controls="sign-chooser"
           onClick={() => setChooserOpen((open) => !open)}
         >
-          {chooserOpen ? 'Hide signs' : 'Choose another'}
+          {chooserOpen ? 'Ausblenden' : 'Anderes wählen'}
         </button>
       </div>
 
       <fieldset id="sign-chooser" className="sign-grid" hidden={!chooserOpen}>
-        <legend className="sr-only">Your sign</legend>
+        <legend className="sr-only">Dein Sternzeichen</legend>
         {ZODIAC.map((s) => (
           <label key={s.id} className="sign-grid__option">
             <input
@@ -171,16 +173,16 @@ export function StepIdentity({ input, errors, setField, suggestion, onAcceptSugg
 
       <FieldShell
         id="field-residence"
-        label="Where do you live now?"
+        label="Wo lebst du heute?"
         optional
         error={errors.residence}
-        hint="Adds a second point to your origins map."
+        hint="Ergänzt deine Karte um einen zweiten Punkt."
       >
         <TextInput
           id="field-residence"
           type="text"
           list="astra-places"
-          placeholder="City, country"
+          placeholder="Stadt, Land"
           value={input.residence}
           maxLength={LIMITS.placeMax}
           onChange={(event) => setField('residence', event.target.value)}
@@ -193,10 +195,10 @@ export function StepIdentity({ input, errors, setField, suggestion, onAcceptSugg
 
       <FieldShell
         id="field-intention"
-        label="What would you like to understand about yourself?"
+        label="Was möchtest du über dich verstehen?"
         optional
         error={errors.intention}
-        hint="A sentence is enough. It shapes your reflection questions."
+        hint="Ein Satz genügt. Er formt deine Reflexionsfragen."
         aside={
           <span className="field__count" aria-hidden="true">
             {input.intention.length}/{LIMITS.intentionMax}
@@ -206,7 +208,7 @@ export function StepIdentity({ input, errors, setField, suggestion, onAcceptSugg
         <TextArea
           id="field-intention"
           rows={3}
-          placeholder="e.g. What really motivates me — and where do I want to go next?"
+          placeholder="z. B. Was treibt mich wirklich an – und wohin will ich als Nächstes?"
           value={input.intention}
           maxLength={LIMITS.intentionMax}
           onChange={(event) => setField('intention', event.target.value)}
@@ -228,32 +230,32 @@ export function StepReveal({ input, suggestion, onEdit }: RevealProps) {
   const sign = getSign(input.sign);
   const place = findPlace(input.birthplace);
   const rows: Array<{ label: string; value: string; detail?: string; step: number; field: ReadingField }> = [
-    { label: 'Born', value: formatLongDate(input.birthDate), step: 0, field: 'birthDate' },
+    { label: 'Geboren', value: formatLongDate(input.birthDate), step: 0, field: 'birthDate' },
     {
-      label: 'Hour',
-      value: input.birthTimeUnknown ? 'Unknown' : input.birthTime,
-      detail: input.birthTimeUnknown ? 'The reading adapts' : undefined,
+      label: 'Uhrzeit',
+      value: input.birthTimeUnknown ? 'Unbekannt' : `${input.birthTime} Uhr`,
+      detail: input.birthTimeUnknown ? 'Die Deutung passt sich an' : undefined,
       step: 0,
       field: input.birthTimeUnknown ? 'birthTimeUnknown' : 'birthTime',
     },
     {
-      label: 'Birthplace',
+      label: 'Geburtsort',
       value: input.birthplace.trim(),
-      detail: place ? formatCoordinates(place) : 'Shown by name',
+      detail: place ? formatCoordinates(place) : 'Erscheint mit Namen',
       step: 0,
       field: 'birthplace',
     },
     {
-      label: 'Sign',
-      value: `${sign.name} · ${sign.image}`,
-      detail: suggestion?.sign.id === sign.id ? 'Suggested' : 'Chosen by you',
+      label: 'Sternzeichen',
+      value: sign.name,
+      detail: suggestion?.sign.id === sign.id ? 'Berechnet' : 'Von dir gewählt',
       step: 1,
       field: 'sign',
     },
-    { label: 'Lives in', value: input.residence.trim() || '—', step: 1, field: 'residence' },
+    { label: 'Wohnort', value: input.residence.trim() || '—', step: 1, field: 'residence' },
     {
-      label: 'Your question',
-      value: input.intention.trim() ? `“${input.intention.trim()}”` : '—',
+      label: 'Deine Frage',
+      value: input.intention.trim() ? `„${input.intention.trim()}“` : '—',
       step: 1,
       field: 'intention',
     },
@@ -274,15 +276,15 @@ export function StepReveal({ input, suggestion, onEdit }: RevealProps) {
             </dd>
             <button type="button" className="reveal-card__edit" onClick={() => onEdit(row.step, row.field)}>
               <Icon name="edit" size={15} />
-              <span className="sr-only">Edit {row.label.toLowerCase()}</span>
+              <span className="sr-only">{row.label} bearbeiten</span>
             </button>
           </div>
         ))}
       </dl>
       <p className="reveal-card__note">
         <Icon name="shield" size={15} />
-        Your reading is a symbolic interpretation created locally in your browser. It does not analyse DNA, ancestry or
-        the future — and nothing you entered is stored.
+        Deine Deutung ist eine symbolische Interpretation, erstellt in deinem Browser. Sie analysiert weder DNA noch
+        Abstammung oder Zukunft – und nichts wird gespeichert.
       </p>
     </div>
   );

@@ -26,19 +26,19 @@ function SkyTelemetry() {
     const moment = momentFromDate(new Date(minuteKey * 60000));
     return { sun: sunPosition(moment), moon: moonPhase(moment) };
   }, [minuteKey]);
-  const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const time = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
   return (
-    <dl className="telemetry" aria-label="Today's sky">
+    <dl className="telemetry" aria-label="Der Himmel heute">
       <div className="telemetry__item">
-        <dt className="label">Sun today</dt>
+        <dt className="label">Sonne heute</dt>
         <dd>
           <Glyph id={sky.sun.sign.id} size={16} strokeWidth={1.4} />
           {formatDegree(sky.sun.degree)} {sky.sun.sign.name}
         </dd>
       </div>
       <div className="telemetry__item">
-        <dt className="label">Moon</dt>
+        <dt className="label">Mond</dt>
         <dd>
           <span
             className="telemetry__moon"
@@ -49,7 +49,7 @@ function SkyTelemetry() {
         </dd>
       </div>
       <div className="telemetry__item telemetry__item--time">
-        <dt className="label">Local time</dt>
+        <dt className="label">Ortszeit</dt>
         <dd>
           <time dateTime={now.toISOString()} aria-live="off">
             {time}
@@ -72,39 +72,40 @@ export function Hero({ onBegin, onExplore }: HeroProps) {
           <p className="hero__eyebrow">
             <span className="label">ASTRA</span>
             <span className="hero__eyebrow-line" aria-hidden="true" />
-            <span className="label">AI Origin &amp; Cosmic Profile</span>
+            <span className="label">Kosmisches Profil</span>
           </p>
 
           <h1 id="hero-title" className="hero__title">
             <span className="hero__line">
-              <span>Your story</span>
+              <span>Deine Geschichte</span>
             </span>
             <span className="hero__line">
               <span>
-                is <em>written</em>
+                steht <em>geschrieben</em>
               </span>
             </span>
             <span className="hero__line">
-              <span>in the stars.</span>
+              <span>in den Sternen.</span>
             </span>
           </h1>
 
           <p className="hero__lead lead">
-            Discover your cosmic profile through the symbolism of astrology, your birth moment and the universe around
-            you.
+            Entdecke dein kosmisches Profil – aus der Symbolik der Astrologie, deinem Geburtsmoment und dem Himmel über
+            dir.
           </p>
 
           <p className="hero__note">
-            <Icon name="sparkle" size={14} className="hero__note-icon" />A personal journey through the cosmos.
+            <Icon name="sparkle" size={14} className="hero__note-icon" />
+            Eine persönliche Reise durch den Kosmos.
           </p>
 
           <div className="hero__ctas">
             <button type="button" className="btn btn--primary" onClick={onBegin}>
-              Reveal My Cosmic Profile
+              Mein Profil entdecken
               <Icon name="arrowRight" className="btn__icon btn__icon--arrow" />
             </button>
             <button type="button" className="btn btn--ghost" onClick={onExplore}>
-              Explore the Universe
+              Mehr erfahren
             </button>
           </div>
         </div>
@@ -113,7 +114,7 @@ export function Hero({ onBegin, onExplore }: HeroProps) {
       <div className="hero__footer container">
         <SkyTelemetry />
         <button type="button" className="hero__scroll" onClick={onExplore}>
-          <span className="label">Scroll</span>
+          <span className="label">Scrollen</span>
           <span className="hero__scroll-line" aria-hidden="true" />
         </button>
       </div>

@@ -72,7 +72,7 @@ export function ZodiacAtlas() {
           <span className="label">{formatSignRange(sign)}</span>
         </div>
 
-        <div className="atlas__signs" role="tablist" aria-label="The twelve signs">
+        <div className="atlas__signs" role="tablist" aria-label="Die zwölf Zeichen">
           {ZODIAC.map((s) => (
             <button
               key={s.id}
@@ -107,7 +107,7 @@ export function ZodiacAtlas() {
       >
         <div className="atlas__panel-inner" key={sign.id}>
           <p className="label label--gold">
-            {String(sign.index + 1).padStart(2, '0')} / 12 {sign.id === todaySign && '· The Sun is here today'}
+            {String(sign.index + 1).padStart(2, '0')} / 12 {sign.id === todaySign && '· Hier steht heute die Sonne'}
           </p>
           <h3 className="atlas__name">
             {sign.name}
@@ -116,7 +116,7 @@ export function ZodiacAtlas() {
           <p className="atlas__essence">{sign.essence}</p>
           <dl className="atlas__specs">
             <div>
-              <dt className="label">Archetype</dt>
+              <dt className="label">Archetyp</dt>
               <dd>{sign.archetype}</dd>
             </div>
             <div>
@@ -124,18 +124,18 @@ export function ZodiacAtlas() {
               <dd>{ELEMENTS[sign.element].name}</dd>
             </div>
             <div>
-              <dt className="label">Modality</dt>
+              <dt className="label">Qualität</dt>
               <dd>{MODALITIES[sign.modality].name}</dd>
             </div>
             <div>
-              <dt className="label">Ruler</dt>
+              <dt className="label">Herrscher</dt>
               <dd>
                 <Glyph id={sign.ruler} size={15} strokeWidth={1.4} />
                 {ruler.name}
               </dd>
             </div>
           </dl>
-          <ul className="atlas__keywords" aria-label="Keywords">
+          <ul className="atlas__keywords" aria-label="Stichworte">
             {sign.keywords.map((keyword) => (
               <li key={keyword} className="chip">
                 {keyword}

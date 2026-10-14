@@ -46,7 +46,7 @@ export function Modal({ open, onClose, labelledBy, describedBy, children, classN
       <div className="modal__panel">
         <button type="button" className="modal__close" onClick={onClose}>
           <Icon name="close" size={18} />
-          <span className="sr-only">Close</span>
+          <span className="sr-only">Schließen</span>
         </button>
         {children}
       </div>

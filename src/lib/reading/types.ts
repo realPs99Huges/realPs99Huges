@@ -29,6 +29,13 @@ export interface Facet {
   note?: string;
 }
 
+/** A verifiable, calculated fact about the birth moment (shown as a tile). */
+export interface Fact {
+  value: string;
+  label: string;
+  note?: string;
+}
+
 export interface Insight {
   title: string;
   body: string;
@@ -74,6 +81,7 @@ export interface CosmicReading {
   subtitle: string;
   asterism: Asterism;
   summary: string;
+  facts: Fact[];
   profile: {
     birthDateLabel: string;
     birthTimeLabel: string;

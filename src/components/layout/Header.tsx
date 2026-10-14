@@ -77,11 +77,11 @@ export function Header({ view, onNavigate, onBegin, onOpenDemoNotice }: HeaderPr
           <button type="button" className="chip header__demo" onClick={onOpenDemoNotice}>
             <span className="chip__dot" aria-hidden="true" />
             Demo
-            <span className="sr-only"> prototype — read the demo notice</span>
+            <span className="sr-only"> – Prototyp, Hinweis lesen</span>
           </button>
         </div>
 
-        <nav className="header__nav" aria-label="Primary">
+        <nav className="header__nav" aria-label="Hauptnavigation">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.target}
@@ -100,7 +100,7 @@ export function Header({ view, onNavigate, onBegin, onOpenDemoNotice }: HeaderPr
 
         <div className="header__actions">
           <button type="button" className="btn btn--ghost btn--sm header__cta" onClick={begin}>
-            Begin Your Reading
+            Deutung starten
           </button>
           <button
             ref={toggleRef}
@@ -110,7 +110,7 @@ export function Header({ view, onNavigate, onBegin, onOpenDemoNotice }: HeaderPr
             aria-controls="mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
+            <span className="sr-only">{menuOpen ? 'Menü schließen' : 'Menü öffnen'}</span>
             <Icon name={menuOpen ? 'close' : 'menu'} size={22} />
           </button>
         </div>
@@ -123,9 +123,9 @@ export function Header({ view, onNavigate, onBegin, onOpenDemoNotice }: HeaderPr
         hidden={!menuOpen}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
+        aria-label="Menü"
       >
-        <nav className="mobile-menu__nav" aria-label="Mobile">
+        <nav className="mobile-menu__nav" aria-label="Mobile Navigation">
           {NAV_ITEMS.map((item, index) => (
             <a
               key={item.target}
@@ -144,10 +144,10 @@ export function Header({ view, onNavigate, onBegin, onOpenDemoNotice }: HeaderPr
         </nav>
         <div className="mobile-menu__footer">
           <button type="button" className="btn btn--primary" onClick={begin}>
-            Begin Your Reading
+            Deutung starten
             <Icon name="arrowRight" className="btn__icon btn__icon--arrow" />
           </button>
-          <p className="label">Demo prototype · symbolic readings · no payments</p>
+          <p className="label">Demo-Prototyp · symbolische Deutungen · keine Zahlungen</p>
         </div>
       </div>
     </header>

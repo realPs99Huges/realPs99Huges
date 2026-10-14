@@ -14,67 +14,67 @@ interface HomeViewProps {
 
 const CHAPTERS: Array<{ title: string; text: string; glyph: GlyphId; access: string }> = [
   {
-    title: 'Your Cosmic Identity',
-    text: 'The symbolism of your Sun sign, element, modality and ruling planet — with your Sun’s exact degree.',
+    title: 'Deine kosmischen Fakten',
+    text: 'Exakter Sonnenstand, Mondphase bei Geburt, Tage auf der Erde, erlebte Vollmonde, chinesisches Tierzeichen und mehr.',
     glyph: 'sun',
-    access: 'Free',
+    access: 'Kostenlos',
   },
   {
-    title: 'Your Inner Universe',
-    text: 'Strengths, tensions and growth themes, written as reflection prompts — never as a diagnosis.',
+    title: 'Dein inneres Universum',
+    text: 'Stärken, Spannungen und Wachstumsthemen – als Impulse zum Nachdenken, nie als Diagnose.',
     glyph: 'moon',
-    access: 'Free',
+    access: 'Kostenlos',
   },
   {
-    title: 'Origins & Cultural Connections',
-    text: 'Your birthplace on an abstract map, the real sky above it, and clearly labelled symbolic geography.',
+    title: 'Herkunft & Kultur',
+    text: 'Dein Geburtsort auf einer Weltkarte, der echte Himmel darüber und klar gekennzeichnete Symbolik.',
     glyph: 'node',
-    access: 'Free + Premium',
+    access: 'Kostenlos + Premium',
   },
   {
-    title: 'Your Cosmic Timeline',
-    text: 'The great astrological cycles of a life, placed at your ages — as chapters and questions, not predictions.',
+    title: 'Dein Zeitstrahl',
+    text: 'Die großen astrologischen Zyklen eines Lebens, passend zu deinem Alter – als Kapitel, nicht als Vorhersage.',
     glyph: 'saturn',
-    access: 'Free + Premium',
+    access: 'Kostenlos + Premium',
   },
   {
-    title: 'Your Personal Reflection',
-    text: 'Questions shaped by your sign and by what you would like to understand about yourself.',
+    title: 'Deine Reflexion',
+    text: 'Fragen, die zu deinem Zeichen und zu dem passen, was du über dich verstehen möchtest.',
     glyph: 'venus',
-    access: 'Free + Premium',
+    access: 'Kostenlos + Premium',
   },
 ];
 
 const STEPS = [
   {
     numeral: 'I',
-    title: 'Share your birth moment',
-    text: 'Date, time and place of birth. If you don’t know the hour, that’s fine — the reading adapts and tells you what it leaves open.',
+    title: 'Geburtsmoment eingeben',
+    text: 'Datum, Uhrzeit und Ort – einfach eintippen. Uhrzeit unbekannt? Kein Problem, die Deutung passt sich an.',
   },
   {
     numeral: 'II',
-    title: 'We map the symbolism',
-    text: 'Your Sun’s degree and the Moon’s phase are calculated right in your browser, then translated through a library of astrological symbolism.',
+    title: 'Wir berechnen deinen Himmel',
+    text: 'Sonnenstand und Mondphase werden direkt in deinem Browser berechnet und mit astrologischer Symbolik gedeutet.',
   },
   {
     numeral: 'III',
-    title: 'Receive your reading',
-    text: 'Your free reading appears instantly. The extended reading can be previewed in this demo — no payment is ever processed.',
+    title: 'Deutung erhalten',
+    text: 'Deine kostenlose Deutung erscheint sofort. Die erweiterte Deutung kannst du in dieser Demo ansehen – ohne Zahlung.',
   },
 ];
 
 const IS = [
-  'A symbolic, astrology-based interpretation',
-  'A tool for reflection and curiosity',
-  'Private by design — your entries never leave your browser',
-  'A design prototype with a simulated premium preview',
+  'Eine symbolische, astrologische Deutung',
+  'Ein Werkzeug für Neugier und Selbstreflexion',
+  'Privat: Deine Angaben verlassen nie deinen Browser',
+  'Ein Prototyp mit simulierter Premium-Vorschau',
 ];
 
 const IS_NOT = [
-  'A DNA, ancestry or ethnicity analysis',
-  'A scientific or psychological diagnosis',
-  'A prediction of future events',
-  'A real payment or subscription',
+  'Eine DNA-, Abstammungs- oder Herkunftsanalyse',
+  'Eine wissenschaftliche oder psychologische Diagnose',
+  'Eine Vorhersage der Zukunft',
+  'Eine echte Zahlung oder ein Abo',
 ];
 
 export function HomeView({ onBegin, onExplore }: HomeViewProps) {
@@ -85,13 +85,13 @@ export function HomeView({ onBegin, onExplore }: HomeViewProps) {
       <section id="discover" className="section discover" aria-labelledby="discover-title">
         <div className="container">
           <header className="section-head" data-reveal>
-            <p className="label label--gold">01 — Discover</p>
+            <p className="label label--gold">01 — Entdecken</p>
             <h2 id="discover-title" className="h2">
-              A reading composed from the sky <em>you were born under.</em>
+              Eine Deutung aus dem Himmel <em>deiner Geburt.</em>
             </h2>
             <p className="lead section-head__lead">
-              ASTRA translates your birth moment — date, hour and place — into a symbolic portrait. Twelve archetypes,
-              four elements, the Sun’s exact degree and the Moon’s phase become a language for reflection.
+              ASTRA übersetzt deinen Geburtsmoment – Datum, Uhrzeit und Ort – in ein persönliches Profil: mit echten,
+              berechneten Fakten und der Symbolik von zwölf Zeichen und vier Elementen.
             </p>
           </header>
 
@@ -104,16 +104,16 @@ export function HomeView({ onBegin, onExplore }: HomeViewProps) {
       <section className="section chapters" aria-labelledby="chapters-title">
         <div className="container chapters__grid">
           <header className="section-head chapters__head" data-reveal>
-            <p className="label label--gold">02 — Inside your reading</p>
+            <p className="label label--gold">02 — Deine Deutung</p>
             <h2 id="chapters-title" className="h2">
-              Five chapters, <em>one sky.</em>
+              Fünf Kapitel, <em>ein Himmel.</em>
             </h2>
             <p className="lead section-head__lead">
-              Every reading is written for one birth moment. The same details always return the same reading — like a
-              chart, not a horoscope of the day.
+              Jede Deutung gehört zu genau einem Geburtsmoment. Gleiche Angaben ergeben immer dieselbe Deutung – wie ein
+              Geburtshoroskop, nicht wie ein Tageshoroskop.
             </p>
             <button type="button" className="btn btn--ghost chapters__cta" onClick={onBegin}>
-              Begin Your Reading
+              Deutung starten
               <Icon name="arrowRight" className="btn__icon btn__icon--arrow" />
             </button>
           </header>
@@ -134,7 +134,7 @@ export function HomeView({ onBegin, onExplore }: HomeViewProps) {
                   <h3 className="chapter__title">{chapter.title}</h3>
                   <p className="chapter__text">{chapter.text}</p>
                 </div>
-                <span className={`chapter__access chip ${chapter.access === 'Free' ? '' : 'chip--gold'}`}>
+                <span className={`chapter__access chip ${chapter.access === 'Kostenlos' ? '' : 'chip--gold'}`}>
                   {chapter.access}
                 </span>
               </li>
@@ -146,9 +146,9 @@ export function HomeView({ onBegin, onExplore }: HomeViewProps) {
       <section id="how-it-works" className="section how" aria-labelledby="how-title">
         <div className="container">
           <header className="section-head" data-reveal>
-            <p className="label label--gold">03 — How It Works</p>
+            <p className="label label--gold">03 — So funktioniert’s</p>
             <h2 id="how-title" className="h2">
-              Three quiet steps from birth moment <em>to reading.</em>
+              In drei Schritten <em>zur Deutung.</em>
             </h2>
           </header>
 
@@ -174,15 +174,15 @@ export function HomeView({ onBegin, onExplore }: HomeViewProps) {
             <div className="truth__intro">
               <Icon name="shield" size={22} className="truth__icon" />
               <h3 className="h3">
-                What ASTRA is — <em>and what it isn’t.</em>
+                Was ASTRA ist – <em>und was nicht.</em>
               </h3>
               <p className="muted">
-                Astrology is a symbolic language, not a science of ancestry or fate. We built ASTRA to be beautiful and
-                honest at the same time.
+                Astrologie ist eine symbolische Sprache, keine Wissenschaft über Herkunft oder Schicksal. ASTRA soll
+                schön und ehrlich zugleich sein.
               </p>
             </div>
             <div className="truth__col">
-              <p className="label label--gold">ASTRA is</p>
+              <p className="label label--gold">ASTRA ist</p>
               <ul>
                 {IS.map((item) => (
                   <li key={item}>
@@ -193,7 +193,7 @@ export function HomeView({ onBegin, onExplore }: HomeViewProps) {
               </ul>
             </div>
             <div className="truth__col">
-              <p className="label">ASTRA is not</p>
+              <p className="label">ASTRA ist nicht</p>
               <ul>
                 {IS_NOT.map((item) => (
                   <li key={item}>
@@ -212,12 +212,12 @@ export function HomeView({ onBegin, onExplore }: HomeViewProps) {
           <div className="final__mark" aria-hidden="true">
             <AstraMark size={420} />
           </div>
-          <p className="label label--gold">Your sky, once</p>
+          <p className="label label--gold">Einmalig</p>
           <h2 id="final-title" className="final__title">
-            The sky of your birth will never <em>return in quite the same way.</em>
+            Der Himmel deiner Geburt <em>kehrt so nie wieder.</em>
           </h2>
           <button type="button" className="btn btn--primary" onClick={onBegin}>
-            Reveal My Cosmic Profile
+            Mein Profil entdecken
             <Icon name="arrowRight" className="btn__icon btn__icon--arrow" />
           </button>
         </div>

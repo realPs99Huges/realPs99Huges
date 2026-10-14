@@ -3,9 +3,9 @@ import type { TimelineNode } from '../../../lib/reading/types';
 import { Glyph, GlyphShape } from '../../cosmos/Glyph';
 
 function ageLabel(node: TimelineNode) {
-  if (node.status === 'now') return `Now · age ${Math.floor(node.age)}`;
-  if (node.age === 0) return `Age 0 · ${node.year}`;
-  return `Age ≈ ${Math.round(node.age)} · ${node.year}`;
+  if (node.status === 'now') return `Jetzt · ${Math.floor(node.age)} Jahre`;
+  if (node.age === 0) return `Geburt · ${node.year}`;
+  return `Mit ≈ ${Math.round(node.age)} · ${node.year}`;
 }
 
 export function TimelineList({ nodes }: { nodes: TimelineNode[] }) {
@@ -57,7 +57,7 @@ export function TimelineArc({ nodes }: { nodes: TimelineNode[] }) {
       <svg
         viewBox="0 0 1000 320"
         role="img"
-        aria-label="Your life arc of astrological cycles, from birth to the Uranus return"
+        aria-label="Dein Lebensbogen der astrologischen Zyklen, von der Geburt bis zur Uranus-Wiederkehr"
       >
         <path d={`M${P0.x} ${P0.y}Q${P1.x} ${P1.y} ${P2.x} ${P2.y}`} className="timeline-arc__future" />
         <path
@@ -77,7 +77,7 @@ export function TimelineArc({ nodes }: { nodes: TimelineNode[] }) {
                 <circle r="7" />
                 <circle r="14" className="timeline-arc__halo" />
                 <text y={118} textAnchor="middle" className="timeline-arc__now-label">
-                  YOU ARE HERE · {now?.year}
+                  DU BIST HIER · {now?.year}
                 </text>
               </g>
             );
@@ -93,7 +93,7 @@ export function TimelineArc({ nodes }: { nodes: TimelineNode[] }) {
                 <GlyphShape id={node.glyph} strokeWidth={1.5} />
               </g>
               <text y={above ? -54 : 62} textAnchor="middle" className="timeline-arc__age">
-                {node.age === 0 ? 'BIRTH' : `≈${Math.round(node.age)}`}
+                {node.age === 0 ? 'GEBURT' : `≈${Math.round(node.age)}`}
               </text>
             </g>
           );

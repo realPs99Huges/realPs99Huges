@@ -10,13 +10,13 @@ import { setStarfieldBoost } from '../../cosmos/Starfield';
 import './GenerationSequence.css';
 
 const MESSAGES = [
-  'Mapping your celestial coordinates…',
-  'Interpreting your astrological profile…',
-  'Connecting your cosmic symbols…',
-  'Preparing your personal reading…',
+  'Deine Himmelskoordinaten werden berechnet …',
+  'Dein astrologisches Profil wird gedeutet …',
+  'Deine kosmischen Symbole werden verbunden …',
+  'Deine persönliche Deutung wird vorbereitet …',
 ];
 
-const DURATION = 5200;
+const DURATION = 4200;
 const EXIT = 700;
 const C = 250;
 const PROGRESS_R = 104;
@@ -40,9 +40,9 @@ interface GenerationSequenceProps {
 }
 
 function describeError(error: unknown): string {
-  if (error instanceof InvalidReadingInputError) return 'Some details were incomplete.';
+  if (error instanceof InvalidReadingInputError) return 'Einige Angaben waren unvollständig.';
   if (error instanceof Error && error.message) return error.message;
-  return 'Something unexpected happened.';
+  return 'Etwas Unerwartetes ist passiert.';
 }
 
 export function GenerationSequence({ input, reducedMotion, onComplete, onError }: GenerationSequenceProps) {
@@ -127,7 +127,7 @@ export function GenerationSequence({ input, reducedMotion, onComplete, onError }
 
   const coordinates = [
     formatLongDate(input.birthDate),
-    input.birthTimeUnknown ? 'Hour unknown' : input.birthTime,
+    input.birthTimeUnknown ? 'Uhrzeit unbekannt' : `${input.birthTime} Uhr`,
     input.birthplace.trim(),
   ].join(' · ');
 
@@ -143,7 +143,7 @@ export function GenerationSequence({ input, reducedMotion, onComplete, onError }
     >
       <div className="genesis__veil" aria-hidden="true" />
       <h2 id="genesis-title" className="sr-only">
-        Preparing your cosmic reading
+        Deine Deutung wird erstellt
       </h2>
 
       <div className="genesis__stage" aria-hidden="true">
@@ -240,7 +240,7 @@ export function GenerationSequence({ input, reducedMotion, onComplete, onError }
 
       <div className="genesis__foot">
         <p className="genesis__note">
-          Visual sequence · symbolic demo reading · no DNA analysis · computed in your browser
+          Visuelle Sequenz · symbolische Demo-Deutung · keine DNA-Analyse · berechnet in deinem Browser
         </p>
         <button
           type="button"
@@ -249,7 +249,7 @@ export function GenerationSequence({ input, reducedMotion, onComplete, onError }
             skipRef.current = true;
           }}
         >
-          Skip animation
+          Animation überspringen
         </button>
       </div>
     </div>,

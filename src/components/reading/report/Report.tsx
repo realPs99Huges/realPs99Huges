@@ -23,11 +23,12 @@ interface ReportProps {
 }
 
 const CHAPTERS = [
-  { id: 'identity', label: 'Identity' },
-  { id: 'inner-universe', label: 'Inner Universe' },
-  { id: 'origins', label: 'Origins' },
-  { id: 'timeline', label: 'Timeline' },
-  { id: 'reflection', label: 'Reflection' },
+  { id: 'facts', label: 'Fakten' },
+  { id: 'identity', label: 'Identität' },
+  { id: 'inner-universe', label: 'Inneres' },
+  { id: 'origins', label: 'Herkunft' },
+  { id: 'timeline', label: 'Zeitstrahl' },
+  { id: 'reflection', label: 'Reflexion' },
   { id: 'premium', label: 'Premium' },
 ];
 
@@ -39,7 +40,7 @@ function Section({ id, num, title, children }: { id: string; num: string; title:
         <h2 id={`${id}-title`} className="report-section__title">
           {title}
         </h2>
-        <span className="chip report-section__free">Free reading</span>
+        <span className="chip report-section__free">Kostenlos</span>
       </div>
       <div className="report-section__body">{children}</div>
     </section>
@@ -51,8 +52,7 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
   const [modalOpen, setModalOpen] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const sign = getSign(reading.sign);
-  const words = reading.title.split(' ');
-  const [article, adjective, ...rest] = words;
+  const [article, noun, ...rest] = reading.title.split(' ');
 
   useEffect(() => {
     titleRef.current?.focus({ preventScroll: true });
@@ -60,21 +60,18 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
 
   const copySummary = async () => {
     const ok = await copyText(summaryText(reading));
-    notify(
-      ok ? 'Summary copied to your clipboard' : 'Copy failed — please select the text manually',
-      ok ? 'success' : 'info',
-    );
+    notify(ok ? 'Zusammenfassung kopiert' : 'Kopieren nicht möglich – bitte Text markieren', ok ? 'success' : 'info');
   };
 
   const download = () => {
-    const name = `astra-demo-reading-${sign.id}${premium === 'unlocked' ? '-full' : ''}.txt`;
+    const name = `astra-demo-deutung-${sign.id}${premium === 'unlocked' ? '-komplett' : ''}.txt`;
     downloadTextFile(name, reportText(reading, premium === 'unlocked'));
-    notify('Demo report downloaded — created on your device');
+    notify('Demo-Bericht auf deinem Gerät erstellt');
   };
 
   const previewPremium = () => {
     setModalOpen(false);
-    onUnlockPremium(reducedMotion ? 300 : 1400);
+    onUnlockPremium(reducedMotion ? 300 : 1100);
     requestAnimationFrame(() => {
       document
         .getElementById('premium')
@@ -90,43 +87,40 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
 
   return (
     <article className="report" aria-labelledby="report-title">
-      {/* ——— Cover ——— */}
       <header className="report-cover container">
         <div className="report-cover__top">
-          <p className="label label--gold">Your Cosmic Profile</p>
+          <p className="label label--gold">Dein kosmisches Profil</p>
           <button type="button" className="chip report-cover__engine" onClick={() => onOpenNotice('demo')}>
             <span className="chip__dot" aria-hidden="true" />
-            Demo reading
-            <span className="sr-only"> — {reading.engine.label}. Open the demo notice.</span>
+            Demo-Deutung
+            <span className="sr-only"> – {reading.engine.label}. Hinweis öffnen.</span>
           </button>
         </div>
 
         <div className="report-cover__grid">
           <div className="report-cover__intro">
             <h1 id="report-title" ref={titleRef} tabIndex={-1} className="report-cover__title">
-              <span className="report-cover__article">{article}</span> <em>{adjective}</em> {rest.join(' ')}
+              <span className="report-cover__article">{article}</span> <em>{noun}</em> {rest.join(' ')}
             </h1>
             <p className="report-cover__subtitle">{reading.subtitle}</p>
 
             <dl className="plate">
               <div className="plate__item plate__item--sign">
-                <dt className="label">Sign</dt>
+                <dt className="label">Sternzeichen</dt>
                 <dd>
                   {sign.name}
                   <span className="plate__note">{sign.image}</span>
                 </dd>
               </div>
               <div className="plate__item">
-                <dt className="label">Born</dt>
+                <dt className="label">Geboren</dt>
                 <dd>
                   {reading.profile.birthDateLabel}
-                  <span className="plate__note">
-                    {reading.profile.birthTimeLabel === 'Unknown' ? 'Hour unknown' : reading.profile.birthTimeLabel}
-                  </span>
+                  <span className="plate__note">{reading.profile.birthTimeLabel}</span>
                 </dd>
               </div>
               <div className="plate__item">
-                <dt className="label">Birthplace</dt>
+                <dt className="label">Geburtsort</dt>
                 <dd>{reading.profile.birthplace}</dd>
               </div>
               {reading.profile.facets.map((facet) => (
@@ -144,37 +138,37 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
           <figure className="report-cover__sigil">
             <Sigil sign={reading.sign} asterism={reading.asterism} />
             <figcaption>
-              <span className="label">Personal asterism</span>
+              <span className="label">Persönliches Sternbild</span>
               <span className="report-cover__asterism">{reading.asterism.name}</span>
             </figcaption>
           </figure>
         </div>
 
         <div className="summary">
-          <p className="label">Summary</p>
+          <p className="label">Kurz gesagt</p>
           <p className="summary__text">{reading.summary}</p>
           <div className="summary__actions">
             <button type="button" className="btn btn--ghost btn--sm" onClick={copySummary}>
               <Icon name="copy" className="btn__icon" size={16} />
-              Copy summary
+              Zusammenfassung kopieren
             </button>
             <button type="button" className="btn btn--ghost btn--sm" onClick={download}>
               <Icon name="download" className="btn__icon" size={16} />
-              Download report · Demo
+              Bericht laden · Demo
             </button>
             <button type="button" className="btn btn--text btn--sm" onClick={onNewReading}>
               <Icon name="restart" className="btn__icon" size={16} />
-              Start a New Reading
+              Neue Deutung starten
             </button>
           </div>
           <p className="summary__engine">
             <Icon name="info" size={14} />
-            {reading.engine.label}. A symbolic interpretation — not an AI model’s output, not a DNA or ancestry
-            analysis, not a prediction.
+            {reading.engine.label}. Eine symbolische Interpretation – keine KI-Ausgabe, keine DNA- oder
+            Abstammungsanalyse, keine Vorhersage.
           </p>
         </div>
 
-        <nav className="chapter-nav" aria-label="Reading chapters">
+        <nav className="chapter-nav" aria-label="Kapitel der Deutung">
           {CHAPTERS.map((chapter, index) => (
             <a
               key={chapter.id}
@@ -185,24 +179,45 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
                 scrollTo(chapter.id);
               }}
             >
-              <span className="chapter-nav__num">{chapter.id === 'premium' ? '✦' : `0${index + 1}`}</span>
+              <span className="chapter-nav__num">
+                {chapter.id === 'premium' ? '✦' : chapter.id === 'facts' ? '✧' : `0${index}`}
+              </span>
               {chapter.label}
             </a>
           ))}
         </nav>
       </header>
 
-      <div className="free-divider container" aria-hidden="true">
-        <span className="label">Free reading</span>
-      </div>
+      {/* ——— Facts ——— */}
+      <section id="facts" className="facts container" aria-labelledby="facts-title">
+        <div className="facts__head" data-reveal>
+          <p className="label label--gold">Berechnet aus deinem Geburtsmoment</p>
+          <h2 id="facts-title" className="facts__title">
+            Deine kosmischen <em>Fakten</em>
+          </h2>
+        </div>
+        <ul className="facts__grid">
+          {reading.facts.map((fact, index) => (
+            <li
+              key={fact.label}
+              className="fact"
+              data-reveal
+              style={{ '--reveal-delay': `${(index % 4) * 60}ms` } as CSSProperties}
+            >
+              <span className="fact__value">{fact.value}</span>
+              <span className="fact__label">{fact.label}</span>
+              {fact.note && <span className="fact__note">{fact.note}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      {/* ——— 01 ——— */}
       <Section
         id="identity"
         num="01"
         title={
           <>
-            Your Cosmic <em>Identity</em>
+            Deine kosmische <em>Identität</em>
           </>
         }
       >
@@ -220,26 +235,22 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
             {identity.note}
           </p>
         )}
-        <div className="spec" data-reveal>
-          <p className="label label--gold">Sign profile</p>
-          <dl className="spec__grid">
-            {identity.facets.map((facet) => (
-              <div key={facet.label} className="spec__item">
-                <dt className="label">{facet.label}</dt>
-                <dd>{facet.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        <dl className="spec__grid" data-reveal>
+          {identity.facets.map((facet) => (
+            <div key={facet.label} className="spec__item">
+              <dt className="label">{facet.label}</dt>
+              <dd>{facet.value}</dd>
+            </div>
+          ))}
+        </dl>
       </Section>
 
-      {/* ——— 02 ——— */}
       <Section
         id="inner-universe"
         num="02"
         title={
           <>
-            Your Inner <em>Universe</em>
+            Dein inneres <em>Universum</em>
           </>
         }
       >
@@ -248,7 +259,7 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
         </p>
         <div className="traits">
           <div className="traits__group">
-            <p className="label label--gold">Where your light gathers</p>
+            <p className="label label--gold">Deine Stärken</p>
             <ol className="traits__list">
               {innerUniverse.strengths.map((item, index) => (
                 <li
@@ -267,7 +278,7 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
             </ol>
           </div>
           <div className="traits__group">
-            <p className="label">Where tension asks a question</p>
+            <p className="label">Deine Spannungsfelder</p>
             <ol className="traits__list traits__list--tension">
               {innerUniverse.tensions.map((item, index) => (
                 <li
@@ -287,19 +298,18 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
           </div>
         </div>
         <div className="growth" data-reveal>
-          <p className="label label--gold">Growth theme</p>
+          <p className="label label--gold">Dein Wachstumsthema</p>
           <p className="growth__title">{innerUniverse.growth.title}</p>
           <p className="growth__body">{innerUniverse.growth.body}</p>
         </div>
       </Section>
 
-      {/* ——— 03 ——— */}
       <Section
         id="origins"
         num="03"
         title={
           <>
-            Origins &amp; Cultural <em>Connections</em>
+            Herkunft &amp; <em>Kultur</em>
           </>
         }
       >
@@ -312,7 +322,7 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
         <div className="boundary" data-reveal>
           <Icon name="shield" size={20} />
           <div>
-            <p className="boundary__title">What this section can — and cannot — tell you</p>
+            <p className="boundary__title">Was dieser Abschnitt zeigen kann – und was nicht</p>
             <p className="boundary__text">{origins.boundary}</p>
           </div>
         </div>
@@ -323,13 +333,12 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
         </div>
       </Section>
 
-      {/* ——— 04 ——— */}
       <Section
         id="timeline"
         num="04"
         title={
           <>
-            Your Cosmic <em>Timeline</em>
+            Dein <em>Zeitstrahl</em>
           </>
         }
       >
@@ -339,13 +348,12 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
         <TimelineList nodes={timeline.nodes} />
       </Section>
 
-      {/* ——— 05 ——— */}
       <Section
         id="reflection"
         num="05"
         title={
           <>
-            Your Personal <em>Reflection</em>
+            Deine <em>Reflexion</em>
           </>
         }
       >
@@ -354,8 +362,8 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
         </p>
         {reflection.intention && (
           <blockquote className="intention" data-reveal>
-            <p className="label">You asked</p>
-            <p className="intention__text">“{reflection.intention}”</p>
+            <p className="label">Deine Frage</p>
+            <p className="intention__text">„{reflection.intention}“</p>
           </blockquote>
         )}
         <ol className="questions">
@@ -382,20 +390,20 @@ export function Report({ reading, premium, reducedMotion, onUnlockPremium, onNew
 
       <footer className="report-end container" data-reveal>
         <p className="report-end__line">
-          Take what resonates. Leave the rest to <em>the stars.</em>
+          Nimm mit, was passt. Den Rest überlass <em>den Sternen.</em>
         </p>
         <div className="report-end__actions">
           <button type="button" className="btn btn--primary" onClick={onNewReading}>
             <Icon name="restart" className="btn__icon" />
-            Start a New Reading
+            Neue Deutung starten
           </button>
           <button type="button" className="btn btn--ghost" onClick={download}>
             <Icon name="download" className="btn__icon" />
-            Download report · Demo
+            Bericht laden · Demo
           </button>
         </div>
         <p className="report-end__fine">
-          The download is a plain-text file created on your device. Nothing is uploaded.
+          Der Bericht ist eine Textdatei, die auf deinem Gerät erstellt wird. Nichts wird hochgeladen.
         </p>
       </footer>
 

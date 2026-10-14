@@ -374,6 +374,152 @@ const COUNTRY_DATA = [
   'Nepal|Nepal|28.4|84.1',
 ];
 
+/** German display names (the English names stay searchable as keys). */
+const COUNTRY_DE: Record<string, string> = {
+  Germany: 'Deutschland',
+  Austria: 'Österreich',
+  Switzerland: 'Schweiz',
+  'United Kingdom': 'Vereinigtes Königreich',
+  Ireland: 'Irland',
+  France: 'Frankreich',
+  Belgium: 'Belgien',
+  Netherlands: 'Niederlande',
+  Luxembourg: 'Luxemburg',
+  Denmark: 'Dänemark',
+  Sweden: 'Schweden',
+  Norway: 'Norwegen',
+  Finland: 'Finnland',
+  Iceland: 'Island',
+  Spain: 'Spanien',
+  Italy: 'Italien',
+  Greece: 'Griechenland',
+  Türkiye: 'Türkei',
+  Poland: 'Polen',
+  Czechia: 'Tschechien',
+  Hungary: 'Ungarn',
+  Slovakia: 'Slowakei',
+  Slovenia: 'Slowenien',
+  Croatia: 'Kroatien',
+  Serbia: 'Serbien',
+  'Bosnia and Herzegovina': 'Bosnien und Herzegowina',
+  Bulgaria: 'Bulgarien',
+  Romania: 'Rumänien',
+  Belarus: 'Belarus',
+  Lithuania: 'Litauen',
+  Latvia: 'Lettland',
+  Estonia: 'Estland',
+  Russia: 'Russland',
+  Moldova: 'Moldau',
+  Albania: 'Albanien',
+  'North Macedonia': 'Nordmazedonien',
+  Cyprus: 'Zypern',
+  Lebanon: 'Libanon',
+  Syria: 'Syrien',
+  Jordan: 'Jordanien',
+  Iraq: 'Irak',
+  'Saudi Arabia': 'Saudi-Arabien',
+  'United Arab Emirates': 'Vereinigte Arabische Emirate',
+  Qatar: 'Katar',
+  Egypt: 'Ägypten',
+  Morocco: 'Marokko',
+  Tunisia: 'Tunesien',
+  Algeria: 'Algerien',
+  Libya: 'Libyen',
+  Ethiopia: 'Äthiopien',
+  Kenya: 'Kenia',
+  Tanzania: 'Tansania',
+  'DR Congo': 'DR Kongo',
+  'South Africa': 'Südafrika',
+  Zimbabwe: 'Simbabwe',
+  Madagascar: 'Madagaskar',
+  India: 'Indien',
+  Uzbekistan: 'Usbekistan',
+  Kazakhstan: 'Kasachstan',
+  Azerbaijan: 'Aserbaidschan',
+  Georgia: 'Georgien',
+  Armenia: 'Armenien',
+  'South Korea': 'Südkorea',
+  Philippines: 'Philippinen',
+  Indonesia: 'Indonesien',
+  Mongolia: 'Mongolei',
+  Cambodia: 'Kambodscha',
+  Australia: 'Australien',
+  'New Zealand': 'Neuseeland',
+  'United States': 'USA',
+  Canada: 'Kanada',
+  Mexico: 'Mexiko',
+  Cuba: 'Kuba',
+  'Dominican Republic': 'Dominikanische Republik',
+  Colombia: 'Kolumbien',
+  Bolivia: 'Bolivien',
+  Argentina: 'Argentinien',
+  Brazil: 'Brasilien',
+  Scotland: 'Schottland',
+  Palestine: 'Palästina',
+  Bangladesh: 'Bangladesch',
+  Somalia: 'Somalia',
+  Eritrea: 'Eritrea',
+  Sudan: 'Sudan',
+  Rwanda: 'Ruanda',
+};
+
+const CITY_DE: Record<string, string> = {
+  Munich: 'München',
+  Cologne: 'Köln',
+  Hanover: 'Hannover',
+  Nuremberg: 'Nürnberg',
+  Vienna: 'Wien',
+  Zurich: 'Zürich',
+  Geneva: 'Genf',
+  Lucerne: 'Luzern',
+  Brussels: 'Brüssel',
+  Copenhagen: 'Kopenhagen',
+  Lisbon: 'Lissabon',
+  Rome: 'Rom',
+  Milan: 'Mailand',
+  Naples: 'Neapel',
+  Florence: 'Florenz',
+  Venice: 'Venedig',
+  Turin: 'Turin',
+  Athens: 'Athen',
+  Warsaw: 'Warschau',
+  Kraków: 'Krakau',
+  Prague: 'Prag',
+  Belgrade: 'Belgrad',
+  Bucharest: 'Bukarest',
+  Kyiv: 'Kiew',
+  Lviv: 'Lwiw',
+  Moscow: 'Moskau',
+  'Saint Petersburg': 'Sankt Petersburg',
+  Damascus: 'Damaskus',
+  Baghdad: 'Bagdad',
+  Tehran: 'Teheran',
+  Riyadh: 'Riad',
+  Cairo: 'Kairo',
+  Marrakesh: 'Marrakesch',
+  Algiers: 'Algier',
+  'Addis Ababa': 'Addis Abeba',
+  'Cape Town': 'Kapstadt',
+  'Kuwait City': 'Kuwait-Stadt',
+  Delhi: 'Neu-Delhi',
+  Beijing: 'Peking',
+  Tokyo: 'Tokio',
+  Singapore: 'Singapur',
+  'Mexico City': 'Mexiko-Stadt',
+  Havana: 'Havanna',
+  'Guatemala City': 'Guatemala-Stadt',
+  'Panama City': 'Panama-Stadt',
+  'Washington, D.C.': 'Washington, D.C.',
+  Tbilisi: 'Tiflis',
+  Yerevan: 'Eriwan',
+  Tashkent: 'Taschkent',
+  Seville: 'Sevilla',
+  Nice: 'Nizza',
+  'Ho Chi Minh City': 'Ho-Chi-Minh-Stadt',
+  Kolkata: 'Kalkutta',
+  Ulaanbaatar: 'Ulan Bator',
+};
+
 export interface Place {
   name: string;
   country: string;
@@ -403,9 +549,11 @@ function transliterate(value: string): string {
 function buildIndex(rows: string[], precision: Place['precision']): Map<string, Place> {
   const index = new Map<string, Place>();
   for (const row of rows) {
-    const [name, country, lat, lon, aliases = ''] = row.split('|');
+    const [english, englishCountry, lat, lon, aliases = ''] = row.split('|');
+    const name = (precision === 'city' ? CITY_DE[english] : COUNTRY_DE[english]) ?? english;
+    const country = COUNTRY_DE[englishCountry] ?? englishCountry;
     const place: Place = { name, country, lat: Number(lat), lon: Number(lon), precision };
-    const keys = [name, ...aliases.split(';').filter(Boolean)];
+    const keys = [english, name, ...aliases.split(';').filter(Boolean)];
     for (const key of keys) {
       for (const variant of [key, transliterate(key)]) {
         const normalized = normalizePlace(variant);
@@ -455,7 +603,9 @@ export function findPlace(input: string): Place | null {
 
 export function suggestedPlaceNames(): string[] {
   return CITY_DATA.map((row) => {
-    const [name, country] = row.split('|');
+    const [english, englishCountry] = row.split('|');
+    const name = CITY_DE[english] ?? english;
+    const country = COUNTRY_DE[englishCountry] ?? englishCountry;
     return country ? `${name}, ${country}` : name;
   });
 }
@@ -470,7 +620,7 @@ export function distanceKm(a: Place, b: Place): number {
   return 2 * EARTH_RADIUS_KM * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
-const COMPASS = ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'];
+const COMPASS = ['Norden', 'Nordosten', 'Osten', 'Südosten', 'Süden', 'Südwesten', 'Westen', 'Nordwesten'];
 
 export function compassDirection(from: Place, to: Place): string {
   const φ1 = from.lat * RAD;
@@ -483,7 +633,7 @@ export function compassDirection(from: Place, to: Place): string {
 }
 
 export function formatCoordinates(place: Place): string {
-  const lat = `${Math.abs(place.lat).toFixed(2)}° ${place.lat >= 0 ? 'N' : 'S'}`;
-  const lon = `${Math.abs(place.lon).toFixed(2)}° ${place.lon >= 0 ? 'E' : 'W'}`;
+  const lat = `${Math.abs(place.lat).toFixed(2).replace('.', ',')}° ${place.lat >= 0 ? 'N' : 'S'}`;
+  const lon = `${Math.abs(place.lon).toFixed(2).replace('.', ',')}° ${place.lon >= 0 ? 'O' : 'W'}`;
   return `${lat} · ${lon}`;
 }

@@ -53,8 +53,8 @@ export function WorldMap({ birth, home }: WorldMapProps) {
 
   const equator = project(0, 0).y;
   const label = points.length
-    ? `Abstract world map marking ${points.map((p) => `${p.role === 'birth' ? 'your birthplace' : 'where you live'}, ${p.label}`).join(' and ')}`
-    : 'Abstract world map. Your birthplace is not in the offline atlas, so no point is marked.';
+    ? `Weltkarte mit ${points.map((p) => `${p.role === 'birth' ? 'deinem Geburtsort' : 'deinem Wohnort'} ${p.label}`).join(' und ')}`
+    : 'Weltkarte. Dein Geburtsort ist nicht im Offline-Atlas, daher ist kein Punkt markiert.';
 
   return (
     <figure className="worldmap">
@@ -77,7 +77,7 @@ export function WorldMap({ birth, home }: WorldMapProps) {
         </g>
         <line x1={0} y1={equator} x2={WIDTH} y2={equator} className="worldmap__equator" />
         <text x={WIDTH - 6} y={equator - 6} className="worldmap__caption" textAnchor="end">
-          EQUATOR
+          ÄQUATOR
         </text>
         <path d={land} className="worldmap__land" />
 
@@ -108,8 +108,8 @@ export function WorldMap({ birth, home }: WorldMapProps) {
                 textAnchor={anchorEnd ? 'end' : 'start'}
                 className="worldmap__coords"
               >
-                {p.role === 'birth' ? 'BIRTH' : 'TODAY'} · {p.coordinates}
-                {p.precision === 'country' ? ' (approx.)' : ''}
+                {p.role === 'birth' ? 'GEBURT' : 'HEUTE'} · {p.coordinates}
+                {p.precision === 'country' ? ' (ca.)' : ''}
               </text>
             </g>
           );
@@ -117,7 +117,7 @@ export function WorldMap({ birth, home }: WorldMapProps) {
       </svg>
       {!birth && (
         <figcaption className="worldmap__empty">
-          Your birthplace isn’t in ASTRA’s offline atlas, so it is held by name, not as a point.
+          Dein Geburtsort ist nicht im Offline-Atlas – er erscheint mit Namen statt als Punkt.
         </figcaption>
       )}
     </figure>

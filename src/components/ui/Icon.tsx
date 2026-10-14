@@ -19,6 +19,7 @@ const ICONS = {
   sparkle: 'M12 3c.4 4.6 2.4 6.6 7 9-4.6.4-6.6 2.4-7 9-.4-6.6-2.4-8.6-7-9 4.6-2.4 6.6-4.4 7-9z',
   pin: 'M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
   minus: 'M5 12h14',
+  calendar: 'M4.5 6.5h15v13h-15zM4.5 10.5h15M8.5 4v4M15.5 4v4',
 } as const;
 
 export type IconName = keyof typeof ICONS;
