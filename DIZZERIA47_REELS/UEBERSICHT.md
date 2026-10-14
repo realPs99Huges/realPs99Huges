@@ -1,6 +1,6 @@
 # Dizzeria 47 – 5 Instagram Reels
 
-Alle Reels: 1080 × 1920 (9:16) · H.264 · AAC 48 kHz · 30 fps · **exakt 30,0 s** · Lautheit −14 LUFS (Instagram-Norm).
+Alle Reels: 1080 × 1920 (9:16) · H.264 · AAC 48 kHz · 30 fps · **exakt 30,0 s** · Lautheit ca. −13 bis −14 LUFS (Instagram-Niveau).
 Texte liegen innerhalb der Instagram-Safe-Zone (oben ≥ 196 px, unten ≥ 380 px frei).
 
 | # | Datei | Konzept | Musik | Besonderheit |
@@ -33,8 +33,8 @@ HDR-Material (iPhone HLG) wurde farbtreu nach SDR/Rec.709 getonemappt. 60-fps-Cl
 ### Reel 1 – Signature Film (ein Shot pro Takt à 3 s, Überblendungen 16 Frames)
 | Zeit | Quelle (In-Punkt · Tempo) | Text / Effekt |
 |---|---|---|
-| 0–3 s | Schwarz | „LIPPSTADT“, „DIZZERIA“ (Laufweite zieht zusammen), Goldlinie, „47“ Mask-Reveal |
-| 3–7,5 s | B 0:00 · 0,62× | „PIZZA MIT DINKELMEHL / Gebacken mit Charakter.“ |
+| 0–3 s | B 0:00 · 0,4×, stark abgedunkelt | „LIPPSTADT“, „DIZZERIA“ (Laufweite zieht zusammen), Goldlinie, „47“ Mask-Reveal |
+| 3–7,5 s | B (läuft weiter, aufgehellt) | „PIZZA MIT DINKELMEHL / Gebacken mit Charakter.“ |
 | 7,5–10,5 s | B 3:05 · 0,4× (Makro) | – |
 | 10,5–13,5 s | D 0:00 · 0,6× | „Gemacht in Lippstadt.“ |
 | 13,5–16,5 s | E 4:35 · 0,85× | Light-Leak in den nächsten Shot |
@@ -62,9 +62,9 @@ HDR-Material (iPhone HLG) wurde farbtreu nach SDR/Rec.709 getonemappt. 60-fps-Cl
 ### Reel 3 – Dinkelmehl (Takt = 2,4 s)
 | Zeit | Quelle | Text / Effekt |
 |---|---|---|
-| 0–4,8 s | D 0:00 · 0,6× in den Buchstaben | Knockout „DINKEL“ + „mehl.“, Zoom durch das „I“ |
-| 4,8–9,6 s | D 0:00–1:80 · 0,6×, dann G 0:80 (Pizzaiolo, Ausschnitt) | Kapitel 01 – DER TEIG, aus Dinkelmehl. |
-| 9,6–12 s | D 3:00 · 0,62× | „Von Hand geformt.“ |
+| 0–4,8 s | D 3:00 · 0,3× (Teig auf bemehlter Arbeitsfläche) in den Buchstaben | Knockout „DINKEL“ + „mehl.“, Zoom durch das „I“ |
+| 4,8–9,6 s | D 0:00 · 0,75×, dann G 0:80 (Pizzaiolo, Ausschnitt) | Kapitel 01 – DER TEIG, aus Dinkelmehl. |
+| 9,6–12 s | D 1:95 · 0,45× (Teigwurf in Zeitlupe) | „Von Hand geformt.“ |
 | 12–16,8 s | E 0:00 · 0,5× | Kapitel 02 – DIE SAUCE |
 | 16,8–21,6 s | J 0:00 · 0,75× | Kapitel 03 – DER OFEN, goldbraun gebacken. |
 | 21,6–26,4 s | P1 (Rand-Detail), K 0:00 | Kapitel 04 – DER MOMENT, Knusprig am Rand. |
