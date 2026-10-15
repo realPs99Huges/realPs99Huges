@@ -1,0 +1,89 @@
+[Script Info]
+Title: Paki Akin – Selbstwert
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter SemiBold,62,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,0.6,0,1,3.4,1.8,5,140,140,0,1
+Style: Head,Instrument Serif,134,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,4,2,5,90,90,0,1
+Style: HeadRoman,Instrument Serif,104,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,0,0,0,100,100,0.5,0,1,4,2,5,90,90,0,1
+Style: Small,Inter Medium,46,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,2.4,0,1,3,1.6,5,90,90,0,1
+Style: Shape,Inter Medium,20,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:05.16,0:00:06.40,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Warum hältst du dich
+Dialogue: 1,0:00:06.40,0:00:07.58,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}eigentlich klein?
+Dialogue: 1,0:00:07.58,0:00:08.65,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Warum machst du dich
+Dialogue: 1,0:00:08.65,0:00:09.41,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}immer wieder
+Dialogue: 1,0:00:10.02,0:00:10.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}als du bist?
+Dialogue: 1,0:00:10.82,0:00:12.02,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Warum vergötterst du
+Dialogue: 1,0:00:12.02,0:00:13.46,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}irgendwelche Stars?
+Dialogue: 1,0:00:13.46,0:00:14.80,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Warum vergötterst du
+Dialogue: 1,0:00:14.80,0:00:16.54,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Menschen, die nicht mal
+Dialogue: 1,0:00:16.54,0:00:17.46,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ansatzweise
+Dialogue: 1,0:00:17.46,0:00:18.60,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}für dich Ozeane
+Dialogue: 1,0:00:18.60,0:00:20.04,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}überqueren würden?
+Dialogue: 1,0:00:20.04,0:00:20.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Und ich meine es
+Dialogue: 1,0:00:20.76,0:00:22.26,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}gerade {\1c&H00FFFFFF&\t(470,610,\1c&H0096CDF2&)}todernst{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:22.26,0:00:23.14,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Warum bist du
+Dialogue: 1,0:00:23.14,0:00:24.06,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}weniger wert{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:24.06,0:00:25.14,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}als jemand anderes
+Dialogue: 1,0:00:25.14,0:00:26.07,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}da draußen?
+Dialogue: 1,0:00:26.26,0:00:27.03,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Erklär es mir,
+Dialogue: 1,0:00:27.12,0:00:28.02,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}beantworte mir
+Dialogue: 1,0:00:28.02,0:00:28.94,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}diese Frage.
+Dialogue: 1,0:00:28.94,0:00:30.04,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Jetzt schreib sie mir
+Dialogue: 1,0:00:30.04,0:00:30.70,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}hier jetzt
+Dialogue: 1,0:00:30.70,0:00:31.88,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in die Kommentare.
+Dialogue: 1,0:00:34.36,0:00:35.26,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Und diesen {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}Wert{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:35.26,0:00:36.58,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}darfst du erkennen.
+Dialogue: 1,0:00:36.58,0:00:38.88,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du darfst heute anfangen,
+Dialogue: 1,0:00:38.88,0:00:40.00,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dich nicht mehr
+Dialogue: 1,0:00:40.00,0:00:41.35,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}klein zu halten,
+Dialogue: 1,0:00:41.35,0:00:42.98,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dein {\1c&H00FFFFFF&\t(540,680,\1c&H0096CDF2&)}Selbstwertgefühl{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:42.98,0:00:44.25,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}zu stabilisieren,
+Dialogue: 1,0:00:44.25,0:00:45.30,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}nicht andere Menschen
+Dialogue: 1,0:00:45.30,0:00:47.00,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}auf ein {\1c&H00FFFFFF&\t(430,570,\1c&H0096CDF2&)}Podest{\1c&H00FFFFFF&} zu stellen.
+Dialogue: 1,0:00:47.00,0:00:48.05,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du darfst erst mal
+Dialogue: 1,0:00:51.67,0:00:52.03,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Also,
+Dialogue: 1,0:00:52.16,0:00:53.58,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(70,210,\1c&H0096CDF2&)}Hausaufgabe{\1c&H00FFFFFF&} erledigen,
+Dialogue: 1,0:00:53.58,0:00:54.88,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Video abspeichern.
+Dialogue: 1,0:00:54.88,0:00:55.34,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ich freue mich,
+Dialogue: 1,0:00:55.34,0:00:56.57,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}von dir zu lesen.
+Dialogue: 2,0:00:00.00,0:00:03.67,HeadRoman,,0,0,0,,{\an5\q2\move(540,1250,540,1240,0,900)\fad(0,120)}{\alpha&HFF&\blur9\t(67,327,0.6,\alpha&H00&\blur0.7)}Warum {\alpha&HFF&\blur9\t(467,727,0.6,\alpha&H00&\blur0.7)}bist {\alpha&HFF&\blur9\t(707,967,0.6,\alpha&H00&\blur0.7)}du
+Dialogue: 2,0:00:00.00,0:00:03.67,Head,,0,0,0,,{\an5\q2\move(540,1382,540,1372,0,900)\fad(0,120)}{\alpha&HFF&\blur9\t(967,1227,0.6,\alpha&H00&\blur0.7)}weniger {\alpha&HFF&\blur9\1c&H0096CDF2&\t(1367,1627,0.6,\alpha&H00&\blur0.7)}wert
+Dialogue: 2,0:00:00.00,0:00:03.67,Small,,0,0,0,,{\an5\q2\move(540,1488,540,1478,0,900)\fad(0,120)}{\alpha&HFF&\blur9\t(1827,2087,0.6,\alpha&H00&\blur0.7)}als {\alpha&HFF&\blur9\t(2147,2407,0.6,\alpha&H00&\blur0.7)}jemand {\alpha&HFF&\blur9\t(2547,2807,0.6,\alpha&H00&\blur0.7)}anderes {\alpha&HFF&\blur9\t(2947,3207,0.6,\alpha&H00&\blur0.7)}da {\alpha&HFF&\blur9\t(3187,3447,0.6,\alpha&H00&\blur0.7)}draußen?
+Dialogue: 2,0:00:03.77,0:00:05.13,Head,,0,0,0,,{\an5\q2\move(540,1338,540,1330,0,600)\fad(0,140)}{\alpha&HFF&\blur9\t(127,347,0.6,\alpha&H00&\blur0.7)}Das {\alpha&HFF&\blur9\t(287,507,0.6,\alpha&H00&\blur0.7)}sagt {\alpha&HFF&\blur9\t(627,847,0.6,\alpha&H00&\blur0.7)}dir {\alpha&HFF&\blur9\t(827,1047,0.6,\alpha&H00&\blur0.7)}niemand.
+Dialogue: 2,0:00:09.41,0:00:10.02,Head,,0,0,0,,{\an5\pos(540,1330)\fad(90,90)\t(80,640,0.7,\fscx66\fscy66\alpha&H30&)}kleiner,
+Dialogue: 2,0:00:31.88,0:00:34.28,Head,,0,0,0,,{\an5\q2\move(540,1272,540,1262,0,1500)\fad(0,160)}{\alpha&HFF&\blur9\t(90,390,0.6,\alpha&H00&\blur0.7)}Du {\alpha&HFF&\blur9\t(670,970,0.6,\alpha&H00&\blur0.7)}hast {\alpha&HFF&\blur9\t(1150,1450,0.6,\alpha&H00&\blur0.7)}einen
+Dialogue: 2,0:00:31.88,0:00:34.28,Head,,0,0,0,,{\an5\q2\move(540,1406,540,1396,0,1500)\fad(0,160)}{\alpha&HFF&\blur9\1c&H0096CDF2&\t(1390,1690,0.6,\alpha&H00&\blur0.7)}Wert {\alpha&HFF&\blur9\t(1790,2090,0.6,\alpha&H00&\blur0.7)}in {\alpha&HFF&\blur9\t(1950,2250,0.6,\alpha&H00&\blur0.7)}dir.
+Dialogue: 3,0:00:48.05,0:00:51.57,Shape,,0,0,0,,{\an7\pos(260,1352)\p1\bord0\shad0\1c&H0096CDF2&\fad(0,180)\clip(540,1350,540,1357)\t(20,400,0.5,\clip(380,1350,700,1357))\t(3133,3633,0.5,\clip(260,1350,820,1357))}m 0 0 l 560 0 l 560 4 l 0 4
+Dialogue: 4,0:00:48.05,0:00:49.29,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1472)}dich
+Dialogue: 4,0:00:49.29,0:00:49.33,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1450)}dich
+Dialogue: 4,0:00:49.33,0:00:49.36,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1430)}dich
+Dialogue: 4,0:00:49.36,0:00:49.39,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1414)}dich
+Dialogue: 4,0:00:49.39,0:00:49.43,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1399)}dich
+Dialogue: 4,0:00:49.43,0:00:49.46,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1387)}dich
+Dialogue: 4,0:00:49.46,0:00:49.49,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1377)}dich
+Dialogue: 4,0:00:49.49,0:00:49.53,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1368)}dich
+Dialogue: 4,0:00:49.53,0:00:49.56,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1362)}dich
+Dialogue: 4,0:00:49.56,0:00:49.59,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1357)}dich
+Dialogue: 4,0:00:49.59,0:00:49.63,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1353)}dich
+Dialogue: 4,0:00:49.63,0:00:49.66,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1350)}dich
+Dialogue: 4,0:00:49.66,0:00:49.69,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1348)}dich
+Dialogue: 4,0:00:49.69,0:00:49.73,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1347)}dich
+Dialogue: 4,0:00:49.73,0:00:49.76,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1346)}dich
+Dialogue: 4,0:00:49.76,0:00:49.79,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1346)}dich
+Dialogue: 4,0:00:49.79,0:00:49.83,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1346)}dich
+Dialogue: 4,0:00:49.84,0:00:51.57,Head,,0,0,0,,{\an2\clip(0,0,1080,1351)\pos(540,1346)\fad(0,180)}dich
+Dialogue: 2,0:00:48.05,0:00:49.53,Small,,0,0,0,,{\an5\q2\pos(540,1414)\fad(0,120)}{\alpha&HFF&\blur6\t(40,240,0.6,\alpha&H00&\blur0.7)}dich {\alpha&HFF&\blur6\t(280,480,0.6,\alpha&H00&\blur0.7)}auf {\alpha&HFF&\blur6\t(440,640,0.6,\alpha&H00&\blur0.7)}diesen {\alpha&HFF&\blur6\1c&H0096CDF2&\t(700,900,0.6,\alpha&H00&\blur0.7)}Podest {\alpha&HFF&\blur6\t(1260,1460,0.6,\alpha&H00&\blur0.7)}stellen.
+Dialogue: 2,0:00:49.59,0:00:51.57,Small,,0,0,0,,{\an5\q2\pos(540,1414)\fad(0,160)}{\alpha&HFF&\blur6\t(100,300,0.6,\alpha&H00&\blur0.7)}Und {\alpha&HFF&\blur6\t(180,380,0.6,\alpha&H00&\blur0.7)}dann {\alpha&HFF&\blur6\t(280,480,0.6,\alpha&H00&\blur0.7)}nimmst {\alpha&HFF&\blur6\t(540,740,0.6,\alpha&H00&\blur0.7)}du {\alpha&HFF&\blur6\t(620,820,0.6,\alpha&H00&\blur0.7)}die {\alpha&HFF&\blur6\t(780,980,0.6,\alpha&H00&\blur0.7)}anderen
+Dialogue: 2,0:00:49.59,0:00:51.57,Small,,0,0,0,,{\an5\q2\pos(540,1474)\fad(0,160)}{\alpha&HFF&\blur6\t(1040,1240,0.6,\alpha&H00&\blur0.7)}mit {\alpha&HFF&\blur6\t(1260,1460,0.6,\alpha&H00&\blur0.7)}auch {\alpha&HFF&\blur6\t(1420,1620,0.6,\alpha&H00&\blur0.7)}noch {\alpha&HFF&\blur6\t(1580,1780,0.6,\alpha&H00&\blur0.7)}da {\alpha&HFF&\blur6\1c&H0096CDF2&\t(1740,1940,0.6,\alpha&H00&\blur0.7)}hoch.
+Dialogue: 3,0:00:30.70,0:00:31.88,Shape,,0,0,0,,{\an5\pos(540,1222)\p1\1a&HFF&\3c&H00FFFFFF&\bord3.2\shad0\fad(0,120)\fscx60\fscy60\3a&HFF&\t(350,490,\fscx110\fscy110\3a&H00&)\t(490,610,\fscx100\fscy100)}m 16 0 l 56 0 b 65 0 72 7 72 16 l 72 38 b 72 47 65 54 56 54 l 30 54 l 15 67 l 17 54 l 16 54 b 7 54 0 47 0 38 l 0 16 b 0 7 7 0 16 0
+Dialogue: 3,0:00:53.58,0:00:54.88,Shape,,0,0,0,,{\an5\pos(540,1222)\p1\1a&HFF&\1c&H0096CDF2&\3c&H00FFFFFF&\bord3.2\shad0\fad(0,120)\fscx60\fscy60\3a&HFF&\t(0,140,\fscx110\fscy110\3a&H00&)\t(140,260,\fscx100\fscy100)\t(450,570,\1a&H00&\3c&H0096CDF2&\fscx112\fscy112)\t(570,710,\fscx100\fscy100)}m 0 4 b 0 2 2 0 4 0 l 44 0 b 46 0 48 2 48 4 l 48 64 l 24 47 l 0 64 l 0 4
