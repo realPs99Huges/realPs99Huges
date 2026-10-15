@@ -1,0 +1,84 @@
+[Script Info]
+Title: Paki Akin – Warum sabotieren sich Menschen selbst?
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter SemiBold,62,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,0.6,0,1,3.4,1.8,5,140,140,0,1
+Style: Head,Instrument Serif,128,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: HeadRoman,Instrument Serif,104,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,0,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: Label,Instrument Serif,66,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,3,1.6,5,80,80,0,1
+Style: Small,Inter Medium,46,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,2.4,0,1,3,1.6,5,80,80,0,1
+Style: Shape,Inter Medium,20,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:08.23,0:00:09.37,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ich sag's dir, warum.
+Dialogue: 1,0:00:09.37,0:00:10.13,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Damit sie sich
+Dialogue: 1,0:00:10.13,0:00:11.09,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}anschließend wieder
+Dialogue: 1,0:00:11.09,0:00:12.71,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}motivieren{\1c&H00FFFFFF&} können.
+Dialogue: 1,0:00:12.71,0:00:13.17,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ja, du hast
+Dialogue: 1,0:00:13.17,0:00:14.19,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}richtig gehört.
+Dialogue: 1,0:00:14.19,0:00:15.57,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Menschen sabotieren
+Dialogue: 1,0:00:15.57,0:00:16.64,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sich selbst
+Dialogue: 1,0:00:16.64,0:00:18.34,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}aus {\1c&H00FFFFFF&\t(430,570,\1c&H0096CDF2&)}Unbewusstheit{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:18.34,0:00:20.00,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}aus einer {\1c&H00FFFFFF&\t(550,690,\1c&H0096CDF2&)}Schutzstrategie{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:20.00,0:00:20.80,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}heraus,
+Dialogue: 1,0:00:20.80,0:00:21.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}damit sie nicht
+Dialogue: 1,0:00:21.82,0:00:23.67,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in ihre {\1c&H00FFFFFF&\t(550,690,\1c&H0096CDF2&)}wahre Größe{\1c&H00FFFFFF&} kommen.
+Dialogue: 1,0:00:23.67,0:00:25.35,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Denn dein Nervensystem
+Dialogue: 1,0:00:25.35,0:00:26.23,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}will immer nur das,
+Dialogue: 1,0:00:26.23,0:00:27.35,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}was {\1c&H00FFFFFF&\t(330,470,\1c&H0096CDF2&)}vertraut{\1c&H00FFFFFF&} ist.
+Dialogue: 1,0:00:27.35,0:00:28.31,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Deinem Nervensystem
+Dialogue: 1,0:00:28.31,0:00:29.17,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ist es scheißegal,
+Dialogue: 1,0:00:29.17,0:00:30.27,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ob du glücklich bist,
+Dialogue: 1,0:00:30.27,0:00:31.23,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}zufrieden bist
+Dialogue: 1,0:00:31.23,0:00:32.43,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}oder erfolgreich bist.
+Dialogue: 1,0:00:32.43,0:00:33.39,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dein Nervensystem
+Dialogue: 1,0:00:33.39,0:00:33.98,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sagt nur:
+Dialogue: 1,0:00:35.27,0:00:36.20,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dann will ich das.
+Dialogue: 1,0:00:36.20,0:00:37.19,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Und wer weiß schon,
+Dialogue: 1,0:00:37.19,0:00:38.23,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}was für deinen Körper
+Dialogue: 1,0:00:38.23,0:00:38.93,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sicher ist?
+Dialogue: 1,0:00:38.93,0:00:39.89,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Wer weiß schon,
+Dialogue: 1,0:00:39.89,0:00:40.69,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}was du alles
+Dialogue: 1,0:00:40.69,0:00:41.57,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in deinem Leben
+Dialogue: 1,0:00:41.57,0:00:42.51,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}erlebt hast?
+Dialogue: 1,0:00:42.51,0:00:43.47,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Aber soll ich dir
+Dialogue: 1,0:00:43.47,0:00:44.40,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}mal was sagen?
+Dialogue: 1,0:00:47.03,0:00:48.87,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Triff diese {\1c&H00FFFFFF&\t(967,1107,\1c&H0096CDF2&)}Entscheidung{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:48.87,0:00:49.83,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}geh aus diesem
+Dialogue: 1,0:00:49.83,0:00:51.07,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}Umfeld{\1c&H00FFFFFF&} heraus.
+Dialogue: 1,0:00:51.07,0:00:52.57,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(70,210,\1c&H0096CDF2&)}Verlass{\1c&H00FFFFFF&} diesen Mann,
+Dialogue: 1,0:00:52.57,0:00:53.97,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}wenn er dir nicht guttut.
+Dialogue: 1,0:00:53.97,0:00:55.43,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Hör auf, dich selbst
+Dialogue: 1,0:00:55.43,0:00:56.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}zu {\1c&H00FFFFFF&\t(250,390,\1c&H0096CDF2&)}sabotieren{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:56.76,0:00:58.00,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Denn jeder Tag,
+Dialogue: 1,0:00:58.00,0:00:58.80,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}an dem du dich
+Dialogue: 1,0:00:58.80,0:00:59.92,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}selbst sabotierst,
+Dialogue: 1,0:00:59.92,0:01:00.64,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}an dem du dich
+Dialogue: 1,0:01:00.64,0:01:01.94,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}klein hältst,
+Dialogue: 1,0:01:01.94,0:01:03.02,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}an dem du
+Dialogue: 1,0:01:03.02,0:01:04.37,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dinge tust,
+Dialogue: 1,0:01:04.37,0:01:05.77,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}die du nicht willst,
+Dialogue: 2,0:00:00.00,0:00:01.73,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(120,230,0.6,\alpha&H00&\blur0.7)}Deinem {\alpha&HFF&\blur5\t(380,490,0.6,\alpha&H00&\blur0.7)}Nervensystem {\alpha&HFF&\blur5\t(980,1090,0.6,\alpha&H00&\blur0.7)}ist {\alpha&HFF&\blur5\t(1080,1190,0.6,\alpha&H00&\blur0.7)}es
+Dialogue: 2,0:00:00.00,0:00:01.73,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\1c&H0096CDF2&\t(1260,1370,0.6,\alpha&H00&\blur0.7)}scheißegal.
+Dialogue: 2,0:00:01.73,0:00:03.10,Head,,0,0,0,,{\an5\q2\pos(540,1300)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(107,217,0.6,\alpha&H00&\blur0.7)}Verlass {\alpha&HFF&\blur5\t(727,837,0.6,\alpha&H00&\blur0.7)}diesen {\alpha&HFF&\blur5\1c&H0096CDF2&\t(1047,1157,0.6,\alpha&H00&\blur0.7)}Mann.
+Dialogue: 2,0:00:03.10,0:00:05.02,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(87,197,0.6,\alpha&H00&\blur0.7)}ist {\alpha&HFF&\blur5\t(287,397,0.6,\alpha&H00&\blur0.7)}ein
+Dialogue: 2,0:00:03.10,0:00:05.02,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(547,657,0.6,\alpha&H00&\blur0.7)}verlorener {\alpha&HFF&\blur5\1c&H0096CDF2&\t(1487,1597,0.6,\alpha&H00&\blur0.7)}Tag.
+Dialogue: 2,0:00:05.27,0:00:08.00,Head,,0,0,0,,{\an5\q2\move(540,1236,540,1226,0,600)\fad(0,140)}{\alpha&HFF&\blur9\t(93,313,0.6,\alpha&H00&\blur0.7)}Warum {\alpha&HFF&\blur9\1c&H0096CDF2&\t(393,613,0.6,\alpha&H00&\blur0.7)}sabotieren
+Dialogue: 2,0:00:05.27,0:00:08.00,Small,,0,0,0,,{\an5\q2\move(540,1350,540,1340,0,600)\fad(0,140)}{\alpha&HFF&\blur6\t(1233,1453,0.6,\alpha&H00&\blur0.7)}sich {\alpha&HFF&\blur6\t(1393,1613,0.6,\alpha&H00&\blur0.7)}eigentlich {\alpha&HFF&\blur6\t(1873,2093,0.6,\alpha&H00&\blur0.7)}Menschen {\alpha&HFF&\blur6\t(2273,2493,0.6,\alpha&H00&\blur0.7)}selbst?
+Dialogue: 3,0:00:29.39,0:00:36.04,Label,,0,0,0,,{\an5\pos(290,1150)\fscx70\fscy70\t(0,160,\fscx100\fscy100)\fad(0,200)\t(5350,5700,\alpha&HB0&\blur3)}{\alpha&HFF&\blur6\t(50,210,0.6,\alpha&H00&\blur0.7)}glücklich
+Dialogue: 3,0:00:30.23,0:00:36.04,Label,,0,0,0,,{\an5\pos(540,1150)\fscx70\fscy70\t(0,160,\fscx100\fscy100)\fad(0,200)\t(4510,4860,\alpha&HB0&\blur3)}{\alpha&HFF&\blur6\t(50,210,0.6,\alpha&H00&\blur0.7)}zufrieden
+Dialogue: 3,0:00:31.43,0:00:36.04,Label,,0,0,0,,{\an5\pos(790,1150)\fscx70\fscy70\t(0,160,\fscx100\fscy100)\fad(0,200)\t(3310,3660,\alpha&HB0&\blur3)}{\alpha&HFF&\blur6\t(50,210,0.6,\alpha&H00&\blur0.7)}erfolgreich
+Dialogue: 2,0:00:33.98,0:00:35.16,Small,,0,0,0,,{\an5\q2\move(540,1246,540,1236,0,500)\fad(0,140)}{\alpha&HFF&\blur6\t(60,260,0.6,\alpha&H00&\blur0.7)}Okay, {\alpha&HFF&\blur6\t(380,580,0.6,\alpha&H00&\blur0.7)}ist {\alpha&HFF&\blur6\t(540,740,0.6,\alpha&H00&\blur0.7)}das
+Dialogue: 2,0:00:33.98,0:00:35.16,Head,,0,0,0,,{\an5\q2\move(540,1358,540,1348,0,500)\fad(0,140)}{\alpha&HFF&\blur9\1c&H0096CDF2&\t(780,980,0.6,\alpha&H00&\blur0.7)}sicher?
+Dialogue: 2,0:00:44.40,0:00:47.03,Head,,0,0,0,,{\an5\q2\move(540,1272,540,1262,0,1500)\fad(0,140)}{\alpha&HFF&\blur9\t(140,400,0.6,\alpha&H00&\blur0.7)}Hör {\alpha&HFF&\blur9\t(540,800,0.6,\alpha&H00&\blur0.7)}auf, {\alpha&HFF&\blur9\t(860,1120,0.6,\alpha&H00&\blur0.7)}dich {\alpha&HFF&\blur9\t(1180,1440,0.6,\alpha&H00&\blur0.7)}selbst
+Dialogue: 2,0:00:44.40,0:00:47.03,Head,,0,0,0,,{\an5\q2\move(540,1406,540,1396,0,1500)\fad(0,140)}{\alpha&HFF&\blur9\t(1580,1840,0.6,\alpha&H00&\blur0.7)}zu {\alpha&HFF&\blur9\1c&H0096CDF2&\t(1740,2000,0.6,\alpha&H00&\blur0.7)}sabotieren.
+Dialogue: 2,0:01:05.77,0:01:07.73,Small,,0,0,0,,{\an5\q2\move(540,1246,540,1236,0,1400)\fad(0,300)}{\alpha&HFF&\blur6\t(187,487,0.6,\alpha&H00&\blur0.7)}ist {\alpha&HFF&\blur6\t(387,687,0.6,\alpha&H00&\blur0.7)}ein
+Dialogue: 2,0:01:05.77,0:01:07.73,Head,,0,0,0,,{\an5\q2\move(540,1358,540,1348,0,1400)\fad(0,300)}{\alpha&HFF&\blur9\t(647,947,0.6,\alpha&H00&\blur0.7)}verlorener {\alpha&HFF&\blur9\1c&H0096CDF2&\t(1587,1887,0.6,\alpha&H00&\blur0.7)}Tag.
