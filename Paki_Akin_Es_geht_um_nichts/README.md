@@ -6,10 +6,28 @@
 | `Paki_Akin_Es_geht_um_nichts_ohne_Musik_1080x1920.mp4` | Identisches Bild ohne Musik, zum Unterlegen eines Sounds direkt in der App |
 | `Paki_Akin_Es_geht_um_nichts_Untertitel.srt` | Untertitel als separate Datei |
 | `projekt/video_es_geht_um_nichts.py` | Alle Schnitt- und Gestaltungsentscheidungen dieses Videos |
-| `projekt/engine.py`, `projekt/music.py` | Schnitt-Engine und Musik-Synthese (wie bei „Göttliches Timing“, erweitert um andere Quellformate) |
+| `Version_2_Hook-Montage/` | **Version 2** (67,0 s) mit Hook-Montage und mehr Effekten, mit und ohne Musik, eigene SRT (siehe unten) |
+| `projekt/video_es_geht_um_nichts_v2.py` | Konfiguration von Version 2 |
+| `projekt/engine.py`, `projekt/music.py` | Schnitt-Engine und Musik-Synthese (Stand Selbstsabotage-Video, plus Abdunklungen und Lichtblitze an beliebigen Stellen) |
 | `projekt/source/` | Originalvideo, unverändert |
 
-Neu rendern: `cd projekt && python3 video_es_geht_um_nichts.py` (Optionen `--preview 25.0` und `--subs-only`).
+Neu rendern: `cd projekt && python3 video_es_geht_um_nichts.py` bzw. `python3 video_es_geht_um_nichts_v2.py` (Optionen `--preview 25.0` und `--subs-only`).
+
+## Version 2 – Hook-Montage und mehr Effekte
+
+Gleiches Originalvideo, gleicher Grundschnitt wie Version 1. Neu sind:
+
+| Zeit | Was passiert |
+|---|---|
+| 0,0 s | **Hook-Montage** mit drei Fragmenten, die neugierig machen, ohne „Es geht um nichts“ zu verraten: *„Worum geht es denn bei diesem **Meeting?**“*, *„Mach es dir **leicht**.“*, *„Trust **me**.“* Jedes Fragment hat einen eigenen Ausschnitt, die Wörter schnappen ins Bild, Herzschlag auf dem ersten Frame, Mikro-Blitze und weiche Schläge an den Schnitten |
+| 3,5 s | Das Bild wird dunkler, Stille, zweiter Herzschlag, ein Rauschanstieg läuft zu |
+| 4,0 s | **Lichtblitz** → Titel „Dieser eine **Satz** wird alles für dich verändern.“, die Musik setzt im Takt ein |
+| 27,4 s | Vor der Enthüllung wird das Bild erneut dunkler, mit Herzschlag in der Spannungspause |
+| 27,9 s | **Lichtblitz auf „Es“** → „Es geht um **nichts**.“, Akzent, die Musik öffnet sich |
+| ~30 s | Prüfung / Entscheidung / Treffen erscheinen mit leisem Tap und werden bei „nichts“ golden durchgestrichen (wie in Version 1) |
+| ~52 s | **Drei weiche Zoom-Punches** bei den drei Fragen (Prüfung? Titel? Meeting?), jeweils mit Luftzug-Sound. Die Kamera fährt in 0,2 s an statt hart zu springen |
+| 59,3 s | Bei „Mach es dir **leicht**.“ schwebt „leicht.“ wie eine Feder nach oben weg, die Buchstaben ziehen dabei auseinander |
+| 60,7 s | Das Lesezeichen erscheint bei „Video ab“ und füllt sich gold |
 
 ## Rohmaterial
 

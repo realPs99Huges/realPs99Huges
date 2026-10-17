@@ -86,8 +86,10 @@ class Project:
         self.base = W / self.src_w                          # Quelle füllt die Breite
         self.crop_top = (self.src_h * self.base - H) / 2    # Rest wird oben/unten gleichmäßig beschnitten
         segs = []
-        if getattr(cfg, "TEASER", None):
-            a, b = cfg.TEASER
+        teaser = getattr(cfg, "TEASER", None) or []
+        if teaser and not isinstance(teaser[0], (list, tuple)):
+            teaser = [teaser]
+        for a, b in teaser:             # Cold Open / Hook-Montage: ein oder mehrere Fragmente
             segs.append(("T", round(a * FPS), round(b * FPS)))
         for a, b in cfg.KEEP:
             segs.append(("M", round(a * FPS), round(b * FPS)))
@@ -98,7 +100,10 @@ class Project:
             t += b - a
         self.n_frames = t
         self.total = t / FPS
-        self.t_cut = self.seg_out[1] / FPS if segs[0][0] == "T" else None
+        n_t = sum(1 for s in segs if s[0] == "T")
+        self.t_cut = self.seg_out[n_t] / FPS if n_t else None
+        self.t_joins = [self.seg_out[i] / FPS for i in range(1, n_t)]     # Schnitte innerhalb der Montage
+        self.track = self.load_track(getattr(cfg, "FACE_TRACK", None))
         self.events, self.srt = [], []
         self._env = None
 
@@ -133,6 +138,8 @@ class Project:
             return self.t_cut
         if ref[0] == "end":
             return self.total + ref[1]
+        if ref[0] == "teaser":
+            return self.seg_out[ref[1]] / FPS + (ref[2] if len(ref) > 2 else 0.0)
         return self.to_out(ref[1], ref[2] if len(ref) > 2 else "M")
 
     def zoom_for(self, seg, src_t):
@@ -142,11 +149,34 @@ class Project:
                 return z0 + (z1 - z0) * (ease(u) if curve == "ease" else u)
         return 1.0
 
+    @staticmethod
+    def load_track(path):
+        """Gesichtsposition über die Zeit: Ausreißer entfernen, interpolieren, weich glätten (~0,8 s)."""
+        if not path:
+            return None
+        pts = np.array(json.load(open(path)), float)
+        t, x, y, w = pts.T
+        med = np.array([np.median(w[max(0, i - 6):i + 7]) for i in range(len(w))])
+        ok = np.abs(w - med) < 0.3 * med
+        t, x, y = t[ok], x[ok], y[ok]
+        grid = np.arange(0, t[-1] + 1, 1 / FPS)
+        xs, ys = np.interp(grid, t, x), np.interp(grid, t, y)
+        k = np.exp(-0.5 * (np.arange(-36, 37) / 12) ** 2)
+        k /= k.sum()
+        sm = lambda v: np.convolve(np.pad(v, 36, mode="edge"), k, mode="valid")
+        return grid, sm(xs), sm(ys)
+
+    def anchor_at(self, src_t):
+        if self.track is None:
+            return self.anchor
+        g, xs, ys = self.track
+        return float(np.interp(src_t, g, xs)), float(np.interp(src_t, g, ys))
+
     def frame_plan(self):
         plan = []
         for name, a, b in self.segs:
             for f in range(a, b):
-                plan.append((f, self.zoom_for(name, f / FPS)))
+                plan.append((f, self.zoom_for(name, f / FPS), self.anchor_at(f / FPS)))
         return plan
 
     # ----- Stimmeinsätze --------------------------------------------------
@@ -264,9 +294,9 @@ class Project:
         n = os.path.getsize(path) // size
         return np.memmap(path, np.uint8, "r", shape=(n, self.src_h, self.src_w, 3))
 
-    def affine(self, z):
+    def affine(self, z, anchor=None):
         s = self.base * z
-        ax, ay = self.anchor
+        ax, ay = anchor or self.anchor
         return np.float32([[s, 0, ax * self.base - s * ax], [0, s, ay * self.base - self.crop_top - s * ay]])
 
     def prepare_light(self):
@@ -278,8 +308,8 @@ class Project:
         for L in self.c.LIGHTS:
             self._lights.append(dict(L, t=self.resolve(L["ref"])))
 
-    def render_frame(self, img, z, t):
-        out = cv2.warpAffine(img, self.affine(z), (W, H), flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REFLECT)
+    def render_frame(self, img, z, t, anchor=None):
+        out = cv2.warpAffine(img, self.affine(z, anchor), (W, H), flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REFLECT)
         f = out.astype(np.float32) / 255
         for L in self._lights:
             t0, rise, fall = L["t"], L["rise"], L["fall"]
@@ -291,6 +321,24 @@ class Project:
             cx = L["cx"] + L.get("drift", 0) * (t - t0 + rise)
             g = np.exp(-(((self._xx - cx) / L["rx"]) ** 2 + ((self._yy - L["cy"]) / L["ry"]) ** 2))[:, :, None]
             f = 1 - (1 - f) * (1 - g * WARM * k)
+        for tj in self.t_joins:         # kurze Blitze an den Montage-Schnitten
+            d = t - tj
+            fl = 0.32 * np.exp(-d / 0.05) if 0 <= d < 0.25 else (0.32 * (1 + d / 0.034) if -0.034 <= d < 0 else 0)
+            if fl > 0.003:
+                f = 1 - (1 - f) * (1 - FLASH * fl)
+        for ref, dur, depth in getattr(self.c, "DIPS", ()):   # Abdunklung vor einem Moment (z. B. Enthüllung)
+            te = self.resolve(ref)
+            if te - dur <= t < te:
+                f = f * (1 - depth * ease((t - (te - dur)) / dur))
+        for ref, peak in getattr(self.c, "FLASHES", ()):      # einzelne Lichtblitze
+            d = t - self.resolve(ref)
+            fl = peak * np.exp(-d / 0.08) if 0 <= d < 0.4 else (peak * (1 + d / 0.05) if -0.05 <= d < 0 else 0)
+            if fl > 0.003:
+                f = 1 - (1 - f) * (1 - FLASH * fl)
+        dip = getattr(self.c, "DIP", None)
+        if dip and self.t_cut is not None and self.t_cut - dip[0] <= t < self.t_cut:
+            u = (t - (self.t_cut - dip[0])) / dip[0]
+            f = f * (1 - dip[1] * ease(u))
         if self.t_cut is not None:
             d = t - self.t_cut
             fl = 0.65 * (1 + d / 0.11) ** 2 if -0.11 <= d < 0 else (0.65 * np.exp(-d / 0.09) if 0 <= d < 0.5 else 0)
@@ -332,6 +380,12 @@ class Project:
         if kind == "click":
             t = np.arange(int(0.25 * SR)) / SR
             s = np.sin(2 * np.pi * 1650 * t) * np.exp(-t / 0.018) + 0.6 * np.sin(2 * np.pi * 820 * t) * np.exp(-t / 0.03)
+            return s / np.abs(s).max(), 0.0
+        if kind == "heartbeat":   # zwei tiefe, weiche Schläge ("ba-bum"), Zeitpunkt = erster Schlag
+            t = np.arange(int(0.9 * SR)) / SR
+            beat = lambda t0, a: a * np.sin(2 * np.pi * (52 + 30 * np.exp(-np.clip(t - t0, 0, None) / 0.03))
+                                            * np.clip(t - t0, 0, None)) * np.exp(-np.clip(t - t0, 0, None) / 0.09) * (t >= t0)
+            s = beat(0.0, 1.0) + beat(0.24, 0.7)
             return s / np.abs(s).max(), 0.0
         if kind == "bell":      # weicher Glockenton (inharmonische Teiltöne), Zeitpunkt = Anschlag
             t = np.arange(int(3.0 * SR)) / SR
@@ -424,8 +478,8 @@ class Project:
              "-vf", self.vfilter(), "-map", "0:v", "-map", "1:a", *X264, "-r", str(FPS),
              "-c:a", "aac", "-b:a", "192k", "-ar", str(SR), "-movflags", "+faststart",
              "-metadata", f"title={self.c.TITLE}", self.c.OUT_MAIN], stdin=subprocess.PIPE)
-        for k, (f, z) in enumerate(plan):
-            enc.stdin.write(self.render_frame(src[f], z, k / FPS).tobytes())
+        for k, (f, z, anc) in enumerate(plan):
+            enc.stdin.write(self.render_frame(src[f], z, k / FPS, anc).tobytes())
             if (k + 1) % 300 == 0:
                 print(f"  {k + 1}/{self.n_frames}", flush=True)
         enc.stdin.close()
@@ -445,8 +499,8 @@ class Project:
         paths = []
         for t in times:
             k = min(int(round(t * FPS)), self.n_frames - 1)
-            f, z = plan[k]
-            raw = self.render_frame(src[f], z, k / FPS)
+            f, z, anc = plan[k]
+            raw = self.render_frame(src[f], z, k / FPS, anc)
             p = os.path.join(self.build, f"preview_{t:05.2f}.png")
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}",
                             "-r", str(FPS), "-i", "-", "-vf", f"setpts=PTS+{k}/{FPS}/TB,{self.vfilter()}",
