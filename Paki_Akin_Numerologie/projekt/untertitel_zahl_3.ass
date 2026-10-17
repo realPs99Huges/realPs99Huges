@@ -19,12 +19,12 @@ Style: Shape,Inter Medium,20,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,0,0,0,0
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 1,0:00:03.82,0:00:06.28,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du wirst am {\1c&H00FFFFFF&\t(730,870,\1c&H0096CDF2&)}3.{\1c&H00FFFFFF&}, {\1c&H00FFFFFF&\t(1543,1683,\1c&H0096CDF2&)}12.{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:03.82,0:00:06.28,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du bist am {\1c&H00FFFFFF&\t(730,870,\1c&H0096CDF2&)}3.{\1c&H00FFFFFF&}, {\1c&H00FFFFFF&\t(1543,1683,\1c&H0096CDF2&)}12.{\1c&H00FFFFFF&}
 Dialogue: 1,0:00:06.28,0:00:08.14,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}oder aber auch am {\1c&H00FFFFFF&\t(1010,1150,\1c&H0096CDF2&)}30.{\1c&H00FFFFFF&}
 Dialogue: 1,0:00:08.14,0:00:09.44,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}geboren, dann ist
 Dialogue: 1,0:00:09.44,0:00:10.54,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dieses Video für dich.
-Dialogue: 1,0:00:10.54,0:00:11.66,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Unsere {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}Dreier{\1c&H00FFFFFF&} gelten
-Dialogue: 1,0:00:11.66,0:00:13.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}als die {\1c&H00FFFFFF&\t(1130,1270,\1c&H0096CDF2&)}schlauesten{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:10.54,0:00:12.30,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Unsere {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}Dreier{\1c&H00FFFFFF&} gelten
+Dialogue: 1,0:00:12.30,0:00:13.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}als die {\1c&H00FFFFFF&\t(490,630,\1c&H0096CDF2&)}schlauesten{\1c&H00FFFFFF&}
 Dialogue: 1,0:00:13.76,0:00:14.52,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Menschen.
 Dialogue: 1,0:00:14.52,0:00:16.70,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Als Dreier bist du jemand,
 Dialogue: 1,0:00:16.70,0:00:17.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}der sehr {\1c&H00FFFFFF&\t(410,550,\1c&H0096CDF2&)}lustig{\1c&H00FFFFFF&} ist,
