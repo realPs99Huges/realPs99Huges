@@ -1,0 +1,112 @@
+[Script Info]
+Title: Paki Akin – Numerologie: Zahl 4
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter SemiBold,62,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,0.6,0,1,3.4,1.8,5,140,140,0,1
+Style: Head,Instrument Serif,128,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: HeadRoman,Instrument Serif,104,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,0,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: Label,Instrument Serif,66,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,3,1.6,5,80,80,0,1
+Style: Small,Inter Medium,46,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,2.4,0,1,3,1.6,5,80,80,0,1
+Style: Chip,Inter SemiBold,40,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,1.2,0,1,0,0,5,60,60,0,1
+Style: Shape,Inter Medium,20,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:04.63,0:00:07.36,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du bist am {\1c&H00FFFFFF&\t(820,960,\1c&H0096CDF2&)}4.{\1c&H00FFFFFF&}, {\1c&H00FFFFFF&\t(1620,1760,\1c&H0096CDF2&)}13.{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:07.36,0:00:09.52,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}oder aber auch am {\1c&H00FFFFFF&\t(1210,1350,\1c&H0096CDF2&)}22.{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:09.52,0:00:10.40,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}geboren, dann ist
+Dialogue: 1,0:00:10.40,0:00:11.52,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dieses Video für dich.
+Dialogue: 1,0:00:11.52,0:00:13.11,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du bist der {\1c&H00FFFFFF&\t(810,950,\1c&H0096CDF2&)}Künstler{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:13.11,0:00:14.70,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}der {\1c&H00FFFFFF&\t(370,510,\1c&H0096CDF2&)}Diplomat{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:16.47,0:00:17.39,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}und ja, du kannst
+Dialogue: 1,0:00:17.39,0:00:18.27,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Menschenleben
+Dialogue: 1,0:00:18.27,0:00:19.31,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}transformieren{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:19.31,0:00:20.91,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Wenn wir einen Plan wollen,
+Dialogue: 1,0:00:20.91,0:00:21.87,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}kommen wir zu dir,
+Dialogue: 1,0:00:21.87,0:00:22.67,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}denn du hast
+Dialogue: 1,0:00:22.67,0:00:24.27,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}immer einen {\1c&H00FFFFFF&\t(890,1030,\1c&H0096CDF2&)}Plan{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:24.27,0:00:25.85,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Gerade mit der 4
+Dialogue: 1,0:00:25.85,0:00:28.57,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}stehst du für {\1c&H00FFFFFF&\t(1850,1990,\1c&H0096CDF2&)}Umsetzung{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:28.57,0:00:30.01,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}du stehst für die Planung,
+Dialogue: 1,0:00:30.01,0:00:31.29,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}für die Organisation,
+Dialogue: 1,0:00:31.29,0:00:32.33,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}für Recht,
+Dialogue: 1,0:00:32.33,0:00:34.57,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}für Unternehmertum.
+Dialogue: 1,0:00:34.57,0:00:35.45,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Deswegen ist es
+Dialogue: 1,0:00:35.45,0:00:36.63,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}auch selten,
+Dialogue: 1,0:00:36.63,0:00:38.31,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dass du für einen Chef
+Dialogue: 1,0:00:38.31,0:00:39.03,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}arbeiten kannst,
+Dialogue: 1,0:00:39.03,0:00:40.25,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}der dir im Nacken sitzt,
+Dialogue: 1,0:00:40.25,0:00:40.87,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}denn du bist sehr
+Dialogue: 1,0:00:40.87,0:00:41.91,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}freiheitsliebend{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:41.91,0:00:43.04,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sehr {\1c&H00FFFFFF&\t(330,470,\1c&H0096CDF2&)}kreativ{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:43.04,0:00:44.02,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sehr ehrlich
+Dialogue: 1,0:00:44.02,0:00:45.70,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}oder sehr lügnerisch,
+Dialogue: 1,0:00:45.70,0:00:47.06,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}wenn du {\1c&H00FFFFFF&\t(410,550,\1c&H0096CDF2&)}im Minus{\1c&H00FFFFFF&} lebst.
+Dialogue: 1,0:00:47.06,0:00:48.10,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Entweder oder.
+Dialogue: 1,0:00:48.10,0:00:48.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Entweder bist du
+Dialogue: 1,0:00:48.82,0:00:49.54,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sehr ehrlich
+Dialogue: 1,0:00:49.54,0:00:51.26,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}oder du lügst sehr viel.
+Dialogue: 1,0:00:51.26,0:00:52.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du hast ebenso
+Dialogue: 1,0:00:52.82,0:00:54.64,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(230,370,\1c&H0096CDF2&)}schauspielerisches Talent{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:54.64,0:00:55.84,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ja, du bist {\1c&H00FFFFFF&\t(650,790,\1c&H0096CDF2&)}Künstler{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:55.84,0:00:56.56,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}und du hast
+Dialogue: 1,0:00:56.56,0:00:58.08,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}schauspielerisches Talent,
+Dialogue: 1,0:00:58.08,0:00:59.24,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}musikalisches{\1c&H00FFFFFF&} Talent.
+Dialogue: 1,0:00:59.24,0:00:59.84,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Vielleicht kannst du
+Dialogue: 1,0:00:59.84,0:01:02.43,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}singen, tanzen, malen,
+Dialogue: 1,0:01:04.56,0:01:06.77,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}mit der starken {\1c&H00FFFFFF&\t(1210,1350,\1c&H0096CDF2&)}Intuition{\1c&H00FFFFFF&}.
+Dialogue: 1,0:01:06.77,0:01:07.58,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Schreib mir gerne
+Dialogue: 1,0:01:07.58,0:01:08.46,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in die Kommentare rein,
+Dialogue: 1,0:01:08.46,0:01:09.50,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}was du darüber sagst.
+Dialogue: 1,0:01:09.50,0:01:09.98,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ich freue mich,
+Dialogue: 1,0:01:09.98,0:01:10.83,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}von dir zu lesen.
+Dialogue: 2,0:00:00.00,0:00:02.77,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(53,163,0.6,\alpha&H00&\blur0.7)}sehr {\alpha&HFF&\blur5\1c&H0096CDF2&\t(353,463,0.6,\alpha&H00&\blur0.7)}ehrlich
+Dialogue: 2,0:00:00.00,0:00:02.77,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(1073,1183,0.6,\alpha&H00&\blur0.7)}oder {\alpha&HFF&\blur5\t(1473,1583,0.6,\alpha&H00&\blur0.7)}sehr {\alpha&HFF&\blur5\t(1793,1903,0.6,\alpha&H00&\blur0.7)}lügnerisch,
+Dialogue: 2,0:00:02.77,0:00:04.38,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(33,143,0.6,\alpha&H00&\blur0.7)}Du {\alpha&HFF&\blur5\t(153,263,0.6,\alpha&H00&\blur0.7)}gehörst
+Dialogue: 2,0:00:02.77,0:00:04.38,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(793,903,0.6,\alpha&H00&\blur0.7)}auf {\alpha&HFF&\blur5\t(1033,1143,0.6,\alpha&H00&\blur0.7)}die {\alpha&HFF&\blur5\1c&H0096CDF2&\t(1213,1323,0.6,\alpha&H00&\blur0.7)}Bühne
+Dialogue: 5,0:00:05.41,0:00:11.29,Head,,0,0,0,,{\an5\pos(890,470)\fs380\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0\alpha&HFF&\fscx140\fscy140\t(0,240,0.5,\fscx100\fscy100\alpha&H00&)}4
+Dialogue: 4,0:00:06.21,0:00:11.44,Label,,0,0,0,,{\an5\pos(890,705)\fs52\alpha&HFF&\blur5\t(0,220,\alpha&H00&\blur0.6)\fad(0,180)}13 → 1 + 3 = 4
+Dialogue: 4,0:00:08.53,0:00:11.44,Label,,0,0,0,,{\an5\pos(890,775)\fs52\alpha&HFF&\blur5\t(0,220,\alpha&H00&\blur0.6)\fad(0,180)}22 → 2 + 2 = 4
+Dialogue: 5,0:00:11.29,0:00:11.33,Head,,0,0,0,,{\an5\pos(882,468)\fs377\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.33,0:00:11.36,Head,,0,0,0,,{\an5\pos(861,463)\fs370\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.36,0:00:11.39,Head,,0,0,0,,{\an5\pos(827,456)\fs358\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.39,0:00:11.43,Head,,0,0,0,,{\an5\pos(783,446)\fs342\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.43,0:00:11.46,Head,,0,0,0,,{\an5\pos(731,435)\fs324\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.46,0:00:11.49,Head,,0,0,0,,{\an5\pos(672,421)\fs303\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.49,0:00:11.53,Head,,0,0,0,,{\an5\pos(609,407)\fs281\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.53,0:00:11.56,Head,,0,0,0,,{\an5\pos(543,392)\fs258\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.56,0:00:11.59,Head,,0,0,0,,{\an5\pos(475,378)\fs234\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.59,0:00:11.63,Head,,0,0,0,,{\an5\pos(409,363)\fs211\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.63,0:00:11.66,Head,,0,0,0,,{\an5\pos(346,349)\fs189\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.66,0:00:11.69,Head,,0,0,0,,{\an5\pos(287,335)\fs168\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.69,0:00:11.73,Head,,0,0,0,,{\an5\pos(235,324)\fs150\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.73,0:00:11.76,Head,,0,0,0,,{\an5\pos(191,314)\fs134\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.76,0:00:11.79,Head,,0,0,0,,{\an5\pos(157,307)\fs122\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.79,0:00:11.83,Head,,0,0,0,,{\an5\pos(136,302)\fs115\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 5,0:00:11.83,0:00:11.86,Head,,0,0,0,,{\an5\pos(128,300)\fs112\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}4
+Dialogue: 6,0:00:11.84,0:01:10.83,Head,,0,0,0,,{\an5\pos(128,300)\fs112\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0\fad(0,250)\t(13357,13497,\fscx124\fscy124)\t(13497,13777,\fscx100\fscy100)}4
+Dialogue: 5,0:00:11.69,0:01:10.83,Shape,,0,0,0,,{\an5\pos(128,300)\p1\1c&H000000&\1a&H60&\3c&H0096CDF2&\bord3\shad0\fad(250,250)\t(13357,13497,\fscx124\fscy124)\t(13497,13777,\fscx100\fscy100)}m 60.0 0.0 b 93.1 0.0 120.0 26.9 120.0 60.0 b 120.0 93.1 93.1 120.0 60.0 120.0 b 26.9 120.0 0.0 93.1 0.0 60.0 b 0.0 26.9 26.9 0.0 60.0 0.0
+Dialogue: 2,0:00:14.70,0:00:16.48,Head,,0,0,0,,{\an5\q2\move(540,1272,540,1262,0,600)\fad(0,140)}{\alpha&HFF&\blur9\t(100,320,0.6,\alpha&H00&\blur0.7)}Du {\alpha&HFF&\blur9\t(220,440,0.6,\alpha&H00&\blur0.7)}gehörst
+Dialogue: 2,0:00:14.70,0:00:16.48,Head,,0,0,0,,{\an5\q2\move(540,1406,540,1396,0,600)\fad(0,140)}{\alpha&HFF&\blur9\t(860,1080,0.6,\alpha&H00&\blur0.7)}auf {\alpha&HFF&\blur9\t(1100,1320,0.6,\alpha&H00&\blur0.7)}die {\alpha&HFF&\blur9\1c&H0096CDF2&\t(1280,1500,0.6,\alpha&H00&\blur0.7)}Bühne
+Dialogue: 3,0:00:29.49,0:00:34.50,Label,,0,0,0,,{\an5\pos(330,1124)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Planung
+Dialogue: 3,0:00:30.37,0:00:34.50,Label,,0,0,0,,{\an5\pos(750,1124)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Organisation
+Dialogue: 3,0:00:31.65,0:00:34.50,Label,,0,0,0,,{\an5\pos(330,1200)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Recht
+Dialogue: 3,0:00:33.01,0:00:34.50,Label,,0,0,0,,{\an5\pos(750,1200)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Unternehmertum
+Dialogue: 3,0:00:43.34,0:00:51.01,Label,,0,0,0,,{\an5\pos(300,1160)\fad(0,300)\t(5730,5890,\fscx118\fscy118)\t(5890,6250,\fscx100\fscy100)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,250,0.6,\alpha&H00&\blur0.7)}ehrlich
+Dialogue: 3,0:00:44.78,0:00:51.01,Label,,0,0,0,,{\an5\pos(780,1160)\fad(0,300)\t(5250,5410,\fscx118\fscy118)\t(5410,5770,\fscx100\fscy100)}{\alpha&HFF&\blur6\1c&H00FFFFFF&\t(50,250,0.6,\alpha&H00&\blur0.7)}lügnerisch
+Dialogue: 3,0:00:44.09,0:00:51.01,Shape,,0,0,0,,{\an5\pos(540,1160)\p1\shad0\1c&H000000&\1a&H90&\3c&H000000&\3a&H90&\bord3\blur4\fad(250,300)}m 0 0 l 3 0 l 3 110 l 0 110
+Dialogue: 4,0:00:44.09,0:00:51.01,Shape,,0,0,0,,{\an5\pos(540,1160)\p1\shad0\1c&H00FFFFFF&\bord0\fad(250,300)}m 0 0 l 3 0 l 3 110 l 0 110
+Dialogue: 3,0:00:59.88,0:01:02.37,Label,,0,0,0,,{\an5\pos(270,1196)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}singen
+Dialogue: 3,0:01:00.60,0:01:02.37,Label,,0,0,0,,{\an5\pos(540,1196)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}tanzen
+Dialogue: 3,0:01:01.56,0:01:02.37,Label,,0,0,0,,{\an5\pos(810,1196)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}malen
+Dialogue: 2,0:01:02.43,0:01:04.57,Small,,0,0,0,,{\an5\q2\move(540,1260,540,1250,0,1000)\fad(0,140)}{\alpha&HFF&\blur6\t(60,320,0.6,\alpha&H00&\blur0.7)}du {\alpha&HFF&\blur6\t(220,480,0.6,\alpha&H00&\blur0.7)}bist {\alpha&HFF&\blur6\t(460,720,0.6,\alpha&H00&\blur0.7)}der
+Dialogue: 2,0:01:02.43,0:01:04.57,Head,,0,0,0,,{\an5\q2\move(540,1372,540,1362,0,1000)\fad(0,140)}{\alpha&HFF&\blur9\t(700,960,0.6,\alpha&H00&\blur0.7)}geborene {\alpha&HFF&\blur9\1c&H0096CDF2&\t(1500,1760,0.6,\alpha&H00&\blur0.7)}Künstler
+Dialogue: 5,0:01:07.53,0:01:08.47,Shape,,0,0,0,,{\an5\pos(540,1222)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.2\blur4\fscx60\fscy60\t(220,360,\fscx110\fscy110)\t(360,480,\fscx100\fscy100)\fad(120,120)}m 16 0 l 56 0 b 65 0 72 7 72 16 l 72 38 b 72 47 65 54 56 54 l 30 54 l 15 67 l 17 54 l 16 54 b 7 54 0 47 0 38 l 0 16 b 0 7 7 0 16 0
+Dialogue: 6,0:01:07.53,0:01:08.47,Shape,,0,0,0,,{\an5\pos(540,1222)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.2\fscx60\fscy60\t(220,360,\fscx110\fscy110)\t(360,480,\fscx100\fscy100)\fad(120,120)}m 16 0 l 56 0 b 65 0 72 7 72 16 l 72 38 b 72 47 65 54 56 54 l 30 54 l 15 67 l 17 54 l 16 54 b 7 54 0 47 0 38 l 0 16 b 0 7 7 0 16 0

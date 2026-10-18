@@ -1,0 +1,110 @@
+[Script Info]
+Title: Paki Akin – Bist du ein Overthinker?
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter SemiBold,62,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,0.6,0,1,3.4,1.8,5,140,140,0,1
+Style: Head,Instrument Serif,128,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: HeadRoman,Instrument Serif,104,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,0,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: Label,Instrument Serif,66,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,3,1.6,5,80,80,0,1
+Style: Small,Inter Medium,46,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,2.4,0,1,3,1.6,5,80,80,0,1
+Style: Chip,Inter SemiBold,40,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,1.2,0,1,0,0,5,60,60,0,1
+Style: Shape,Inter Medium,20,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:09.90,0:00:10.59,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ja, ich weiß,
+Dialogue: 1,0:00:10.59,0:00:11.37,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}du machst dir Sorgen
+Dialogue: 1,0:00:11.37,0:00:12.27,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}um deine {\1c&H00FFFFFF&\t(510,650,\1c&H0096CDF2&)}Zukunft{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:12.27,0:00:13.15,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}du denkst über deine
+Dialogue: 1,0:00:13.15,0:00:14.03,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}Vergangenheit{\1c&H00FFFFFF&} nach,
+Dialogue: 1,0:00:14.03,0:00:15.23,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ob das richtig war,
+Dialogue: 1,0:00:15.23,0:00:16.35,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}du denkst darüber nach,
+Dialogue: 1,0:00:16.35,0:00:18.66,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ob XY-Szenario
+Dialogue: 1,0:00:18.66,0:00:19.88,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}eintreffen wird.
+Dialogue: 1,0:00:19.88,0:00:21.78,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Aber dein {\1c&H00FFFFFF&\t(950,1090,\1c&H0096CDF2&)}Overthinking{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:21.78,0:00:23.50,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sagt dir in Wirklichkeit
+Dialogue: 1,0:00:23.50,0:00:24.58,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}was anderes
+Dialogue: 1,0:00:24.58,0:00:25.86,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}als deine Zukunft
+Dialogue: 1,0:00:25.86,0:00:27.24,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}oder deine Vergangenheit.
+Dialogue: 1,0:00:27.24,0:00:28.74,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dein Overthinking
+Dialogue: 1,0:00:28.74,0:00:29.78,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sagt dir,
+Dialogue: 1,0:00:29.78,0:00:30.56,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dass du nicht
+Dialogue: 1,0:00:30.56,0:00:31.86,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in deinem {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}Körper{\1c&H00FFFFFF&} bist.
+Dialogue: 1,0:00:31.86,0:00:32.48,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dass du nicht
+Dialogue: 1,0:00:32.48,0:00:34.00,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in deinem {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}Gefühl{\1c&H00FFFFFF&} bist.
+Dialogue: 1,0:00:34.00,0:00:34.86,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dass du
+Dialogue: 1,0:00:34.86,0:00:36.44,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}kaum mehr {\1c&H00FFFFFF&\t(710,850,\1c&H0096CDF2&)}spürst{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:36.44,0:00:37.32,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Mal ganz ehrlich,
+Dialogue: 1,0:00:37.32,0:00:37.96,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}wann hast du
+Dialogue: 1,0:00:37.96,0:00:39.08,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}das letzte Mal
+Dialogue: 1,0:00:39.08,0:00:40.52,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in dich hineingehorcht?
+Dialogue: 1,0:00:40.52,0:00:41.16,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Wann hast du
+Dialogue: 1,0:00:41.16,0:00:41.88,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}das letzte Mal
+Dialogue: 1,0:00:41.88,0:00:42.60,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}deine Hand auf
+Dialogue: 1,0:00:42.60,0:00:43.96,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}deine Brust gelegt
+Dialogue: 1,0:00:43.96,0:00:44.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}und einfach nur
+Dialogue: 1,0:00:44.76,0:00:46.26,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dein {\1c&H00FFFFFF&\t(330,470,\1c&H0096CDF2&)}Herz{\1c&H00FFFFFF&} gespürt?
+Dialogue: 1,0:00:46.26,0:00:46.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Wenn du sagst,
+Dialogue: 1,0:00:46.76,0:00:47.93,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}es ist schon lange her,
+Dialogue: 1,0:00:47.93,0:00:48.99,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dann wird es jetzt
+Dialogue: 1,0:00:48.99,0:00:50.11,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Zeit dafür,
+Dialogue: 1,0:00:50.11,0:00:51.39,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dass du {\1c&H00FFFFFF&\t(490,630,\1c&H0096CDF2&)}weniger denkst{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:51.39,0:00:52.27,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}und mehr
+Dialogue: 1,0:00:52.27,0:00:54.19,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in deinen {\1c&H00FFFFFF&\t(970,1110,\1c&H0096CDF2&)}Körper{\1c&H00FFFFFF&} kommst.
+Dialogue: 1,0:00:54.19,0:00:54.99,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Und wenn du sagst:
+Dialogue: 1,0:00:54.99,0:00:55.71,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}„Ich weiß aber gar nicht,
+Dialogue: 1,0:00:55.71,0:00:56.35,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}wie das geht,
+Dialogue: 1,0:00:56.35,0:00:56.97,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}wo soll ich denn
+Dialogue: 1,0:00:56.97,0:00:57.87,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}da anfangen?
+Dialogue: 1,0:00:57.87,0:00:59.31,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ich denke automatisch.“
+Dialogue: 1,0:00:59.31,0:01:00.11,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dann fängst du
+Dialogue: 1,0:01:00.11,0:01:00.67,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}jetzt mal an,
+Dialogue: 1,0:01:00.67,0:01:01.39,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}deine Gedanken
+Dialogue: 1,0:01:01.39,0:01:02.30,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}zu {\1c&H00FFFFFF&\t(250,390,\1c&H0096CDF2&)}beobachten{\1c&H00FFFFFF&}.
+Dialogue: 1,0:01:02.30,0:01:03.60,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Mit jeder Beobachtung
+Dialogue: 1,0:01:03.60,0:01:04.53,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}deiner Gedanken
+Dialogue: 1,0:01:07.18,0:01:08.24,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Zweite Methode ist,
+Dialogue: 1,0:01:08.24,0:01:09.23,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}du fragst dich:
+Dialogue: 1,0:01:11.48,0:01:12.84,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Und dann empfehle ich dir,
+Dialogue: 1,0:01:12.84,0:01:13.56,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dinge zu tun,
+Dialogue: 1,0:01:13.56,0:01:14.40,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}die dich in deinen
+Dialogue: 1,0:01:14.40,0:01:15.33,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(130,270,\1c&H0096CDF2&)}Körper{\1c&H00FFFFFF&} bringen.
+Dialogue: 1,0:01:15.33,0:01:16.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Arbeite mit deinen Händen,
+Dialogue: 1,0:01:16.82,0:01:17.70,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}geh in die Natur,
+Dialogue: 1,0:01:17.70,0:01:18.71,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}mach Sport,
+Dialogue: 1,0:01:18.71,0:01:19.67,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}mach Yoga.
+Dialogue: 2,0:00:00.00,0:00:01.57,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(27,137,0.6,\alpha&H00&\blur0.7)}…und {\alpha&HFF&\blur5\t(187,297,0.6,\alpha&H00&\blur0.7)}einfach {\alpha&HFF&\blur5\t(507,617,0.6,\alpha&H00&\blur0.7)}nur
+Dialogue: 2,0:00:00.00,0:00:01.57,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(747,857,0.6,\alpha&H00&\blur0.7)}dein {\alpha&HFF&\blur5\1c&H0096CDF2&\t(987,1097,0.6,\alpha&H00&\blur0.7)}Herz {\alpha&HFF&\blur5\t(1287,1397,0.6,\alpha&H00&\blur0.7)}gespürt?
+Dialogue: 2,0:00:01.57,0:00:03.90,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(20,130,0.6,\alpha&H00&\blur0.7)}Hören {\alpha&HFF&\blur5\t(540,650,0.6,\alpha&H00&\blur0.7)}deine {\alpha&HFF&\blur5\t(860,970,0.6,\alpha&H00&\blur0.7)}Gedanken
+Dialogue: 2,0:00:01.57,0:00:03.90,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(1500,1610,0.6,\alpha&H00&\blur0.7)}sofort {\alpha&HFF&\blur5\1c&H0096CDF2&\t(2220,2330,0.6,\alpha&H00&\blur0.7)}auf.
+Dialogue: 2,0:00:03.90,0:00:06.00,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(73,183,0.6,\alpha&H00&\blur0.7)}Was {\alpha&HFF&\blur5\t(313,423,0.6,\alpha&H00&\blur0.7)}ist {\alpha&HFF&\blur5\t(553,663,0.6,\alpha&H00&\blur0.7)}jetzt {\alpha&HFF&\blur5\t(873,983,0.6,\alpha&H00&\blur0.7)}mein
+Dialogue: 2,0:00:03.90,0:00:06.00,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(1113,1223,0.6,\alpha&H00&\blur0.7)}nächster {\alpha&HFF&\blur5\1c&H0096CDF2&\t(1433,1543,0.6,\alpha&H00&\blur0.7)}Gedanke?
+Dialogue: 2,0:00:06.30,0:00:09.85,Head,,0,0,0,,{\an5\q2\move(540,1190,540,1180,0,600)\fad(0,140)}{\alpha&HFF&\blur9\t(160,380,0.6,\alpha&H00&\blur0.7)}Bist {\alpha&HFF&\blur9\t(420,640,0.6,\alpha&H00&\blur0.7)}du {\alpha&HFF&\blur9\t(740,960,0.6,\alpha&H00&\blur0.7)}ein
+Dialogue: 2,0:00:06.30,0:00:09.85,Head,,0,0,0,,{\an5\q2\move(540,1320,540,1310,0,600)\fad(0,140)}{\alpha&HFF&\blur9\1c&H0096CDF2&\t(1000,1220,0.6,\alpha&H00&\blur0.7)}Overthinker?
+Dialogue: 2,0:00:06.30,0:00:09.85,Small,,0,0,0,,{\an5\q2\move(540,1434,540,1424,0,600)\fad(0,140)}{\alpha&HFF&\blur6\t(2020,2240,0.6,\alpha&H00&\blur0.7)}Dann {\alpha&HFF&\blur6\t(2260,2480,0.6,\alpha&H00&\blur0.7)}ist {\alpha&HFF&\blur6\t(2500,2720,0.6,\alpha&H00&\blur0.7)}dieses {\alpha&HFF&\blur6\t(2820,3040,0.6,\alpha&H00&\blur0.7)}Video {\alpha&HFF&\blur6\t(3220,3440,0.6,\alpha&H00&\blur0.7)}für {\alpha&HFF&\blur6\t(3380,3600,0.6,\alpha&H00&\blur0.7)}dich.
+Dialogue: 1,0:00:11.83,0:00:20.38,Label,,0,0,0,,{\an5\move(880,540,898,506,0,8553)\alpha&HFF&\blur6\t(0,450,\alpha&H58&\blur0.8)\t(8103,8553,\alpha&HFF&\blur8)}Zukunft
+Dialogue: 1,0:00:13.19,0:00:20.38,Label,,0,0,0,,{\an5\move(200,470,186,440,0,7193)\alpha&HFF&\blur6\t(0,450,\alpha&H58&\blur0.8)\t(6743,7193,\alpha&HFF&\blur8)}Vergangenheit
+Dialogue: 1,0:00:14.37,0:00:20.38,Label,,0,0,0,,{\an5\move(210,770,200,796,0,6013)\alpha&HFF&\blur6\t(0,450,\alpha&H58&\blur0.8)\t(5563,6013,\alpha&HFF&\blur8)}richtig war
+Dialogue: 1,0:00:18.04,0:00:20.38,Label,,0,0,0,,{\an5\move(860,820,872,842,0,2340)\alpha&HFF&\blur6\t(0,450,\alpha&H58&\blur0.8)\t(1890,2340,\alpha&HFF&\blur8)}XY-Szenario
+Dialogue: 2,0:01:04.53,0:01:07.07,Head,,0,0,0,,{\an5\q2\move(540,1272,540,1262,0,1200)\fad(0,140)}{\alpha&HFF&\blur9\t(120,380,0.6,\alpha&H00&\blur0.7)}hören {\alpha&HFF&\blur9\t(640,900,0.6,\alpha&H00&\blur0.7)}deine {\alpha&HFF&\blur9\t(960,1220,0.6,\alpha&H00&\blur0.7)}Gedanken
+Dialogue: 2,0:01:04.53,0:01:07.07,Head,,0,0,0,,{\an5\q2\move(540,1406,540,1396,0,1200)\fad(0,140)}{\alpha&HFF&\blur9\1c&H0096CDF2&\t(1600,1860,0.6,\alpha&H00&\blur0.7)}sofort {\alpha&HFF&\blur9\1c&H0096CDF2&\t(2320,2580,0.6,\alpha&H00&\blur0.7)}auf.
+Dialogue: 2,0:01:09.23,0:01:11.38,Head,,0,0,0,,{\an5\q2\move(540,1272,540,1262,0,900)\fad(0,140)}{\alpha&HFF&\blur9\t(80,320,0.6,\alpha&H00&\blur0.7)}Was {\alpha&HFF&\blur9\t(320,560,0.6,\alpha&H00&\blur0.7)}ist {\alpha&HFF&\blur9\t(560,800,0.6,\alpha&H00&\blur0.7)}jetzt {\alpha&HFF&\blur9\t(880,1120,0.6,\alpha&H00&\blur0.7)}mein
+Dialogue: 2,0:01:09.23,0:01:11.38,Head,,0,0,0,,{\an5\q2\move(540,1406,540,1396,0,900)\fad(0,140)}{\alpha&HFF&\blur9\t(1120,1360,0.6,\alpha&H00&\blur0.7)}nächster {\alpha&HFF&\blur9\1c&H0096CDF2&\t(1440,1680,0.6,\alpha&H00&\blur0.7)}Gedanke?
+Dialogue: 2,0:01:09.23,0:01:11.38,Head,,0,0,0,,{\an5\pos(540,1500)\fsp14\fad(0,140)}{\alpha&HFF&\t(1840,1960,\alpha&H00&)}·{\alpha&HFF&\t(1970,2090,\alpha&H00&)}·{\alpha&HFF&\t(2100,2220,\alpha&H00&)}·
+Dialogue: 3,0:01:01.59,0:01:06.93,Shape,,0,0,0,,{\an5\p1\bord0\shad0\1c&H000000&\1a&H70&\fad(180,220)\move(540,300,540,330,0,260)}m 32 0 l 438 0 b 456 0 470 14 470 32 b 470 50 456 64 438 64 l 32 64 b 14 64 0 50 0 32 b 0 14 14 0 32 0
+Dialogue: 4,0:01:01.59,0:01:06.93,Chip,,0,0,0,,{\an5\q2\fad(180,220)\move(540,300,540,330,0,260)}1 · Gedanken beobachten
+Dialogue: 3,0:01:07.10,0:01:11.30,Shape,,0,0,0,,{\an5\p1\bord0\shad0\1c&H000000&\1a&H70&\fad(180,220)\move(540,300,540,330,0,260)}m 32 0 l 668 0 b 686 0 700 14 700 32 b 700 50 686 64 668 64 l 32 64 b 14 64 0 50 0 32 b 0 14 14 0 32 0
+Dialogue: 4,0:01:07.10,0:01:11.30,Chip,,0,0,0,,{\an5\q2\fad(180,220)\move(540,300,540,330,0,260)}2 · Was ist jetzt mein nächster Gedanke?
+Dialogue: 3,0:01:11.90,0:01:19.67,Shape,,0,0,0,,{\an5\p1\bord0\shad0\1c&H000000&\1a&H70&\fad(180,220)\move(540,300,540,330,0,260)}m 32 0 l 448 0 b 466 0 480 14 480 32 b 480 50 466 64 448 64 l 32 64 b 14 64 0 50 0 32 b 0 14 14 0 32 0
+Dialogue: 4,0:01:11.90,0:01:19.67,Chip,,0,0,0,,{\an5\q2\fad(180,220)\move(540,300,540,330,0,260)}3 · In den Körper kommen
+Dialogue: 3,0:01:16.20,0:01:19.67,Label,,0,0,0,,{\an5\pos(230,1196)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Hände
+Dialogue: 3,0:01:17.40,0:01:19.67,Label,,0,0,0,,{\an5\pos(437,1196)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Natur
+Dialogue: 3,0:01:18.06,0:01:19.67,Label,,0,0,0,,{\an5\pos(643,1196)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Sport
+Dialogue: 3,0:01:18.97,0:01:19.67,Label,,0,0,0,,{\an5\pos(850,1196)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Yoga

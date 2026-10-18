@@ -1,0 +1,104 @@
+[Script Info]
+Title: Paki Akin – Numerologie: Zahl 8
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter SemiBold,62,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,0.6,0,1,3.4,1.8,5,140,140,0,1
+Style: Head,Instrument Serif,128,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: HeadRoman,Instrument Serif,104,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,0,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: Label,Instrument Serif,66,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,3,1.6,5,80,80,0,1
+Style: Small,Inter Medium,46,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,2.4,0,1,3,1.6,5,80,80,0,1
+Style: Chip,Inter SemiBold,40,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,1.2,0,1,0,0,5,60,60,0,1
+Style: Shape,Inter Medium,20,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:03.57,0:00:05.10,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du bist am {\1c&H00FFFFFF&\t(580,720,\1c&H0096CDF2&)}8.{\1c&H00FFFFFF&}, {\1c&H00FFFFFF&\t(980,1120,\1c&H0096CDF2&)}17.{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:05.10,0:00:07.83,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}oder am {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}26.{\1c&H00FFFFFF&} geboren,
+Dialogue: 1,0:00:07.83,0:00:08.71,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dann bist du eine
+Dialogue: 1,0:00:08.71,0:00:10.25,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sehr {\1c&H00FFFFFF&\t(330,470,\1c&H0096CDF2&)}starke Persönlichkeit{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:10.25,0:00:11.99,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du stehst für {\1c&H00FFFFFF&\t(790,930,\1c&H0096CDF2&)}Materie{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:11.99,0:00:13.11,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Bei dir dreht sich
+Dialogue: 1,0:00:13.11,0:00:14.63,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}alles um Wohlstand,
+Dialogue: 1,0:00:14.63,0:00:16.55,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Materie, Wahrnehmung,
+Dialogue: 1,0:00:16.55,0:00:18.31,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}aber auch um die Wahrheit.
+Dialogue: 1,0:00:18.31,0:00:19.75,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du bist jemand, der immer
+Dialogue: 1,0:00:19.75,0:00:21.59,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}nach der {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}Wahrheit{\1c&H00FFFFFF&} strebt.
+Dialogue: 1,0:00:21.59,0:00:22.87,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du bist aber auch jemand,
+Dialogue: 1,0:00:22.87,0:00:24.44,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}der sehr {\1c&H00FFFFFF&\t(490,630,\1c&H0096CDF2&)}extrem{\1c&H00FFFFFF&} ist.
+Dialogue: 1,0:00:27.49,0:00:28.26,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dir fällt es
+Dialogue: 1,0:00:28.26,0:00:29.58,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}absolut schwer,
+Dialogue: 1,0:00:29.58,0:00:30.42,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ins {\1c&H00FFFFFF&\t(210,350,\1c&H0096CDF2&)}Gleichgewicht{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:30.42,0:00:30.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}zu kommen.
+Dialogue: 1,0:00:30.82,0:00:31.54,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Dir fällt es
+Dialogue: 1,0:00:31.54,0:00:32.74,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sowas von schwer,
+Dialogue: 1,0:00:32.74,0:00:33.62,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}loszulassen{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:33.62,0:00:34.34,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du hast auch oft
+Dialogue: 1,0:00:34.34,0:00:35.06,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}das Gefühl:
+Dialogue: 1,0:00:35.06,0:00:35.94,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}„Ich muss die Dinge
+Dialogue: 1,0:00:35.94,0:00:37.28,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}kontrollieren{\1c&H00FFFFFF&}.“
+Dialogue: 1,0:00:37.28,0:00:38.88,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Was du lernen darfst,
+Dialogue: 1,0:00:38.88,0:00:40.64,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ist {\1c&H00FFFFFF&\t(490,630,\1c&H0096CDF2&)}Kontrolle abgeben{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:40.64,0:00:41.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Was du lernen darfst,
+Dialogue: 1,0:00:41.76,0:00:43.04,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}ist in die {\1c&H00FFFFFF&\t(570,710,\1c&H0096CDF2&)}Führung{\1c&H00FFFFFF&} gehen.
+Dialogue: 1,0:00:43.04,0:00:44.32,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du gehörst in die Führung,
+Dialogue: 1,0:00:44.32,0:00:46.00,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}du bist hier, um zu {\1c&H00FFFFFF&\t(890,1030,\1c&H0096CDF2&)}leaden{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:46.00,0:00:47.60,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Du bist hier, um andere
+Dialogue: 1,0:00:47.60,0:00:49.04,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Menschen in ihre {\1c&H00FFFFFF&\t(1050,1190,\1c&H0096CDF2&)}Kraft{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:49.04,0:00:49.73,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}zu bringen.
+Dialogue: 1,0:00:49.73,0:00:50.65,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ja, du bist auch
+Dialogue: 1,0:00:50.65,0:00:52.02,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sehr {\1c&H00FFFFFF&\t(330,470,\1c&H0096CDF2&)}spirituell{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:52.02,0:00:53.22,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Mit der 8 solltest du
+Dialogue: 1,0:00:53.22,0:00:54.82,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}aber auch {\1c&H00FFFFFF&\t(650,790,\1c&H0096CDF2&)}Acht{\1c&H00FFFFFF&} geben
+Dialogue: 1,0:00:54.82,0:00:56.26,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}auf deine {\1c&H00FFFFFF&\t(730,870,\1c&H0096CDF2&)}Gesundheit{\1c&H00FFFFFF&}.
+Dialogue: 1,0:00:56.26,0:00:57.54,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Denn du neigst dazu,
+Dialogue: 1,0:00:57.54,0:00:59.50,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in {\1c&H00FFFFFF&\t(330,470,\1c&H0096CDF2&)}Extremen{\1c&H00FFFFFF&} zu verweilen.
+Dialogue: 1,0:00:59.50,0:01:01.18,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Mit der 8 interessierst du
+Dialogue: 1,0:01:01.18,0:01:01.76,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}dich auch für das
+Dialogue: 1,0:01:01.76,0:01:02.85,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Thema Gesundheit.
+Dialogue: 1,0:01:02.85,0:01:04.63,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Mit der 8 stehst du
+Dialogue: 1,0:01:04.63,0:01:06.34,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}für die {\1c&H00FFFFFF&\t(490,630,\1c&H0096CDF2&)}absolute Wahrheit{\1c&H00FFFFFF&},
+Dialogue: 2,0:00:00.00,0:00:01.67,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(60,170,0.6,\alpha&H00&\blur0.7)}„Ich {\alpha&HFF&\blur5\t(140,250,0.6,\alpha&H00&\blur0.7)}muss {\alpha&HFF&\blur5\t(380,490,0.6,\alpha&H00&\blur0.7)}die
+Dialogue: 2,0:00:00.00,0:00:01.67,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(540,650,0.6,\alpha&H00&\blur0.7)}Dinge {\alpha&HFF&\blur5\1c&H0096CDF2&\t(860,970,0.6,\alpha&H00&\blur0.7)}kontrollieren.“
+Dialogue: 2,0:00:01.67,0:00:03.32,Small,,0,0,0,,{\an5\q2\pos(540,1226)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\t(87,197,0.6,\alpha&H00&\blur0.7)}Dein {\alpha&HFF&\blur5\t(347,457,0.6,\alpha&H00&\blur0.7)}allergrößtes
+Dialogue: 2,0:00:01.67,0:00:03.32,Head,,0,0,0,,{\an5\q2\pos(540,1338)\fscx108\fscy108\t(0,180,0.5,\fscx100\fscy100)\fad(0,60)}{\alpha&HFF&\blur5\1c&H0096CDF2&\t(1227,1337,0.6,\alpha&H00&\blur0.7)}Manko:
+Dialogue: 5,0:00:04.11,0:00:10.12,Head,,0,0,0,,{\an5\pos(890,470)\fs380\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0\alpha&HFF&\fscx140\fscy140\t(0,240,0.5,\fscx100\fscy100\alpha&H00&)}8
+Dialogue: 4,0:00:04.51,0:00:10.27,Label,,0,0,0,,{\an5\pos(890,705)\fs52\alpha&HFF&\blur5\t(0,220,\alpha&H00&\blur0.6)\fad(0,180)}17 → 1 + 7 = 8
+Dialogue: 4,0:00:05.63,0:00:10.27,Label,,0,0,0,,{\an5\pos(890,775)\fs52\alpha&HFF&\blur5\t(0,220,\alpha&H00&\blur0.6)\fad(0,180)}26 → 2 + 6 = 8
+Dialogue: 5,0:00:10.12,0:00:10.15,Head,,0,0,0,,{\an5\pos(882,468)\fs377\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.15,0:00:10.19,Head,,0,0,0,,{\an5\pos(861,463)\fs370\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.19,0:00:10.22,Head,,0,0,0,,{\an5\pos(827,456)\fs358\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.22,0:00:10.25,Head,,0,0,0,,{\an5\pos(783,446)\fs342\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.25,0:00:10.29,Head,,0,0,0,,{\an5\pos(731,435)\fs324\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.29,0:00:10.32,Head,,0,0,0,,{\an5\pos(672,421)\fs303\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.32,0:00:10.35,Head,,0,0,0,,{\an5\pos(609,407)\fs281\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.35,0:00:10.39,Head,,0,0,0,,{\an5\pos(543,392)\fs258\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.39,0:00:10.42,Head,,0,0,0,,{\an5\pos(475,378)\fs234\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.42,0:00:10.45,Head,,0,0,0,,{\an5\pos(409,363)\fs211\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.45,0:00:10.49,Head,,0,0,0,,{\an5\pos(346,349)\fs189\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.49,0:00:10.52,Head,,0,0,0,,{\an5\pos(287,335)\fs168\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.52,0:00:10.55,Head,,0,0,0,,{\an5\pos(235,324)\fs150\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.55,0:00:10.59,Head,,0,0,0,,{\an5\pos(191,314)\fs134\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.59,0:00:10.62,Head,,0,0,0,,{\an5\pos(157,307)\fs122\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.62,0:00:10.65,Head,,0,0,0,,{\an5\pos(136,302)\fs115\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 5,0:00:10.65,0:00:10.69,Head,,0,0,0,,{\an5\pos(128,300)\fs112\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0}8
+Dialogue: 6,0:00:10.67,0:01:09.00,Head,,0,0,0,,{\an5\pos(128,300)\fs112\1c&H0096CDF2&\3c&H000000&\3a&H60&\bord5\blur2\shad0\fad(0,250)\t(41663,41803,\fscx124\fscy124)\t(41803,42083,\fscx100\fscy100)\t(49223,49363,\fscx124\fscy124)\t(49363,49643,\fscx100\fscy100)\t(52670,52810,\fscx124\fscy124)\t(52810,53090,\fscx100\fscy100)}8
+Dialogue: 5,0:00:10.52,0:01:09.00,Shape,,0,0,0,,{\an5\pos(128,300)\p1\1c&H000000&\1a&H60&\3c&H0096CDF2&\bord3\shad0\fad(250,250)\t(41663,41803,\fscx124\fscy124)\t(41803,42083,\fscx100\fscy100)\t(49223,49363,\fscx124\fscy124)\t(49363,49643,\fscx100\fscy100)\t(52670,52810,\fscx124\fscy124)\t(52810,53090,\fscx100\fscy100)}m 60.0 0.0 b 93.1 0.0 120.0 26.9 120.0 60.0 b 120.0 93.1 93.1 120.0 60.0 120.0 b 26.9 120.0 0.0 93.1 0.0 60.0 b 0.0 26.9 26.9 0.0 60.0 0.0
+Dialogue: 3,0:00:13.79,0:00:18.30,Label,,0,0,0,,{\an5\pos(330,1124)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Wohlstand
+Dialogue: 3,0:00:14.67,0:00:18.30,Label,,0,0,0,,{\an5\pos(750,1124)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Materie
+Dialogue: 3,0:00:15.63,0:00:18.30,Label,,0,0,0,,{\an5\pos(330,1200)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Wahrnehmung
+Dialogue: 3,0:00:17.47,0:00:18.30,Label,,0,0,0,,{\an5\pos(750,1200)\fscx70\fscy70\t(0,170,\fscx100\fscy100)\fad(0,300)}{\alpha&HFF&\blur6\1c&H0096CDF2&\t(50,210,0.6,\alpha&H00&\blur0.7)}Wahrheit
+Dialogue: 2,0:00:24.44,0:00:27.50,Small,,0,0,0,,{\an5\q2\move(540,1260,540,1250,0,900)\fad(0,140)}{\alpha&HFF&\blur6\t(80,340,0.6,\alpha&H00&\blur0.7)}Dein {\alpha&HFF&\blur6\t(340,600,0.6,\alpha&H00&\blur0.7)}allergrößtes {\alpha&HFF&\blur6\t(1220,1480,0.6,\alpha&H00&\blur0.7)}Manko:
+Dialogue: 2,0:00:24.44,0:00:27.50,Head,,0,0,0,,{\an5\q2\move(540,1372,540,1362,0,900)\fad(0,140)}{\alpha&HFF&\blur9\1c&H0096CDF2&\t(2100,2360,0.6,\alpha&H00&\blur0.7)}Gleichgewicht.
+Dialogue: 5,0:00:26.50,0:00:30.77,Shape,,0,0,0,,{\an5\pos(540,1112)\p1\shad0\1c&H000000&\1a&H90&\3c&H000000&\3a&H90&\bord3\blur4\org(540,1115)\fad(250,300)\t(0,420,0.6,\frz-9)\t(420,840,0.6,\frz7)\t(840,1260,0.6,\frz-6)\t(1260,1680,0.6,\frz8)\t(1680,2100,0.6,\frz-7)\t(2100,2520,0.6,\frz5)\t(2520,2940,0.6,\frz-8)\t(2940,3360,0.6,\frz6)\t(3360,3780,0.6,\frz-5)\t(3780,4200,0.6,\frz7)}m 0 0 l 380 0 l 380 6 l 0 6
+Dialogue: 6,0:00:26.50,0:00:30.77,Shape,,0,0,0,,{\an5\pos(540,1112)\p1\shad0\1c&H0096CDF2&\bord0\org(540,1115)\fad(250,300)\t(0,420,0.6,\frz-9)\t(420,840,0.6,\frz7)\t(840,1260,0.6,\frz-6)\t(1260,1680,0.6,\frz8)\t(1680,2100,0.6,\frz-7)\t(2100,2520,0.6,\frz5)\t(2520,2940,0.6,\frz-8)\t(2940,3360,0.6,\frz6)\t(3360,3780,0.6,\frz-5)\t(3780,4200,0.6,\frz7)}m 0 0 l 380 0 l 380 6 l 0 6
+Dialogue: 5,0:00:26.50,0:00:30.77,Shape,,0,0,0,,{\an5\pos(540,1140)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4\fad(250,300)}m 22 0 l 44 40 l 0 40 l 22 0
+Dialogue: 6,0:00:26.50,0:00:30.77,Shape,,0,0,0,,{\an5\pos(540,1140)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0\fad(250,300)}m 22 0 l 44 40 l 0 40 l 22 0
+Dialogue: 2,0:01:06.34,0:01:09.00,Small,,0,0,0,,{\an5\q2\move(540,1260,540,1250,0,1400)\fad(0,300)}{\alpha&HFF&\blur6\t(60,360,0.6,\alpha&H00&\blur0.7)}deswegen {\alpha&HFF&\blur6\t(460,760,0.6,\alpha&H00&\blur0.7)}bist {\alpha&HFF&\blur6\t(780,1080,0.6,\alpha&H00&\blur0.7)}du {\alpha&HFF&\blur6\t(940,1240,0.6,\alpha&H00&\blur0.7)}immer {\alpha&HFF&\blur6\t(1260,1560,0.6,\alpha&H00&\blur0.7)}ein
+Dialogue: 2,0:01:06.34,0:01:09.00,Head,,0,0,0,,{\an5\q2\move(540,1372,540,1362,0,1400)\fad(0,300)}{\alpha&HFF&\blur9\1c&H0096CDF2&\t(1520,1820,0.6,\alpha&H00&\blur0.7)}Wahrheitssuchender.

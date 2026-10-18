@@ -1,0 +1,116 @@
+[Script Info]
+Title: Paki Akin – Topf und Deckel
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter SemiBold,62,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,0.6,0,1,3.4,1.8,5,140,140,0,1
+Style: Head,Instrument Serif,128,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: HeadRoman,Instrument Serif,104,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,0,0,0,100,100,0.5,0,1,4,2,5,80,80,0,1
+Style: Label,Instrument Serif,66,&H00FFFFFF,&H00FFFFFF,&H78000000,&HA0000000,0,1,0,0,100,100,0.5,0,1,3,1.6,5,80,80,0,1
+Style: Small,Inter Medium,46,&H00FFFFFF,&H00FFFFFF,&H8C000000,&HA0000000,0,0,0,0,100,100,2.4,0,1,3,1.6,5,80,80,0,1
+Style: Shape,Inter Medium,20,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:05.02,0:00:06.17,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Und weißt du was?
+Dialogue: 1,0:00:06.17,0:00:07.11,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Wenn du diese {\1c&H00FFFFFF&\t(470,610,\1c&H0096CDF2&)}Sehnsucht{\1c&H00FFFFFF&}
+Dialogue: 1,0:00:07.11,0:00:08.01,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in dir trägst,
+Dialogue: 1,0:00:08.01,0:00:08.55,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}gibt es auch
+Dialogue: 1,0:00:08.55,0:00:09.60,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}einen {\1c&H00FFFFFF&\t(250,390,\1c&H0096CDF2&)}Plan{\1c&H00FFFFFF&} dafür.
+Dialogue: 1,0:00:09.60,0:00:11.10,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Denn diese Sehnsucht
+Dialogue: 1,0:00:11.10,0:00:12.68,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}wurde nicht umsonst
+Dialogue: 1,0:00:12.68,0:00:14.43,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in dich hineingelegt.
+Dialogue: 1,0:00:14.43,0:00:15.24,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Solange du
+Dialogue: 1,0:00:15.24,0:00:16.22,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}diese Sehnsucht
+Dialogue: 1,0:00:16.22,0:00:17.56,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}in dir verspürst,
+Dialogue: 1,0:00:17.56,0:00:18.30,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}immer wieder
+Dialogue: 1,0:00:18.30,0:00:19.18,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}und sie immer
+Dialogue: 1,0:00:19.18,0:00:20.50,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}{\1c&H00FFFFFF&\t(90,230,\1c&H0096CDF2&)}stärker{\1c&H00FFFFFF&} wird,
+Dialogue: 1,0:00:20.50,0:00:21.34,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}gibt es auch
+Dialogue: 1,0:00:21.34,0:00:22.60,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}einen Plan dafür.
+Dialogue: 1,0:00:22.60,0:00:24.03,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Ja, solange du
+Dialogue: 1,0:00:24.03,0:00:25.55,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}eine Sehnsucht hast,
+Dialogue: 1,0:00:25.55,0:00:26.55,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}hat Gott auch
+Dialogue: 1,0:00:26.55,0:00:29.61,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}den Plan gestiftet.
+Dialogue: 1,0:00:29.61,0:00:30.17,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Das ist doch
+Dialogue: 1,0:00:30.17,0:00:31.39,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sowas von klar.
+Dialogue: 1,0:00:31.39,0:00:32.49,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}Stell dir vor,
+Dialogue: 1,0:00:32.49,0:00:33.57,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}es gibt einen Topf.
+Dialogue: 1,0:00:33.57,0:00:34.73,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}Und komischerweise
+Dialogue: 1,0:00:34.73,0:00:36.39,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}hat doch jeder Topf
+Dialogue: 1,0:00:36.39,0:00:37.31,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}einen Deckel.
+Dialogue: 1,0:00:37.31,0:00:38.77,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}Also warum sollte
+Dialogue: 1,0:00:38.77,0:00:39.97,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}deine Sehnsucht
+Dialogue: 1,0:00:39.97,0:00:40.51,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}nicht auch
+Dialogue: 1,0:00:40.51,0:00:41.95,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}einen Deckel haben?
+Dialogue: 1,0:00:41.95,0:00:43.65,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}Und dieser Deckel
+Dialogue: 1,0:00:43.65,0:00:45.41,Sub,,0,0,0,,{\an5\q2\move(540,1440,540,1430,0,170)\fad(110,80)\blur0.6}ist die {\1c&H00FFFFFF&\t(610,750,\1c&H0096CDF2&)}Verwirklichung{\1c&H00FFFFFF&},
+Dialogue: 1,0:00:45.41,0:00:46.36,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}der Plan,
+Dialogue: 1,0:00:46.36,0:00:48.00,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}der aufgehen wird,
+Dialogue: 1,0:00:48.00,0:00:49.02,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}aber nicht dann,
+Dialogue: 1,0:00:49.02,0:00:50.12,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}wenn du willst,
+Dialogue: 1,0:00:50.12,0:00:51.87,Sub,,0,0,0,,{\an5\q2\move(540,1340,540,1330,0,170)\fad(110,80)\blur0.6}sondern wenn {\1c&H00FFFFFF&\t(1097,1237,\1c&H0096CDF2&)}Gott will{\1c&H00FFFFFF&},
+Dialogue: 2,0:00:00.00,0:00:03.07,Small,,0,0,0,,{\an5\q2\move(540,1216,540,1206,0,900)\fad(0,140)}{\alpha&HFF&\blur6\t(67,327,0.6,\alpha&H00&\blur0.7)}komischerweise {\alpha&HFF&\blur6\t(787,1047,0.6,\alpha&H00&\blur0.7)}hat {\alpha&HFF&\blur6\t(1027,1287,0.6,\alpha&H00&\blur0.7)}doch
+Dialogue: 2,0:00:00.00,0:00:03.07,HeadRoman,,0,0,0,,{\an5\q2\move(540,1314,540,1304,0,900)\fad(0,140)}{\alpha&HFF&\blur9\t(1347,1607,0.6,\alpha&H00&\blur0.7)}jeder {\alpha&HFF&\blur9\t(1847,2107,0.6,\alpha&H00&\blur0.7)}Topf
+Dialogue: 2,0:00:00.00,0:00:03.07,Head,,0,0,0,,{\an5\q2\move(540,1438,540,1428,0,900)\fad(0,140)}{\alpha&HFF&\blur9\t(2407,2667,0.6,\alpha&H00&\blur0.7)}einen {\alpha&HFF&\blur9\1c&H0096CDF2&\t(2727,2987,0.6,\alpha&H00&\blur0.7)}Deckel.
+Dialogue: 2,0:00:03.17,0:00:04.90,Head,,0,0,0,,{\an5\q2\move(540,1272,540,1262,0,600)\fad(0,140)}{\alpha&HFF&\blur9\t(140,360,0.6,\alpha&H00&\blur0.7)}Du {\alpha&HFF&\blur9\t(260,480,0.6,\alpha&H00&\blur0.7)}hast {\alpha&HFF&\blur9\t(560,780,0.6,\alpha&H00&\blur0.7)}eine
+Dialogue: 2,0:00:03.17,0:00:04.90,Head,,0,0,0,,{\an5\q2\move(540,1406,540,1396,0,600)\fad(0,140)}{\alpha&HFF&\blur9\1c&H0096CDF2&\t(740,960,0.6,\alpha&H00&\blur0.7)}Sehnsucht {\alpha&HFF&\blur9\t(1360,1580,0.6,\alpha&H00&\blur0.7)}in {\alpha&HFF&\blur9\t(1520,1740,0.6,\alpha&H00&\blur0.7)}dir.
+Dialogue: 3,0:00:32.70,0:00:45.30,Shape,,0,0,0,,{\an5\pos(540,1225)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4\fad(0,260)\clip(0,1320,1080,1320)\t(180,780,0.6,\clip(0,1136,1080,1320))}m 0 0 l 230 0 l 214 122 b 211 140 197 150 179 150 l 51 150 b 33 150 19 140 16 122 l 0 0
+Dialogue: 4,0:00:32.70,0:00:45.30,Shape,,0,0,0,,{\an5\pos(540,1225)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0\fad(0,260)\clip(0,1320,1080,1320)\t(180,780,0.6,\clip(0,1136,1080,1320))}m 0 0 l 230 0 l 214 122 b 211 140 197 150 179 150 l 51 150 b 33 150 19 140 16 122 l 0 0
+Dialogue: 3,0:00:33.23,0:00:45.30,Shape,,0,0,0,,{\an5\pos(412,1172)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4\frz180\fad(250,260)}m 0 0 l 22 0 b 30 0 30 14 22 14 l 0 14
+Dialogue: 4,0:00:33.23,0:00:45.30,Shape,,0,0,0,,{\an5\pos(412,1172)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0\frz180\fad(250,260)}m 0 0 l 22 0 b 30 0 30 14 22 14 l 0 14
+Dialogue: 3,0:00:33.23,0:00:45.30,Shape,,0,0,0,,{\an5\pos(668,1172)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4\fad(250,260)}m 0 0 l 22 0 b 30 0 30 14 22 14 l 0 14
+Dialogue: 4,0:00:33.23,0:00:45.30,Shape,,0,0,0,,{\an5\pos(668,1172)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0\fad(250,260)}m 0 0 l 22 0 b 30 0 30 14 22 14 l 0 14
+Dialogue: 5,0:00:35.88,0:00:36.40,Shape,,0,0,0,,{\an5\pos(540,978)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4\fad(300,0)}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:35.88,0:00:36.40,Shape,,0,0,0,,{\an5\pos(540,978)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0\fad(300,0)}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.40,0:00:36.43,Shape,,0,0,0,,{\an5\pos(540,979)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.40,0:00:36.43,Shape,,0,0,0,,{\an5\pos(540,979)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.43,0:00:36.47,Shape,,0,0,0,,{\an5\pos(540,982)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.43,0:00:36.47,Shape,,0,0,0,,{\an5\pos(540,982)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.47,0:00:36.50,Shape,,0,0,0,,{\an5\pos(540,986)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.47,0:00:36.50,Shape,,0,0,0,,{\an5\pos(540,986)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.50,0:00:36.53,Shape,,0,0,0,,{\an5\pos(540,992)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.50,0:00:36.53,Shape,,0,0,0,,{\an5\pos(540,992)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.53,0:00:36.57,Shape,,0,0,0,,{\an5\pos(540,1000)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.53,0:00:36.57,Shape,,0,0,0,,{\an5\pos(540,1000)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.57,0:00:36.60,Shape,,0,0,0,,{\an5\pos(540,1010)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.57,0:00:36.60,Shape,,0,0,0,,{\an5\pos(540,1010)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.60,0:00:36.63,Shape,,0,0,0,,{\an5\pos(540,1021)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.60,0:00:36.63,Shape,,0,0,0,,{\an5\pos(540,1021)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.63,0:00:36.67,Shape,,0,0,0,,{\an5\pos(540,1035)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.63,0:00:36.67,Shape,,0,0,0,,{\an5\pos(540,1035)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.67,0:00:36.70,Shape,,0,0,0,,{\an5\pos(540,1050)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.67,0:00:36.70,Shape,,0,0,0,,{\an5\pos(540,1050)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.70,0:00:36.73,Shape,,0,0,0,,{\an5\pos(540,1067)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.70,0:00:36.73,Shape,,0,0,0,,{\an5\pos(540,1067)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.73,0:00:36.77,Shape,,0,0,0,,{\an5\pos(540,1085)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.73,0:00:36.77,Shape,,0,0,0,,{\an5\pos(540,1085)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.77,0:00:36.80,Shape,,0,0,0,,{\an5\pos(540,1106)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.77,0:00:36.80,Shape,,0,0,0,,{\an5\pos(540,1106)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.80,0:00:36.83,Shape,,0,0,0,,{\an5\pos(540,1128)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.80,0:00:36.83,Shape,,0,0,0,,{\an5\pos(540,1128)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.82,0:00:36.85,Shape,,0,0,0,,{\an5\pos(540,1124)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.82,0:00:36.85,Shape,,0,0,0,,{\an5\pos(540,1124)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.85,0:00:36.89,Shape,,0,0,0,,{\an5\pos(540,1122)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.85,0:00:36.89,Shape,,0,0,0,,{\an5\pos(540,1122)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.89,0:00:36.92,Shape,,0,0,0,,{\an5\pos(540,1121)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.89,0:00:36.92,Shape,,0,0,0,,{\an5\pos(540,1121)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.92,0:00:36.95,Shape,,0,0,0,,{\an5\pos(540,1122)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.92,0:00:36.95,Shape,,0,0,0,,{\an5\pos(540,1122)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.95,0:00:36.99,Shape,,0,0,0,,{\an5\pos(540,1124)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.95,0:00:36.99,Shape,,0,0,0,,{\an5\pos(540,1124)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:36.99,0:00:37.02,Shape,,0,0,0,,{\an5\pos(540,1128)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:36.99,0:00:37.02,Shape,,0,0,0,,{\an5\pos(540,1128)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 5,0:00:37.02,0:00:45.30,Shape,,0,0,0,,{\an5\pos(540,1128)\p1\shad0\1a&HFF&\3c&H000000&\3a&H80&\bord6.0\blur4\fad(0,260)}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 6,0:00:37.02,0:00:45.30,Shape,,0,0,0,,{\an5\pos(540,1128)\p1\shad0\1a&HFF&\3c&H00FFFFFF&\bord3.0\fad(0,260)\t(7240,7540,\3c&H0096CDF2&\bord3.6)}m 0 40 b 30 4 230 4 260 40 l 0 40 m 120 12 l 140 12 l 140 2 l 120 2 l 120 12
+Dialogue: 3,0:00:38.82,0:00:45.30,Label,,0,0,0,,{\an5\pos(540,1220)\fad(0,260)}{\alpha&HFF&\blur9\t(360,660,0.6,\alpha&H00&\blur0.7)}Sehnsucht
+Dialogue: 3,0:00:44.21,0:00:45.30,Label,,0,0,0,,{\an5\pos(540,1058)\fad(0,260)\1c&H0096CDF2&}{\alpha&HFF&\blur9\t(10,310,0.6,\alpha&H00&\blur0.7)}Verwirklichung
+Dialogue: 2,0:00:51.87,0:00:54.97,Small,,0,0,0,,{\an5\q2\move(540,1224,540,1214,0,1400)\fad(0,300)}{\alpha&HFF&\blur6\t(193,493,0.6,\alpha&H00&\blur0.7)}wenn {\alpha&HFF&\blur6\t(293,593,0.6,\alpha&H00&\blur0.7)}das
+Dialogue: 2,0:00:51.87,0:00:54.97,Head,,0,0,0,,{\an5\q2\move(540,1336,540,1326,0,1400)\fad(0,300)}{\alpha&HFF&\blur9\t(513,813,0.6,\alpha&H00&\blur0.7)}göttliche {\alpha&HFF&\blur9\1c&H0096CDF2&\t(1233,1533,0.6,\alpha&H00&\blur0.7)}Timing
+Dialogue: 2,0:00:51.87,0:00:54.97,Small,,0,0,0,,{\an5\q2\move(540,1446,540,1436,0,1400)\fad(0,300)}{\alpha&HFF&\blur6\t(2080,2380,0.6,\alpha&H00&\blur0.7)}da {\alpha&HFF&\blur6\t(2340,2640,0.6,\alpha&H00&\blur0.7)}ist.
