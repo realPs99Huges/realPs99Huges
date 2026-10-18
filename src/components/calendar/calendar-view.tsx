@@ -312,7 +312,7 @@ function ItemChip({ item, onOpen, compact }: { item: CalendarItem; onOpen: () =>
       {!compact && <GripVertical className="mt-0.5 hidden size-3.5 shrink-0 text-ink-3 opacity-0 group-hover/item:opacity-100 md:block" aria-hidden />}
       <span className={cn("mt-1.5 size-1.5 shrink-0 rounded-full", STATUS_DOT[item.status])} aria-hidden />
       <span className="min-w-0 flex-1">
-        <span className={cn("block font-medium text-ink", compact ? "truncate text-[0.6875rem]" : "line-clamp-2 text-xs leading-snug")}>{item.title}</span>
+        <span className={cn("block font-medium text-ink", compact ? "truncate text-[0.6875rem]" : "line-clamp-3 hyphens-auto break-words text-xs leading-snug")}>{item.title}</span>
         {!compact && (
           <span className="mt-1 flex items-center gap-1.5 text-[0.6875rem] text-ink-3">
             <PlatformMark platform={item.platform} className="size-4 text-[0.5rem]" />
